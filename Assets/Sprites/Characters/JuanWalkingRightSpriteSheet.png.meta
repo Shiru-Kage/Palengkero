@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: f7e3147195a652f46825f2795011887f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4483285093137508553
+    second: JuanWalkingRightSpriteSheet_0
+  - first:
+      213: -6431525974833609731
+    second: JuanWalkingRightSpriteSheet_1
+  - first:
+      213: 680884505733139445
+    second: JuanWalkingRightSpriteSheet_2
+  - first:
+      213: 359950626387461394
+    second: JuanWalkingRightSpriteSheet_3
+  - first:
+      213: 653642209164561410
+    second: JuanWalkingRightSpriteSheet_4
+  - first:
+      213: -2467027566659289042
+    second: JuanWalkingRightSpriteSheet_5
+  - first:
+      213: -6112578380784594689
+    second: JuanWalkingRightSpriteSheet_6
+  - first:
+      213: 888023722625736310
+    second: JuanWalkingRightSpriteSheet_7
+  - first:
+      213: -1797261207147247221
+    second: JuanWalkingRightSpriteSheet_8
+  - first:
+      213: 12615755860102095
+    second: JuanWalkingRightSpriteSheet_9
+  - first:
+      213: 685429418177581960
+    second: JuanWalkingRightSpriteSheet_10
+  - first:
+      213: -7011296535195904372
+    second: JuanWalkingRightSpriteSheet_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 327
+        width: 75
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7371cb416fb28c1c0800000000000000
+      internalID: -4483285093137508553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 327
+        width: 76
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df3485a9331aeb6a0800000000000000
+      internalID: -6431525974833609731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 327
+        width: 73
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fb8a49b9dcf27900800000000000000
+      internalID: 680884505733139445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 219
+        width: 73
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2150186003dcef400800000000000000
+      internalID: 359950626387461394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 219
+        width: 73
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20c84774024321900800000000000000
+      internalID: 653642209164561410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 219
+        width: 73
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e204d2ebf7b53cdd0800000000000000
+      internalID: -2467027566659289042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 112
+        width: 71
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff01a973952cb2ba0800000000000000
+      internalID: -6112578380784594689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 112
+        width: 71
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67e1a3beed4e25c00800000000000000
+      internalID: 888023722625736310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 111
+        width: 71
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8906635478de07e0800000000000000
+      internalID: -1797261207147247221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 5
+        width: 71
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcb4d9e86f1dc2000800000000000000
+      internalID: 12615755860102095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 5
+        width: 70
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 883d31d9c62238900800000000000000
+      internalID: 685429418177581960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JuanWalkingRightSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 4
+        width: 70
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8698bcd2fed2be90800000000000000
+      internalID: -7011296535195904372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      JuanWalkingRightSpriteSheet_0: -4483285093137508553
+      JuanWalkingRightSpriteSheet_1: -6431525974833609731
+      JuanWalkingRightSpriteSheet_10: 685429418177581960
+      JuanWalkingRightSpriteSheet_11: -7011296535195904372
+      JuanWalkingRightSpriteSheet_2: 680884505733139445
+      JuanWalkingRightSpriteSheet_3: 359950626387461394
+      JuanWalkingRightSpriteSheet_4: 653642209164561410
+      JuanWalkingRightSpriteSheet_5: -2467027566659289042
+      JuanWalkingRightSpriteSheet_6: -6112578380784594689
+      JuanWalkingRightSpriteSheet_7: 888023722625736310
+      JuanWalkingRightSpriteSheet_8: -1797261207147247221
+      JuanWalkingRightSpriteSheet_9: 12615755860102095
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
