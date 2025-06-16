@@ -1349,9 +1349,10 @@ GameObject:
   - component: {fileID: 1095317159}
   - component: {fileID: 1095317158}
   - component: {fileID: 1095317157}
-  - component: {fileID: 1095317156}
   - component: {fileID: 1095317161}
   - component: {fileID: 1095317162}
+  - component: {fileID: 1095317156}
+  - component: {fileID: 1095317163}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1567,6 +1568,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1095317163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095317155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22a327bc58c5a94ea62d6e69a8c1ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1095317158}
+  playerController: {fileID: 1095317156}
 --- !u!1 &1242494481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,9 +2263,9 @@ SceneRoots:
   - {fileID: 361268102}
   - {fileID: 1912863718}
   - {fileID: 256207547}
+  - {fileID: 1095317160}
   - {fileID: 954237379}
   - {fileID: 879638073}
   - {fileID: 533380226}
   - {fileID: 1506680904}
   - {fileID: 412567119}
-  - {fileID: 1095317160}

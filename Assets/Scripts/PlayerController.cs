@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     private InputSystem_Actions inputActions;
     private Vector2 moveInput;
+    public Vector2 MoveInput => moveInput;
 
     private void Awake()
     {
@@ -26,7 +27,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        Vector2 input = context.ReadValue<Vector2>();
+        if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+            moveInput = new Vector2(input.x, 0f);
+        else
+            moveInput = new Vector2(0f, input.y);
     }
 
     private void Update()

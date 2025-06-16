@@ -1,34 +1,43 @@
 fileFormatVersion: 2
-guid: f2da4a555f53ac14396a6c783b96bf21
+guid: 7f22326aac9725543a81dd04aa99d5d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4399565679542752301
-    second: JuanWalkingDownSpriteSheet_0
+      213: 6528363073242023053
+    second: JuanIdle_0
   - first:
-      213: -4530383128368400962
-    second: JuanWalkingDownSpriteSheet_1
+      213: 2735598677302719350
+    second: JuanIdle_1
   - first:
-      213: 939209445174146751
-    second: JuanWalkingDownSpriteSheet_2
+      213: -4149597624303949324
+    second: JuanIdle_2
   - first:
-      213: -8908951902920546182
-    second: JuanWalkingDownSpriteSheet_3
+      213: -2458883105588053333
+    second: JuanIdle_3
   - first:
-      213: -4750630744646441001
-    second: JuanWalkingDownSpriteSheet_4
+      213: 3329342116612273763
+    second: JuanIdle_4
   - first:
-      213: -2986382990235274820
-    second: JuanWalkingDownSpriteSheet_5
+      213: -4238683566847996642
+    second: JuanIdle_5
   - first:
-      213: 9018236166646074358
-    second: JuanWalkingDownSpriteSheet_6
+      213: 3925193183368774459
+    second: JuanIdle_6
   - first:
-      213: -3056691648656531648
-    second: JuanWalkingDownSpriteSheet_7
+      213: -8036223857318207062
+    second: JuanIdle_7
   - first:
-      213: -6355697575439394293
-    second: JuanWalkingDownSpriteSheet_8
+      213: -5071943184032471721
+    second: JuanIdle_8
+  - first:
+      213: -4760350001715850658
+    second: JuanIdle_9
+  - first:
+      213: 1057690107286030533
+    second: JuanIdle_10
+  - first:
+      213: 6712244392883326778
+    second: JuanIdle_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -137,265 +146,265 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_0
+      name: JuanIdle_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 323
-        width: 73
-        height: 111
+        x: 12
+        y: 320
+        width: 70
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3dbaad8035a91f2c0800000000000000
-      internalID: -4399565679542752301
+      spriteID: d844e5950a7699a50800000000000000
+      internalID: 6528363073242023053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_1
+      name: JuanIdle_1
       rect:
         serializedVersion: 2
-        x: 105
-        y: 323
-        width: 78
-        height: 111
+        x: 96
+        y: 320
+        width: 70
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb5bd293c88d021c0800000000000000
-      internalID: -4530383128368400962
+      spriteID: 67338a0d08cc6f520800000000000000
+      internalID: 2735598677302719350
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_2
+      name: JuanIdle_2
       rect:
         serializedVersion: 2
-        x: 198
-        y: 323
-        width: 78
-        height: 111
+        x: 186
+        y: 320
+        width: 69
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fb6fb45a30eb80d00800000000000000
-      internalID: 939209445174146751
+      spriteID: 4f9ee8a32faa966c0800000000000000
+      internalID: -4149597624303949324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_3
+      name: JuanIdle_3
       rect:
         serializedVersion: 2
-        x: 15
-        y: 217
-        width: 73
-        height: 105
+        x: 12
+        y: 214
+        width: 70
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a786169227b0d5480800000000000000
-      internalID: -8908951902920546182
+      spriteID: baaf63bd7da40edd0800000000000000
+      internalID: -2458883105588053333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_4
+      name: JuanIdle_4
       rect:
         serializedVersion: 2
-        x: 105
-        y: 217
-        width: 78
-        height: 105
+        x: 96
+        y: 214
+        width: 70
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d7ac46f18e521eb0800000000000000
-      internalID: -4750630744646441001
+      spriteID: 366fb64f303343e20800000000000000
+      internalID: 3329342116612273763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_5
+      name: JuanIdle_5
       rect:
         serializedVersion: 2
-        x: 198
-        y: 218
-        width: 78
-        height: 105
+        x: 186
+        y: 214
+        width: 69
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb1f1cf2e7c3e86d0800000000000000
-      internalID: -2986382990235274820
+      spriteID: e1d4db2e0cb2d25c0800000000000000
+      internalID: -4238683566847996642
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_6
+      name: JuanIdle_6
       rect:
         serializedVersion: 2
-        x: 15
-        y: 112
-        width: 73
-        height: 105
+        x: 12
+        y: 108
+        width: 70
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6fb058d4306372d70800000000000000
-      internalID: 9018236166646074358
+      spriteID: b330b795766197630800000000000000
+      internalID: 3925193183368774459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_7
+      name: JuanIdle_7
       rect:
         serializedVersion: 2
-        x: 105
-        y: 112
-        width: 78
-        height: 105
+        x: 96
+        y: 108
+        width: 70
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 04f9cedf3237495d0800000000000000
-      internalID: -3056691648656531648
+      spriteID: aa16701caf8997090800000000000000
+      internalID: -8036223857318207062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_8
+      name: JuanIdle_8
       rect:
         serializedVersion: 2
-        x: 198
-        y: 111
-        width: 78
-        height: 106
+        x: 185
+        y: 108
+        width: 70
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b0a9f14aab60cc7a0800000000000000
-      internalID: -6355697575439394293
+      spriteID: 755e7c2eb86dc99b0800000000000000
+      internalID: -5071943184032471721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_9
+      name: JuanIdle_9
       rect:
         serializedVersion: 2
-        x: 15
-        y: 5
-        width: 73
-        height: 107
+        x: 12
+        y: 2
+        width: 70
+        height: 103
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 18fbc023d181b9944a964002bd7ef711
-      internalID: 637359679
+      spriteID: e52523515e6dfedb0800000000000000
+      internalID: -4760350001715850658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_10
+      name: JuanIdle_10
       rect:
         serializedVersion: 2
-        x: 105
-        y: 5
-        width: 78
-        height: 107
+        x: 96
+        y: 2
+        width: 70
+        height: 103
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a98fd4c2b766c06489b78184cdff9036
-      internalID: -685888395
+      spriteID: 5c88a377c8badae00800000000000000
+      internalID: 1057690107286030533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JuanWalkingDownSpriteSheet_11
+      name: JuanIdle_11
       rect:
         serializedVersion: 2
-        x: 198
-        y: 5
-        width: 78
-        height: 107
+        x: 185
+        y: 2
+        width: 70
+        height: 103
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 0194bd5734b4a54488f0cf2607fa263e
-      internalID: -1598929533
+      spriteID: a3f0b6b56bea62d50800000000000000
+      internalID: 6712244392883326778
       vertices: []
       indices: 
       edges: []
@@ -404,7 +413,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -414,18 +423,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      JuanWalkingDownSpriteSheet_0: -4399565679542752301
-      JuanWalkingDownSpriteSheet_1: -4530383128368400962
-      JuanWalkingDownSpriteSheet_10: -685888395
-      JuanWalkingDownSpriteSheet_11: -1598929533
-      JuanWalkingDownSpriteSheet_2: 939209445174146751
-      JuanWalkingDownSpriteSheet_3: -8908951902920546182
-      JuanWalkingDownSpriteSheet_4: -4750630744646441001
-      JuanWalkingDownSpriteSheet_5: -2986382990235274820
-      JuanWalkingDownSpriteSheet_6: 9018236166646074358
-      JuanWalkingDownSpriteSheet_7: -3056691648656531648
-      JuanWalkingDownSpriteSheet_8: -6355697575439394293
-      JuanWalkingDownSpriteSheet_9: 637359679
+      JuanIdle_0: 6528363073242023053
+      JuanIdle_1: 2735598677302719350
+      JuanIdle_10: 1057690107286030533
+      JuanIdle_11: 6712244392883326778
+      JuanIdle_2: -4149597624303949324
+      JuanIdle_3: -2458883105588053333
+      JuanIdle_4: 3329342116612273763
+      JuanIdle_5: -4238683566847996642
+      JuanIdle_6: 3925193183368774459
+      JuanIdle_7: -8036223857318207062
+      JuanIdle_8: -5071943184032471721
+      JuanIdle_9: -4760350001715850658
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
