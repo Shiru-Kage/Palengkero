@@ -11,6 +11,6 @@ public class PlayerAnimator : MonoBehaviour
 
         animator.SetFloat("MoveX", move.x);
         animator.SetFloat("MoveY", move.y);
-        animator.SetBool("IsMoving", move.magnitude > 0.1f);
+        animator.SetBool("IsMoving", move != Vector2.zero);
     }
 }
