@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      NotebookCropped_0: -6246532730292522137
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
