@@ -17,6 +17,6 @@ MonoBehaviour:
   characterAge: 28
   characterMonthlyIncome: "\u20B113,000 - \u20B114,999"
   characterWeeklyBudget: 2800
-  characterSprite: {fileID: 21300000, guid: 351505d43a0cf57468694a9d0bf6bad8, type: 3}
+  characterSprite: {fileID: 831398740, guid: 1201c14bb4ee74d8e99e56dc4f3f4fd1, type: 3}
   characterDescription: A hardworking family man, Tonyo sends a good chunk of his
     wage back to the province. Between rising food costs and bills.

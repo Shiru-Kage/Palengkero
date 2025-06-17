@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 public class OnHover : MonoBehaviour
 {
     private Image img;
-    private PolygonCollider2D poly;
     private Color originalColor;
     private Color darkenedColor;
     private bool isHovered = false;
@@ -11,16 +12,13 @@ public class OnHover : MonoBehaviour
     void Start()
     {
         img = GetComponent<Image>();
-        poly = GetComponent<PolygonCollider2D>();
-
         originalColor = img.color;
         darkenedColor = originalColor * 0.7f;
     }
 
     void Update()
     {
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        bool currentlyHovered = poly.OverlapPoint(mouseWorldPos);
+        bool currentlyHovered = IsPointerOverThisUI();
 
         if (currentlyHovered && !isHovered)
         {
@@ -32,5 +30,24 @@ public class OnHover : MonoBehaviour
             img.color = originalColor;
             isHovered = false;
         }
+    }
+
+    private bool IsPointerOverThisUI()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+
+        var results = new System.Collections.Generic.List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (var result in results)
+        {
+            if (result.gameObject == this.gameObject)
+                return true;
+        }
+
+        return false;
     }
 }
