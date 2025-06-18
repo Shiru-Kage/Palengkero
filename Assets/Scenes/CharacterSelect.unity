@@ -1308,7 +1308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenesToDestroyOn:
   - TitleScreen
-  - Tutorial
 --- !u!4 &703608447
 Transform:
   m_ObjectHideFlags: 0
