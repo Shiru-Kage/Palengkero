@@ -4,14 +4,15 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("All Level Data")]
-    [SerializeField] private LevelData[] levels;
-
     [Header("UI References")]
     [SerializeField] private Image levelSprite;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI levelDescriptionText;
-    [SerializeField] private TextMeshProUGUI objectivesPerLevel;
+
+    [Header("Objective Texts")]
+    [SerializeField] private TextMeshProUGUI nutritionGoalText;
+    [SerializeField] private TextMeshProUGUI satisfactionGoalText;
+    [SerializeField] private TextMeshProUGUI savingsGoalText;
 
     void Start()
     {
@@ -24,13 +25,17 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("LevelStateManager not found. Defaulting to index 0.");
             SetLevel(0);
         }
+
+        // Already updated by SetLevel, no need to call UpdateUI again here
     }
 
     public void SetLevel(int levelIndex)
     {
+        LevelData[] levels = LevelStateManager.Instance?.AllLevels;
+
         if (levels == null || levels.Length == 0)
         {
-            Debug.LogError("No level data assigned.");
+            Debug.LogError("No level data available from LevelStateManager.");
             return;
         }
 
@@ -39,17 +44,13 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Invalid level index: " + levelIndex);
             return;
         }
-        if (LevelStateManager.Instance != null)
-        {
-            LevelStateManager.Instance.SetLevelIndex(levelIndex);
-        }
-        UpdateUI(levelIndex);
+
+        LevelStateManager.Instance.SetLevelIndex(levelIndex);
+        UpdateUI(levels[levelIndex]);
     }
 
-    private void UpdateUI(int levelIndex)
+    private void UpdateUI(LevelData currentLevel)
     {
-        LevelData currentLevel = levels[levelIndex];
-
         if (CharacterSelectionManager.Instance == null || CharacterSelectionManager.Instance.SelectedCharacterData == null)
         {
             Debug.LogError("No selected character found.");
@@ -59,24 +60,26 @@ public class LevelManager : MonoBehaviour
         CharacterData selectedCharacter = CharacterSelectionManager.Instance.SelectedCharacterData;
         CharacterObjective objective = currentLevel.GetObjectiveFor(selectedCharacter);
 
-        levelText.text = "Level " + currentLevel.levelNumber;
-        levelDescriptionText.text = currentLevel.levelDescription;
+        if (levelText != null)
+            levelText.text = "Level " + currentLevel.levelNumber;
 
-        if (levelSprite != null && currentLevel.levelIcon != null)
-        {
+        if (levelDescriptionText != null)
+            levelDescriptionText.text = currentLevel.levelDescription ?? "No description available.";
+
+        if (levelSprite != null)
             levelSprite.sprite = currentLevel.levelIcon;
-        }
 
         if (objective != null)
         {
-            objectivesPerLevel.text = $"Objectives:\n" +
-                                      $"- Nutrition: TBD\n" +
-                                      $"- Satisfaction: TBD\n" +
-                                      $"- Savings Goal: {objective.savingsGoal}";
+            nutritionGoalText.text = $"Nutrition Goal: {objective.nutritionGoal}";
+            satisfactionGoalText.text = $"Satisfaction Goal: {objective.satisfactionGoal}";
+            savingsGoalText.text = $"Savings Goal: ₱{objective.savingsGoal}";
         }
         else
         {
-            objectivesPerLevel.text = $"No objective set for {selectedCharacter.characterName}.";
+            nutritionGoalText.text = "Nutrition Goal: N/A";
+            satisfactionGoalText.text = "Satisfaction Goal: N/A";
+            savingsGoalText.text = "Savings Goal: N/A";
         }
     }
 }

@@ -20,5 +20,7 @@ public class LevelData : ScriptableObject
 public class CharacterObjective
 {
     public CharacterData character;
+    public int nutritionGoal;
+    public int satisfactionGoal;
     public int savingsGoal;
 }

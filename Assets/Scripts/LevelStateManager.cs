@@ -4,6 +4,10 @@ public class LevelStateManager : MonoBehaviour
 {
     public static LevelStateManager Instance { get; private set; }
 
+    [Header("All Level Data")]
+    [SerializeField] private LevelData[] allLevels;
+    public LevelData[] AllLevels => allLevels;
+
     public int CurrentLevelIndex { get; private set; } = 0;
 
     void Awake()
@@ -22,5 +26,16 @@ public class LevelStateManager : MonoBehaviour
     {
         CurrentLevelIndex = index;
         Debug.Log("SetLevelIndex called! New index = " + index);
+    }
+
+    public LevelData GetCurrentLevelData()
+    {
+        if (allLevels == null || CurrentLevelIndex < 0 || CurrentLevelIndex >= allLevels.Length)
+        {
+            Debug.LogError("Invalid current level index or missing level data.");
+            return null;
+        }
+
+        return allLevels[CurrentLevelIndex];
     }
 }
