@@ -1,0 +1,88 @@
+{
+  "items": [
+    {
+      "id": "rice",
+      "itemName": "Rice",
+      "price": 70,
+      "nutrition": 10,
+      "satisfaction": 0
+    },
+    {
+      "id": "bananas",
+      "itemName": "Bananas",
+      "price": 100,
+      "nutrition": 10,
+      "satisfaction": 2
+    },
+    {
+      "id": "coke",
+      "itemName": "Coke",
+      "price": 80,
+      "nutrition": -5,
+      "satisfaction": 20
+    },
+    {
+      "id": "hotdogs",
+      "itemName": "Hotdogs",
+      "price": 110,
+      "nutrition": 0,
+      "satisfaction": 25
+    },
+    {
+      "id": "fish",
+      "itemName": "Fish",
+      "price": 180,
+      "nutrition": 20,
+      "satisfaction": 0
+    },
+    {
+      "id": "instant_noodles",
+      "itemName": "Instant Noodles",
+      "price": 50,
+      "nutrition": -10,
+      "satisfaction": 20
+    },
+    {
+      "id": "eggs",
+      "itemName": "Eggs",
+      "price": 120,
+      "nutrition": 25,
+      "satisfaction": 0
+    },
+    {
+      "id": "milk",
+      "itemName": "Milk",
+      "price": 150,
+      "nutrition": 15,
+      "satisfaction": 0
+    },
+    {
+      "id": "chips",
+      "itemName": "Chips",
+      "price": 60,
+      "nutrition": -5,
+      "satisfaction": 15
+    },
+    {
+      "id": "processed_cheese",
+      "itemName": "Processed Cheese",
+      "price": 100,
+      "nutrition": 0,
+      "satisfaction": 10
+    },
+    {
+      "id": "stale_bread",
+      "itemName": "Stale Bread",
+      "price": 30,
+      "nutrition": 5,
+      "satisfaction": -10
+    },
+    {
+      "id": "rotten_fruit",
+      "itemName": "Rotten Fruit",
+      "price": 20,
+      "nutrition": -5,
+      "satisfaction": -5
+    }
+  ]
+}
