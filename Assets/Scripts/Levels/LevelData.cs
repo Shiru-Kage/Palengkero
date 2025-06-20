@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class LevelData : ScriptableObject
 {
     public Sprite levelIcon;
+    public string levelName;
     public int levelNumber;
     public List<CharacterObjective> objectivesPerCharacter = new List<CharacterObjective>();
     [TextArea(5, 10)]

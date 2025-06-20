@@ -4,10 +4,6 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("UI References")]
-    [SerializeField] private Image levelSprite;
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI levelDescriptionText;
 
     [Header("Objective Texts")]
     [SerializeField] private TextMeshProUGUI nutritionGoalText;
@@ -25,8 +21,6 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("LevelStateManager not found. Defaulting to index 0.");
             SetLevel(0);
         }
-
-        // Already updated by SetLevel, no need to call UpdateUI again here
     }
 
     public void SetLevel(int levelIndex)
@@ -59,15 +53,6 @@ public class LevelManager : MonoBehaviour
 
         CharacterData selectedCharacter = CharacterSelectionManager.Instance.SelectedCharacterData;
         CharacterObjective objective = currentLevel.GetObjectiveFor(selectedCharacter);
-
-        if (levelText != null)
-            levelText.text = "Level " + currentLevel.levelNumber;
-
-        if (levelDescriptionText != null)
-            levelDescriptionText.text = currentLevel.levelDescription ?? "No description available.";
-
-        if (levelSprite != null)
-            levelSprite.sprite = currentLevel.levelIcon;
 
         if (objective != null)
         {

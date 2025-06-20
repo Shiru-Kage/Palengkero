@@ -1457,8 +1457,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916743974}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+      - m_Target: {fileID: 1916743976}
+        m_TargetAssemblyTypeName: LevelSelectManager, Assembly-CSharp
         m_MethodName: SetLevel
         m_Mode: 3
         m_Arguments:
@@ -2435,8 +2435,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916743974}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+      - m_Target: {fileID: 1916743976}
+        m_TargetAssemblyTypeName: LevelSelectManager, Assembly-CSharp
         m_MethodName: SetLevel
         m_Mode: 3
         m_Arguments:
@@ -3242,32 +3242,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8523505962629669589, guid: 27f2d12ba7940244fa737c44f900402c, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1916743974}
+      insertIndex: -1
+      addedObject: {fileID: 1916743976}
   m_SourcePrefab: {fileID: 100100000, guid: 27f2d12ba7940244fa737c44f900402c, type: 3}
 --- !u!1 &1916743973 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8523505962629669589, guid: 27f2d12ba7940244fa737c44f900402c, type: 3}
   m_PrefabInstance: {fileID: 1916743972}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1916743974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916743973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f44c6adc672ff04085d80fa47f80f8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelSprite: {fileID: 912001086}
-  levelText: {fileID: 1985834146}
-  levelDescriptionText: {fileID: 538469388}
-  nutritionGoalText: {fileID: 1378377180}
-  satisfactionGoalText: {fileID: 1468986605}
-  savingsGoalText: {fileID: 1189085209}
 --- !u!114 &1916743975 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5285551264723500715, guid: 27f2d12ba7940244fa737c44f900402c, type: 3}
@@ -3279,6 +3261,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ace411a0face14d8c04a999a565130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1916743976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916743973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5cbfb7e812942439c74594cee917c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelSprite: {fileID: 912001086}
+  levelText: {fileID: 1985834146}
+  levelDescriptionText: {fileID: 538469388}
+  nutritionGoalText: {fileID: 1378377180}
+  satisfactionGoalText: {fileID: 1468986605}
+  savingsGoalText: {fileID: 1189085209}
 --- !u!1 &1932947170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,8 +3631,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916743974}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+      - m_Target: {fileID: 1916743976}
+        m_TargetAssemblyTypeName: LevelSelectManager, Assembly-CSharp
         m_MethodName: SetLevel
         m_Mode: 3
         m_Arguments:
@@ -3776,8 +3776,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916743974}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+      - m_Target: {fileID: 1916743976}
+        m_TargetAssemblyTypeName: LevelSelectManager, Assembly-CSharp
         m_MethodName: SetLevel
         m_Mode: 3
         m_Arguments:
@@ -3921,8 +3921,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916743974}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+      - m_Target: {fileID: 1916743976}
+        m_TargetAssemblyTypeName: LevelSelectManager, Assembly-CSharp
         m_MethodName: SetLevel
         m_Mode: 3
         m_Arguments:

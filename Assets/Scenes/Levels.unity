@@ -2305,7 +2305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1247660527}
   m_Layer: 5
-  m_Name: Bottom Right
+  m_Name: Bottom Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2803,7 +2803,7 @@ GameObject:
   - component: {fileID: 1441234189}
   - component: {fileID: 1441234190}
   m_Layer: 5
-  m_Name: Bottom Left
+  m_Name: Bottom Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3559,7 +3559,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -3737,7 +3737,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -4007,15 +4007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f44c6adc672ff04085d80fa47f80f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 11400000, guid: 999dd7b571c253c4dba9d726097a085a, type: 2}
-  - {fileID: 11400000, guid: 5ed2334ad422f4341ae2d5f2b7f1b8a7, type: 2}
-  - {fileID: 11400000, guid: 747330d30bb008b4e9e14ce03012276a, type: 2}
-  - {fileID: 11400000, guid: 11f1d81e18bc30549b732851dda9a04f, type: 2}
-  - {fileID: 11400000, guid: f31cae67a4b87364c98d42a04d6b5412, type: 2}
-  levelSprite: {fileID: 0}
-  levelText: {fileID: 0}
-  levelDescriptionText: {fileID: 0}
   nutritionGoalText: {fileID: 4866192944047289557}
   satisfactionGoalText: {fileID: 4866192944047289556}
   savingsGoalText: {fileID: 4866192944047289555}
