@@ -3,8 +3,8 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [Header("Interaction Area")]
-    public Vector2 boxSize = new Vector2(3f, 3f);       // Width & height of the square
-    public Vector2 boxOffset = Vector2.zero;            // X and Y offset from the origin
+    public Vector2 boxSize = new Vector2(3f, 3f);     
+    public Vector2 boxOffset = Vector2.zero;           
     public Transform interactionTransform;
 
     public virtual void Interact()

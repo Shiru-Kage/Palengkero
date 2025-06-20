@@ -1,16 +1,21 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class StallData : MonoBehaviour
+[CreateAssetMenu(fileName = "New Stall Data", menuName = "Stall/Stall Data")]
+public class StallData : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Stall Visuals")]
+    public Sprite upperStallIcon;
+    public Sprite lowerStallIcon;
+    public Sprite stallBackground;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Stall Inventory")]
+    public List<StallItemEntry> items;
+}
+
+[System.Serializable]
+public class StallItemEntry
+{
+    public string itemId;
+    public int stock;
 }

@@ -91,8 +91,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Entered trigger with: " + interactable.gameObject.name);
             currentInteractable = interactable;
 
-            if (interactable is Stall stall)
+            var stall = other.GetComponent<StallUI>();
+            if (stall != null)
+            {
                 stall.SetBlinking(true);
+            }
         }
     }
 
@@ -100,8 +103,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.TryGetComponent(out Interactable interactable) && interactable == currentInteractable)
         {
-            if (interactable is Stall stall)
+            var stall = other.GetComponent<StallUI>();
+            if (stall != null)
+            {
                 stall.SetBlinking(false);
+            }
 
             currentInteractable = null;
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class ItemData
 {
+    public Sprite icon;
     public string id;
     public string itemName;
     public int price;

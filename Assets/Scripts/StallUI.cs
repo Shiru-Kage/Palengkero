@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
-public class Stall : Interactable
+public class StallUI : MonoBehaviour
 {
+    [Header("Stall Data")]
+    [SerializeField] private StallData stallData;
     [Header("Stall UI")]
-    [SerializeField] private GameObject stallUI;
+    [SerializeField] private SpriteRenderer upperIconRenderer;
+    [SerializeField] private SpriteRenderer lowerIconRenderer;
+    [SerializeField] private Image backgroundRenderer;
 
     [Header("Outline Settings")]
     [SerializeField] private Color outlineColor = Color.yellow;
@@ -33,11 +36,17 @@ public class Stall : Interactable
         }
     }
 
-    public override void Interact()
+    private void Start()
     {
-        base.Interact();
-        if (stallUI != null)
-            stallUI.SetActive(true);
+
+        if (upperIconRenderer != null)
+            upperIconRenderer.sprite = stallData.upperStallIcon;
+
+        if (lowerIconRenderer != null)
+            lowerIconRenderer.sprite = stallData.lowerStallIcon;
+
+        if (backgroundRenderer != null)
+            backgroundRenderer.sprite = stallData.stallBackground;
     }
 
     public void SetBlinking(bool shouldBlink)
