@@ -2,54 +2,26 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public float radius = 3f;
+    [Header("Interaction Area")]
+    public Vector2 boxSize = new Vector2(3f, 3f);       // Width & height of the square
+    public Vector2 boxOffset = Vector2.zero;            // X and Y offset from the origin
     public Transform interactionTransform;
-    private bool hasInteracted = false;
-    private Transform player;
-
-    void Start()
-    {
-        PlayerController playerController = Object.FindFirstObjectByType<PlayerController>();
-        if (playerController != null)
-        {
-            player = playerController.transform;
-        }
-        else
-        {
-            Debug.LogWarning("No PlayerController found in the scene!");
-        }
-    }
-
-    void Update()
-    {
-        if (player == null) return;
-
-        float distance = Vector3.Distance(player.position, interactionTransform.position);
-
-        if (distance <= radius && !hasInteracted)
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                hasInteracted = true;
-                Interact();
-            }
-        }
-        else if (distance > radius)
-        {
-            hasInteracted = false;
-        }
-    }
 
     public virtual void Interact()
     {
-        // This method is meant to be overwritten
+        Debug.Log("Interact called on: " + gameObject.name);
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         if (interactionTransform == null)
             interactionTransform = transform;
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(interactionTransform.position, radius);
+
+        Vector3 center = interactionTransform.position + (Vector3)boxOffset;
+        Vector3 size = new Vector3(boxSize.x, boxSize.y, 0f);
+
+        Gizmos.DrawWireCube(center, size);
     }
 }

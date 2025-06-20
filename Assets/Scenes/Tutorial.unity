@@ -867,7 +867,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 270884393}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 571942095}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &270884393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1595,12 +1607,12 @@ GameObject:
   - component: {fileID: 420158749}
   - component: {fileID: 420158754}
   - component: {fileID: 420158753}
-  - component: {fileID: 420158752}
-  - component: {fileID: 420158751}
   - component: {fileID: 420158750}
   - component: {fileID: 420158755}
+  - component: {fileID: 420158751}
+  - component: {fileID: 420158752}
   m_Layer: 0
-  m_Name: Image
+  m_Name: 'Stall BG '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1652,9 +1664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6e5bb26e4d3c541a083a5c66bb7ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineColor: {r: 0.015686274, g: 1, b: 0.040312048, a: 1}
-  blinkSpeed: 2
-  outlineThickness: 5
 --- !u!114 &420158752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1667,10 +1676,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264df63f8d32f1349b5ed263e4f03280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2.5
+  boxSize: {x: 1, y: 1}
+  boxOffset: {x: 0, y: -1.8}
   interactionTransform: {fileID: 2022821422}
   stallUI: {fileID: 571942095}
-  stallManager: {fileID: 420158751}
+  outlineColor: {r: 0.13570975, g: 1, b: 0.015686274, a: 1}
+  blinkSpeed: 2
+  outlineThickness: 5
 --- !u!114 &420158753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1768,7 +1780,7 @@ GameObject:
   - component: {fileID: 459216027}
   - component: {fileID: 459216026}
   m_Layer: 0
-  m_Name: Stall BG
+  m_Name: Stall Outer UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1855,7 +1867,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &533380223
 GameObject:
@@ -1949,7 +1961,7 @@ GameObject:
   - component: {fileID: 571942097}
   - component: {fileID: 571942096}
   m_Layer: 0
-  m_Name: Stall UI
+  m_Name: Stall Inner UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2173,7 +2185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4859127322020132726, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27
+      value: 0.26999998
       objectReference: {fileID: 0}
     - target: {fileID: 4859127322020132726, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2185,15 +2197,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4859127322020132726, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4859127322020132726, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4859127322020132726, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4859127322020132726, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2213,7 +2225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7395643586672669852, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4319,7 +4331,7 @@ Transform:
   m_GameObject: {fileID: 1435371594}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 4.51, z: 63.882042}
+  m_LocalPosition: {x: -0, y: 4.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6050,7 +6062,7 @@ Transform:
   m_GameObject: {fileID: 2028459583}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9921752, y: -2.2614648, z: 0.04769523}
+  m_LocalPosition: {x: -0.9921752, y: -2.2614648, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6474,7 +6486,6 @@ SceneRoots:
   - {fileID: 361268102}
   - {fileID: 1912863718}
   - {fileID: 256207547}
-  - {fileID: 644994638}
   - {fileID: 533380226}
   - {fileID: 954237379}
   - {fileID: 879638073}
@@ -6482,3 +6493,4 @@ SceneRoots:
   - {fileID: 1506680904}
   - {fileID: 412567119}
   - {fileID: 2022821422}
+  - {fileID: 644994638}

@@ -51,11 +51,34 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInteract(InputAction.CallbackContext context)
     {
-        if (currentInteractable != null)
+        if (currentInteractable == null)
         {
-            currentInteractable.Interact();
+            Debug.Log("No interactable in range.");
+            return;
+        }
+
+        // Get box center and half-size
+        var interactable = currentInteractable;
+        Transform origin = interactable.interactionTransform ?? interactable.transform;
+
+        Vector2 center = (Vector2)origin.position + interactable.boxOffset;
+        Vector2 halfSize = interactable.boxSize * 0.5f;
+
+        // Check if player is inside box
+        Vector2 playerPos = transform.position;
+        bool isInside = Mathf.Abs(playerPos.x - center.x) <= halfSize.x &&
+                        Mathf.Abs(playerPos.y - center.y) <= halfSize.y;
+
+        if (isInside)
+        {
+            interactable.Interact();
+        }
+        else
+        {
+            Debug.Log("Too far to interact.");
         }
     }
+
 
     private void Update()
     {
@@ -65,6 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.TryGetComponent(out Interactable interactable))
         {
+            Debug.Log("Entered trigger with: " + interactable.gameObject.name);
             currentInteractable = interactable;
 
             if (interactable is Stall stall)
