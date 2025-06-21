@@ -25,7 +25,6 @@ public class LevelStateManager : MonoBehaviour
     public void SetLevelIndex(int index)
     {
         CurrentLevelIndex = index;
-        Debug.Log("SetLevelIndex called! New index = " + index);
     }
 
     public LevelData GetCurrentLevelData()

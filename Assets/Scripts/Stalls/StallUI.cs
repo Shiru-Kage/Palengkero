@@ -9,9 +9,9 @@ public class StallUI : MonoBehaviour
     [SerializeField] private StallData stallData;
 
     [Header("Stall Outer UI")]
-    [SerializeField] private SpriteRenderer upperIconRenderer;
-    [SerializeField] private SpriteRenderer lowerIconRenderer;
-    [SerializeField] private Image backgroundRenderer;
+    [SerializeField] private Image upperStallHalf;
+    [SerializeField] private Image lowerStallHalf;
+    [SerializeField] private Image backgroundImage;
 
     [Header("Stall Inner UI")]
     [SerializeField] private GameObject itemDisplay;
@@ -52,14 +52,14 @@ public class StallUI : MonoBehaviour
 
     private void Start()
     {
-        if (upperIconRenderer != null)
-            upperIconRenderer.sprite = stallData.upperStallIcon;
+        if (upperStallHalf != null)
+            upperStallHalf.sprite = stallData.upperStallIcon;
 
-        if (lowerIconRenderer != null)
-            lowerIconRenderer.sprite = stallData.lowerStallIcon;
+        if (lowerStallHalf != null)
+            lowerStallHalf.sprite = stallData.lowerStallIcon;
 
-        if (backgroundRenderer != null)
-            backgroundRenderer.sprite = stallData.stallBackground;
+        if (backgroundImage != null)
+            backgroundImage.sprite = stallData.stallBackground;
     }
 
     public void SetStallReference(Stall stall)
