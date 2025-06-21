@@ -11,4 +11,6 @@ public class CharacterData : ScriptableObject
     public Sprite characterSprite;
     [TextArea(3, 10)]
     public string characterDescription;
+    public Color textColor;
+    public AudioClip voiceClip;
 }

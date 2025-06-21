@@ -20,3 +20,5 @@ MonoBehaviour:
   characterSprite: {fileID: -2234832920766540872, guid: 17a28dea99218f749a25581212a1fb4b, type: 3}
   characterDescription: A hardworking family man, Tonyo sends a good chunk of his
     wage back to the province. Between rising food costs and bills.
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  voiceClip: {fileID: 0}

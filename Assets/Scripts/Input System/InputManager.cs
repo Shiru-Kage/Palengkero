@@ -7,9 +7,10 @@ public class InputManager : MonoBehaviour
     public InputEvents Events { get { return events; } }
     private static InputSystem_Actions inputActions;
     [System.Serializable]
-	public struct InputEvents {
-		public UnityEvent<Vector2> OnTap;
-	}
+    public struct InputEvents
+    {
+        public UnityEvent<Vector2> OnTap;
+    }
     private void Awake()
     {
         if (inputActions == null)
@@ -37,12 +38,15 @@ public class InputManager : MonoBehaviour
         }
         return inputActions;
     }
-    private void Start() {
-		inputActions.UI.LocationTap.started += _ => OnClick();
-	}
+    private void Start()
+    {
+        inputActions.UI.LocationTap.started += _ => OnClick();
+    }
 
-	private void OnClick() {
-		Vector2 screenPosition = inputActions.UI.LocationTap.ReadValue<Vector2>();
-		events.OnTap.Invoke(screenPosition);
-	}
+    private void OnClick()
+    {
+        Vector2 screenPosition = inputActions.UI.LocationTap.ReadValue<Vector2>();
+        events.OnTap.Invoke(screenPosition);
+    }
+    
 }

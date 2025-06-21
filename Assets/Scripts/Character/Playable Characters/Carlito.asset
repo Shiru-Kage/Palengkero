@@ -20,3 +20,5 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: 351505d43a0cf57468694a9d0bf6bad8, type: 3}
   characterDescription: Carlito juggles tasks in a small store, often stocking shelves,
     assisting customers, and managing errands
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  voiceClip: {fileID: 0}
