@@ -4,7 +4,7 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-
+    [SerializeField] private TextMeshProUGUI weeklyBudgetText;
     [Header("Objective Texts")]
     [SerializeField] private TextMeshProUGUI nutritionGoalText;
     [SerializeField] private TextMeshProUGUI satisfactionGoalText;
@@ -45,14 +45,19 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateUI(LevelData currentLevel)
     {
-        if (CharacterSelectionManager.Instance == null || CharacterSelectionManager.Instance.SelectedCharacterData == null)
+        CharacterSelectionManager manager = CharacterSelectionManager.Instance;
+
+        if (manager == null || manager.SelectedCharacterData == null || manager.SelectedRuntimeCharacter == null)
         {
             Debug.LogError("No selected character found.");
             return;
         }
 
-        CharacterData selectedCharacter = CharacterSelectionManager.Instance.SelectedCharacterData;
+        CharacterData selectedCharacter = manager.SelectedCharacterData;
+        RuntimeCharacter runtimeCharacter = manager.SelectedRuntimeCharacter;
+
         CharacterObjective objective = currentLevel.GetObjectiveFor(selectedCharacter);
+        weeklyBudgetText.text = $"PHP {runtimeCharacter.currentWeeklyBudget}.00";
 
         if (objective != null)
         {
@@ -66,5 +71,15 @@ public class LevelManager : MonoBehaviour
             satisfactionGoalText.text = "Satisfaction Goal: N/A";
             savingsGoalText.text = "Savings Goal: N/A";
         }
+    }
+
+
+    public void UpdateBudgetDisplay()
+    {
+        RuntimeCharacter runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
+        if (runtimeCharacter == null)
+            return;
+
+        weeklyBudgetText.text = $"PHP {runtimeCharacter.currentWeeklyBudget}.00";
     }
 }

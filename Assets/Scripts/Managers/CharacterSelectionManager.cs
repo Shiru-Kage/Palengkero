@@ -8,6 +8,10 @@ public class CharacterSelectionManager : MonoBehaviour
 
     public GameObject SelectedCharacterPrefab { get; private set; }
 
+    // New: runtime character copy
+    public RuntimeCharacter SelectedRuntimeCharacter { get; private set; }
+
+    // Optional: keeps access to the original ScriptableObject, if needed
     public CharacterData SelectedCharacterData
     {
         get
@@ -47,10 +51,33 @@ public class CharacterSelectionManager : MonoBehaviour
     public void SetSelectedPrefab(GameObject prefab)
     {
         SelectedCharacterPrefab = prefab;
+
+        PlayerData pd = prefab.GetComponent<PlayerData>();
+        if (pd != null && pd.Data != null)
+        {
+            // Create the runtime character copy (safe to mutate)
+            SelectedRuntimeCharacter = new RuntimeCharacter(pd.Data);
+        }
+        else
+        {
+            SelectedRuntimeCharacter = null;
+        }
     }
 
     void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+}
+
+public class RuntimeCharacter
+{
+    public CharacterData characterData;
+    public int currentWeeklyBudget;
+
+    public RuntimeCharacter(CharacterData data)
+    {
+        characterData = data;
+        currentWeeklyBudget = data.characterWeeklyBudget;
     }
 }

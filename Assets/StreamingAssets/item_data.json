@@ -5,84 +5,108 @@
       "itemName": "Rice",
       "price": 70,
       "nutrition": 10,
-      "satisfaction": 0
+      "satisfaction": 0,
+      "iconName": "rice",
+      "stockLimit": 10
     },
     {
       "id": "bananas",
       "itemName": "Bananas",
       "price": 100,
       "nutrition": 10,
-      "satisfaction": 2
+      "satisfaction": 2,
+      "iconName": "bananas",
+      "stockLimit": 10
     },
     {
       "id": "coke",
       "itemName": "Coke",
       "price": 80,
       "nutrition": -5,
-      "satisfaction": 20
+      "satisfaction": 20,
+      "iconName": "coke",
+      "stockLimit": 10
     },
     {
       "id": "hotdogs",
       "itemName": "Hotdogs",
       "price": 110,
       "nutrition": 0,
-      "satisfaction": 25
+      "satisfaction": 25,
+      "iconName": "hotdogs",
+      "stockLimit": 10
     },
     {
       "id": "fish",
       "itemName": "Fish",
       "price": 180,
       "nutrition": 20,
-      "satisfaction": 0
+      "satisfaction": 0,
+      "iconName": "fish",
+      "stockLimit": 10
     },
     {
       "id": "instant_noodles",
       "itemName": "Instant Noodles",
       "price": 50,
       "nutrition": -10,
-      "satisfaction": 20
+      "satisfaction": 20,
+      "iconName": "instant_noodles",
+      "stockLimit": 10
     },
     {
       "id": "eggs",
       "itemName": "Eggs",
       "price": 120,
       "nutrition": 25,
-      "satisfaction": 0
+      "satisfaction": 0,
+      "iconName": "eggs",
+      "stockLimit": 10
     },
     {
       "id": "milk",
       "itemName": "Milk",
       "price": 150,
       "nutrition": 15,
-      "satisfaction": 0
+      "satisfaction": 0,
+      "iconName": "milk",
+      "stockLimit": 10
     },
     {
       "id": "chips",
       "itemName": "Chips",
       "price": 60,
       "nutrition": -5,
-      "satisfaction": 15
+      "satisfaction": 15,
+      "iconName": "chips",
+      "stockLimit": 10
     },
     {
       "id": "processed_cheese",
       "itemName": "Processed Cheese",
       "price": 100,
       "nutrition": 0,
-      "satisfaction": 10
+      "satisfaction": 10,
+      "iconName": "processed_cheese",
+      "stockLimit": 10
     },
     {
       "id": "stale_bread",
       "itemName": "Stale Bread",
       "price": 30,
       "nutrition": 5,
-      "satisfaction": -10
+      "satisfaction": -10,
+      "iconName": "stale_bread",
+      "stockLimit": 10
     },
     {
       "id": "rotten_fruit",
       "itemName": "Rotten Fruit",
       "price": 20,
       "nutrition": -5,
-      "satisfaction": -5
+      "satisfaction": -5,
+      "iconName": "rotten_fruit",
+      "stockLimit": 10
     }
   ]
 }

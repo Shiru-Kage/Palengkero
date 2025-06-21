@@ -24,7 +24,17 @@ public class ItemDatabaseManager : MonoBehaviour {
         if (File.Exists(path)) {
             string json = File.ReadAllText(path);
             itemDatabase = JsonUtility.FromJson<ItemDatabase>(json);
+            
+            foreach (var item in itemDatabase.items)
+            {
+                item.icon = Resources.Load<Sprite>($"Sprites/Items/{item.iconName}");
 
+                if (item.icon == null)
+                {
+                    Debug.LogWarning($"Missing icon for item: {item.id} (iconName: {item.iconName})");
+                }
+            }
+            
             // Build lookup dictionary
             itemLookup = new Dictionary<string, ItemData>();
             foreach (var item in itemDatabase.items) {

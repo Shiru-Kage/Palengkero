@@ -5,13 +5,16 @@ using System.Collections.Generic;
 [System.Serializable]
 public class ItemData
 {
-    public Sprite icon;
+    public string iconName;
     public string id;
     public string itemName;
     public int price;
     public int nutrition;
     public int satisfaction;
     public int stockLimit;
+
+    [NonSerialized]
+    public Sprite icon;
 }
 
 [System.Serializable]

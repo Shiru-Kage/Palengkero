@@ -9,7 +9,7 @@ public class StallData : ScriptableObject
     public Sprite lowerStallIcon;
     public Sprite stallBackground;
 
-    [Header("Stall Inventory")]
+    [HideInInspector]
     public List<StallItemEntry> items;
 }
 
