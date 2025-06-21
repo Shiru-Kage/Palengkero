@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class Stall : Interactable
 {
+    [SerializeField] private StallCooldown stallCooldown;
     [Header("Stall UI")]
     [SerializeField] private GameObject stallUI;
 
@@ -15,7 +16,6 @@ public class Stall : Interactable
 
     [Header("UI References")]
     public Button[] itemButtons;
-
     private ItemData[] assignedItems;
     private int[] stockAmounts;
 
@@ -81,7 +81,14 @@ public class Stall : Interactable
 
     public override void Interact()
     {
+        if (stallCooldown != null && stallCooldown.isCoolingDown)
+        {
+            Debug.Log("Stall is cooling down. Interaction blocked.");
+            return;
+        }
+
         base.Interact();
+        
         if (stallUI != null)
         {
             stallUI.SetActive(true);

@@ -5,6 +5,7 @@ using TMPro;
 
 public class StallUI : MonoBehaviour
 {
+    [SerializeField] private StallCooldown stallCooldown;
     [Header("Stall Data")]
     [SerializeField] private StallData stallData;
 
@@ -32,6 +33,9 @@ public class StallUI : MonoBehaviour
     private Coroutine blinkRoutine;
     private Color originalColor;
     private Stall currentStall;
+
+    [HideInInspector]
+    public bool isPlayerNearby = false;
 
     private void Awake()
     {
@@ -99,12 +103,6 @@ public class StallUI : MonoBehaviour
                 DisplayItemDetails(capturedItem, capturedStock);
             });
         }
-
-        // Optionally show the first item by default
-        if (items.Length > 0 && items[0] != null)
-        {
-            DisplayItemDetails(items[0], stocks[0]);
-        }
     }
 
     private void DisplayItemDetails(ItemData item, int stock)
@@ -117,14 +115,17 @@ public class StallUI : MonoBehaviour
 
         if (satisfactionInfo != null)
             satisfactionInfo.text = $"Satisfaction: {item.satisfaction}";
-
-        // You could also show stock or enable the purchase button here
-        // purchaseButton.interactable = stock > 0;
     }
 
     public void SetBlinking(bool shouldBlink)
-    {
+    { 
         if (outline == null) return;
+
+        if (stallCooldown != null && stallCooldown.isCoolingDown)
+        {
+            StopBlinkingOutline();
+            return;
+        }
 
         if (shouldBlink)
             StartBlinkingOutline();

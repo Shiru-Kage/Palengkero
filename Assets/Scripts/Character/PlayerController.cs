@@ -94,10 +94,16 @@ public class PlayerController : MonoBehaviour
             var stall = other.GetComponent<StallUI>();
             if (stall != null)
             {
-                stall.SetBlinking(true);
+                StallCooldown cooldown = stall.GetComponent<StallCooldown>();
+                if (cooldown != null && !cooldown.isCoolingDown)
+                {
+                    stall.SetBlinking(true);
+                    stall.isPlayerNearby = true;
+                }
             }
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -107,6 +113,7 @@ public class PlayerController : MonoBehaviour
             if (stall != null)
             {
                 stall.SetBlinking(false);
+                stall.isPlayerNearby = false;
             }
 
             currentInteractable = null;
