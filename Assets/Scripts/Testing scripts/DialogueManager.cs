@@ -165,7 +165,7 @@ public class DialogueManager : MonoBehaviour
         // Unsubscribe to avoid firing multiple times
         dialogueController.events.OnDialogueEnd.RemoveListener(HandleDialogueEnd);
         HideDialogueBox();
-        events.OnSceneEnd.Invoke(); // NOW this is only called once scene is truly finished
+        events.OnSceneEnd.Invoke();
     }
 
     public void ResetScene()

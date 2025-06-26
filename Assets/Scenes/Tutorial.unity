@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 84146585}
   - component: {fileID: 84146584}
   m_Layer: 0
-  m_Name: Satisfaction Value
+  m_Name: Flavor text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -75}
+  m_AnchoredPosition: {x: 50, y: -125}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84146584
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Satisfaction Value: -5'
+  m_text: 'Flavor text '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1276,6 +1276,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1407891987}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &270884393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,6 +1434,30 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 571942095}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1407891987}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 284631576}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1873,6 +1909,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1407891987}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &355817692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,7 +2247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &412567119
 Transform:
   m_ObjectHideFlags: 0
@@ -2294,6 +2342,7 @@ MonoBehaviour:
   boxOffset: {x: 0, y: -1.8}
   interactionTransform: {fileID: 2022821422}
   stallCooldown: {fileID: 420158758}
+  haggleSystem: {fileID: 5064311198717668787}
   stallUI: {fileID: 571942095}
   useRandomItems: 1
   specificItemIds: []
@@ -2400,7 +2449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eafb9ee3a80d14ba09202aee7d7569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stallCooldown: {fileID: 0}
+  stallCooldown: {fileID: 420158758}
   stallData: {fileID: 11400000, guid: d1514b368df58c14b9d92e5daf16805b, type: 2}
   upperStallHalf: {fileID: 1483942918}
   lowerStallHalf: {fileID: 2089934202}
@@ -2408,8 +2457,9 @@ MonoBehaviour:
   itemDisplay: {fileID: 1169517167}
   purchaseButton: {fileID: 284631578}
   itemName: {fileID: 1600185352}
-  nutritionInfo: {fileID: 1682084111}
-  satisfactionInfo: {fileID: 84146584}
+  stockInfo: {fileID: 1682084111}
+  priceInfo: {fileID: 1712101711}
+  descriptionInfo: {fileID: 84146584}
   outlineColor: {r: 0, g: 1, b: 0.07339382, a: 1}
   blinkSpeed: 2
   outlineThickness: 5
@@ -2997,7 +3047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7395643586672669852, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4471,8 +4521,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1682084110}
-  - {fileID: 84146583}
   - {fileID: 1712101710}
+  - {fileID: 84146583}
   m_Father: {fileID: 1977917140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6694,7 +6744,7 @@ GameObject:
   - component: {fileID: 1682084112}
   - component: {fileID: 1682084111}
   m_Layer: 0
-  m_Name: Nutrition Value
+  m_Name: Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6739,7 +6789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Nutrition Value: +10'
+  m_text: 'Stock Amount: 10x'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6852,7 +6902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -125}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1712101711

@@ -36,7 +36,6 @@ public class StallCooldown : MonoBehaviour
             stallUI.SetBlinking(false);
         }
 
-        // Set visuals for cooldown
         if (stallUpperHalf != null)
             stallUpperHalf.gameObject.SetActive(false);
 
@@ -45,7 +44,6 @@ public class StallCooldown : MonoBehaviour
 
         float elapsed = 0f;
 
-        // Gradually transition color from cooldownColor to normalColor
         while (elapsed < cooldownDuration)
         {
             elapsed += Time.deltaTime;
@@ -57,7 +55,6 @@ public class StallCooldown : MonoBehaviour
             yield return null;
         }
 
-        // Restore visuals
         if (stallUpperHalf != null)
             stallUpperHalf.gameObject.SetActive(true);
 

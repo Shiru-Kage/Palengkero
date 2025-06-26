@@ -1,18 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 public class Stall : Interactable
 {
     [SerializeField] private StallCooldown stallCooldown;
+    [SerializeField] private HaggleSystem haggleSystem;
+
     [Header("Stall UI")]
     [SerializeField] private GameObject stallUI;
 
     [Header("Manual Setup (optional)")]
     public bool useRandomItems = true;
-    public string[] specificItemIds; // Used if not random
-    public int customStock = -1;  // -1 = random stock
+    public string[] specificItemIds;
+    public int customStock = -1;
 
     [Header("UI References")]
     public Button[] itemButtons;
@@ -42,7 +43,6 @@ public class Stall : Interactable
 
         if (useRandomItems)
         {
-            // Shuffle the list using Fisher-Yates shuffle
             for (int i = 0; i < databaseItems.Count; i++)
             {
                 int j = Random.Range(i, databaseItems.Count);
@@ -78,7 +78,6 @@ public class Stall : Interactable
         }
     }
 
-
     public override void Interact()
     {
         if (stallCooldown != null && stallCooldown.isCoolingDown)
@@ -88,7 +87,7 @@ public class Stall : Interactable
         }
 
         base.Interact();
-        
+
         if (stallUI != null)
         {
             stallUI.SetActive(true);
@@ -106,7 +105,6 @@ public class Stall : Interactable
         }
     }
 
-    // Optional getter per item
     public (ItemData, int) GetItemAndStock(int index)
     {
         if (index < 0 || index >= assignedItems.Length)
@@ -120,6 +118,15 @@ public class Stall : Interactable
         {
             selectedItemIndex = index;
         }
+    }
+
+    public int SelectedItemIndex => selectedItemIndex;
+
+    public ItemData GetSelectedItem()
+    {
+        return (selectedItemIndex >= 0 && selectedItemIndex < assignedItems.Length)
+            ? assignedItems[selectedItemIndex]
+            : null;
     }
 
     public void PurchaseSelectedItem()
@@ -156,22 +163,29 @@ public class Stall : Interactable
             return false;
         }
 
-        if (runtimeCharacter == null)
+        float finalPrice = item.price;
+
+        if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
         {
-            Debug.LogWarning("No runtime character selected.");
-            return false;
+            finalPrice *= 0.5f;
+            finalPrice = Mathf.Round(finalPrice);
         }
 
-        if (runtimeCharacter.currentWeeklyBudget < item.price)
+        if (runtimeCharacter.currentWeeklyBudget < finalPrice)
         {
             Debug.Log("Not enough budget.");
             return false;
         }
 
         stockAmounts[index]--;
-        runtimeCharacter.currentWeeklyBudget -= item.price;
+        runtimeCharacter.currentWeeklyBudget -= (int)finalPrice;
 
-        Debug.Log($"Purchased {item.itemName} for ₱{item.price}. Remaining budget: ₱{runtimeCharacter.currentWeeklyBudget}");
+        if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
+        {
+            haggleSystem.ResetDiscount(); // Consume discount
+        }
+
+        Debug.Log($"Purchased {item.itemName} for ₱{finalPrice}. Remaining budget: ₱{runtimeCharacter.currentWeeklyBudget}");
 
         LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
         if (levelManager != null)
@@ -182,4 +196,24 @@ public class Stall : Interactable
         return true;
     }
 
+    public void UpdateSelectedItemUIAfterHaggle()
+    {
+        if (selectedItemIndex < 0 || selectedItemIndex >= assignedItems.Length)
+            return;
+
+        var item = assignedItems[selectedItemIndex];
+        float finalPrice = item.price;
+
+        if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
+        {
+            finalPrice *= 0.5f;
+            finalPrice = Mathf.Round(finalPrice);
+        }
+
+        var ui = Object.FindAnyObjectByType<StallUI>();
+        if (ui != null)
+        {
+            ui.UpdateSelectedItemPrice(finalPrice);
+        }
+    }
 }

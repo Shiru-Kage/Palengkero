@@ -84,11 +84,11 @@ public class DialogueBoxController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (IsLastSentence())
             {
-                events.OnDialogueEnd.Invoke(); // ✅ ensure scene ends
+                events.OnDialogueEnd.Invoke();
             }
             else
             {
-                PlayNextSentence(); // continue if there are more sentences
+                PlayNextSentence();
             }
             yield break;
         }
@@ -103,18 +103,14 @@ public class DialogueBoxController : MonoBehaviour
             }
         }
 
-        // Fallback to first speaker if runtime character is not in list
         activeSpeaker ??= sentence.speakers[0];
 
-        // Immediately assign name and color
         personNameTextDisplay.text = activeSpeaker.characterName;
         personNameTextDisplay.color = activeSpeaker.textColor;
 
-        // Play audio and effects before/while text types
         PlayAudio(activeSpeaker, sentence.dialogueAudio);
         ActDialogueBoxShake(sentence);
 
-        // Start typing text
         yield return StartCoroutine(TypeText(sentence.text));
     }
 
@@ -151,7 +147,7 @@ public class DialogueBoxController : MonoBehaviour
             {
                 barText.text = text;
                 skipAttempt = false;
-                break; // Exit loop early to avoid overflow
+                break;
             }
 
             if (charIndex >= text.Length)

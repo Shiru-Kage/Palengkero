@@ -12,6 +12,7 @@ public class ItemData
     public int nutrition;
     public int satisfaction;
     public int stockLimit;
+    public string flavorText;
 
     [NonSerialized]
     public Sprite icon;

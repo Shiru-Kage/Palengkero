@@ -18,8 +18,9 @@ public class StallUI : MonoBehaviour
     [SerializeField] private GameObject itemDisplay;
     [SerializeField] private Button purchaseButton;
     [SerializeField] private TextMeshProUGUI itemName;
-    [SerializeField] private TextMeshProUGUI nutritionInfo;
-    [SerializeField] private TextMeshProUGUI satisfactionInfo;
+    [SerializeField] private TextMeshProUGUI stockInfo;
+    [SerializeField] private TextMeshProUGUI priceInfo;
+    [SerializeField] private TextMeshProUGUI descriptionInfo;
 
     [Header("Outline Settings")]
     [SerializeField] private Color outlineColor = Color.yellow;
@@ -110,15 +111,58 @@ public class StallUI : MonoBehaviour
         if (itemName != null)
             itemName.text = item.itemName;
 
-        if (nutritionInfo != null)
-            nutritionInfo.text = $"Nutrition: {item.nutrition}";
+        if (stockInfo != null)
+            stockInfo.text = $"Stock amount: {stock}x";
 
-        if (satisfactionInfo != null)
-            satisfactionInfo.text = $"Satisfaction: {item.satisfaction}";
+        if (priceInfo != null)
+        {
+            float originalPrice = item.price;
+            float finalPrice = originalPrice;
+
+            var haggleSystem = Object.FindAnyObjectByType<HaggleSystem>();
+            if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
+            {
+                finalPrice *= 0.5f;
+                finalPrice = Mathf.Round(finalPrice);
+            }
+
+            if (finalPrice < originalPrice)
+            {
+                priceInfo.text = $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{finalPrice}";
+            }
+            else
+            {
+                priceInfo.text = $"Price: ₱{originalPrice}";
+            }
+        }
+
+        if (descriptionInfo != null)
+            descriptionInfo.text = item.flavorText;
     }
 
+    public void UpdateSelectedItemPrice(float discountedPrice)
+    {
+        if (currentStall == null || priceInfo == null)
+            return;
+
+        var (item, _) = currentStall.GetItemAndStock(currentStall.SelectedItemIndex);
+        if (item == null) return;
+
+        float originalPrice = item.price;
+
+        if (discountedPrice < originalPrice)
+        {
+            priceInfo.text = $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{discountedPrice}";
+        }
+        else
+        {
+            priceInfo.text = $"Price: ₱{originalPrice}";
+        }
+    }
+
+
     public void SetBlinking(bool shouldBlink)
-    { 
+    {
         if (outline == null) return;
 
         if (stallCooldown != null && stallCooldown.isCoolingDown)
@@ -173,4 +217,5 @@ public class StallUI : MonoBehaviour
     {
         outline.effectDistance = new Vector2(thickness, thickness);
     }
+    
 }

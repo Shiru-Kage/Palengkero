@@ -7,11 +7,7 @@ public class CharacterSelectionManager : MonoBehaviour
     public static CharacterSelectionManager Instance { get; private set; }
 
     public GameObject SelectedCharacterPrefab { get; private set; }
-
-    // New: runtime character copy
     public RuntimeCharacter SelectedRuntimeCharacter { get; private set; }
-
-    // Optional: keeps access to the original ScriptableObject, if needed
     public CharacterData SelectedCharacterData
     {
         get
