@@ -10,15 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05985c5146c32aa4faefb67a36e7f985, type: 3}
-  m_Name: Level 2
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  levelIcon: {fileID: 21300000, guid: 057b570a827fefd40a0cf927cf7fca53, type: 3}
-  levelNumber: 2
+  levelIcon: {fileID: 21300000, guid: cf66abc51844f7245bc5f9e7dbb35d3d, type: 3}
+  levelName: 
+  levelNumber: 3
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
-    savingsGoal: 400
-  - character: {fileID: 11400000, guid: 6399178f1d62bc74289bb49dc0ddc68a, type: 2}
+    nutritionGoal: 125
+    satisfactionGoal: 125
     savingsGoal: 500
-  - character: {fileID: 11400000, guid: eb0e05ddc319aba40bb3b693dfbcb67c, type: 2}
+  - character: {fileID: 11400000, guid: 6399178f1d62bc74289bb49dc0ddc68a, type: 2}
+    nutritionGoal: 105
+    satisfactionGoal: 150
     savingsGoal: 600
+  - character: {fileID: 11400000, guid: eb0e05ddc319aba40bb3b693dfbcb67c, type: 2}
+    nutritionGoal: 150
+    satisfactionGoal: 105
+    savingsGoal: 700
   levelDescription: 

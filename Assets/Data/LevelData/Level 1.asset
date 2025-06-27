@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   levelIcon: {fileID: 21300000, guid: 90f29a5c3266b70489bff508f72f1b36, type: 3}
+  levelName: 
   levelNumber: 1
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
-    nutritionGoal: 70
-    satisfactionGoal: 70
+    nutritionGoal: 105
+    satisfactionGoal: 105
     savingsGoal: 300
   - character: {fileID: 11400000, guid: 6399178f1d62bc74289bb49dc0ddc68a, type: 2}
-    nutritionGoal: 60
-    satisfactionGoal: 80
+    nutritionGoal: 85
+    satisfactionGoal: 130
     savingsGoal: 400
   - character: {fileID: 11400000, guid: eb0e05ddc319aba40bb3b693dfbcb67c, type: 2}
-    nutritionGoal: 80
-    satisfactionGoal: 60
+    nutritionGoal: 130
+    satisfactionGoal: 85
     savingsGoal: 500
   levelDescription: This level is about blah blah blah blah blah
