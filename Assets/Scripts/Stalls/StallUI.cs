@@ -32,7 +32,7 @@ public class StallUI : MonoBehaviour
     private Coroutine blinkRoutine;
     private Color originalColor;
 
-    private Stall currentStall;
+    private Stall currentStall; // ✅ Track which stall this UI belongs to
 
     [Header("Outline Settings")]
     [SerializeField] private Color outlineColor = Color.yellow;
@@ -109,7 +109,7 @@ public class StallUI : MonoBehaviour
 
     public void SetStallReference(Stall stall)
     {
-        currentStall = stall;
+        currentStall = stall; // ✅ Save reference to the correct stall
 
         if (purchaseButton != null)
         {
@@ -191,8 +191,8 @@ public class StallUI : MonoBehaviour
         float price = item.price;
         float finalPrice = price;
 
-        var haggleSystem = Object.FindAnyObjectByType<HaggleSystem>();
-        if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
+        // ✅ Check this stall's local discount, not HaggleSystem global
+        if (currentStall != null && item.id == currentStall.GetDiscountedItemId())
         {
             finalPrice *= 0.5f;
             finalPrice = Mathf.Round(finalPrice);

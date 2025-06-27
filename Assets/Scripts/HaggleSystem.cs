@@ -19,27 +19,11 @@ public class HaggleSystem : MonoBehaviour
     private int[] successRates = new int[] { 50, 40, 30 };
     private bool waitingForResult = false;
 
-    private string discountedItemId = null;
-    public string DiscountedItemId => discountedItemId;
+    private Stall currentHaggledStall; // ✅ Tracks which stall initiated the haggle
 
-    public void ApplyHaggleDiscount(string itemId)
+    public void StartHaggle(Stall stall, DialogueManager manager)
     {
-        discountedItemId = itemId;
-    }
-
-    public void ResetDiscount()
-    {
-        discountedItemId = null;
-    }
-
-    public void StartHaggle(DialogueManager manager)
-    {
-        if (haggleIntroScene == null || manager == null)
-        {
-            Debug.LogWarning("Missing DialogueManager or haggleIntroScene.");
-            return;
-        }
-
+        currentHaggledStall = stall; // ✅ Store the stall reference
         dialogueManager = manager;
         waitingForResult = true;
 
@@ -76,14 +60,13 @@ public class HaggleSystem : MonoBehaviour
     {
         attemptCount = 0;
 
-        var stall = Object.FindAnyObjectByType<Stall>();
-        if (stall != null)
+        if (currentHaggledStall != null)
         {
-            var selectedItem = stall.GetSelectedItem();
+            var selectedItem = currentHaggledStall.GetSelectedItem();
             if (selectedItem != null)
             {
-                ApplyHaggleDiscount(selectedItem.id);
-                stall.UpdateSelectedItemUIAfterHaggle();
+                currentHaggledStall.ApplyHaggleDiscount(selectedItem.id); // ✅ Apply discount to this stall only
+                currentHaggledStall.UpdateSelectedItemUIAfterHaggle();
             }
         }
 
@@ -99,7 +82,12 @@ public class HaggleSystem : MonoBehaviour
     private void HandleFailure()
     {
         attemptCount++;
-        ResetDiscount();
+
+        if (currentHaggledStall != null)
+        {
+            currentHaggledStall.ResetDiscount(); // ✅ Clear discount on failure
+        }
+
         Debug.Log($"Haggle failed at attempt {attemptCount}. Discount reset.");
 
         if (attemptCount >= 3)
@@ -123,7 +111,6 @@ public class HaggleSystem : MonoBehaviour
         }
     }
 
-
     private void ResetAttempts()
     {
         attemptCount = 0;
@@ -144,7 +131,7 @@ public class HaggleSystem : MonoBehaviour
     {
         stallCooldown = cooldown;
     }
-    
+
     private void OnDialogueSceneEnd_ShowStallDetails()
     {
         dialogueManager.events.OnSceneEnd.RemoveListener(OnDialogueSceneEnd_ShowStallDetails);
