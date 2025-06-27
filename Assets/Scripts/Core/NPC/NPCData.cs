@@ -4,7 +4,7 @@ using UnityEngine;
 public class NPCData : ScriptableObject
 {
     public Sprite npcSprite;
-    
+
     [Header("Preferences")]
     [Range(0, 100)]
     public int preferCheapItemsChance = 50;
@@ -14,4 +14,8 @@ public class NPCData : ScriptableObject
 
     [Range(0, 100)]
     public int preferHighSatisfactionChance = 50;
+    
+    [Header("Buying likelihood")]
+    [Range(0, 100)]
+    public int buyLikelihood = 50;
 }

@@ -18,13 +18,18 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (data == null) return;
+{
+    if (data == null) return;
 
-        Vector2 move = data.MoveInput;
+    Vector2 move = data.MoveInput;
 
-        animator.SetFloat("MoveX", move.x);
-        animator.SetFloat("MoveY", move.y);
-        animator.SetBool("IsMoving", move != Vector2.zero);
-    }
+    // Apply threshold to avoid very small movements triggering animation
+    float threshold = 0.1f;
+    animator.SetFloat("MoveX", Mathf.Abs(move.x) > threshold ? move.x : 0);
+    animator.SetFloat("MoveY", Mathf.Abs(move.y) > threshold ? move.y : 0);
+    animator.SetBool("IsMoving", move != Vector2.zero);
+}
+
+
+
 }

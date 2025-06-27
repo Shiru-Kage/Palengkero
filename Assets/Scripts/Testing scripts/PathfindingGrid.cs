@@ -11,6 +11,10 @@ public class PathfindingGrid : MonoBehaviour
     [Header("Grid Settings")]
     [SerializeField] private Grid unityGrid;
     [SerializeField] private Vector2Int size = new Vector2Int(10, 10);
+    public Vector2Int GetGridSize()
+    {
+        return size;
+    }
     [SerializeField] private LayerMask obstacleMask;
 
     private bool[,] walkable;

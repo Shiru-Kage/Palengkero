@@ -5,8 +5,7 @@ public class NPC_Shopper_Behavior : MonoBehaviour
     private Stall[] allStalls;
     private Stall currentStallTarget;
     private NPC_Shopper shopper;
-
-    private Vector3? currentTarget;
+    private bool isRoaming = true;
 
     private void Awake()
     {
@@ -16,66 +15,75 @@ public class NPC_Shopper_Behavior : MonoBehaviour
     private void Start()
     {
         allStalls = FindObjectsByType<Stall>(FindObjectsSortMode.None);
-        ChooseNewStallTarget();
+        RoamAround(); // Start roaming at the beginning
     }
 
-    public void OnTargetReached()
+    private void Update()
     {
-        if (currentStallTarget == null) return;
-
-        var buttons = currentStallTarget.GetItemButtons();
-        if (buttons != null && buttons.Length > 0)
+        if (isRoaming)
         {
-            currentStallTarget.PurchaseItem(Random.Range(0, buttons.Length));
-        }
-
-        ChooseNewStallTarget();
-    }
-
-    private void ChooseNewStallTarget()
-    {
-        if (allStalls == null || allStalls.Length == 0) return;
-
-        // Choose one stall randomly
-        currentStallTarget = allStalls[Random.Range(0, allStalls.Length)];
-
-        // Use interactionTransform if available, otherwise fallback to transform
-        Transform interactionTransform = currentStallTarget.interactionTransform != null
-            ? currentStallTarget.interactionTransform
-            : currentStallTarget.transform;
-
-        // Properly apply the offset
-        Vector3 targetPos = interactionTransform.position + (Vector3)currentStallTarget.boxOffset;
-
-        // Store for debug / gizmos
-        currentTarget = new Vector3(targetPos.x, targetPos.y, 0f); // keep it on 2D plane
-
-        // Tell the NPC to move there
-        shopper.SetTarget(currentTarget.Value);
-    }
-    private Stall FindNearestStall()
-    {
-        Stall nearest = null;
-        float minDist = Mathf.Infinity;
-        foreach (var stall in allStalls)
-        {
-            float dist = Vector3.Distance(transform.position, stall.transform.position);
-            if (dist < minDist)
+            // Handle NPC's roaming logic (move towards target set by shopper)
+            if (!shopper.HasTarget())
             {
-                minDist = dist;
-                nearest = stall;
+                RoamAround();
             }
         }
-        return nearest;
+    }
+    private void DecideOnAction()
+    {
+        if (currentStallTarget != null)
+        {
+            // NPC is at a stall, decide whether to buy something
+            ChooseItemToBuy();
+        }
+        else
+        {
+            // NPC is not at a stall, pick a new random location
+            RoamAround();
+        }
+
+        isRoaming = true; // Resume roaming after making a decision
+    }
+
+    private void RoamAround()
+    {
+        Vector2Int randomGridPos = GetRandomWalkableGridPosition();
+        Vector3 targetPosition = PathfindingGrid.Instance.GetWorldPosition(randomGridPos.x, randomGridPos.y);
+        shopper.SetTarget(targetPosition);  // Delegate target setting to NPC_Shopper
+    }
+
+    private Vector2Int GetRandomWalkableGridPosition()
+    {
+        Vector2Int randomGridPos = new Vector2Int(0, 0);
+        bool foundWalkable = false;
+
+        while (!foundWalkable)
+        {
+            randomGridPos = new Vector2Int(Random.Range(0, PathfindingGrid.Instance.GetGridSize().x), Random.Range(0, PathfindingGrid.Instance.GetGridSize().y));
+
+            if (PathfindingGrid.Instance.IsWalkable(randomGridPos.x, randomGridPos.y))
+            {
+                foundWalkable = true;
+            }
+        }
+
+        return randomGridPos;
+    }
+
+    private void ChooseItemToBuy()
+    {
+
+        if (Random.Range(0, 100) < shopper.Data.preferCheapItemsChance)
+        {
+            // NPC decides to buy from the stall
+            currentStallTarget.PurchaseItem(0); // Example of making a purchase
+        }
+
+        RoamAround();  // After buying (or not), pick a new random grid position
     }
 
     private void OnDrawGizmos()
     {
-        if (currentTarget.HasValue)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, currentTarget.Value);
-            Gizmos.DrawSphere(currentTarget.Value, 0.1f);
-        }
+        // Gizmo logic for drawing paths, if needed
     }
 }

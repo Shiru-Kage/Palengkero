@@ -37,6 +37,5 @@ public class NPC_Manager : MonoBehaviour
         }
 
         spawnCount++;
-        Debug.Log($"NPCs spawned at interval {spawnCount * spawnInterval} seconds");
     }
 }
