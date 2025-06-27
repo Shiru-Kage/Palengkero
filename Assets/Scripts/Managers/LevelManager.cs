@@ -1,16 +1,18 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI weeklyBudgetText;
-    [Header("Objective Texts")]
-    [SerializeField] private TextMeshProUGUI nutritionGoalText;
-    [SerializeField] private TextMeshProUGUI satisfactionGoalText;
-    [SerializeField] private TextMeshProUGUI savingsGoalText;
 
-    void Start()
+    [Header("Objective UI Handler")]
+    [SerializeField] private LevelObjectiveUI objectiveUI;   // ✅ NEW: Reference to the LevelObjectiveUI script
+
+    [Header("Spawners")]
+    [SerializeField] private CharacterSpawner characterSpawner;
+    [SerializeField] private StallManager stallManager;
+
+    private void Start()
     {
         if (LevelStateManager.Instance != null)
         {
@@ -21,6 +23,8 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("LevelStateManager not found. Defaulting to index 0.");
             SetLevel(0);
         }
+
+        SpawnCharacterAndStalls();
     }
 
     public void SetLevel(int levelIndex)
@@ -57,30 +61,48 @@ public class LevelManager : MonoBehaviour
         CharacterData selectedCharacter = manager.SelectedCharacterData;
         RuntimeCharacter runtimeCharacter = manager.SelectedRuntimeCharacter;
 
-        CharacterObjective objective = currentLevel.GetObjectiveFor(selectedCharacter);
         weeklyBudgetText.text = $"PHP {runtimeCharacter.currentWeeklyBudget}.00";
 
-        if (objective != null)
+        CharacterObjective objective = currentLevel.GetObjectiveFor(selectedCharacter);
+
+        // ✅ NEW: Use LevelObjectiveUI to display goal texts
+        if (objectiveUI != null)
         {
-            nutritionGoalText.text = $"Nutrition Goal: {objective.nutritionGoal}";
-            satisfactionGoalText.text = $"Satisfaction Goal: {objective.satisfactionGoal}";
-            savingsGoalText.text = $"Savings Goal: ₱{objective.savingsGoal}";
+            objectiveUI.UpdateObjectiveUI(objective);
         }
         else
         {
-            nutritionGoalText.text = "Nutrition Goal: N/A";
-            satisfactionGoalText.text = "Satisfaction Goal: N/A";
-            savingsGoalText.text = "Savings Goal: N/A";
+            Debug.LogWarning("ObjectiveUI reference missing on LevelManager.");
         }
     }
-
 
     public void UpdateBudgetDisplay()
     {
         RuntimeCharacter runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
-        if (runtimeCharacter == null)
-            return;
+        if (runtimeCharacter != null)
+        {
+            weeklyBudgetText.text = $"PHP {runtimeCharacter.currentWeeklyBudget}.00";
+        }
+    }
 
-        weeklyBudgetText.text = $"PHP {runtimeCharacter.currentWeeklyBudget}.00";
+    private void SpawnCharacterAndStalls()
+    {
+        if (characterSpawner != null)
+        {
+            characterSpawner.SpawnSelectedCharacter();
+        }
+        else
+        {
+            Debug.LogWarning("CharacterSpawner reference missing on LevelManager.");
+        }
+
+        if (stallManager != null)
+        {
+            stallManager.SpawnStalls();
+        }
+        else
+        {
+            Debug.LogWarning("StallManager reference missing on LevelManager.");
+        }
     }
 }

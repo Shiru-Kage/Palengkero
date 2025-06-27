@@ -4801,9 +4801,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6618353305845829015, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: objectiveUI
+      value: 
+      objectReference: {fileID: 5064311198717668788}
+    - target: {fileID: 6618353305845829015, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: stallManager
+      value: 
+      objectReference: {fileID: 5064311198717668782}
+    - target: {fileID: 6618353305845829015, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
       propertyPath: savingsGoalText
       value: 
       objectReference: {fileID: 4866192944047289555}
+    - target: {fileID: 6618353305845829015, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: characterSpawner
+      value: 
+      objectReference: {fileID: 5064311198717668781}
     - target: {fileID: 6618353305845829015, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
       propertyPath: weeklyBudgetText
       value: 
@@ -4854,6 +4866,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5064311198717668787}
+    - targetCorrespondingSourceObject: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5064311198717668788}
   m_SourcePrefab: {fileID: 100100000, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
 --- !u!1 &5064311198717668779 stripped
 GameObject:
@@ -4881,6 +4896,28 @@ MonoBehaviour:
     OnSceneEnd:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &5064311198717668781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8637088222432853269, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+  m_PrefabInstance: {fileID: 5064311198717668778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064311198717668779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab8a2d1515a56f4aa9423123afa39b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5064311198717668782 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 347279307014972522, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+  m_PrefabInstance: {fileID: 5064311198717668778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064311198717668779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6e5bb26e4d3c541a083a5c66bb7ec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5064311198717668787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4896,8 +4933,22 @@ MonoBehaviour:
   haggleIntroScene: {fileID: 11400000, guid: 44153230214ad064da87e78ef11455e9, type: 2}
   successScene: {fileID: 11400000, guid: 779c226d4bbc17b458ebf4e5513c9924, type: 2}
   failScene: {fileID: 11400000, guid: 3702b5bcd6573974fa5ce1463edde99f, type: 2}
-  stallCooldown: {fileID: 0}
   stallInnerUIContainer: {fileID: 1060466693}
+--- !u!114 &5064311198717668788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064311198717668779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5649a8fbfaedf469262ad88aca23ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritionGoalText: {fileID: 4866192944047289557}
+  satisfactionGoalText: {fileID: 4866192944047289556}
+  savingsGoalText: {fileID: 4866192944047289555}
 --- !u!224 &5353304399790806219
 RectTransform:
   m_ObjectHideFlags: 0

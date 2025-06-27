@@ -14,12 +14,7 @@ public class StallManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int numberOfStalls = 1;                    
 
-    private void Start()
-    {
-        SpawnStalls();
-    }
-
-    private void SpawnStalls()
+    public void SpawnStalls()
     {
         if (stallPrefab == null || haggleSystem == null || spawnPoint == null ||
             stallInnerUIContainer == null || stallInnerUICanvasObject == null)

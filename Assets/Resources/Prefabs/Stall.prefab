@@ -425,12 +425,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxSize: {x: 1, y: 1}
-  boxOffset: {x: 0, y: -1.8}
+  boxOffset: {x: 0, y: -1.75}
   interactionTransform: {fileID: 3459913666276844109}
   stallCooldown: {fileID: 4524069568572524114}
-  useRandomItems: 1
-  specificItemIds: []
-  customStock: -1
 --- !u!114 &4043979214030717336
 MonoBehaviour:
   m_ObjectHideFlags: 0

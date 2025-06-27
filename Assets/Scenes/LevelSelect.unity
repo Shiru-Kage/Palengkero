@@ -3244,6 +3244,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8523505962629669589, guid: 27f2d12ba7940244fa737c44f900402c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1916743976}
+    - targetCorrespondingSourceObject: {fileID: 8523505962629669589, guid: 27f2d12ba7940244fa737c44f900402c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1916743977}
   m_SourcePrefab: {fileID: 100100000, guid: 27f2d12ba7940244fa737c44f900402c, type: 3}
 --- !u!1 &1916743973 stripped
 GameObject:
@@ -3276,6 +3279,19 @@ MonoBehaviour:
   levelSprite: {fileID: 912001086}
   levelText: {fileID: 1985834146}
   levelDescriptionText: {fileID: 538469388}
+  objectiveUI: {fileID: 1916743977}
+--- !u!114 &1916743977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916743973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5649a8fbfaedf469262ad88aca23ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   nutritionGoalText: {fileID: 1378377180}
   satisfactionGoalText: {fileID: 1468986605}
   savingsGoalText: {fileID: 1189085209}

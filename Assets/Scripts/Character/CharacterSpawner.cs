@@ -5,12 +5,7 @@ public class CharacterSpawner : MonoBehaviour
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPoint;
 
-    void Start()
-    {
-        SpawnSelectedCharacter();
-    }
-
-    private void SpawnSelectedCharacter()
+    public void SpawnSelectedCharacter()
     {
         GameObject selectedPrefab = CharacterSelectionManager.Instance.SelectedCharacterPrefab;
 

@@ -9,12 +9,10 @@ public class LevelSelectManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI levelDescriptionText;
 
-    [Header("Objective Texts")]
-    [SerializeField] private TextMeshProUGUI nutritionGoalText;
-    [SerializeField] private TextMeshProUGUI satisfactionGoalText;
-    [SerializeField] private TextMeshProUGUI savingsGoalText;
+    [Header("Objective UI Handler")]
+    [SerializeField] private LevelObjectiveUI objectiveUI; 
 
-    void Start()
+    private void Start()
     {
         if (LevelStateManager.Instance != null)
         {
@@ -25,8 +23,6 @@ public class LevelSelectManager : MonoBehaviour
             Debug.LogWarning("LevelStateManager not found. Defaulting to index 0.");
             SetLevel(0);
         }
-
-        // Already updated by SetLevel, no need to call UpdateUI again here
     }
 
     public void SetLevel(int levelIndex)
@@ -69,17 +65,9 @@ public class LevelSelectManager : MonoBehaviour
         if (levelSprite != null)
             levelSprite.sprite = currentLevel.levelIcon;
 
-        if (objective != null)
-        {
-            nutritionGoalText.text = $"Nutrition Goal: {objective.nutritionGoal}";
-            satisfactionGoalText.text = $"Satisfaction Goal: {objective.satisfactionGoal}";
-            savingsGoalText.text = $"Savings Goal: ₱{objective.savingsGoal}";
-        }
+        if (objectiveUI != null)
+            objectiveUI.UpdateObjectiveUI(objective);
         else
-        {
-            nutritionGoalText.text = "Nutrition Goal: N/A";
-            satisfactionGoalText.text = "Satisfaction Goal: N/A";
-            savingsGoalText.text = "Savings Goal: N/A";
-        }
+            Debug.LogWarning("Objective UI reference missing in LevelSelectManager.");
     }
 }
