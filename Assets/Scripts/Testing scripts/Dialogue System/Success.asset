@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - text: Sige po, bawas ko ng kaunti.
-    speakers: []
+    speakers:
+    - {fileID: 11400000, guid: 7982bd26340930c4ebf3f22eaefc865e, type: 2}
     dialogueAudio: {fileID: 0}
     dialogueBoxActionTypes: 0
     dialogueChoice: []

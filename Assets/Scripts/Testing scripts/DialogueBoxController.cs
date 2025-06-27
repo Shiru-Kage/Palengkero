@@ -18,6 +18,7 @@ public class DialogueBoxController : MonoBehaviour
     private AudioSource audioSource;
     private RectTransform rectTransform;
     private Vector2 originalPosition;
+    private Coroutine typingCoroutine;
 
     public Events events;
 
@@ -49,6 +50,10 @@ public class DialogueBoxController : MonoBehaviour
 
     public void PlayScene(StoryScene scene)
     {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        ClearText();
         events.OnDialogueStart.Invoke();
         currentScene = scene;
         sentenceIndex = -1;
@@ -58,6 +63,7 @@ public class DialogueBoxController : MonoBehaviour
     public void PlayNextSentence()
     {
         sentenceIndex++;
+
         if (sentenceIndex >= currentScene.sentences.Count)
         {
             Debug.LogWarning("No more sentences to play.");
@@ -68,7 +74,10 @@ public class DialogueBoxController : MonoBehaviour
         events.OnDialogueNext.Invoke();
         var sentence = currentScene.sentences[sentenceIndex];
 
-        StartCoroutine(HandleSentence(sentence));
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(HandleSentence(sentence));
     }
 
     private IEnumerator HandleSentence(StoryScene.Sentence sentence)
@@ -141,25 +150,18 @@ public class DialogueBoxController : MonoBehaviour
         state = State.PLAYING;
         int charIndex = 0;
 
-        while (state != State.COMPLETED)
+        while (charIndex < text.Length)
         {
             if (skipAttempt)
             {
                 barText.text = text;
                 skipAttempt = false;
-                break;
-            }
-
-            if (charIndex >= text.Length)
-            {
                 state = State.COMPLETED;
-                break;
+                yield break;
             }
 
-            char currentChar = text[charIndex];
-            barText.text += currentChar;
+            barText.text += text[charIndex];
             charIndex++;
-
             yield return new WaitForSeconds(typingDelay);
         }
 
@@ -169,8 +171,8 @@ public class DialogueBoxController : MonoBehaviour
 
     public void SkipPrinting()
     {
-        if (state != State.PLAYING) return;
-        skipAttempt = true;
+        if (state == State.PLAYING)
+            skipAttempt = true;
     }
 
     private void PlayAudio(CharacterData speaker, AudioClip overrideClip = null)

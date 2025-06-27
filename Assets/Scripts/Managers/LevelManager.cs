@@ -40,6 +40,7 @@ public class LevelManager : MonoBehaviour
         }
 
         LevelStateManager.Instance.SetLevelIndex(levelIndex);
+        CharacterSelectionManager.Instance?.ResetRuntimeCharacterBudget();
         UpdateUI(levels[levelIndex]);
     }
 

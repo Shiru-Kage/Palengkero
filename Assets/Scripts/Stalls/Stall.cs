@@ -5,26 +5,30 @@ using System.Collections.Generic;
 public class Stall : Interactable
 {
     [SerializeField] private StallCooldown stallCooldown;
-    [SerializeField] private HaggleSystem haggleSystem;
 
-    [Header("Stall UI")]
-    [SerializeField] private GameObject stallUI;
+    private HaggleSystem haggleSystem;
+    private GameObject stallUI;
+    private Button[] itemButtons;
 
     [Header("Manual Setup (optional)")]
     public bool useRandomItems = true;
     public string[] specificItemIds;
     public int customStock = -1;
 
-    [Header("UI References")]
-    public Button[] itemButtons;
     private ItemData[] assignedItems;
     private int[] stockAmounts;
-
     private int selectedItemIndex = -1;
 
-    private void Start()
+    private bool isInitialized = false;
+
+    public void Initialize(HaggleSystem haggleSystemRef, GameObject uiRef, Button[] buttonArray)
     {
+        haggleSystem = haggleSystemRef;
+        stallUI = uiRef;
+        itemButtons = buttonArray;
+
         AssignItems();
+        isInitialized = true;
     }
 
     private void AssignItems()
@@ -32,6 +36,12 @@ public class Stall : Interactable
         if (ItemDatabaseManager.Instance == null || ItemDatabaseManager.Instance.itemDatabase == null)
         {
             Debug.LogError("ItemDatabaseManager not ready!");
+            return;
+        }
+
+        if (itemButtons == null || itemButtons.Length == 0)
+        {
+            Debug.LogError("ItemButtons not set. Call Initialize() first.");
             return;
         }
 
@@ -80,6 +90,12 @@ public class Stall : Interactable
 
     public override void Interact()
     {
+        if (!isInitialized)
+        {
+            Debug.LogWarning("Stall not initialized. Interaction blocked.");
+            return;
+        }
+
         if (stallCooldown != null && stallCooldown.isCoolingDown)
         {
             Debug.Log("Stall is cooling down. Interaction blocked.");
@@ -92,7 +108,7 @@ public class Stall : Interactable
         {
             stallUI.SetActive(true);
 
-            StallUI ui = Object.FindAnyObjectByType<StallUI>();
+            var ui = Object.FindAnyObjectByType<StallUI>();
             if (ui != null)
             {
                 ui.SetStallReference(this);
@@ -100,34 +116,48 @@ public class Stall : Interactable
             }
             else
             {
-                Debug.LogWarning("StallUI component missing on assigned stallUI object.");
+                Debug.LogWarning("StallUI component not found.");
             }
         }
     }
 
-    public (ItemData, int) GetItemAndStock(int index)
+    public void TryStartHaggling()
     {
-        if (index < 0 || index >= assignedItems.Length)
-            return (null, 0);
-        return (assignedItems[index], stockAmounts[index]);
+        DialogueManager dialogueManager = Object.FindAnyObjectByType<DialogueManager>();
+        if (dialogueManager == null)
+        {
+            Debug.LogWarning("DialogueManager not found in scene.");
+            return;
+        }
+
+        if (haggleSystem != null)
+        {
+            haggleSystem.StartHaggle(dialogueManager);
+        }
+        else
+        {
+            Debug.LogWarning("HaggleSystem not assigned.");
+        }
+        StallUI stallUI = GetComponent<StallUI>();
+        if (stallUI != null)
+        {
+            stallUI.HideDetailsAfterHaggle();
+        }
     }
+
+    public (ItemData, int) GetItemAndStock(int index) =>
+        (index < 0 || index >= assignedItems.Length) ? (null, 0) : (assignedItems[index], stockAmounts[index]);
 
     public void SetSelectedItem(int index)
     {
         if (index >= 0 && index < assignedItems.Length)
-        {
             selectedItemIndex = index;
-        }
     }
 
     public int SelectedItemIndex => selectedItemIndex;
 
-    public ItemData GetSelectedItem()
-    {
-        return (selectedItemIndex >= 0 && selectedItemIndex < assignedItems.Length)
-            ? assignedItems[selectedItemIndex]
-            : null;
-    }
+    public ItemData GetSelectedItem() =>
+        (selectedItemIndex >= 0 && selectedItemIndex < assignedItems.Length) ? assignedItems[selectedItemIndex] : null;
 
     public void PurchaseSelectedItem()
     {
@@ -154,9 +184,7 @@ public class Stall : Interactable
             return false;
         }
 
-        var characterManager = CharacterSelectionManager.Instance;
-        var runtimeCharacter = characterManager?.SelectedRuntimeCharacter;
-
+        var runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
         if (runtimeCharacter == null)
         {
             Debug.LogWarning("No runtime character selected.");
@@ -181,19 +209,31 @@ public class Stall : Interactable
         runtimeCharacter.currentWeeklyBudget -= (int)finalPrice;
 
         if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
-        {
-            haggleSystem.ResetDiscount(); // Consume discount
-        }
+            haggleSystem.ResetDiscount();
 
         Debug.Log($"Purchased {item.itemName} for ₱{finalPrice}. Remaining budget: ₱{runtimeCharacter.currentWeeklyBudget}");
 
         LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
         if (levelManager != null)
-        {
             levelManager.UpdateBudgetDisplay();
-        }
 
         return true;
+    }
+
+    public void OnPurchaseButtonPressed()
+    {
+        PurchaseSelectedItem();
+
+        StallUI stallUI = GetComponent<StallUI>();
+        if (stallUI != null)
+        {
+            stallUI.HideDetailsAfterPurchase();
+        }
+
+        if (stallCooldown != null)
+        {
+            stallCooldown.TriggerCooldown();
+        }
     }
 
     public void UpdateSelectedItemUIAfterHaggle()
@@ -212,8 +252,6 @@ public class Stall : Interactable
 
         var ui = Object.FindAnyObjectByType<StallUI>();
         if (ui != null)
-        {
             ui.UpdateSelectedItemPrice(finalPrice);
-        }
     }
 }

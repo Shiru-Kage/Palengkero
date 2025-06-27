@@ -51,12 +51,20 @@ public class CharacterSelectionManager : MonoBehaviour
         PlayerData pd = prefab.GetComponent<PlayerData>();
         if (pd != null && pd.Data != null)
         {
-            // Create the runtime character copy (safe to mutate)
             SelectedRuntimeCharacter = new RuntimeCharacter(pd.Data);
         }
         else
         {
             SelectedRuntimeCharacter = null;
+        }
+    }
+
+    public void ResetRuntimeCharacterBudget()
+    {
+        if (SelectedRuntimeCharacter != null && SelectedCharacterData != null)
+        {
+            SelectedRuntimeCharacter.currentWeeklyBudget = SelectedCharacterData.characterWeeklyBudget;
+            Debug.Log($"Budget reset to: ₱{SelectedRuntimeCharacter.currentWeeklyBudget}");
         }
     }
 

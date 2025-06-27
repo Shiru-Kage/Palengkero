@@ -12,14 +12,13 @@ public class HaggleSystem : MonoBehaviour
     [SerializeField] private StallCooldown stallCooldown;
 
     [Header("UI")]
-    [SerializeField] private GameObject stallInnerUI;
     [SerializeField] private GameObject stallInnerUIContainer;
 
     private DialogueManager dialogueManager;
     private int attemptCount = 0;
     private int[] successRates = new int[] { 50, 40, 30 };
     private bool waitingForResult = false;
-    
+
     private string discountedItemId = null;
     public string DiscountedItemId => discountedItemId;
 
@@ -92,7 +91,7 @@ public class HaggleSystem : MonoBehaviour
 
         if (successScene != null)
         {
-            dialogueManager.events.OnSceneEnd.AddListener(ShowStallInnerUI);
+            dialogueManager.events.OnSceneEnd.AddListener(OnDialogueSceneEnd_ShowStallDetails);
             dialogueManager.PlayScene(successScene);
         }
     }
@@ -119,18 +118,11 @@ public class HaggleSystem : MonoBehaviour
 
         if (failScene != null)
         {
-            dialogueManager.events.OnSceneEnd.AddListener(ShowStallInnerUI);
+            dialogueManager.events.OnSceneEnd.AddListener(OnDialogueSceneEnd_ShowStallDetails);
             dialogueManager.PlayScene(failScene);
         }
     }
 
-    private void ShowStallInnerUI()
-    {
-        dialogueManager.events.OnSceneEnd.RemoveListener(ShowStallInnerUI);
-
-        if (stallInnerUI != null)
-            stallInnerUI.SetActive(true);
-    }
 
     private void ResetAttempts()
     {
@@ -146,5 +138,25 @@ public class HaggleSystem : MonoBehaviour
         }
 
         ResetAttempts();
+    }
+
+    public void SetStallCooldown(StallCooldown cooldown)
+    {
+        stallCooldown = cooldown;
+    }
+    
+    private void OnDialogueSceneEnd_ShowStallDetails()
+    {
+        dialogueManager.events.OnSceneEnd.RemoveListener(OnDialogueSceneEnd_ShowStallDetails);
+
+        var stallUI = Object.FindAnyObjectByType<StallUI>();
+        if (stallUI != null)
+        {
+            stallUI.DisplayDetailsAfterHaggle();
+        }
+        else
+        {
+            Debug.LogWarning("StallUI not found when trying to display details after haggle.");
+        }
     }
 }

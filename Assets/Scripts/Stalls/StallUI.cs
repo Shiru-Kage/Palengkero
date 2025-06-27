@@ -1,47 +1,49 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using TMPro;
+using System.Collections;
 
 public class StallUI : MonoBehaviour
 {
     [SerializeField] private StallCooldown stallCooldown;
-    [Header("Stall Data")]
     [SerializeField] private StallData stallData;
 
-    [Header("Stall Outer UI")]
+    [Header("Stall UI")]
     [SerializeField] private Image upperStallHalf;
     [SerializeField] private Image lowerStallHalf;
     [SerializeField] private Image backgroundImage;
 
-    [Header("Stall Inner UI")]
-    [SerializeField] private GameObject itemDisplay;
-    [SerializeField] private Button purchaseButton;
-    [SerializeField] private TextMeshProUGUI itemName;
-    [SerializeField] private TextMeshProUGUI stockInfo;
-    [SerializeField] private TextMeshProUGUI priceInfo;
-    [SerializeField] private TextMeshProUGUI descriptionInfo;
+    private Transform stallInnerUIContainer;
+    private GameObject stallInnerUICanvasObject;
+    private GameObject informationPanel;
+
+    private GameObject itemDisplay;
+    private Button purchaseButton;
+    private Button haggleButton;
+
+    private TextMeshProUGUI itemName;
+    private Image itemIcon;
+    private TextMeshProUGUI stockInfo;
+    private TextMeshProUGUI priceInfo;
+    private TextMeshProUGUI descriptionInfo;
+
+    private Button[] itemButtons;
+    private Outline outline;
+    private Coroutine blinkRoutine;
+    private Color originalColor;
+
+    private Stall currentStall;
 
     [Header("Outline Settings")]
     [SerializeField] private Color outlineColor = Color.yellow;
     [SerializeField] private float blinkSpeed = 2f;
     [SerializeField] private float outlineThickness = 2f;
 
-    [Header("Item Display")]
-    [SerializeField] private Button[] itemButtons;
-
-    private Outline outline;
-    private Coroutine blinkRoutine;
-    private Color originalColor;
-    private Stall currentStall;
-
-    [HideInInspector]
-    public bool isPlayerNearby = false;
+    [HideInInspector] public bool isPlayerNearby = false;
 
     private void Awake()
     {
         outline = GetComponent<Outline>();
-
         if (outline != null)
         {
             originalColor = outline.effectColor;
@@ -49,27 +51,104 @@ public class StallUI : MonoBehaviour
             SetOutlineThickness(outlineThickness);
             outline.enabled = false;
         }
-        else
-        {
-            Debug.LogWarning($"Outline component missing on {gameObject.name}");
-        }
     }
 
     private void Start()
     {
-        if (upperStallHalf != null)
-            upperStallHalf.sprite = stallData.upperStallIcon;
+        if (upperStallHalf != null) upperStallHalf.sprite = stallData.upperStallIcon;
+        if (lowerStallHalf != null) lowerStallHalf.sprite = stallData.lowerStallIcon;
+        if (backgroundImage != null) backgroundImage.sprite = stallData.stallBackground;
+    }
 
-        if (lowerStallHalf != null)
-            lowerStallHalf.sprite = stallData.lowerStallIcon;
+    public void AssignUIContainer(Transform container) => stallInnerUIContainer = container;
+    public void SetUICanvasObject(GameObject canvasObject) => stallInnerUICanvasObject = canvasObject;
+    public Button[] GetItemButtons() => itemButtons;
 
-        if (backgroundImage != null)
-            backgroundImage.sprite = stallData.stallBackground;
+    public void SetupUIReferences()
+    {
+        if (stallInnerUIContainer == null)
+        {
+            Debug.LogError("StallInnerUIContainer not assigned!");
+            return;
+        }
+
+        Transform infoPanel = stallInnerUIContainer.Find("Information Panel");
+        if (infoPanel != null)
+        {
+            itemName = infoPanel.Find("ItemName")?.GetComponent<TextMeshProUGUI>();
+            itemIcon = infoPanel.Find("ItemIcon")?.GetComponent<Image>();
+            stockInfo = infoPanel.Find("Texts/Stock")?.GetComponent<TextMeshProUGUI>();
+            priceInfo = infoPanel.Find("Texts/Price")?.GetComponent<TextMeshProUGUI>();
+            descriptionInfo = infoPanel.Find("Texts/Flavor text")?.GetComponent<TextMeshProUGUI>();
+
+            informationPanel = infoPanel.gameObject;
+        }
+
+        itemButtons = stallInnerUIContainer.Find("Boxes")?.GetComponentsInChildren<Button>(true);
+
+        Transform haggleTransform = stallInnerUIContainer.Find("Haggle");
+        if (haggleTransform != null)
+            haggleButton = haggleTransform.GetComponent<Button>();
+
+        purchaseButton = stallInnerUIContainer.parent.Find("Purchase")?.GetComponent<Button>();
+
+        ValidateUI();
+    }
+
+    private void ValidateUI()
+    {
+        if (itemName == null) Debug.LogWarning("ItemName not found.");
+        if (itemIcon == null) Debug.LogWarning("ItemIcon not found.");
+        if (stockInfo == null) Debug.LogWarning("StockInfo not found.");
+        if (priceInfo == null) Debug.LogWarning("PriceInfo not found.");
+        if (descriptionInfo == null) Debug.LogWarning("DescriptionInfo not found.");
+        if (haggleButton == null) Debug.LogWarning("haggleButton not found.");
+        if (purchaseButton == null) Debug.LogWarning("PurchaseButton not found.");
+        if (itemButtons == null || itemButtons.Length == 0) Debug.LogWarning("ItemButtons not found.");
     }
 
     public void SetStallReference(Stall stall)
     {
         currentStall = stall;
+
+        if (purchaseButton != null)
+        {
+            purchaseButton.onClick.RemoveAllListeners();
+            purchaseButton.onClick.AddListener(() => currentStall.OnPurchaseButtonPressed());
+        }
+
+        if (haggleButton != null)
+        {
+            haggleButton.onClick.RemoveAllListeners();
+            haggleButton.onClick.AddListener(() =>
+            {
+                currentStall.TryStartHaggling();
+            });
+        }
+    }
+
+    public void HideDetailsAfterPurchase()
+    {
+        if (purchaseButton != null) purchaseButton.gameObject.SetActive(false);
+        if (haggleButton != null) haggleButton.gameObject.SetActive(false);
+        if (informationPanel != null) informationPanel.SetActive(false);
+        if (stallInnerUICanvasObject != null) stallInnerUICanvasObject.SetActive(false);
+    }
+
+    public void HideDetailsAfterHaggle()
+    {
+        if (purchaseButton != null) purchaseButton.gameObject.SetActive(false);
+        if (haggleButton != null) haggleButton.gameObject.SetActive(false);
+        if (informationPanel != null) informationPanel.SetActive(false);
+        if (stallInnerUIContainer != null) stallInnerUIContainer.gameObject.SetActive(false);
+    }
+
+    public void DisplayDetailsAfterHaggle()
+    {
+        if (purchaseButton != null) purchaseButton.gameObject.SetActive(true);
+        if (haggleButton != null) haggleButton.gameObject.SetActive(true);
+        if (informationPanel != null) informationPanel.SetActive(true);
+        if (stallInnerUIContainer != null) stallInnerUIContainer.gameObject.SetActive(true);
     }
 
     public void DisplayItems(ItemData[] items, int[] stocks)
@@ -87,12 +166,8 @@ public class StallUI : MonoBehaviour
             button.gameObject.SetActive(true);
 
             Image iconImage = button.GetComponentInChildren<Image>();
-            if (iconImage != null)
-            {
-                iconImage.sprite = items[i].icon;
-            }
+            if (iconImage != null) iconImage.sprite = items[i].icon;
 
-            // Capture values locally for the lambda
             int capturedIndex = i;
             ItemData capturedItem = items[capturedIndex];
             int capturedStock = stocks[capturedIndex];
@@ -102,79 +177,59 @@ public class StallUI : MonoBehaviour
             {
                 currentStall.SetSelectedItem(capturedIndex);
                 DisplayItemDetails(capturedItem, capturedStock);
+                if (purchaseButton != null) purchaseButton.gameObject.SetActive(true);
             });
         }
     }
 
     private void DisplayItemDetails(ItemData item, int stock)
     {
-        if (itemName != null)
-            itemName.text = item.itemName;
+        itemName.text = item.itemName;
+        itemIcon.sprite = item.icon;
+        stockInfo.text = $"Stock amount: {stock}x";
 
-        if (stockInfo != null)
-            stockInfo.text = $"Stock amount: {stock}x";
+        float price = item.price;
+        float finalPrice = price;
 
-        if (priceInfo != null)
+        var haggleSystem = Object.FindAnyObjectByType<HaggleSystem>();
+        if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
         {
-            float originalPrice = item.price;
-            float finalPrice = originalPrice;
-
-            var haggleSystem = Object.FindAnyObjectByType<HaggleSystem>();
-            if (haggleSystem != null && item.id == haggleSystem.DiscountedItemId)
-            {
-                finalPrice *= 0.5f;
-                finalPrice = Mathf.Round(finalPrice);
-            }
-
-            if (finalPrice < originalPrice)
-            {
-                priceInfo.text = $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{finalPrice}";
-            }
-            else
-            {
-                priceInfo.text = $"Price: ₱{originalPrice}";
-            }
+            finalPrice *= 0.5f;
+            finalPrice = Mathf.Round(finalPrice);
         }
 
-        if (descriptionInfo != null)
-            descriptionInfo.text = item.flavorText;
+        priceInfo.text = finalPrice < price
+            ? $"Price: <color=red><s>₱{price}</s></color> ₱{finalPrice}"
+            : $"Price: ₱{price}";
+
+        descriptionInfo.text = item.flavorText;
     }
 
     public void UpdateSelectedItemPrice(float discountedPrice)
     {
-        if (currentStall == null || priceInfo == null)
-            return;
+        if (currentStall == null || priceInfo == null) return;
 
         var (item, _) = currentStall.GetItemAndStock(currentStall.SelectedItemIndex);
         if (item == null) return;
 
         float originalPrice = item.price;
 
-        if (discountedPrice < originalPrice)
-        {
-            priceInfo.text = $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{discountedPrice}";
-        }
-        else
-        {
-            priceInfo.text = $"Price: ₱{originalPrice}";
-        }
+        priceInfo.text = discountedPrice < originalPrice
+            ? $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{discountedPrice}"
+            : $"Price: ₱{originalPrice}";
     }
-
 
     public void SetBlinking(bool shouldBlink)
     {
         if (outline == null) return;
-
         if (stallCooldown != null && stallCooldown.isCoolingDown)
         {
             StopBlinkingOutline();
             return;
         }
 
-        if (shouldBlink)
-            StartBlinkingOutline();
-        else
-            StopBlinkingOutline();
+        if (shouldBlink) StartBlinkingOutline();
+        else StopBlinkingOutline();
     }
 
     private void StartBlinkingOutline()
@@ -217,5 +272,4 @@ public class StallUI : MonoBehaviour
     {
         outline.effectDistance = new Vector2(thickness, thickness);
     }
-    
 }
