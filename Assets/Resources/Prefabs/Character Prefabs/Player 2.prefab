@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 676108838921789708}
   - component: {fileID: 2166161405686122722}
   - component: {fileID: 4739211558704148984}
-  - component: {fileID: 9156168810539219485}
+  - component: {fileID: 3669705712445171921}
   - component: {fileID: 7413407951881140692}
   - component: {fileID: 7850201430907840650}
   - component: {fileID: 1420484794399029279}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!61 &9156168810539219485
+--- !u!61 &3669705712445171921
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.01, y: -0.31}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -190,7 +190,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.71, y: 1.12}
+  m_Size: {x: 0.65, y: 0.45}
   m_EdgeRadius: 0
 --- !u!50 &7413407951881140692
 Rigidbody2D:

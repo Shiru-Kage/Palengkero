@@ -8,24 +8,27 @@ public class HaggleSystem : MonoBehaviour
     [SerializeField] private StoryScene successScene;
     [SerializeField] private StoryScene failScene;
 
-    [Header("Cooldown")]
-    [SerializeField] private StallCooldown stallCooldown;
-
     [Header("UI")]
     [SerializeField] private GameObject stallInnerUIContainer;
 
     private DialogueManager dialogueManager;
     private int attemptCount = 0;
-    private int[] successRates = new int[] { 50, 40, 30 };
+    private int[] successRates = new int[] { 40, 30, 20 };
     private bool waitingForResult = false;
 
-    private Stall currentHaggledStall; // ✅ Tracks which stall initiated the haggle
+    private Stall currentHaggledStall;
 
-    public void StartHaggle(Stall stall, DialogueManager manager)
+    public void StartHaggle(DialogueManager manager, Stall stall)
     {
-        currentHaggledStall = stall; // ✅ Store the stall reference
+        if (haggleIntroScene == null || manager == null || stall == null)
+        {
+            Debug.LogWarning("Missing DialogueManager, stall, or haggleIntroScene.");
+            return;
+        }
+
         dialogueManager = manager;
         waitingForResult = true;
+        currentHaggledStall = stall;   
 
         dialogueManager.events.OnSceneEnd.AddListener(HandleResultAfterIntro);
         manager.PlayScene(haggleIntroScene);
@@ -65,7 +68,7 @@ public class HaggleSystem : MonoBehaviour
             var selectedItem = currentHaggledStall.GetSelectedItem();
             if (selectedItem != null)
             {
-                currentHaggledStall.ApplyHaggleDiscount(selectedItem.id); // ✅ Apply discount to this stall only
+                currentHaggledStall.ApplyHaggleDiscount(selectedItem.id); 
                 currentHaggledStall.UpdateSelectedItemUIAfterHaggle();
             }
         }
@@ -85,7 +88,7 @@ public class HaggleSystem : MonoBehaviour
 
         if (currentHaggledStall != null)
         {
-            currentHaggledStall.ResetDiscount(); // ✅ Clear discount on failure
+            currentHaggledStall.ResetDiscount();  
         }
 
         Debug.Log($"Haggle failed at attempt {attemptCount}. Discount reset.");
@@ -95,13 +98,15 @@ public class HaggleSystem : MonoBehaviour
             Debug.Log("3 failed attempts. Triggering cooldown.");
             attemptCount = 0;
 
-            if (stallCooldown != null)
-                stallCooldown.TriggerCooldown();
+            if (currentHaggledStall != null && currentHaggledStall.GetStallCooldown() != null)
+            {
+                currentHaggledStall.GetStallCooldown().TriggerCooldown();
 
-            if (stallInnerUIContainer != null)
-                stallInnerUIContainer.SetActive(false);
+                if (stallInnerUIContainer != null)
+                    stallInnerUIContainer.SetActive(false);
 
-            StartCoroutine(ResetAfterCooldown());
+                StartCoroutine(ResetAfterCooldown());
+            }
         }
 
         if (failScene != null)
@@ -119,17 +124,12 @@ public class HaggleSystem : MonoBehaviour
 
     private IEnumerator ResetAfterCooldown()
     {
-        while (stallCooldown != null && stallCooldown.isCoolingDown)
+        while (currentHaggledStall != null && currentHaggledStall.GetStallCooldown() != null && currentHaggledStall.GetStallCooldown().isCoolingDown)
         {
             yield return null;
         }
 
         ResetAttempts();
-    }
-
-    public void SetStallCooldown(StallCooldown cooldown)
-    {
-        stallCooldown = cooldown;
     }
 
     private void OnDialogueSceneEnd_ShowStallDetails()

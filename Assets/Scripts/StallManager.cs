@@ -7,13 +7,12 @@ public class StallManager : MonoBehaviour
     [SerializeField] private GameObject stallPrefab;
     [SerializeField] private HaggleSystem haggleSystem;
     [SerializeField] private Transform stallCanvas;
-    [SerializeField] private Transform stallInnerUIContainer;      // ← UI internals
-    [SerializeField] private GameObject stallInnerUICanvasObject; // ← actual canvas/panel in the scene
+    [SerializeField] private Transform stallInnerUIContainer;    
+    [SerializeField] private GameObject stallInnerUICanvasObject; 
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private int numberOfStalls = 1;                     // ✅ How many stalls to spawn
-    [SerializeField] private Vector3 spawnOffset = new Vector3(2f, 0, 0); // ✅ Spacing between each stall
+    [SerializeField] private int numberOfStalls = 1;                    
 
     private void Start()
     {
@@ -31,7 +30,7 @@ public class StallManager : MonoBehaviour
 
         for (int i = 0; i < numberOfStalls; i++)
         {
-            Vector3 position = spawnPoint.position + (spawnOffset * i);
+            Vector3 position = spawnPoint.position;
 
             GameObject stallInstance = Instantiate(stallPrefab, position, spawnPoint.rotation, stallCanvas);
 
@@ -52,8 +51,6 @@ public class StallManager : MonoBehaviour
             Button[] itemButtons = stallUI.GetItemButtons();
 
             stall.Initialize(haggleSystem, stallInnerUICanvasObject, itemButtons);
-
-            haggleSystem.SetStallCooldown(stallCooldown);
 
             Debug.Log($"Stall #{i + 1} spawned at {position}");
         }

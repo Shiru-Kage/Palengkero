@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Stall : Interactable
 {
     [SerializeField] private StallCooldown stallCooldown;
-
+    public StallCooldown GetStallCooldown() => stallCooldown;
     private HaggleSystem haggleSystem;
     private GameObject stallUI;
     private Button[] itemButtons;
@@ -15,7 +15,7 @@ public class Stall : Interactable
     private int selectedItemIndex = -1;
     private bool isInitialized = false;
 
-    private string discountedItemId = null; // ✅ Tracks discounted item for this stall only
+    private string discountedItemId = null;
 
     public void Initialize(HaggleSystem haggleSystemRef, GameObject uiRef, Button[] buttonArray)
     {
@@ -74,9 +74,19 @@ public class Stall : Interactable
     public void TryStartHaggling()
     {
         DialogueManager dialogueManager = Object.FindAnyObjectByType<DialogueManager>();
-        if (dialogueManager != null && haggleSystem != null)
+        if (dialogueManager == null)
         {
-            haggleSystem.StartHaggle(this, dialogueManager); // ✅ Pass this stall!
+            Debug.LogWarning("DialogueManager not found in scene.");
+            return;
+        }
+
+        if (haggleSystem != null)
+        {
+            haggleSystem.StartHaggle(dialogueManager, this);
+        }
+        else
+        {
+            Debug.LogWarning("HaggleSystem not assigned.");
         }
 
         StallUI stallUI = GetComponent<StallUI>();
@@ -99,16 +109,16 @@ public class Stall : Interactable
 
     public int SelectedItemIndex => selectedItemIndex;
 
-    public string GetDiscountedItemId() => discountedItemId; // ✅ Allow UI to check for discount display
+    public string GetDiscountedItemId() => discountedItemId;
 
     public void ApplyHaggleDiscount(string itemId)
     {
-        discountedItemId = itemId; // ✅ Apply discount locally
+        discountedItemId = itemId; 
     }
 
     public void ResetDiscount()
     {
-        discountedItemId = null; // ✅ Reset local discount
+        discountedItemId = null;
     }
 
     public bool PurchaseItem(int index)
@@ -126,7 +136,7 @@ public class Stall : Interactable
 
         float finalPrice = item.price;
 
-        if (item.id == discountedItemId) // ✅ Check local discount
+        if (item.id == discountedItemId)
         {
             finalPrice *= 0.5f;
             finalPrice = Mathf.Round(finalPrice);
@@ -142,7 +152,7 @@ public class Stall : Interactable
         runtimeCharacter.currentWeeklyBudget -= (int)finalPrice;
 
         if (item.id == discountedItemId)
-            ResetDiscount(); // ✅ Clear discount after purchase
+            ResetDiscount();
 
         LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
         if (levelManager != null)
@@ -174,7 +184,7 @@ public class Stall : Interactable
         var item = assignedItems[selectedItemIndex];
         float finalPrice = item.price;
 
-        if (item.id == discountedItemId) // ✅ Local discount check
+        if (item.id == discountedItemId)
         {
             finalPrice *= 0.5f;
             finalPrice = Mathf.Round(finalPrice);

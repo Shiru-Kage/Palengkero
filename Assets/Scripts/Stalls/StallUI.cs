@@ -32,7 +32,7 @@ public class StallUI : MonoBehaviour
     private Coroutine blinkRoutine;
     private Color originalColor;
 
-    private Stall currentStall; // ✅ Track which stall this UI belongs to
+    private Stall currentStall; 
 
     [Header("Outline Settings")]
     [SerializeField] private Color outlineColor = Color.yellow;
@@ -109,7 +109,7 @@ public class StallUI : MonoBehaviour
 
     public void SetStallReference(Stall stall)
     {
-        currentStall = stall; // ✅ Save reference to the correct stall
+        currentStall = stall;
 
         if (purchaseButton != null)
         {

@@ -57,14 +57,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // Get box center and half-size
         var interactable = currentInteractable;
         Transform origin = interactable.interactionTransform ?? interactable.transform;
 
         Vector2 center = (Vector2)origin.position + interactable.boxOffset;
         Vector2 halfSize = interactable.boxSize * 0.5f;
 
-        // Check if player is inside box
         Vector2 playerPos = transform.position;
         bool isInside = Mathf.Abs(playerPos.x - center.x) <= halfSize.x &&
                         Mathf.Abs(playerPos.y - center.y) <= halfSize.y;
