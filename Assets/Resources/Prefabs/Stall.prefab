@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7500578385570423591}
   - component: {fileID: 1219838189558645375}
   - component: {fileID: 549172735050590910}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'Lower Half '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5f6d3fdab41fce448962466780408125, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

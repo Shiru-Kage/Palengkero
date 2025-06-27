@@ -1,12 +1,13 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI weeklyBudgetText;
 
     [Header("Objective UI Handler")]
-    [SerializeField] private LevelObjectiveUI objectiveUI;   // ✅ NEW: Reference to the LevelObjectiveUI script
+    [SerializeField] private LevelObjectiveUI objectiveUI;
 
     [Header("Spawners")]
     [SerializeField] private CharacterSpawner characterSpawner;
@@ -24,7 +25,44 @@ public class LevelManager : MonoBehaviour
             SetLevel(0);
         }
 
+        StartCoroutine(SetupLevel());
+    }
+
+    private IEnumerator SetupLevel()
+    {
+        // Step 1: Spawn character and stalls
         SpawnCharacterAndStalls();
+
+        // Step 2: Wait until all stalls and their colliders are ready
+        yield return new WaitUntil(() =>
+        {
+            var allStalls = FindObjectsByType<Stall>(FindObjectsSortMode.None);
+
+            foreach (var stall in allStalls)
+            {
+                var collider = stall.GetComponent<Collider2D>();
+                if (collider == null || !collider.enabled)
+                {
+                    Debug.LogWarning($"Stall '{stall.name}' is missing or has disabled Collider2D.");
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        // Step 3: Wait one physics frame to finalize registration
+        yield return new WaitForFixedUpdate();
+
+        // Step 4: Generate grid
+        if (PathfindingGrid.Instance != null)
+        {
+            PathfindingGrid.Instance.GenerateGrid();
+            Debug.Log("✅ Pathfinding grid generated after all stall colliders were detected.");
+        }
+        else
+        {
+            Debug.LogWarning("❌ PathfindingGrid.Instance is null.");
+        }
     }
 
     public void SetLevel(int levelIndex)
@@ -65,7 +103,6 @@ public class LevelManager : MonoBehaviour
 
         CharacterObjective objective = currentLevel.GetObjectiveFor(selectedCharacter);
 
-        // ✅ NEW: Use LevelObjectiveUI to display goal texts
         if (objectiveUI != null)
         {
             objectiveUI.UpdateObjectiveUI(objective);

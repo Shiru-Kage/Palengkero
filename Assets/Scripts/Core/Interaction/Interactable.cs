@@ -4,7 +4,7 @@ public class Interactable : MonoBehaviour
 {
     [Header("Interaction Area")]
     public Vector2 boxSize = new Vector2(3f, 3f);     
-    public Vector2 boxOffset = Vector2.zero;           
+    public Vector2 boxOffset;           
     public Transform interactionTransform;
 
     public virtual void Interact()

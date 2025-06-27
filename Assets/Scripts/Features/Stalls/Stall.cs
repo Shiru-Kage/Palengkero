@@ -9,7 +9,6 @@ public class Stall : Interactable
     private HaggleSystem haggleSystem;
     private GameObject stallUI;
     private Button[] itemButtons;
-
     private ItemData[] assignedItems;
     private int[] stockAmounts;
     private int selectedItemIndex = -1;
@@ -113,7 +112,7 @@ public class Stall : Interactable
 
     public void ApplyHaggleDiscount(string itemId)
     {
-        discountedItemId = itemId; 
+        discountedItemId = itemId;
     }
 
     public void ResetDiscount()
@@ -197,4 +196,6 @@ public class Stall : Interactable
 
     public (ItemData, int) GetItemAndStock(int index) =>
         (index < 0 || index >= assignedItems.Length) ? (null, 0) : (assignedItems[index], stockAmounts[index]);
+        
+    public Button[] GetItemButtons() => itemButtons;
 }
