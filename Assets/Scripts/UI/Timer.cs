@@ -7,7 +7,9 @@ public class Timer : MonoBehaviour
 
     [SerializeField] private TimerType timerType = TimerType.CountDown;
     [SerializeField] private float timeRemaining = 60f;
+    public float CurrentTime => timeRemaining;
     [SerializeField] private bool timerIsRunning = false;
+    public bool IsRunning => timerIsRunning;
     [SerializeField] private TextMeshProUGUI timeText;
     //[SerializeField] private LevelManager levelManager;
 

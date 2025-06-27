@@ -1,85 +1,42 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class NPC_Manager : MonoBehaviour
 {
-    [Header("NPC Prefabs & Data")]
+    [Header("NPC Settings")]
     [SerializeField] private GameObject npcPrefab;
-    [SerializeField] private List<NPCData> npcDatas;
+    [SerializeField] private int npcsToSpawnAtOnce = 5; 
+    [SerializeField] private float spawnInterval = 4f; 
 
-    [Header("Spawning Settings")]
-    [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private int initialSpawnCount = 2;
-    [SerializeField] private int maxNPCs = 10;
-    [SerializeField] private float spawnInterval = 15f;
+    [Header("Timer Settings")]
+    [SerializeField] private Timer timer;
 
-    [Header("Timer Reference")]
-    [SerializeField] private Timer gameTimer;
+    [Header("Spawn Point Settings")]
+    [SerializeField] private Transform spawnPoint; 
 
-    private List<NPC_Shopper> activeNPCs = new List<NPC_Shopper>();
+    private float timeElapsed = 0f; 
+    private int spawnCount = 0; 
 
-    private void Start()
+    private void Update()
     {
-        // Initial spawn
-        for (int i = 0; i < initialSpawnCount; i++)
+        if (timer.IsRunning)
         {
-            SpawnNPC();
-        }
-
-        if (gameTimer != null)
-        {
-            StartCoroutine(SpawnOverTime());
-        }
-        else
-        {
-            Debug.LogWarning("NPC_Manager: No Timer assigned. NPCs will not spawn over time.");
-        }
-    }
-
-    private IEnumerator SpawnOverTime()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(spawnInterval);
-
-            if (activeNPCs.Count < maxNPCs)
+            timeElapsed += Time.deltaTime; 
+            if (timeElapsed >= spawnInterval)
             {
-                SpawnNPC();
+                SpawnNPCs(); 
+                timeElapsed = 0f;
             }
         }
     }
 
-    private void SpawnNPC()
+    private void SpawnNPCs()
     {
-        if (npcPrefab == null || npcDatas.Count == 0 || spawnPoints.Length == 0)
+        for (int i = 0; i < npcsToSpawnAtOnce; i++)
         {
-            Debug.LogWarning("NPC_Manager: Cannot spawn NPC — check prefab, datas, or spawn points.");
-            return;
+            Instantiate(npcPrefab, spawnPoint.position, Quaternion.identity);
         }
 
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        NPCData chosenData = npcDatas[Random.Range(0, npcDatas.Count)];
-
-        GameObject npcObj = Instantiate(npcPrefab, spawnPoint.position, Quaternion.identity);
-        NPC_Shopper shopper = npcObj.GetComponent<NPC_Shopper>();
-        if (shopper != null)
-        {
-            shopper.GetType().GetProperty(nameof(shopper.Data)).SetValue(shopper, chosenData);
-        }
-
-        activeNPCs.Add(shopper);
-
-    }
-
-    /// <summary>
-    /// Called if you want to remove an NPC from tracking (e.g. on despawn)
-    /// </summary>
-    public void RemoveNPC(NPC_Shopper shopper)
-    {
-        if (activeNPCs.Contains(shopper))
-        {
-            activeNPCs.Remove(shopper);
-        }
+        spawnCount++;
+        Debug.Log($"NPCs spawned at interval {spawnCount * spawnInterval} seconds");
     }
 }
