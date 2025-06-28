@@ -46,8 +46,6 @@ public class StallManager : MonoBehaviour
             Button[] itemButtons = stallUI.GetItemButtons();
 
             stall.Initialize(haggleSystem, stallInnerUICanvasObject, itemButtons);
-
-            Debug.Log($"Stall #{i + 1} spawned at {position}");
         }
     }
 }

@@ -49,10 +49,7 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
         }
     }
 
-    public bool HasTarget()
-    {
-        return currentTarget.HasValue;
-    }
+    public bool HasTarget() => currentTarget.HasValue;
 
     private void FollowPath()
     {
@@ -116,21 +113,6 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        if (pathQueue.Count > 0)
-        {
-            Gizmos.color = Color.cyan;
-            Vector3 previous = transform.position;
-            foreach (var point in pathQueue)
-            {
-                Gizmos.DrawLine(previous, point);
-                Gizmos.DrawWireSphere(point, 0.08f);
-                previous = point;
-            }
-        }
-    }
-
     // This method will pick a new random location after idle time ends.
     private void RoamAround()
     {
@@ -144,6 +126,7 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
         Vector2Int randomGridPos = new Vector2Int(0, 0);
         bool foundWalkable = false;
 
+        // Keep generating random grid positions until we find one that's walkable
         while (!foundWalkable)
         {
             randomGridPos = new Vector2Int(Random.Range(0, PathfindingGrid.Instance.GetGridSize().x), Random.Range(0, PathfindingGrid.Instance.GetGridSize().y));
@@ -155,5 +138,25 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
         }
 
         return randomGridPos;
+    }
+
+    public bool IsAtTarget()
+    {
+        return currentTarget.HasValue && Vector3.Distance(cachedTransform.position, currentTarget.Value) < arrivalThreshold;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (pathQueue.Count > 0)
+        {
+            Gizmos.color = Color.cyan;
+            Vector3 previous = transform.position;
+            foreach (var point in pathQueue)
+            {
+                Gizmos.DrawLine(previous, point);
+                Gizmos.DrawWireSphere(point, 0.08f);
+                previous = point;
+            }
+        }
     }
 }

@@ -160,6 +160,24 @@ public class Stall : Interactable
         return true;
     }
 
+    public bool PurchaseItemForNPC(int index)
+    {
+        if (index < 0 || index >= assignedItems.Length)
+            return false;
+
+        ItemData item = assignedItems[index];
+        int stock = stockAmounts[index];
+
+        if (item == null || stock <= 0) return false;
+
+
+        stockAmounts[index]--;
+
+        Debug.Log($"NPC purchased {item.itemName}!");
+        return true;
+    }
+
+
     public void OnPurchaseButtonPressed()
     {
         PurchaseItem(selectedItemIndex);
@@ -196,6 +214,23 @@ public class Stall : Interactable
 
     public (ItemData, int) GetItemAndStock(int index) =>
         (index < 0 || index >= assignedItems.Length) ? (null, 0) : (assignedItems[index], stockAmounts[index]);
-        
+
     public Button[] GetItemButtons() => itemButtons;
+    
+    public ItemData[] GetAssignedItems()
+    {
+        return assignedItems;
+    }
+
+    public int GetItemIndex(ItemData item)
+    {
+        for (int i = 0; i < assignedItems.Length; i++)
+        {
+            if (assignedItems[i].id == item.id)
+            {
+                return i;
+            }
+        }
+        return -1; // Return -1 if item not found
+    }
 }

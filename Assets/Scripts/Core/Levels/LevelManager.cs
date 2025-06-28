@@ -30,10 +30,8 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator SetupLevel()
     {
-        // Step 1: Spawn character and stalls
         SpawnCharacterAndStalls();
 
-        // Step 2: Wait until all stalls and their colliders are ready
         yield return new WaitUntil(() =>
         {
             var allStalls = FindObjectsByType<Stall>(FindObjectsSortMode.None);
@@ -50,18 +48,15 @@ public class LevelManager : MonoBehaviour
             return true;
         });
 
-        // Step 3: Wait one physics frame to finalize registration
         yield return new WaitForFixedUpdate();
 
-        // Step 4: Generate grid
         if (PathfindingGrid.Instance != null)
         {
             PathfindingGrid.Instance.GenerateGrid();
-            Debug.Log("✅ Pathfinding grid generated after all stall colliders were detected.");
         }
         else
         {
-            Debug.LogWarning("❌ PathfindingGrid.Instance is null.");
+            Debug.LogWarning("PathfindingGrid.Instance is null.");
         }
     }
 

@@ -16,6 +16,5 @@ public class CharacterSpawner : MonoBehaviour
         }
 
         Instantiate(selectedPrefab, spawnPoint.position, spawnPoint.rotation);
-        Debug.Log("Spawned character: " + selectedPrefab.name);
     }
 }

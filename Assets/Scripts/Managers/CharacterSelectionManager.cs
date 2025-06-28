@@ -64,7 +64,6 @@ public class CharacterSelectionManager : MonoBehaviour
         if (SelectedRuntimeCharacter != null && SelectedCharacterData != null)
         {
             SelectedRuntimeCharacter.currentWeeklyBudget = SelectedCharacterData.characterWeeklyBudget;
-            Debug.Log($"Budget reset to: ₱{SelectedRuntimeCharacter.currentWeeklyBudget}");
         }
     }
 

@@ -23,7 +23,6 @@ public class CharacterAnimator : MonoBehaviour
 
     Vector2 move = data.MoveInput;
 
-    // Apply threshold to avoid very small movements triggering animation
     float threshold = 0.1f;
     animator.SetFloat("MoveX", Mathf.Abs(move.x) > threshold ? move.x : 0);
     animator.SetFloat("MoveY", Mathf.Abs(move.y) > threshold ? move.y : 0);

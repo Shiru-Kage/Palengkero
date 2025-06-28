@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
     {
         Vector2 input = context.ReadValue<Vector2>();
 
-        // Axis prioritization (horizontal vs vertical)
         moveInput = Mathf.Abs(input.x) > Mathf.Abs(input.y)
             ? new Vector2(input.x, 0f)
             : new Vector2(0f, input.y);
