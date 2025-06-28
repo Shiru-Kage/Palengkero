@@ -424,10 +424,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264df63f8d32f1349b5ed263e4f03280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 1, y: 1.28}
-  boxOffset: {x: 0, y: -2.1}
+  boxSize: {x: 1, y: 1.3}
+  boxOffset: {x: 0, y: -1.9}
   interactionTransform: {fileID: 3459913666276844109}
   stallCooldown: {fileID: 4524069568572524114}
+  useManualItems: 0
+  manuallyAssignedItemIDs:
+  - rice
+  - shrimp
+  - tilapia
+  - cabbage
+  - carrots
 --- !u!114 &4043979214030717336
 MonoBehaviour:
   m_ObjectHideFlags: 0

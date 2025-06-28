@@ -927,11 +927,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 395.00006
+      value: 960.00006
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -327.5
+      value: -595
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1332,7 +1332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -327.5
+      value: -382.5
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1711,6 +1711,18 @@ PrefabInstance:
       propertyPath: boxOffset.y
       value: -1.8
       objectReference: {fileID: 0}
+    - target: {fileID: 48882865127751798, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
+      propertyPath: useManualItems
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 48882865127751798, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
+      propertyPath: manuallyAssignedItemIDs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 48882865127751798, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
+      propertyPath: 'manuallyAssignedItemIDs.Array.data[4]'
+      value: shrimp
+      objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1777,7 +1789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -327.5
+      value: -382.5
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3001,7 +3013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -752.5
+      value: -807.5
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4103,7 +4115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -752.5
+      value: -807.5
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4616,7 +4628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -752.5
+      value: -807.5
       objectReference: {fileID: 0}
     - target: {fileID: 3459913666276844109, guid: 29bd432e6f52a2240aee43a39cb4d4a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5623,8 +5635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcPrefab: {fileID: 6444193704485106208, guid: 0d232dbc14b708c4da9212eeac152d46, type: 3}
-  npcsToSpawnAtOnce: 2
-  spawnInterval: 4
+  npcsToSpawnAtOnce: 1
+  spawnInterval: 10
   timer: {fileID: 1262946652}
   spawnPoint: {fileID: 1435371595}
 --- !u!224 &5353304399790806219
@@ -5733,7 +5745,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 110
     m_Bottom: 0
   m_ChildAlignment: 4
   m_StartCorner: 0

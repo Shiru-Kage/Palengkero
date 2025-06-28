@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        Debug.Log("Interact called on: " + gameObject.name);
+        //This will override
     }
 
     private void OnDrawGizmosSelected()

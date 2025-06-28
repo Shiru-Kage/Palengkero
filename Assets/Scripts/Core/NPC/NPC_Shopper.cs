@@ -10,7 +10,6 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float arrivalThreshold = 0.05f;
 
-    // Idle time range
     [SerializeField] private float minIdleTime = 1f;
     [SerializeField] private float maxIdleTime = 3f;
     private float idleTimer = 0f;
@@ -21,11 +20,17 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
     public Vector2 MoveInput { get; private set; }
 
     private bool isMovingAlongX = true;
-    private bool isIdle = false; // Flag to check if the NPC is in idle state
+    private bool isIdle = false;
+    public bool IsIdle => isIdle;
+
+    private bool isTargetLocked = false;
+
+    public event System.Action OnIdleStarted;
 
     private void Awake()
     {
         cachedTransform = transform;
+        RoamAround();
     }
 
     private void Update()
@@ -33,15 +38,16 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
         FollowPath();
     }
 
-    // Set a new target and calculate the path to it
     public void SetTarget(Vector3 worldPos)
     {
+        if (isTargetLocked) return;
+
         List<Vector3> path = Pathfinder.FindPath(transform.position, worldPos);
 
         if (path != null && path.Count > 0)
         {
             pathQueue = new Queue<Vector3>(path);
-            currentTarget = pathQueue.Dequeue();  // Start moving to the first point in the path
+            currentTarget = pathQueue.Dequeue();
         }
         else
         {
@@ -53,89 +59,89 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
 
     private void FollowPath()
     {
-        if (pathQueue.Count == 0) return; // No path to follow
-
+        // Handle idle countdown first
         if (isIdle)
         {
-            // NPC is idling, count down the idle timer
             idleTimer -= Time.deltaTime;
             if (idleTimer <= 0f)
             {
-                // End idle state, start roaming again
                 isIdle = false;
                 RoamAround();
+                LockTarget();
             }
-            return; // Don't proceed with moving
+            return;
         }
 
-        currentTarget = pathQueue.Peek(); // Look at the next target without dequeuing it
+        if (pathQueue.Count == 0) return;
 
+        currentTarget = pathQueue.Peek();
         Vector3 direction = currentTarget.Value - cachedTransform.position;
         MoveInput = direction.normalized;
 
         if (isMovingAlongX)
         {
-            MoveInput = new Vector2(MoveInput.x, 0); // Only move along the X-axis
+            MoveInput = new Vector2(MoveInput.x, 0);
 
-            // If close to the X target, switch to Y movement
             if (Mathf.Abs(cachedTransform.position.x - currentTarget.Value.x) < arrivalThreshold)
             {
                 isMovingAlongX = false;
             }
         }
-        else // Moving along Y axis
+        else
         {
-            MoveInput = new Vector2(0, MoveInput.y); // Only move along the Y-axis
+            MoveInput = new Vector2(0, MoveInput.y);
 
-            // If close to the Y target, dequeue and move to the next target
             if (Mathf.Abs(cachedTransform.position.y - currentTarget.Value.y) < arrivalThreshold)
             {
                 pathQueue.Dequeue();
-                isMovingAlongX = true; // Switch back to X movement
+                isMovingAlongX = true;
 
-                // If we reached the last target, start idle time
                 if (pathQueue.Count == 0)
                 {
-                    idleTimer = Random.Range(minIdleTime, maxIdleTime); // Set idle time
-                    isIdle = true; // Start idle state
+                    idleTimer = Random.Range(minIdleTime, maxIdleTime);
+                    isIdle = true;
+                    OnIdleStarted?.Invoke();
                 }
             }
         }
 
-        // Move towards the target (in either X or Y direction)
         cachedTransform.position = Vector3.MoveTowards(cachedTransform.position, currentTarget.Value, moveSpeed * Time.deltaTime);
 
-        // If we're done with the path, stop movement
         if (pathQueue.Count == 0)
         {
             MoveInput = Vector2.zero;
             currentTarget = null;
+            UnlockTarget();
         }
     }
 
-    // This method will pick a new random location after idle time ends.
-    private void RoamAround()
+    public void RoamAround()
     {
-        Vector2Int randomGridPos = GetRandomWalkableGridPosition();
-        Vector3 targetPosition = PathfindingGrid.Instance.GetWorldPosition(randomGridPos.x, randomGridPos.y);
-        SetTarget(targetPosition);  // Delegate target setting to NPC_Shopper
+        if (!isTargetLocked)
+        {
+            Vector2Int randomGridPos = GetRandomWalkableGridPosition();
+            Vector3 targetPosition = PathfindingGrid.Instance.GetWorldPosition(randomGridPos.x, randomGridPos.y);
+            SetTarget(targetPosition);
+        }
     }
 
     private Vector2Int GetRandomWalkableGridPosition()
     {
-        Vector2Int randomGridPos = new Vector2Int(0, 0);
+        Vector2Int randomGridPos;
         bool foundWalkable = false;
 
-        // Keep generating random grid positions until we find one that's walkable
-        while (!foundWalkable)
+        do
         {
-            randomGridPos = new Vector2Int(Random.Range(0, PathfindingGrid.Instance.GetGridSize().x), Random.Range(0, PathfindingGrid.Instance.GetGridSize().y));
+            randomGridPos = new Vector2Int(
+                Random.Range(0, PathfindingGrid.Instance.GetGridSize().x),
+                Random.Range(0, PathfindingGrid.Instance.GetGridSize().y)
+            );
 
             if (PathfindingGrid.Instance.IsWalkable(randomGridPos.x, randomGridPos.y))
             {
                 foundWalkable = true;
             }
-        }
+        } while (!foundWalkable);
 
         return randomGridPos;
     }
@@ -159,4 +165,7 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
             }
         }
     }
+
+    public void LockTarget() => isTargetLocked = true;
+    public void UnlockTarget() => isTargetLocked = false;
 }

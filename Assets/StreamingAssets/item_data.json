@@ -100,12 +100,12 @@
       "stockLimit": 10
     },
     {
-      "id": "coke",
-      "itemName": "Coke",
+      "id": "cola",
+      "itemName": "Cola",
       "price": 35,
       "nutrition": -30,
       "satisfaction": 55,
-      "iconName": "coke",
+      "iconName": "cola",
       "stockLimit": 10
     },
     {
@@ -118,12 +118,12 @@
       "stockLimit": 10
     },
     {
-      "id": "street_food",
-      "itemName": "Street Food",
+      "id": "tusok_tusok",
+      "itemName": "Tusok-tusok",
       "price": 10,
       "nutrition": -10,
       "satisfaction": 25,
-      "iconName": "street_food",
+      "iconName": "tusok_tusok",
       "stockLimit": 10
     },
     {
@@ -196,6 +196,15 @@
       "nutrition": 25,
       "satisfaction": -15,
       "iconName": "salted_egg",
+      "stockLimit": 10
+    },
+    {
+      "id": "egg",
+      "itemName": "Egg",
+      "price": 10,
+      "nutrition": 15,
+      "satisfaction": -5,
+      "iconName": "egg",
       "stockLimit": 10
     },
     {

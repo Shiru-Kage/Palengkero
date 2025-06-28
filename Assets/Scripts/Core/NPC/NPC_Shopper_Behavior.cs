@@ -1,182 +1,247 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class NPC_Shopper_Behavior : MonoBehaviour
 {
     private Stall[] allStalls;
     private Stall currentStallTarget;
     private NPC_Shopper shopper;
-    private bool isRoaming = true;
-    private Color gizmoColor = Color.cyan;
+    private NPCState currentState;
+    private Color gizmoColor = Color.green;
+
+    private bool hasPurchasedItem = false;
+
+    private enum NPCState
+    {
+        Roaming,
+        MovingToStall,
+        BuyingItem
+    }
 
     private void Awake()
     {
         shopper = GetComponent<NPC_Shopper>();
+        shopper.OnIdleStarted += HandleIdleStarted;
     }
 
     private void Start()
     {
         allStalls = FindObjectsByType<Stall>(FindObjectsSortMode.None);
-        RoamAround(); // Start roaming at the beginning
+        currentState = NPCState.Roaming;
+    }
+
+    private void OnDestroy()
+    {
+        if (shopper != null)
+            shopper.OnIdleStarted -= HandleIdleStarted;
     }
 
     private void Update()
     {
-        if (isRoaming)
+        switch (currentState)
         {
-            // Handle NPC's roaming logic (move towards target set by shopper)
-            if (!shopper.HasTarget())
-            {
-                RoamAround();
-            }
+            case NPCState.MovingToStall:
+                HandleMovingToStall();
+                break;
+
+            case NPCState.BuyingItem:
+                HandleBuyingItem();
+                break;
         }
-        else
+    }
+
+    private void HandleIdleStarted()
+    {
+        if (Random.Range(0, 100) < shopper.Data.buyLikelihood)
         {
-            // NPC is on the way to a stall
-            if (currentStallTarget != null && shopper.IsAtTarget())
+            // pick a stall with at least one item in stock
+            Stall stallToVisit = ChooseStallWithStock();
+            if (stallToVisit != null)
             {
-                // Once NPC reaches the stall's box offset, decide whether to buy
-                DecideOnAction();
+                SetTargetToStallBoxOffset(stallToVisit);
+                currentStallTarget = stallToVisit;
+                shopper.LockTarget();
+                currentState = NPCState.MovingToStall;
+            }
+            else
+            {
+                Debug.Log($"{shopper.name} found no stalls with available stock.");
+                currentState = NPCState.Roaming;
             }
         }
     }
 
-    private void DecideOnAction()
+    private Stall ChooseStallWithStock()
     {
-        // NPC is at the stall, decide whether to buy something
-        if (Random.Range(0, 100) < shopper.Data.buyLikelihood)
+        var availableStalls = new System.Collections.Generic.List<Stall>();
+
+        foreach (var stall in allStalls)
         {
-            // NPC decides to buy an item from this stall
-            ChooseItemToBuy();
+            if (stall == null) continue;
+
+            bool hasStock = false;
+            var items = stall.GetAssignedItems();
+            for (int i = 0; i < items.Length; i++)
+            {
+                var (_, stock) = stall.GetItemAndStock(i);
+                if (stock > 0)
+                {
+                    hasStock = true;
+                    break;
+                }
+            }
+
+            if (hasStock)
+                availableStalls.Add(stall);
         }
 
-        // After attempting to buy (or not), go back to roaming
-        isRoaming = true;  
+        if (availableStalls.Count > 0)
+        {
+            return availableStalls[Random.Range(0, availableStalls.Count)];
+        }
+
+        return null;
     }
 
-    private void RoamAround()
+    private void HandleMovingToStall()
     {
-        Vector2Int randomGridPos = GetRandomWalkableGridPosition();
-        Vector3 targetPosition = PathfindingGrid.Instance.GetWorldPosition(randomGridPos.x, randomGridPos.y);
-        shopper.SetTarget(targetPosition);  // Delegate target setting to NPC_Shopper
-
-        // Randomly decide if NPC will visit a stall
-        if (Random.Range(0, 100) < shopper.Data.buyLikelihood)
+        if (shopper.IsAtTarget())
         {
-            Stall stallToVisit = allStalls[Random.Range(0, allStalls.Length)];
+            currentState = NPCState.BuyingItem;
+        }
+    }
 
-            // Set target to stall’s box offset
-            SetTargetToStallBoxOffset(stallToVisit);
-            currentStallTarget = stallToVisit;
+    private void HandleBuyingItem()
+    {
+        if (currentStallTarget != null && !hasPurchasedItem)
+        {
+            Vector3 stallTargetPosition = currentStallTarget.GetApproachPoint();
 
-            isRoaming = false; // Stop roaming to visit the stall
+            if (Vector3.Distance(shopper.transform.position, stallTargetPosition) < 0.1f)
+            {
+                bool success = TryChooseItemToBuy();
+                if (success)
+                {
+                    hasPurchasedItem = true;
+                }
+
+                shopper.UnlockTarget();
+                currentState = NPCState.Roaming;
+                hasPurchasedItem = false;
+            }
         }
     }
 
     private void SetTargetToStallBoxOffset(Stall stall)
     {
-        Vector3 targetPosition = stall.transform.position + (Vector3)stall.boxOffset;
-        shopper.SetTarget(targetPosition);  // Move towards the stall's box offset
+        Vector3 targetPosition = stall.GetApproachPoint();
+        shopper.SetTarget(targetPosition);
     }
 
-    private void ChooseItemToBuy()
+    private bool TryChooseItemToBuy()
     {
-        // NPC will buy an item based on preferences after arriving at the stall
-        Stall stall = currentStallTarget;
-        if (stall != null)
+        if (currentStallTarget == null) return false;
+
+        ItemData itemToBuy = null;
+
+        // preference order
+        if (Random.Range(0, 100) < shopper.Data.preferCheapItemsChance)
         {
-            ItemData itemToBuy = null;
-
-            // Preference logic to pick an item based on NPC's preferences
-            if (Random.Range(0, 100) < shopper.Data.preferCheapItemsChance)
-            {
-                itemToBuy = GetCheapItem(stall);
-            }
-            else if (Random.Range(0, 100) < shopper.Data.preferHighNutritionChance)
-            {
-                itemToBuy = GetHighNutritionItem(stall);
-            }
-            else if (Random.Range(0, 100) < shopper.Data.preferHighSatisfactionChance)
-            {
-                itemToBuy = GetHighSatisfactionItem(stall);
-            }
-
-            // If an item was selected, attempt to buy it
-            if (itemToBuy != null)
-            {
-                stall.PurchaseItemForNPC(stall.GetItemIndex(itemToBuy)); // Attempt to buy item
-                Debug.Log($"{shopper.name} successfully bought {itemToBuy.itemName} from the stall!");
-            }
+            itemToBuy = GetCheapItem(currentStallTarget);
+        }
+        else if (Random.Range(0, 100) < shopper.Data.preferHighNutritionChance)
+        {
+            itemToBuy = GetHighNutritionItem(currentStallTarget);
+        }
+        else if (Random.Range(0, 100) < shopper.Data.preferHighSatisfactionChance)
+        {
+            itemToBuy = GetHighSatisfactionItem(currentStallTarget);
         }
 
-        // After buying (or not), pick a new random grid position to roam
-        RoamAround();  
+        // check stock
+        if (itemToBuy != null)
+        {
+            int index = currentStallTarget.GetItemIndex(itemToBuy);
+            var (_, stock) = currentStallTarget.GetItemAndStock(index);
+            if (stock <= 0)
+            {
+                itemToBuy = GetAnyAvailableItem(currentStallTarget);
+            }
+        }
+        else
+        {
+            itemToBuy = GetAnyAvailableItem(currentStallTarget);
+        }
+
+        if (itemToBuy != null)
+        {
+            int itemIndex = currentStallTarget.GetItemIndex(itemToBuy);
+            bool purchaseSuccess = currentStallTarget.PurchaseItemForNPC(itemIndex);
+            if (purchaseSuccess)
+            {
+                Debug.Log($"{shopper.name} successfully bought {itemToBuy.itemName} from the stall!");
+                return true;
+            }
+            else
+            {
+                Debug.Log($"{shopper.name} tried to buy {itemToBuy.itemName} but stock was empty.");
+            }
+        }
+        else
+        {
+            Debug.Log($"{shopper.name} found no items to buy at {currentStallTarget.name}");
+        }
+
+        return false;
     }
 
     private ItemData GetCheapItem(Stall stall)
     {
-        // Find item with lowest price in the stall
-        ItemData cheapestItem = null;
+        ItemData cheapest = null;
         foreach (var item in stall.GetAssignedItems())
         {
-            if (cheapestItem == null || item.price < cheapestItem.price)
-            {
-                cheapestItem = item;
-            }
+            if (cheapest == null || item.price < cheapest.price)
+                cheapest = item;
         }
-        return cheapestItem;
+        return cheapest;
     }
 
     private ItemData GetHighNutritionItem(Stall stall)
     {
-        // Find item with highest nutrition in the stall
-        ItemData bestItem = null;
+        ItemData best = null;
         foreach (var item in stall.GetAssignedItems())
         {
-            if (bestItem == null || item.nutrition > bestItem.nutrition)
-            {
-                bestItem = item;
-            }
+            if (best == null || item.nutrition > best.nutrition)
+                best = item;
         }
-        return bestItem;
+        return best;
     }
 
     private ItemData GetHighSatisfactionItem(Stall stall)
     {
-        // Find item with highest satisfaction in the stall
-        ItemData bestItem = null;
+        ItemData best = null;
         foreach (var item in stall.GetAssignedItems())
         {
-            if (bestItem == null || item.satisfaction > bestItem.satisfaction)
-            {
-                bestItem = item;
-            }
+            if (best == null || item.satisfaction > best.satisfaction)
+                best = item;
         }
-        return bestItem;
+        return best;
     }
 
-    private Vector2Int GetRandomWalkableGridPosition()
+    private ItemData GetAnyAvailableItem(Stall stall)
     {
-        Vector2Int randomGridPos = new Vector2Int(0, 0);
-        bool foundWalkable = false;
-
-        while (!foundWalkable)
+        var items = stall.GetAssignedItems();
+        for (int i = 0; i < items.Length; i++)
         {
-            randomGridPos = new Vector2Int(Random.Range(0, PathfindingGrid.Instance.GetGridSize().x), Random.Range(0, PathfindingGrid.Instance.GetGridSize().y));
-
-            if (PathfindingGrid.Instance.IsWalkable(randomGridPos.x, randomGridPos.y))
-            {
-                foundWalkable = true;
-            }
+            var (item, stock) = stall.GetItemAndStock(i);
+            if (item != null && stock > 0)
+                return item;
         }
-
-        return randomGridPos;
+        return null;
     }
 
     private void OnDrawGizmos()
     {
-        // Use the dynamic gizmoColor when drawing gizmos
         Gizmos.color = gizmoColor;
-        Gizmos.DrawWireSphere(transform.position, 0.2f);  // Draw a sphere at the NPC's position for visual aid
+        Gizmos.DrawWireSphere(transform.position, 0.2f);
     }
 }

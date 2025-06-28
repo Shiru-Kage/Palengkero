@@ -70,8 +70,6 @@ public class DialogueManager : MonoBehaviour
 
     public void HandleInput(Vector2 position)
     {
-        Debug.Log("Pressing me");
-
         if (currentScene is StoryScene currentStoryScene)
         {
             HandleStorySceneInput(currentStoryScene);

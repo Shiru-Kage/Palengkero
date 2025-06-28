@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NPC 1
   m_EditorClassIdentifier: 
   npcSprite: {fileID: 0}
-  preferCheapItemsChance: 50
-  preferHighNutritionChance: 25
-  preferHighSatisfactionChance: 25
-  buyLikelihood: 50
+  preferCheapItemsChance: 0
+  preferHighNutritionChance: 100
+  preferHighSatisfactionChance: 0
+  buyLikelihood: 100

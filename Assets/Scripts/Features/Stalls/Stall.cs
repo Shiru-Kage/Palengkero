@@ -6,6 +6,7 @@ public class Stall : Interactable
 {
     [SerializeField] private StallCooldown stallCooldown;
     public StallCooldown GetStallCooldown() => stallCooldown;
+
     private HaggleSystem haggleSystem;
     private GameObject stallUI;
     private Button[] itemButtons;
@@ -15,6 +16,13 @@ public class Stall : Interactable
     private bool isInitialized = false;
 
     private string discountedItemId = null;
+
+    // MANUAL ASSIGNMENT
+    [SerializeField]
+    public bool useManualItems = false;
+
+    [SerializeField]
+    public List<string> manuallyAssignedItemIDs = new List<string>();
 
     public void Initialize(HaggleSystem haggleSystemRef, GameObject uiRef, Button[] buttonArray)
     {
@@ -31,29 +39,51 @@ public class Stall : Interactable
         var db = ItemDatabaseManager.Instance;
         if (db == null || db.itemDatabase == null) return;
 
-        var databaseItems = new List<ItemData>(db.itemDatabase.items);
-        int itemCount = Mathf.Min(itemButtons.Length, databaseItems.Count);
-
-        assignedItems = new ItemData[itemCount];
-        stockAmounts = new int[itemCount];
-
-        for (int i = 0; i < databaseItems.Count; i++)
+        if (useManualItems && manuallyAssignedItemIDs != null && manuallyAssignedItemIDs.Count > 0)
         {
-            int j = Random.Range(i, databaseItems.Count);
-            (databaseItems[i], databaseItems[j]) = (databaseItems[j], databaseItems[i]);
+            int itemLimit = Mathf.Min(itemButtons.Length, manuallyAssignedItemIDs.Count);
+            assignedItems = new ItemData[itemLimit];
+            stockAmounts = new int[itemLimit];
+
+            for (int i = 0; i < itemLimit; i++)
+            {
+                ItemData item = db.GetItem(manuallyAssignedItemIDs[i]);
+                if (item != null)
+                {
+                    assignedItems[i] = item;
+                    stockAmounts[i] = Random.Range(1, item.stockLimit + 1);
+                }
+                else
+                {
+                    Debug.LogWarning($"Manual Item ID {manuallyAssignedItemIDs[i]} not found in database.");
+                }
+            }
         }
-
-        for (int i = 0; i < itemCount; i++)
+        else
         {
-            assignedItems[i] = databaseItems[i];
-            stockAmounts[i] = Random.Range(1, assignedItems[i].stockLimit + 1);
+            var databaseItems = new List<ItemData>(db.itemDatabase.items);
+            int itemCount = Mathf.Min(itemButtons.Length, databaseItems.Count);
+
+            assignedItems = new ItemData[itemCount];
+            stockAmounts = new int[itemCount];
+
+            for (int i = 0; i < databaseItems.Count; i++)
+            {
+                int j = Random.Range(i, databaseItems.Count);
+                (databaseItems[i], databaseItems[j]) = (databaseItems[j], databaseItems[i]);
+            }
+
+            for (int i = 0; i < itemCount; i++)
+            {
+                assignedItems[i] = databaseItems[i];
+                stockAmounts[i] = Random.Range(1, assignedItems[i].stockLimit + 1);
+            }
         }
     }
 
     public override void Interact()
     {
         if (!isInitialized) return;
-
         if (stallCooldown != null && stallCooldown.isCoolingDown) return;
 
         base.Interact();
@@ -122,8 +152,7 @@ public class Stall : Interactable
 
     public bool PurchaseItem(int index)
     {
-        if (index < 0 || index >= assignedItems.Length)
-            return false;
+        if (index < 0 || index >= assignedItems.Length) return false;
 
         ItemData item = assignedItems[index];
         int stock = stockAmounts[index];
@@ -162,21 +191,17 @@ public class Stall : Interactable
 
     public bool PurchaseItemForNPC(int index)
     {
-        if (index < 0 || index >= assignedItems.Length)
-            return false;
+        if (index < 0 || index >= assignedItems.Length) return false;
 
         ItemData item = assignedItems[index];
         int stock = stockAmounts[index];
 
         if (item == null || stock <= 0) return false;
 
-
         stockAmounts[index]--;
-
         Debug.Log($"NPC purchased {item.itemName}!");
         return true;
     }
-
 
     public void OnPurchaseButtonPressed()
     {
@@ -216,11 +241,8 @@ public class Stall : Interactable
         (index < 0 || index >= assignedItems.Length) ? (null, 0) : (assignedItems[index], stockAmounts[index]);
 
     public Button[] GetItemButtons() => itemButtons;
-    
-    public ItemData[] GetAssignedItems()
-    {
-        return assignedItems;
-    }
+
+    public ItemData[] GetAssignedItems() => assignedItems;
 
     public int GetItemIndex(ItemData item)
     {
@@ -231,6 +253,12 @@ public class Stall : Interactable
                 return i;
             }
         }
-        return -1; // Return -1 if item not found
+        return -1;
+    }
+
+    public Vector3 GetApproachPoint()
+    {
+        Vector2Int gridPos = PathfindingGrid.Instance.GetGridPosition(interactionTransform.position + (Vector3)boxOffset);
+        return PathfindingGrid.Instance.GetWorldPosition(gridPos.x, gridPos.y);
     }
 }
