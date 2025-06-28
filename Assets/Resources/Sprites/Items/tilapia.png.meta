@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c6ddf3108d2de3040ac3133a18bf5113
+guid: 2ca329ab1f9a77a428eee1eb5e4812e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5247816500109422983
-    second: Chips_0
+      213: 7125838742212968817
+    second: Tilapia_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chips_0
+      name: Tilapia_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 781b47f7d4df3d840800000000000000
-      internalID: 5247816500109422983
+      spriteID: 171025ce49014e260800000000000000
+      internalID: 7125838742212968817
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chips_0: 5247816500109422983
+      Tilapia_0: 7125838742212968817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

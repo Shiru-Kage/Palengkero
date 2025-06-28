@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c6ddf3108d2de3040ac3133a18bf5113
+guid: c35626db817366d44b693cdfa629ea74
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5247816500109422983
-    second: Chips_0
+      213: -4295091512156895717
+    second: Street Food_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chips_0
+      name: Street Food_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 781b47f7d4df3d840800000000000000
-      internalID: 5247816500109422983
+      spriteID: b16c71ca605c464c0800000000000000
+      internalID: -4295091512156895717
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chips_0: 5247816500109422983
+      Street Food_0: -4295091512156895717
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

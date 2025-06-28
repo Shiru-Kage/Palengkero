@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c6ddf3108d2de3040ac3133a18bf5113
+guid: a5048ff4ed7c7384197fade876e267e7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5247816500109422983
-    second: Chips_0
+      213: -2110104355339441885
+    second: Pork_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chips_0
+      name: Pork_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 781b47f7d4df3d840800000000000000
-      internalID: 5247816500109422983
+      spriteID: 329ecf4c44767b2e0800000000000000
+      internalID: -2110104355339441885
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chips_0: 5247816500109422983
+      Pork_0: -2110104355339441885
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

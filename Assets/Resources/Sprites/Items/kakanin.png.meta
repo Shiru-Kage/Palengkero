@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c6ddf3108d2de3040ac3133a18bf5113
+guid: 4e467928eb128cb48a2f87e778b62710
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5247816500109422983
-    second: Chips_0
+      213: -7320628319957749776
+    second: Kakanin_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chips_0
+      name: Kakanin_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 781b47f7d4df3d840800000000000000
-      internalID: 5247816500109422983
+      spriteID: 0ffe0405457e76a90800000000000000
+      internalID: -7320628319957749776
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chips_0: 5247816500109422983
+      Kakanin_0: -7320628319957749776
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

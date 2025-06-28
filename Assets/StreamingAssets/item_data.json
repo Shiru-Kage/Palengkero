@@ -37,12 +37,12 @@
       "stockLimit": 10
     },
     {
-      "id": "carrots",
-      "itemName": "Carrots",
+      "id": "carrot",
+      "itemName": "Carrot",
       "price": 200,
       "nutrition": 50,
       "satisfaction": -20,
-      "iconName": "carrots",
+      "iconName": "carrot",
       "stockLimit": 10
     },
     {
