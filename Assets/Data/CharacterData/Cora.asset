@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Cora
   characterIndustry: Call Center Agent
+  characterDifficulty: Hard
   characterAge: 25
   characterMonthlyIncome: "\u20B115,000 - \u20B117,999"
   characterWeeklyBudget: 3200
-  characterSprite: {fileID: -2234832920766540872, guid: 17a28dea99218f749a25581212a1fb4b, type: 3}
-  characterDescription: A hardworking family man, Tonyo sends a good chunk of his
-    wage back to the province. Between rising food costs and bills.
+  characterSprite: {fileID: 824734146875366258, guid: a9bdb48b6af1f9249b385afd78c1f21d, type: 3}
+  characterFrameSprite: {fileID: -7800151483077857245, guid: 2380f0fc8b1caac4eb4702e510755a7f, type: 3}
+  characterDescription: Working graveyard shifts, Cora grabs groceries between work
+    and sleep. With student loans and family contributions, she's learned how to
+    manage finances tightly.
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
+  characterAnimator: {fileID: 9100000, guid: 460a30ae5d6c482419b9262d6db13464, type: 2}

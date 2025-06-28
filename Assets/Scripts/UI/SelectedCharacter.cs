@@ -13,7 +13,9 @@ public class SelectedCharacter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI industryText;
     [SerializeField] private TextMeshProUGUI incomeText;
     [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private Image characterImage;
+    [SerializeField] private TextMeshProUGUI difficulty;
+    [SerializeField] private Image characterFrameImage;
+    [SerializeField] private Animator characterAnimator;
     private GameObject currentDisplayedPrefab;
 
     public void DisplayCharacter(int index)
@@ -40,7 +42,13 @@ public class SelectedCharacter : MonoBehaviour
         industryText.text = "Industry: " + data.characterIndustry;
         incomeText.text = "Income: " + data.characterMonthlyIncome + "/Month";
         descriptionText.text = data.characterDescription;
-        characterImage.sprite = data.characterSprite;
+        characterFrameImage.sprite = data.characterFrameSprite;
+        difficulty.text = data.characterDifficulty;
+        if (characterAnimator != null && data.characterAnimator != null)
+        {
+            characterAnimator.runtimeAnimatorController = data.characterAnimator;
+            characterAnimator.Play("Idle", 0);
+        }
 
         currentDisplayedPrefab = prefab;
     }

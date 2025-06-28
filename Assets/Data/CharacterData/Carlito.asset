@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Carlito
   characterIndustry: 'Retail '
+  characterDifficulty: Easy
   characterAge: 21
   characterMonthlyIncome: "\u20B110,000 \u2013 \u20B112,999"
   characterWeeklyBudget: 2500
-  characterSprite: {fileID: 21300000, guid: 351505d43a0cf57468694a9d0bf6bad8, type: 3}
+  characterSprite: {fileID: -2045020426, guid: 3aa61bb415c104c4e88cfd28144fcd01, type: 3}
+  characterFrameSprite: {fileID: 736041423354105381, guid: ed49fe7c1141c3b429ae7704d2082b87, type: 3}
   characterDescription: Carlito juggles tasks in a small store, often stocking shelves,
     assisting customers, and managing errands
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
+  characterAnimator: {fileID: 9100000, guid: 358f431969669b444842e768e0924e90, type: 2}

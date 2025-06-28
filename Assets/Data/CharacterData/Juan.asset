@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Juan
   characterIndustry: 'Construction '
+  characterDifficulty: Medium
   characterAge: 28
   characterMonthlyIncome: "\u20B113,000 - \u20B114,999"
   characterWeeklyBudget: 2800
-  characterSprite: {fileID: 831398740, guid: 1201c14bb4ee74d8e99e56dc4f3f4fd1, type: 3}
+  characterSprite: {fileID: -848950568071791416, guid: 12caafa19ff1ed04aae0f7d3e77ff6de, type: 3}
+  characterFrameSprite: {fileID: 797296067685068265, guid: c970c9285f5301f4597cb359f8e7917e, type: 3}
   characterDescription: A hardworking family man, Tonyo sends a good chunk of his
     wage back to the province. Between rising food costs and bills.
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
+  characterAnimator: {fileID: 9100000, guid: 45a3f8e369c225345bbe403769d87401, type: 2}
