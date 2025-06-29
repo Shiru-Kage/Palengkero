@@ -41,20 +41,30 @@ public class PauseManager : MonoBehaviour
     public void PauseGame()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        ApplyTimePause(true);
         isPaused = true;
-
-        inputActions.Player.Disable();
     }
 
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        ApplyTimePause(false);
         isPaused = false;
-
-        inputActions.Player.Enable();
     }
+    public void ApplyTimePause(bool pause)
+    {
+        Time.timeScale = pause ? 0f : 1f;
+
+        if (pause)
+        {
+            inputActions.Player.Disable();
+        }
+        else
+        {
+            inputActions.Player.Enable();
+        }
+    }
+
 
     public bool IsPaused()
     {
