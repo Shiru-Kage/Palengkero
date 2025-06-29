@@ -18,6 +18,8 @@ public class WellBeingMeter : MonoBehaviour
 
     private int currentNutrition = 0;
     private int currentSatisfaction = 0;
+    public int CurrentNutrition => currentNutrition;
+    public int CurrentSatisfaction => currentSatisfaction;
 
     private Coroutine nutritionColorRoutine;
     private Coroutine satisfactionColorRoutine;

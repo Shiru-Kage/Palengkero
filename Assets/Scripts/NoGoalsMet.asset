@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b89c8030538dc143b978a70db44fcba, type: 3}
+  m_Name: NoGoalsMet
+  m_EditorClassIdentifier: 
+  adviceText: 'It seems like you''re having a tough time meeting your goals this
+    week. Don''t worry, every journey has its challenges! Let''s break it down: Try
+    focusing on one goal at a time, perhaps your nutrition first, to build momentum.
+    Review your expenses, prioritize needs over wants, and remember that consistent
+    small steps lead to big improvements in your overall well-being and finances.
+    You''ve got this!'
+  requiresLowSavings: 0
+  requiresLowNutrition: 0
+  requiresLowSatisfaction: 0
+  requiresPerfectGoals: 0
+  requiresAllFailedGoals: 1

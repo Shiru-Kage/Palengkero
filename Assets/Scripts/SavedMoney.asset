@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b89c8030538dc143b978a70db44fcba, type: 3}
+  m_Name: SavedMoney
+  m_EditorClassIdentifier: 
+  adviceText: '"Great job on saving money! However, your nutrition and satisfaction
+    levels could use some work. To perform better next time, focus on balancing your
+    resources spend some time improving your nutrition and ensuring satisfaction.
+    Your health and happiness are just as important as your financial goals!'
+  requiresLowSavings: 0
+  requiresLowNutrition: 0
+  requiresLowSatisfaction: 0
+  requiresSavingsMet: 1
+  requiresPerfectGoals: 0
+  requiresAllFailedGoals: 0

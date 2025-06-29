@@ -9,6 +9,7 @@ public class LevelObjectiveUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI savingsGoalText;
 
     private CharacterObjective currentObjective;
+    public CharacterObjective CurrentObjective => currentObjective;
 
     private int currentNutrition = 0;
     private int currentSatisfaction = 0;
