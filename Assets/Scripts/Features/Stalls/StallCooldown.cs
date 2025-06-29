@@ -37,7 +37,7 @@ public class StallCooldown : MonoBehaviour
         }
 
         if (stallUpperHalf != null)
-            stallUpperHalf.gameObject.SetActive(false);
+            stallUpperHalf.color = cooldownColor;
 
         if (stallCooldown != null)
             stallCooldown.color = cooldownColor;
@@ -51,12 +51,12 @@ public class StallCooldown : MonoBehaviour
 
             if (stallCooldown != null)
                 stallCooldown.color = Color.Lerp(cooldownColor, normalColor, t);
-
+            
+            if (stallUpperHalf != null)
+                stallUpperHalf.color = Color.Lerp(cooldownColor, normalColor, t);
+                
             yield return null;
         }
-
-        if (stallUpperHalf != null)
-            stallUpperHalf.gameObject.SetActive(true);
 
         isCoolingDown = false;
 
