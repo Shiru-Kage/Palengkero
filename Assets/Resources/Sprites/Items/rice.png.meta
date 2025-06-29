@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2ca329ab1f9a77a428eee1eb5e4812e5
+guid: ae5a840890ce618469ceda6720534f21
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7125838742212968817
-    second: Tilapia_0
+      213: 9135130128162984572
+    second: rice_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tilapia_0
+      name: rice_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 171025ce49014e260800000000000000
-      internalID: 7125838742212968817
+      spriteID: c729f1a937086ce70800000000000000
+      internalID: 9135130128162984572
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tilapia_0: 7125838742212968817
+      rice_0: 9135130128162984572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

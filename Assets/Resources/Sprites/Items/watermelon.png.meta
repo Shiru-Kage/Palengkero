@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2ca329ab1f9a77a428eee1eb5e4812e5
+guid: 18f2aa090c0194b45a4d9f516ebee91c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7125838742212968817
-    second: Tilapia_0
+      213: 8532703672136922592
+    second: watermelon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tilapia_0
+      name: watermelon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 171025ce49014e260800000000000000
-      internalID: 7125838742212968817
+      spriteID: 0e5746718c04a6670800000000000000
+      internalID: 8532703672136922592
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tilapia_0: 7125838742212968817
+      watermelon_0: 8532703672136922592
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

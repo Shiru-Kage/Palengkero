@@ -136,12 +136,12 @@
       "stockLimit": 10
     },
     {
-      "id": "sweet_drinks",
-      "itemName": "Sweet Drinks",
+      "id": "juice",
+      "itemName": "Juice",
       "price": 25,
       "nutrition": -10,
       "satisfaction": 40,
-      "iconName": "sweet_drinks",
+      "iconName": "juice",
       "stockLimit": 10
     },
     {

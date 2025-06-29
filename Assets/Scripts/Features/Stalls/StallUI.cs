@@ -84,7 +84,25 @@ public class StallUI : MonoBehaviour
             informationPanel = infoPanel.gameObject;
         }
 
-        itemButtons = stallInnerUIContainer.Find("Boxes")?.GetComponentsInChildren<Button>(true);
+        Transform boxes = stallInnerUIContainer.Find("Boxes");
+
+        if (boxes != null)
+        {
+            int childCount = boxes.childCount;
+            itemButtons = new Button[childCount];
+
+            for (int i = 0; i < childCount; i++)
+            {
+                Transform child = boxes.GetChild(i);
+                Button button = child.GetComponent<Button>();
+                itemButtons[i] = button;
+
+                if (button == null)
+                {
+                    Debug.LogWarning($"Child '{child.name}' of Boxes does not have a Button component.");
+                }
+            }
+        }
 
         Transform haggleTransform = stallInnerUIContainer.Find("Haggle");
         if (haggleTransform != null)
@@ -165,8 +183,16 @@ public class StallUI : MonoBehaviour
 
             button.gameObject.SetActive(true);
 
-            Image iconImage = button.GetComponentInChildren<Image>();
-            if (iconImage != null) iconImage.sprite = items[i].icon;
+            // ✅ Find and set the icon from the child named "ItemIcon"
+            Image iconImage = button.transform.Find("Icon")?.GetComponent<Image>();
+            if (iconImage != null)
+            {
+                iconImage.sprite = items[i].icon;
+            }
+            else
+            {
+                Debug.LogWarning($"Icon not found on {button.name}");
+            }
 
             int capturedIndex = i;
             ItemData capturedItem = items[capturedIndex];
@@ -181,6 +207,7 @@ public class StallUI : MonoBehaviour
             });
         }
     }
+
 
     private void DisplayItemDetails(ItemData item, int stock)
     {
