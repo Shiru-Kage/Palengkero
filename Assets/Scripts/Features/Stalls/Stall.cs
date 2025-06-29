@@ -182,6 +182,8 @@ public class Stall : Interactable
         if (item.id == discountedItemId)
             ResetDiscount();
 
+        WellBeingEvents.OnWellBeingChanged?.Invoke(item.nutrition, item.satisfaction);
+
         LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
         if (levelManager != null)
             levelManager.UpdateBudgetDisplay();

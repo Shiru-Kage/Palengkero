@@ -16,4 +16,4 @@ MonoBehaviour:
   preferCheapItemsChance: 0
   preferHighNutritionChance: 100
   preferHighSatisfactionChance: 0
-  buyLikelihood: 100
+  buyLikelihood: 60
