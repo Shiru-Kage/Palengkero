@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
   m_Name: Carlito
   m_EditorClassIdentifier: 
+  characterId: 1
   characterName: Carlito
   characterIndustry: 'Retail '
   characterDifficulty: Easy

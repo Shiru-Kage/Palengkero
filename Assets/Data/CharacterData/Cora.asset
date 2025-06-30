@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
   m_Name: Cora
   m_EditorClassIdentifier: 
+  characterId: 3
   characterName: Cora
   characterIndustry: Call Center Agent
   characterDifficulty: Hard

@@ -52,6 +52,9 @@ public class CharacterSelectionManager : MonoBehaviour
         if (pd != null && pd.Data != null)
         {
             SelectedRuntimeCharacter = new RuntimeCharacter(pd.Data);
+
+            // Set the selected character's level lock state in the LevelStateManager using character name
+            LevelStateManager.Instance.SetSelectedCharacter(pd.Data.characterName);
         }
         else
         {

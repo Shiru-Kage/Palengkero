@@ -121,60 +121,74 @@ public class LevelSummarySequence : MonoBehaviour
             $"{goalObjective}\nYou got: {displayActualValue} Failed";
     }
 
-
     private IEnumerator ShowAdviceSequence()
+{
+    var runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
+    var wellBeing = Object.FindAnyObjectByType<WellBeingMeter>();
+
+    bool metNutrition = false;
+    bool metSatisfaction = false;
+    bool metSavings = false;
+
+    if (currentObjective != null && wellBeing != null)
     {
-        var runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
-        var wellBeing = Object.FindAnyObjectByType<WellBeingMeter>();
+        metNutrition = wellBeing.CurrentNutrition >= currentObjective.nutritionGoal;
+        metSatisfaction = wellBeing.CurrentSatisfaction >= currentObjective.satisfactionGoal;
+    }
 
-        bool metNutrition = false;
-        bool metSatisfaction = false;
-        bool metSavings = false;
+    if (runtimeCharacter != null && currentObjective != null)
+    {
+        metSavings = runtimeCharacter.currentWeeklyBudget >= currentObjective.savingsGoal;
+    }
 
-        if (currentObjective != null && wellBeing != null)
+    bool adviceShown = false;
+
+    foreach (var profile in adviceProfiles)
+    {
+        bool show = false;
+
+        if (profile.requiresSavingsMet && metSavings && !metNutrition && !metSatisfaction) show = true;
+        if (profile.requiresPerfectGoals && metNutrition && metSatisfaction && metSavings) show = true;
+        if (profile.requiresAllFailedGoals && !metNutrition && !metSatisfaction && !metSavings) show = true;
+        if (profile.requiresLowNutrition && !metNutrition && metSatisfaction && metSavings) show = true;
+        if (profile.requiresLowSatisfaction && !metSatisfaction && metNutrition && metSavings) show = true;
+        if (profile.requiresLowSavings && !metSavings) show = true;
+
+        if (show)
         {
-            metNutrition = wellBeing.CurrentNutrition >= currentObjective.nutritionGoal;
-            metSatisfaction = wellBeing.CurrentSatisfaction >= currentObjective.satisfactionGoal;
-        }
-
-        if (runtimeCharacter != null && currentObjective != null)
-        {
-            metSavings = runtimeCharacter.currentWeeklyBudget >= currentObjective.savingsGoal;
-        }
-
-        bool adviceShown = false;
-
-        foreach (var profile in adviceProfiles)
-        {
-            bool show = false;
-
-            if (profile.requiresSavingsMet && metSavings && !metNutrition && !metSatisfaction) show = true;
-            if (profile.requiresPerfectGoals && metNutrition && metSatisfaction && metSavings) show = true;
-            if (profile.requiresAllFailedGoals && !metNutrition && !metSatisfaction && !metSavings) show = true;
-            if (profile.requiresLowNutrition && !metNutrition && metSatisfaction && metSavings) show = true;
-            if (profile.requiresLowSatisfaction && !metSatisfaction && metNutrition && metSavings) show = true;
-            if (profile.requiresLowSavings && !metSavings) show = true;
-
-            if (show)
-            {
-                adviceShown = true;
-                adviceText.text = profile.adviceText;
-                adviceText.alpha = 0f;
-                yield return FadeInText(adviceText);
-            }
-        }
-
-        if (!adviceShown)
-        {
-            adviceText.text = "No specific advice this time. You're doing okay!";
+            adviceShown = true;
+            adviceText.text = profile.adviceText;
             adviceText.alpha = 0f;
             yield return FadeInText(adviceText);
         }
+    }
 
+    if (!adviceShown)
+    {
+        adviceText.text = "No specific advice this time. You're doing okay!";
+        adviceText.alpha = 0f;
+        yield return FadeInText(adviceText);
+    }
+
+    if (levelSelect != null)
+    {
         levelSelect.gameObject.SetActive(true);
         levelSelect.onClick.RemoveAllListeners();
-        levelSelect.onClick.AddListener(ReturnToLevelSelect);
+        levelSelect.onClick.AddListener(() =>
+        {
+            if (metNutrition || metSatisfaction || metSavings)
+            {
+                LevelStateManager.Instance.UnlockNextLevel();
+            }
+            ReturnToLevelSelect();
+        });
     }
+    else
+    {
+        Debug.LogWarning("Level Select button is missing or destroyed.");
+    }
+}
+
 
     private IEnumerator FadeInText(TextMeshProUGUI text)
     {

@@ -15,6 +15,7 @@ public class LevelData : ScriptableObject
     {
         return objectivesPerCharacter.Find(obj => obj.character == characterData);
     }
+    public bool levelCleared;
 }
 
 [System.Serializable]
