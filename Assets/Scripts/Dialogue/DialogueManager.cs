@@ -12,6 +12,8 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Managers")]
     [SerializeField] private DialogueBoxController dialogueController;
+    //[SerializeField] private CutsceneBackground backgroundChanger;
+
 
     public Events events;
 
@@ -28,7 +30,14 @@ public class DialogueManager : MonoBehaviour
         public UnityEvent OnSceneStart;
         public UnityEvent OnSceneEnd;
     }
-
+    /*
+    void Awake()
+    {
+        if (backgroundChanger != null)
+        {
+            backgroundChanger.gameObject.SetActive(false); 
+        }
+    }*/
     void Start()
     {
         if (currentScene == null || string.IsNullOrEmpty(currentScene.name))
@@ -127,8 +136,10 @@ public class DialogueManager : MonoBehaviour
 
         if (scene is StoryScene storyScene)
         {
+            //backgroundChanger.gameObject.SetActive(true); 
             dialogueController.ClearText();
             dialogueController.PlayScene(storyScene);
+            //backgroundChanger.SetImage(storyScene.background);
             state = State.IDLE;
         }
         else
@@ -146,6 +157,7 @@ public class DialogueManager : MonoBehaviour
         if (dialogueUI != null)
         {
             dialogueUI.gameObject.SetActive(false);
+            //backgroundChanger.gameObject.SetActive(false); 
         }
     }
 
@@ -155,6 +167,7 @@ public class DialogueManager : MonoBehaviour
         if (dialogueUI != null)
         {
             dialogueUI.gameObject.SetActive(true);
+            //backgroundChanger.gameObject.SetActive(true); 
         }
     }
 

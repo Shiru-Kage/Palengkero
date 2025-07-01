@@ -6,6 +6,7 @@ public class SelectedCharacter : MonoBehaviour
 {
     [Header("Character Prefabs")]
     [SerializeField] private GameObject[] characterPrefabs;
+    public GameObject[] CharacterPrefabs => characterPrefabs;
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI nameText;
@@ -17,6 +18,7 @@ public class SelectedCharacter : MonoBehaviour
     [SerializeField] private Image characterFrameImage;
     [SerializeField] private Animator characterAnimator;
     private GameObject currentDisplayedPrefab;
+    public GameObject CurrentDisplayedPrefab => currentDisplayedPrefab;
 
     public void DisplayCharacter(int index)
     {

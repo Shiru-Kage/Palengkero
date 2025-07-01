@@ -5,6 +5,7 @@ using UnityEngine;
 public class StoryScene : GameScene
 {
     public List<Sentence> sentences;
+    public Sprite background;
     public GameScene nextScene;
     [System.Serializable]
     public struct Sentence

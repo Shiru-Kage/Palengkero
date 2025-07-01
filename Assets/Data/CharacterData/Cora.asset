@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
   m_Name: Cora
   m_EditorClassIdentifier: 
-  characterId: 3
   characterName: Cora
   characterIndustry: Call Center Agent
   characterDifficulty: Hard
@@ -27,3 +26,5 @@ MonoBehaviour:
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
   characterAnimator: {fileID: 9100000, guid: 460a30ae5d6c482419b9262d6db13464, type: 2}
+  cutsceneAnimator: {fileID: 0}
+  cutsceneVideo: {fileID: 32900000, guid: c284fd4022beea242b2fd78f39152643, type: 3}

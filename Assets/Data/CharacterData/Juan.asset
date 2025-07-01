@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
   m_Name: Juan
   m_EditorClassIdentifier: 
-  characterId: 2
   characterName: Juan
   characterIndustry: 'Construction '
   characterDifficulty: Medium
@@ -26,3 +25,5 @@ MonoBehaviour:
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
   characterAnimator: {fileID: 9100000, guid: 45a3f8e369c225345bbe403769d87401, type: 2}
+  cutsceneAnimator: {fileID: 0}
+  cutsceneVideo: {fileID: 32900000, guid: be673348712e85c43898e473d5712380, type: 3}
