@@ -3390,7 +3390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5bd7dd16528b646a099be56eeb9bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 594163123}
+  slotContainer: {fileID: 594163123}
   itemSlotPrefab: {fileID: 7790742109890360895, guid: 1224e1f810f4ff44ab195496a6d1817a, type: 3}
   priceText: {fileID: 2064308218}
   nutritionText: {fileID: 1270671394}
@@ -3399,6 +3399,7 @@ MonoBehaviour:
   itemNameText: {fileID: 897569414}
   selectedItemImage: {fileID: 1971460233}
   informationPanel: {fileID: 1274420206}
+  inventoryPanel: {fileID: 247863977}
 --- !u!4 &809087794
 Transform:
   m_ObjectHideFlags: 0
@@ -3668,7 +3669,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.29504, y: -14.554988}
+  m_AnchoredPosition: {x: 163.29504, y: -14.554985}
   m_SizeDelta: {x: 259.59, y: 23.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &897569413
@@ -6947,18 +6948,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 809087793}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: ShowInformationPanel
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -4,7 +4,7 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private Transform inventoryPanel;
+    [SerializeField] private Transform slotContainer;
     [SerializeField] private GameObject itemSlotPrefab;
 
     [Header("TextMeshPro References")]
@@ -17,6 +17,7 @@ public class InventoryUI : MonoBehaviour
     [Header("Selected Item Display")]
     [SerializeField] private Image selectedItemImage;
     [SerializeField] private GameObject informationPanel;
+    [SerializeField] private GameObject inventoryPanel;
 
     private void OnEnable()
     {
@@ -35,17 +36,24 @@ public class InventoryUI : MonoBehaviour
     {
         DisplayInventory();
     }
+    void Update()
+    {
+        if (inventoryPanel != null && !inventoryPanel.activeSelf)
+        {
+            informationPanel.SetActive(false);
+        }
+    }
 
     public void DisplayInventory()
     {
-        foreach (Transform child in inventoryPanel)
+        foreach (Transform child in slotContainer)
         {
             Destroy(child.gameObject);
         }
 
         foreach (var inventoryItem in Inventory.Instance.GetAllItems())
         {
-            GameObject itemSlot = Instantiate(itemSlotPrefab, inventoryPanel);
+            GameObject itemSlot = Instantiate(itemSlotPrefab, slotContainer);
 
             Button button = itemSlot.GetComponent<Button>();
 
@@ -66,7 +74,7 @@ public class InventoryUI : MonoBehaviour
 
     private void OnItemSelected(InventoryItem inventoryItem)
     {
-        ShowInformationPanel();
+        informationPanel.SetActive(true);
         Debug.Log("Item Selected: " + inventoryItem.itemData.itemName);
 
         if (selectedItemImage != null && inventoryItem.itemData.icon != null)
@@ -93,18 +101,6 @@ public class InventoryUI : MonoBehaviour
         if (itemNameText != null)
         {
             itemNameText.text = inventoryItem.itemData.itemName;
-        }
-    }
-
-    public void ShowInformationPanel()
-    {
-        if (informationPanel != null)
-        {
-            informationPanel.SetActive(!informationPanel.activeSelf);
-        }
-        else
-        {
-            Debug.LogWarning("Information panel is not assigned.");
         }
     }
 }
