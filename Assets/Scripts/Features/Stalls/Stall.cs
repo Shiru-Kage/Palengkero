@@ -179,6 +179,7 @@ public class Stall : Interactable
         stockAmounts[index]--;
         runtimeCharacter.currentWeeklyBudget -= (int)finalPrice;
 
+        Inventory.Instance.AddItem(item, 1);  
         if (item.id == discountedItemId)
             ResetDiscount();
 
@@ -190,6 +191,7 @@ public class Stall : Interactable
 
         return true;
     }
+
 
     public bool PurchaseItemForNPC(int index)
     {

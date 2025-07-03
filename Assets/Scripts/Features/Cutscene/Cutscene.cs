@@ -1,43 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private VideoPlayer videoPlayer; // Reference to the VideoPlayer component
-    [SerializeField] private CharacterSelectionManager characterSelectionManager; // Reference to CharacterSelectionManager
-
+    [SerializeField] private VideoPlayer videoPlayer;
+    [SerializeField] private CharacterSelectionManager characterSelectionManager;
+    [Header("UI")]
+    [SerializeField] private Button skipButton;
     private void Start()
     {
-        // Ensure that necessary references are assigned
         if (videoPlayer == null || characterSelectionManager == null)
         {
             Debug.LogError("Missing required references! VideoPlayer or CharacterSelectionManager.");
             return;
         }
-
-        // Register the event to trigger when the video finishes
+        skipButton.gameObject.SetActive(false);
         videoPlayer.loopPointReached += OnVideoEnd;
     }
 
-    // Method to play the cutscene for the selected character
     public void PlayCutsceneForSelectedCharacter()
     {
-        // Ensure the selected character data is available
         if (characterSelectionManager.SelectedCharacterData != null)
         {
             CharacterData selectedCharacter = characterSelectionManager.SelectedCharacterData;
 
-            // Get the video clip directly from the selected character data
             VideoClip cutsceneVideo = selectedCharacter.cutsceneVideo;
 
-            // Check if a valid video clip exists
             if (cutsceneVideo != null)
             {
-                // Set the correct video clip for the video player
                 videoPlayer.clip = cutsceneVideo;
-                videoPlayer.Play(); // Play the selected cutscene video
+                videoPlayer.Play();
+                skipButton.gameObject.SetActive(true);
                 Debug.Log("Playing cutscene for " + selectedCharacter.characterName);
             }
             else
@@ -51,18 +47,22 @@ public class Cutscene : MonoBehaviour
         }
     }
 
-    // Called when the video ends
     private void OnVideoEnd(VideoPlayer vp)
     {
-        // Trigger the scene change using SceneChanger
         if (SceneChanger.instance != null)
         {
-            // Call the SceneChanger to load the next scene
-            SceneChanger.instance.ChangeScene("LevelSelect");  // Replace "NextSceneName" with the appropriate scene name or logic
+            skipButton.gameObject.SetActive(false);
+            SceneChanger.instance.ChangeScene("LevelSelect");
         }
         else
         {
             Debug.LogError("SceneChanger instance not found!");
         }
+    }
+    
+    public void SkipCutscene()
+    {
+        videoPlayer.Stop();
+        OnVideoEnd(videoPlayer);
     }
 }

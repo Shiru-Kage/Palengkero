@@ -7,7 +7,8 @@
       "nutrition": 40,
       "satisfaction": -10,
       "iconName": "rice",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A staple food that fills the stomach, though it could use a bit more flavor."
     },
     {
       "id": "shrimp",
@@ -16,7 +17,8 @@
       "nutrition": 60,
       "satisfaction": -30,
       "iconName": "shrimp",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Freshly caught from the sea, shrimp brings a touch of luxury to any meal."
     },
     {
       "id": "tilapia",
@@ -25,7 +27,8 @@
       "nutrition": 50,
       "satisfaction": -25,
       "iconName": "tilapia",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A mild, tasty fish that pairs well with almost anything."
     },
     {
       "id": "cabbage",
@@ -34,7 +37,8 @@
       "nutrition": 40,
       "satisfaction": -15,
       "iconName": "cabbage",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Crisp and crunchy, but a bit bland on its own."
     },
     {
       "id": "carrot",
@@ -43,7 +47,8 @@
       "nutrition": 50,
       "satisfaction": -20,
       "iconName": "carrot",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A sweet, crunchy vegetable that's a healthy addition to any dish."
     },
     {
       "id": "ampalaya",
@@ -52,7 +57,8 @@
       "nutrition": 45,
       "satisfaction": -30,
       "iconName": "ampalaya",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Bitter and bold, for those who love a strong flavor."
     },
     {
       "id": "tomato",
@@ -61,7 +67,8 @@
       "nutrition": 35,
       "satisfaction": -10,
       "iconName": "tomato",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A juicy and tangy delight, perfect for balancing other flavors."
     },
     {
       "id": "banana",
@@ -70,7 +77,8 @@
       "nutrition": 30,
       "satisfaction": -15,
       "iconName": "banana",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Sweet and soft, but not everyone’s favorite snack."
     },
     {
       "id": "watermelon",
@@ -79,7 +87,8 @@
       "nutrition": -15,
       "satisfaction": 40,
       "iconName": "watermelon",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Refreshingly sweet and juicy, a perfect summer treat."
     },
     {
       "id": "mango",
@@ -88,7 +97,8 @@
       "nutrition": -30,
       "satisfaction": 60,
       "iconName": "mango",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A tropical delight, ripe with sweetness and flavor."
     },
     {
       "id": "instant_noodles",
@@ -97,7 +107,8 @@
       "nutrition": -25,
       "satisfaction": 50,
       "iconName": "instant_noodles",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Quick and comforting, but not the healthiest choice."
     },
     {
       "id": "cola",
@@ -106,7 +117,8 @@
       "nutrition": -30,
       "satisfaction": 55,
       "iconName": "cola",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Fizzy, sweet, and energizing—perfect for a quick refreshment."
     },
     {
       "id": "chips",
@@ -115,7 +127,8 @@
       "nutrition": -20,
       "satisfaction": 45,
       "iconName": "chips",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Crispy and salty, a snack that’s hard to put down."
     },
     {
       "id": "tusok_tusok",
@@ -124,7 +137,8 @@
       "nutrition": -10,
       "satisfaction": 25,
       "iconName": "tusok_tusok",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A variety of skewered street food, each bite packed with flavor."
     },
     {
       "id": "kakanin",
@@ -133,7 +147,8 @@
       "nutrition": -15,
       "satisfaction": 35,
       "iconName": "kakanin",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Sweet rice desserts that hit the spot after a savory meal."
     },
     {
       "id": "juice",
@@ -142,7 +157,8 @@
       "nutrition": -10,
       "satisfaction": 40,
       "iconName": "juice",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A refreshing drink, full of fruity sweetness."
     },
     {
       "id": "candy_pack",
@@ -151,7 +167,8 @@
       "nutrition": -20,
       "satisfaction": 45,
       "iconName": "candy_pack",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Sugary and sweet, a burst of energy in every bite."
     },
     {
       "id": "leche_flan",
@@ -160,7 +177,8 @@
       "nutrition": -20,
       "satisfaction": 50,
       "iconName": "leche_flan",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Creamy, rich, and perfectly sweet—an indulgence in every bite."
     },
     {
       "id": "halo_halo",
@@ -169,7 +187,8 @@
       "nutrition": -25,
       "satisfaction": 60,
       "iconName": "halo_halo",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A colorful and refreshing dessert, bursting with variety and flavor."
     },
     {
       "id": "pancake",
@@ -178,7 +197,8 @@
       "nutrition": -10,
       "satisfaction": 45,
       "iconName": "pancake",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Soft, fluffy, and perfect with a drizzle of syrup."
     },
     {
       "id": "pandesal",
@@ -187,7 +207,8 @@
       "nutrition": 10,
       "satisfaction": -5,
       "iconName": "pandesal",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A Filipino breakfast classic, perfect with butter or jam."
     },
     {
       "id": "salted_egg",
@@ -196,7 +217,8 @@
       "nutrition": 25,
       "satisfaction": -15,
       "iconName": "salted_egg",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Salty, rich, and satisfying in small bites."
     },
     {
       "id": "egg",
@@ -205,7 +227,8 @@
       "nutrition": 15,
       "satisfaction": -5,
       "iconName": "egg",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Simple and versatile, an egg can be enjoyed in many ways."
     },
     {
       "id": "pork_liempo",
@@ -214,7 +237,8 @@
       "nutrition": 55,
       "satisfaction": -40,
       "iconName": "pork_liempo",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Juicy and flavorful, grilled to perfection."
     },
     {
       "id": "apple",
@@ -223,7 +247,8 @@
       "nutrition": -10,
       "satisfaction": 35,
       "iconName": "apple",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Crisp and sweet, a refreshing bite of nature."
     },
     {
       "id": "orange",
@@ -232,7 +257,8 @@
       "nutrition": -15,
       "satisfaction": 30,
       "iconName": "orange",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Tangy, juicy, and full of zest!"
     },
     {
       "id": "pineapple",
@@ -241,7 +267,8 @@
       "nutrition": -10,
       "satisfaction": 30,
       "iconName": "pineapple",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Tropical sweetness in every bite."
     },
     {
       "id": "pechay",
@@ -250,7 +277,8 @@
       "nutrition": 30,
       "satisfaction": -10,
       "iconName": "pechay",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Mild and crisp, a gentle addition to any dish."
     },
     {
       "id": "kamote",
@@ -259,7 +287,8 @@
       "nutrition": 35,
       "satisfaction": -10,
       "iconName": "kamote",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "Sweet and earthy, a comforting root vegetable."
     },
     {
       "id": "garlic",
@@ -268,7 +297,8 @@
       "nutrition": 15,
       "satisfaction": -5,
       "iconName": "garlic",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A small bulb with big flavor, perfect for adding depth to any dish."
     },
     {
       "id": "siomai",
@@ -277,7 +307,8 @@
       "nutrition": -10,
       "satisfaction": 20,
       "iconName": "siomai",
-      "stockLimit": 10
+      "stockLimit": 10,
+      "flavorText": "A tasty dumpling, savory and satisfying in every bite."
     }
   ]
 }
