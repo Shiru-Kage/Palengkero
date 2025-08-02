@@ -73,4 +73,29 @@ public class LevelStateManager : MonoBehaviour
 
         return allLevels[CurrentLevelIndex];
     }
+
+    public bool[] GetUnlockedLevelsForCurrentCharacter()
+    {
+        if (characterLevelLocks.TryGetValue(currentCharacterName, out var levels))
+        {
+            return (bool[])levels.Clone();
+        }
+
+        return new bool[allLevels.Length];
+    }
+
+    public void SetUnlockedLevelsForCurrentCharacter(bool[] levels)
+    {
+        if (string.IsNullOrEmpty(currentCharacterName)) return;
+
+        if (characterLevelLocks.ContainsKey(currentCharacterName))
+        {
+            characterLevelLocks[currentCharacterName] = levels;
+        }
+        else
+        {
+            characterLevelLocks.Add(currentCharacterName, levels);
+        }
+    }
+
 }

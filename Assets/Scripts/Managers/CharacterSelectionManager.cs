@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class CharacterSelectionManager : MonoBehaviour
 {
     public static CharacterSelectionManager Instance { get; private set; }
-
     public GameObject SelectedCharacterPrefab { get; private set; }
+    public string SelectedCharacterID { get; private set; }
     public RuntimeCharacter SelectedRuntimeCharacter { get; private set; }
     public CharacterData SelectedCharacterData
     {
@@ -20,6 +20,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
     [Header("Scenes where this should be destroyed")]
     [SerializeField] private List<string> scenesToDestroyOn = new List<string>();
+    [SerializeField] private List<GameObject> characterPrefabs;
 
     void Awake()
     {
@@ -52,11 +53,13 @@ public class CharacterSelectionManager : MonoBehaviour
         if (pd != null && pd.Data != null)
         {
             SelectedRuntimeCharacter = new RuntimeCharacter(pd.Data);
+            SelectedCharacterID = pd.Data.characterID;
             LevelStateManager.Instance.SetSelectedCharacter(pd.Data.characterName);
         }
         else
         {
             SelectedRuntimeCharacter = null;
+            SelectedCharacterID = null;
         }
     }
 
@@ -67,6 +70,31 @@ public class CharacterSelectionManager : MonoBehaviour
             SelectedRuntimeCharacter.currentWeeklyBudget = SelectedCharacterData.characterWeeklyBudget;
         }
     }
+
+    public GameObject GetPrefabByCharacterID(string characterID)
+    {
+        foreach (var prefab in characterPrefabs)
+        {
+            var pd = prefab.GetComponent<PlayerData>();
+            if (pd != null && pd.Data != null && pd.Data.characterID == characterID)
+            {
+                return prefab;
+            }
+        }
+
+        Debug.LogError("Character ID not found: " + characterID);
+        return null;
+    }
+
+    public void LoadCharacterFromID(string characterID)
+    {
+        var prefab = GetPrefabByCharacterID(characterID);
+        if (prefab != null)
+        {
+            SetSelectedPrefab(prefab);
+        }
+    }
+
 
     void OnDestroy()
     {

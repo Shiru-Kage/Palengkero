@@ -3,6 +3,7 @@ using UnityEngine.Video;
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Character/Character Data")]
 public class CharacterData : ScriptableObject
 {
+    public string characterID;
     public string characterName;
     public string characterIndustry;
     public string characterDifficulty;
