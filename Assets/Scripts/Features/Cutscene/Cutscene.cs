@@ -7,16 +7,23 @@ public class Cutscene : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private CharacterSelectionManager characterSelectionManager;
+
+    private CharacterSelectionManager characterSelectionManager;
+
     [Header("UI")]
     [SerializeField] private Button skipButton;
+
     private void Start()
     {
+        // 🔄 Automatically find the CharacterSelectionManager singleton instance
+        characterSelectionManager = CharacterSelectionManager.Instance;
+
         if (videoPlayer == null || characterSelectionManager == null)
         {
             Debug.LogError("Missing required references! VideoPlayer or CharacterSelectionManager.");
             return;
         }
+
         skipButton.gameObject.SetActive(false);
         videoPlayer.loopPointReached += OnVideoEnd;
     }
@@ -59,7 +66,7 @@ public class Cutscene : MonoBehaviour
             Debug.LogError("SceneChanger instance not found!");
         }
     }
-    
+
     public void SkipCutscene()
     {
         videoPlayer.Stop();

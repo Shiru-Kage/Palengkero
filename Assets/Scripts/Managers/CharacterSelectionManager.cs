@@ -21,6 +21,7 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("Scenes where this should be destroyed")]
     [SerializeField] private List<string> scenesToDestroyOn = new List<string>();
     [SerializeField] private List<GameObject> characterPrefabs;
+    public List<GameObject> AllCharacterPrefabs => characterPrefabs;
 
     void Awake()
     {

@@ -12,11 +12,27 @@ public class SaveGameManager : MonoBehaviour
 
         var saveData = new SaveData
         {
-            characterID = CharacterSelectionManager.Instance.SelectedCharacterID,
-            currentLevelIndex = LevelStateManager.Instance.CurrentLevelIndex,
-            unlockedLevels = LevelStateManager.Instance.GetUnlockedLevelsForCurrentCharacter()
+            characterID = CharacterSelectionManager.Instance.SelectedCharacterID
         };
+
+        foreach (var prefab in CharacterSelectionManager.Instance.AllCharacterPrefabs)
+        {
+            var pd = prefab.GetComponent<PlayerData>();
+            if (pd == null || pd.Data == null) continue;
+
+            string charName = pd.Data.characterName;
+
+            LevelStateManager.Instance.SetSelectedCharacter(charName);
+
+            saveData.characterProgressData.Add(new CharacterProgressEntry
+            {
+                characterName = charName,
+                currentLevelIndex = LevelStateManager.Instance.CurrentLevelIndex,
+                unlockedLevels = LevelStateManager.Instance.GetUnlockedLevelsForCurrentCharacter()
+            });
+        }
 
         SaveSystem.SaveToSlot(slotIndex, saveData);
     }
 }
+

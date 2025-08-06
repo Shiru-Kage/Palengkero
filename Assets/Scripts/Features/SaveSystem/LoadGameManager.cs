@@ -1,40 +1,46 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoadGameManager : MonoBehaviour
 {
-    [Header("Required Prefabs")]
-    [SerializeField] private GameObject characterSelectionManagerPrefab;
-    [SerializeField] private GameObject levelStateManagerPrefab;
-
     public void LoadGameSlot(int slotIndex)
     {
-        SaveData saveData = SaveSystem.LoadFromSlot(slotIndex);
-        if (saveData == null)
+        if (!SaveSystem.SaveExists(slotIndex))
         {
-            Debug.LogWarning($"No save data found for slot {slotIndex}");
+            Debug.LogWarning($"No save file exists in slot {slotIndex}. Scene will not change.");
             return;
         }
 
-        var characterManager = CharacterSelectionManager.Instance;
-        if (characterManager == null)
+        SaveData saveData = SaveSystem.LoadFromSlot(slotIndex);
+        if (saveData == null)
         {
-            GameObject charGO = Instantiate(characterSelectionManagerPrefab);
-            characterManager = charGO.GetComponent<CharacterSelectionManager>();
+            Debug.LogWarning($"Failed to load save data from slot {slotIndex}");
+            return;
         }
 
-        var levelManager = LevelStateManager.Instance;
-        if (levelManager == null)
+        foreach (CharacterProgressEntry entry in saveData.characterProgressData)
         {
-            GameObject levelGO = Instantiate(levelStateManagerPrefab);
-            levelManager = levelGO.GetComponent<LevelStateManager>();
+            if (entry.characterName != saveData.characterID)
+            {
+                LevelStateManager.Instance.SetSelectedCharacter(entry.characterName);
+                LevelStateManager.Instance.SetLevelIndex(entry.currentLevelIndex);
+                LevelStateManager.Instance.SetUnlockedLevelsForCurrentCharacter(entry.unlockedLevels);
+            }
         }
 
-        characterManager.LoadCharacterFromID(saveData.characterID);
-        levelManager.SetSelectedCharacter(saveData.characterID);
-        levelManager.SetLevelIndex(saveData.currentLevelIndex);
-        levelManager.SetUnlockedLevelsForCurrentCharacter(saveData.unlockedLevels);
+        CharacterProgressEntry selectedEntry = saveData.characterProgressData
+            .Find(entry => entry.characterName == saveData.characterID);
 
-        SceneChanger.instance.ChangeScene("LevelSelect");
+        if (selectedEntry != null)
+        {
+            LevelStateManager.Instance.SetSelectedCharacter(selectedEntry.characterName);
+            LevelStateManager.Instance.SetLevelIndex(selectedEntry.currentLevelIndex);
+            LevelStateManager.Instance.SetUnlockedLevelsForCurrentCharacter(selectedEntry.unlockedLevels);
+        }
+
+        CharacterSelectionManager.Instance.LoadCharacterFromID(saveData.characterID);
+
+        Debug.Log("Preloaded save data for slot " + slotIndex + ". Transitioning to CharacterSelect...");
+
+        SceneChanger.instance.ChangeScene("CharacterSelect");
     }
 }
