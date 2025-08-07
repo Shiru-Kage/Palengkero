@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class LevelStateManager : MonoBehaviour
@@ -25,6 +26,7 @@ public class LevelStateManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
     public void SetSelectedCharacter(string characterName)
     {
         currentCharacterName = characterName;
@@ -98,4 +100,29 @@ public class LevelStateManager : MonoBehaviour
         }
     }
 
+    // ✅ Reset level data for all characters
+    public void ResetAllCharacterLevelData()
+    {
+        foreach (var characterName in new List<string>(characterLevelLocks.Keys))  // Use a copy of keys to avoid modification issues
+        {
+            bool[] resetLevels = new bool[allLevels.Length];
+            resetLevels[0] = true;  // Keep the first level unlocked
+            SetUnlockedLevelsForCurrentCharacterForCharacter(characterName, resetLevels);
+            SetLevelIndex(0);  // Reset level index to 0 for all characters
+        }
+    }
+
+    private void SetUnlockedLevelsForCurrentCharacterForCharacter(string characterName, bool[] levels)
+    {
+        if (string.IsNullOrEmpty(characterName)) return;
+
+        if (characterLevelLocks.ContainsKey(characterName))
+        {
+            characterLevelLocks[characterName] = levels;
+        }
+        else
+        {
+            characterLevelLocks.Add(characterName, levels);
+        }
+    }
 }

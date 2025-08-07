@@ -43,4 +43,10 @@ public class LoadGameManager : MonoBehaviour
 
         SceneChanger.instance.ChangeScene("CharacterSelect");
     }
+
+    public void ResetAllCharacterLevelData()
+    {
+        LevelStateManager.Instance.ResetAllCharacterLevelData();
+        Debug.Log("All character level data has been reset.");
+    }
 }
