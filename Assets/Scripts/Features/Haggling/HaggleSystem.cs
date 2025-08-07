@@ -77,7 +77,6 @@ public class HaggleSystem : MonoBehaviour
 
         if (successScene != null)
         {
-            dialogueManager.events.OnSceneEnd.AddListener(OnDialogueSceneEnd_ShowStallDetails);
             dialogueManager.PlayScene(successScene);
         }
     }
@@ -111,7 +110,6 @@ public class HaggleSystem : MonoBehaviour
 
         if (failScene != null)
         {
-            dialogueManager.events.OnSceneEnd.AddListener(OnDialogueSceneEnd_ShowStallDetails);
             dialogueManager.PlayScene(failScene);
         }
     }
@@ -132,18 +130,9 @@ public class HaggleSystem : MonoBehaviour
         ResetAttempts();
     }
 
-    private void OnDialogueSceneEnd_ShowStallDetails()
+    public void OnDialogueSceneEnd_ShowStallDetails()
     {
-        dialogueManager.events.OnSceneEnd.RemoveListener(OnDialogueSceneEnd_ShowStallDetails);
-
         var stallUI = Object.FindAnyObjectByType<StallUI>();
-        if (stallUI != null)
-        {
-            stallUI.DisplayDetailsAfterHaggle();
-        }
-        else
-        {
-            Debug.LogWarning("StallUI not found when trying to display details after haggle.");
-        }
+        stallUI.DisplayDetailsAfterHaggle();
     }
 }

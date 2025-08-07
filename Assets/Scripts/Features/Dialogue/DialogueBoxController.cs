@@ -87,7 +87,6 @@ public class DialogueBoxController : MonoBehaviour
 
         if (sentence.speakers == null || sentence.speakers.Length == 0)
         {
-            // If no speakers, clear speaker UI and auto-advance
             personNameTextDisplay.text = "";
             yield return StartCoroutine(TypeText(sentence.text));
             yield return new WaitForSeconds(1f);
@@ -102,7 +101,6 @@ public class DialogueBoxController : MonoBehaviour
             yield break;
         }
 
-        // Determine the speaker before typing starts
         foreach (var speaker in sentence.speakers)
         {
             if (speaker == runtimeCharacterData)

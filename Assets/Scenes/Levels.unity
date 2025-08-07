@@ -10518,7 +10518,19 @@ MonoBehaviour:
         m_Calls: []
     OnSceneEnd:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 5064311198717668787}
+          m_TargetAssemblyTypeName: HaggleSystem, Assembly-CSharp
+          m_MethodName: OnDialogueSceneEnd_ShowStallDetails
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &5064311198717668781 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8637088222432853269, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}

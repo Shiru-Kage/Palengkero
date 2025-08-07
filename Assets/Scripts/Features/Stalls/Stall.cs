@@ -117,12 +117,6 @@ public class Stall : Interactable
         {
             Debug.LogWarning("HaggleSystem not assigned.");
         }
-
-        StallUI stallUI = GetComponent<StallUI>();
-        if (stallUI != null)
-        {
-            stallUI.HideDetailsAfterHaggle();
-        }
     }
 
     public ItemData GetSelectedItem()

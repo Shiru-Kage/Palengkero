@@ -141,6 +141,7 @@ public class StallUI : MonoBehaviour
             haggleButton.onClick.AddListener(() =>
             {
                 currentStall.TryStartHaggling();
+                HideDetailsAfterHaggle();
             });
         }
     }
@@ -153,7 +154,7 @@ public class StallUI : MonoBehaviour
         if (stallInnerUICanvasObject != null) stallInnerUICanvasObject.SetActive(false);
     }
 
-    public void HideDetailsAfterHaggle()
+    private void HideDetailsAfterHaggle()
     {
         if (purchaseButton != null) purchaseButton.gameObject.SetActive(false);
         if (haggleButton != null) haggleButton.gameObject.SetActive(false);
@@ -183,7 +184,6 @@ public class StallUI : MonoBehaviour
 
             button.gameObject.SetActive(true);
 
-            // ✅ Find and set the icon from the child named "ItemIcon"
             Image iconImage = button.transform.Find("Icon")?.GetComponent<Image>();
             if (iconImage != null)
             {
@@ -218,7 +218,6 @@ public class StallUI : MonoBehaviour
         float price = item.price;
         float finalPrice = price;
 
-        // ✅ Check this stall's local discount, not HaggleSystem global
         if (currentStall != null && item.id == currentStall.GetDiscountedItemId())
         {
             finalPrice *= 0.5f;
