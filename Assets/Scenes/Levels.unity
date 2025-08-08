@@ -982,6 +982,7 @@ GameObject:
   - component: {fileID: 316245384}
   - component: {fileID: 316245386}
   - component: {fileID: 316245385}
+  - component: {fileID: 316245387}
   m_Layer: 5
   m_Name: Phone
   m_TagString: Untagged
@@ -1046,6 +1047,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316245383}
   m_CullTransparentMesh: 1
+--- !u!114 &316245387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316245383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61637b10fb010b4b84dd2e7c9b480f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 1262946652}
+  youngerSiblingChance: 50
+  fatherChance: 30
+  motherChance: 20
+  fillImage: {fileID: 316245385}
+  fillColor: {r: 0, g: 1, b: 0, a: 1}
+  emptyColor: {r: 1, g: 0, b: 0, a: 1}
+  aidInterval: 10
 --- !u!1 &332392911
 GameObject:
   m_ObjectHideFlags: 0
