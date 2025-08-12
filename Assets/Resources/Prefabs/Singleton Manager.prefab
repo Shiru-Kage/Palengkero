@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7296553842937276283}
   - component: {fileID: 3521736806769775435}
+  - component: {fileID: 4305478765811230560}
+  - component: {fileID: 9020987342369923903}
   m_Layer: 0
-  m_Name: Player Character
+  m_Name: Singleton Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,9 +46,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0daeee10ee978a447b868de4c87c94c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenesToDestroyOn:
-  - TitleScreen
   characterPrefabs:
   - {fileID: 7395643586672669852, guid: 946c4dd872022ef439f3709c6c8c1133, type: 3}
   - {fileID: 7395643586672669852, guid: ede889f410344c74f8e769571050de50, type: 3}
   - {fileID: 7395643586672669852, guid: e9429578008ecd142b46adc3ed3b2839, type: 3}
+--- !u!114 &4305478765811230560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344866156676854580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa36173987a301a4a9301c4e9ef0232b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allLevels:
+  - {fileID: 11400000, guid: 999dd7b571c253c4dba9d726097a085a, type: 2}
+  - {fileID: 11400000, guid: 5ed2334ad422f4341ae2d5f2b7f1b8a7, type: 2}
+  - {fileID: 11400000, guid: 747330d30bb008b4e9e14ce03012276a, type: 2}
+  - {fileID: 11400000, guid: 11f1d81e18bc30549b732851dda9a04f, type: 2}
+  - {fileID: 11400000, guid: f31cae67a4b87364c98d42a04d6b5412, type: 2}
+--- !u!114 &9020987342369923903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344866156676854580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0dc3a4e6166e04984e51e24e4498c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDatabase:
+    items: []
+  priceIncreasePercentage: 100

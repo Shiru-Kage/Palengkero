@@ -77,6 +77,7 @@ public class LevelManager : MonoBehaviour
         }
 
         LevelStateManager.Instance.SetLevelIndex(levelIndex);
+        ItemDatabaseManager.Instance.AdjustPricesBasedOnLevel(levelIndex);
         CharacterSelectionManager.Instance?.ResetRuntimeCharacterBudget();
         UpdateUI(levels[levelIndex]);
     }

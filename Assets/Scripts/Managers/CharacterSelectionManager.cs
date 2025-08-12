@@ -17,9 +17,6 @@ public class CharacterSelectionManager : MonoBehaviour
             return pd != null ? pd.Data : null;
         }
     }
-
-    [Header("Scenes where this should be destroyed")]
-    [SerializeField] private List<string> scenesToDestroyOn = new List<string>();
     [SerializeField] private List<GameObject> characterPrefabs;
     public List<GameObject> AllCharacterPrefabs => characterPrefabs;
 
@@ -33,17 +30,6 @@ public class CharacterSelectionManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scenesToDestroyOn.Contains(scene.name))
-        {
-            Destroy(gameObject);
-            Instance = null;
-        }
     }
 
     public void SetSelectedPrefab(GameObject prefab)
@@ -94,12 +80,6 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             SetSelectedPrefab(prefab);
         }
-    }
-
-
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
 

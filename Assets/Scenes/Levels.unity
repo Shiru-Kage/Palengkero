@@ -869,6 +869,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268715933}
   m_CullTransparentMesh: 1
+--- !u!1 &301359368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301359369}
+  - component: {fileID: 301359371}
+  - component: {fileID: 301359370}
+  m_Layer: 5
+  m_Name: Phone BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &301359369
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301359368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 316245384}
+  m_Father: {fileID: 1647751233}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -430, y: -80}
+  m_SizeDelta: {x: 80, y: 120}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &301359370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301359368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.4943396, g: 0.4943396, b: 0.4943396, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: e52bb1eab0e55d84ca4dfd70fb8eaeb4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 1
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &301359371
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301359368}
+  m_CullTransparentMesh: 1
 --- !u!1 &306296730
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,16 +1073,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316245383}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1647751233}
+  m_Father: {fileID: 301359369}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -430, y: -80}
+  m_AnchoredPosition: {x: -39.99997, y: -59.999992}
   m_SizeDelta: {x: 80, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &316245385
@@ -1030,10 +1106,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e52bb1eab0e55d84ca4dfd70fb8eaeb4, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1064,9 +1140,9 @@ MonoBehaviour:
   fatherChance: 30
   motherChance: 20
   fillImage: {fileID: 316245385}
-  fillColor: {r: 0, g: 1, b: 0, a: 1}
-  emptyColor: {r: 1, g: 0, b: 0, a: 1}
-  aidInterval: 10
+  fillColor: {r: 0, g: 1, b: 0.017044306, a: 1}
+  emptyColor: {r: 1, g: 1, b: 1, a: 1}
+  aidInterval: 300
 --- !u!1 &332392911
 GameObject:
   m_ObjectHideFlags: 0
@@ -7724,7 +7800,7 @@ RectTransform:
   m_Children:
   - {fileID: 1262946650}
   - {fileID: 244478927}
-  - {fileID: 316245384}
+  - {fileID: 301359369}
   m_Father: {fileID: 1867660164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8636,7 +8712,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1886068142778245919, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
   m_PrefabInstance: {fileID: 5064311198717668778}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064311198717668779}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4ace411a0face14d8c04a999a565130, type: 3}
@@ -10368,6 +10444,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 22210090367136133, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: dialogueController
+      value: 
+      objectReference: {fileID: 7191816876267962208}
+    - target: {fileID: 22210090367136133, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: events.OnSceneEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5064311198717668787}
     - target: {fileID: 347279307014972522, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -10400,6 +10484,18 @@ PrefabInstance:
       propertyPath: stallInnerUICanvasObject
       value: 
       objectReference: {fileID: 1060466693}
+    - target: {fileID: 2901242554119275491, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: stallInnerUIContainer
+      value: 
+      objectReference: {fileID: 1060466693}
+    - target: {fileID: 3639178882297668901, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 1262946652}
+    - target: {fileID: 3639178882297668901, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1435371595}
     - target: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -10503,61 +10599,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5064311198717668780}
-    - targetCorrespondingSourceObject: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5064311198717668787}
-    - targetCorrespondingSourceObject: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5064311198717668789}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
---- !u!1 &5064311198717668779 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+--- !u!114 &5064311198717668780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 22210090367136133, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
   m_PrefabInstance: {fileID: 5064311198717668778}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5064311198717668780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064311198717668779}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15e5325e71312e1428487f9a254facb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScene: {fileID: 0}
-  dialogueController: {fileID: 7191816876267962208}
-  events:
-    OnSceneStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnSceneEnd:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5064311198717668787}
-          m_TargetAssemblyTypeName: HaggleSystem, Assembly-CSharp
-          m_MethodName: OnDialogueSceneEnd_ShowStallDetails
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &5064311198717668781 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8637088222432853269, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
   m_PrefabInstance: {fileID: 5064311198717668778}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064311198717668779}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eab8a2d1515a56f4aa9423123afa39b2, type: 3}
@@ -10568,45 +10628,23 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 347279307014972522, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
   m_PrefabInstance: {fileID: 5064311198717668778}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064311198717668779}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f6e5bb26e4d3c541a083a5c66bb7ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5064311198717668787
+--- !u!114 &5064311198717668787 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2901242554119275491, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+  m_PrefabInstance: {fileID: 5064311198717668778}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064311198717668779}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28c5952d66409874faf46d295f1544b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haggleIntroScene: {fileID: 11400000, guid: 44153230214ad064da87e78ef11455e9, type: 2}
-  successScene: {fileID: 11400000, guid: 779c226d4bbc17b458ebf4e5513c9924, type: 2}
-  failScene: {fileID: 11400000, guid: 3702b5bcd6573974fa5ce1463edde99f, type: 2}
-  stallInnerUIContainer: {fileID: 1060466693}
---- !u!114 &5064311198717668789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064311198717668779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba77ef5ead2cb8c4b92fee2c5cbf434f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcPrefab: {fileID: 6444193704485106208, guid: 0d232dbc14b708c4da9212eeac152d46, type: 3}
-  npcsToSpawnAtOnce: 1
-  spawnInterval: 10
-  timer: {fileID: 1262946652}
-  spawnPoint: {fileID: 1435371595}
 --- !u!224 &5353304399790806219
 RectTransform:
   m_ObjectHideFlags: 0

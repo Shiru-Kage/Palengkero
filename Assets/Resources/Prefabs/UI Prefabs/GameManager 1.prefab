@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 6955809615524159130}
   - component: {fileID: 1886068142778245919}
   - component: {fileID: 8637088222432853269}
-  - component: {fileID: 6937203021300105448}
   - component: {fileID: 347279307014972522}
   - component: {fileID: 6618353305845829015}
+  - component: {fileID: 22210090367136133}
+  - component: {fileID: 2901242554119275491}
+  - component: {fileID: 3639178882297668901}
   m_Layer: 0
   m_Name: GameManager 1
   m_TagString: Untagged
@@ -78,34 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 0}
---- !u!114 &6937203021300105448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5828795787040725207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0dc3a4e6166e04984e51e24e4498c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemDatabase:
-    items:
-    - iconName: 
-      id: 
-      itemName: 
-      price: 0
-      nutrition: 0
-      satisfaction: 0
-      stockLimit: 0
-    - iconName: 
-      id: 
-      itemName: 
-      price: 0
-      nutrition: 0
-      satisfaction: 0
-      stockLimit: 0
 --- !u!114 &347279307014972522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +92,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6e5bb26e4d3c541a083a5c66bb7ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stallPrefab: {fileID: 0}
+  haggleSystem: {fileID: 0}
+  stallCanvas: {fileID: 0}
+  stallInnerUIContainer: {fileID: 0}
+  stallInnerUICanvasObject: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  numberOfStalls: 1
 --- !u!114 &6618353305845829015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +112,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weeklyBudgetText: {fileID: 0}
-  nutritionGoalText: {fileID: 0}
-  satisfactionGoalText: {fileID: 0}
-  savingsGoalText: {fileID: 0}
+  objectiveUI: {fileID: 0}
+  characterSpawner: {fileID: 0}
+  stallManager: {fileID: 0}
+--- !u!114 &22210090367136133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828795787040725207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e5325e71312e1428487f9a254facb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentScene: {fileID: 0}
+  dialogueController: {fileID: 0}
+  events:
+    OnSceneStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSceneEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: HaggleSystem, Assembly-CSharp
+          m_MethodName: OnDialogueSceneEnd_ShowStallDetails
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &2901242554119275491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828795787040725207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c5952d66409874faf46d295f1544b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  haggleIntroScene: {fileID: 11400000, guid: 44153230214ad064da87e78ef11455e9, type: 2}
+  successScene: {fileID: 11400000, guid: 779c226d4bbc17b458ebf4e5513c9924, type: 2}
+  failScene: {fileID: 11400000, guid: 3702b5bcd6573974fa5ce1463edde99f, type: 2}
+  stallInnerUIContainer: {fileID: 0}
+--- !u!114 &3639178882297668901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828795787040725207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba77ef5ead2cb8c4b92fee2c5cbf434f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcPrefab: {fileID: 6444193704485106208, guid: 0d232dbc14b708c4da9212eeac152d46, type: 3}
+  npcsToSpawnAtOnce: 1
+  spawnInterval: 10
+  timer: {fileID: 0}
+  spawnPoint: {fileID: 0}

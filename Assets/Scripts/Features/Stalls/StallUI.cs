@@ -17,7 +17,6 @@ public class StallUI : MonoBehaviour
     private GameObject stallInnerUICanvasObject;
     private GameObject informationPanel;
 
-    private GameObject itemDisplay;
     private Button purchaseButton;
     private Button haggleButton;
 
