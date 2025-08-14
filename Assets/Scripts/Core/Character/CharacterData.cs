@@ -17,6 +17,5 @@ public class CharacterData : ScriptableObject
     public Color textColor;
     public AudioClip voiceClip;
     public RuntimeAnimatorController characterAnimator;
-    public RuntimeAnimatorController cutsceneAnimator;
     public VideoClip cutsceneVideo; 
 }
