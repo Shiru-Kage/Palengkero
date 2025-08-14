@@ -1,19 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class LevelSelectManager : MonoBehaviour
 {
-    [Header("UI References")]
-    [SerializeField] private Image levelSprite;
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI levelDescriptionText;
-
-    [Header("Objective UI Handler")]
-    [SerializeField] private LevelObjectiveUI objectiveUI; 
-
+    private StarUI starUI;
     private void Start()
     {
+        starUI = Object.FindAnyObjectByType<StarUI>();
         if (LevelStateManager.Instance != null)
         {
             SetLevel(LevelStateManager.Instance.CurrentLevelIndex);
@@ -43,31 +35,19 @@ public class LevelSelectManager : MonoBehaviour
 
         LevelStateManager.Instance.SetLevelIndex(levelIndex);
         UpdateUI(levels[levelIndex]);
+
+        if (starUI != null)
+        {
+            starUI.UpdateStarsForSelectedLevel(levelIndex);
+        }
+        else
+        {
+            Debug.LogWarning("StarUI component not found!");
+        }
     }
 
     private void UpdateUI(LevelData currentLevel)
     {
-        if (CharacterSelectionManager.Instance == null || CharacterSelectionManager.Instance.SelectedCharacterData == null)
-        {
-            Debug.LogError("No selected character found.");
-            return;
-        }
-
-        CharacterData selectedCharacter = CharacterSelectionManager.Instance.SelectedCharacterData;
-        CharacterObjective objective = currentLevel.GetObjectiveFor(selectedCharacter);
-
-        if (levelText != null)
-            levelText.text = "Level " + currentLevel.levelNumber;
-
-        if (levelDescriptionText != null)
-            levelDescriptionText.text = currentLevel.levelDescription ?? "No description available.";
-
-        if (levelSprite != null)
-            levelSprite.sprite = currentLevel.levelIcon;
-
-        if (objectiveUI != null)
-            objectiveUI.UpdateObjectiveUI(objective);
-        else
-            Debug.LogWarning("Objective UI reference missing in LevelSelectManager.");
+        LevelSelectUI.Instance.UpdateLevelUI(currentLevel);
     }
 }

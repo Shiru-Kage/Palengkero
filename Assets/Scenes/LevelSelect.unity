@@ -4394,10 +4394,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1916743981}
   - component: {fileID: 1916743976}
-  - component: {fileID: 1916743977}
   - component: {fileID: 1916743978}
+  - component: {fileID: 1916743977}
   - component: {fileID: 1916743979}
   - component: {fileID: 1916743980}
+  - component: {fileID: 1916743982}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4417,10 +4418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5cbfb7e812942439c74594cee917c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSprite: {fileID: 912001086}
-  levelText: {fileID: 1985834146}
-  levelDescriptionText: {fileID: 538469388}
-  objectiveUI: {fileID: 1916743977}
 --- !u!114 &1916743977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4454,6 +4451,10 @@ MonoBehaviour:
   - {fileID: 1390758528}
   - {fileID: 2105395496}
   - {fileID: 2047435818}
+  levelSprite: {fileID: 912001086}
+  levelText: {fileID: 1985834146}
+  levelDescriptionText: {fileID: 538469388}
+  objectiveUI: {fileID: 1916743977}
 --- !u!114 &1916743979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4487,12 +4488,31 @@ Transform:
   m_GameObject: {fileID: 1916743973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3551337, y: 0.009063378, z: 0.03315627}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1916743982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916743973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13be5e75ae07c51449a9187db7c8cf6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starImages:
+  - {fileID: 1463449843}
+  - {fileID: 1499551345}
+  - {fileID: 1298871323}
+  fullStarSprite: {fileID: 5199979006384268662, guid: eb8b4dfd2b43fcd4fbfb0be88df814ef, type: 3}
+  emptyStarSprite: {fileID: 21300000, guid: 774eb8236373e43459e7160b7021e61a, type: 3}
+  totalStarsText: {fileID: 204670384}
 --- !u!1 &1932947170
 GameObject:
   m_ObjectHideFlags: 0

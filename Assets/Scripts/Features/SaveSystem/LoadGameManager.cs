@@ -19,11 +19,16 @@ public class LoadGameManager : MonoBehaviour
 
         foreach (CharacterProgressEntry entry in saveData.characterProgressData)
         {
-            if (entry.characterName != saveData.characterID)
+            if (entry.characterName == saveData.characterID)
             {
                 LevelStateManager.Instance.SetSelectedCharacter(entry.characterName);
                 LevelStateManager.Instance.SetLevelIndex(entry.currentLevelIndex);
                 LevelStateManager.Instance.SetUnlockedLevelsForCurrentCharacter(entry.unlockedLevels);
+
+                for (int i = 0; i < entry.levelStars.Count; i++)
+                {
+                    StarSystem.Instance.AssignStarsForLevel(i, entry.levelStars[i]);
+                }
             }
         }
 
@@ -35,6 +40,11 @@ public class LoadGameManager : MonoBehaviour
             LevelStateManager.Instance.SetSelectedCharacter(selectedEntry.characterName);
             LevelStateManager.Instance.SetLevelIndex(selectedEntry.currentLevelIndex);
             LevelStateManager.Instance.SetUnlockedLevelsForCurrentCharacter(selectedEntry.unlockedLevels);
+
+            for (int i = 0; i < selectedEntry.levelStars.Count; i++)
+            {
+                StarSystem.Instance.AssignStarsForLevel(i, selectedEntry.levelStars[i]);
+            }
         }
 
         CharacterSelectionManager.Instance.LoadCharacterFromID(saveData.characterID);
@@ -47,6 +57,7 @@ public class LoadGameManager : MonoBehaviour
     public void ResetAllCharacterLevelData()
     {
         LevelStateManager.Instance.ResetAllCharacterLevelData();
+        StarSystem.Instance.ResetStarsForAllLevels();
         Debug.Log("All character level data has been reset.");
     }
 }
