@@ -44,9 +44,20 @@ public class StarUI : MonoBehaviour
 
     public void UpdateTotalStarsText()
     {
-        int totalStars = StarSystem.Instance.GetTotalStars();  // Get the total stars from the manager
-        int maxStars = LevelStateManager.Instance.AllLevels.Length * 3;  // Max stars (3 per level)
+        int totalStars = 0;
+        int maxStars = 0;
 
-        totalStarsText.text = $"{totalStars}/{maxStars}";
+        // Calculate the total stars earned and the maximum possible stars
+        for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
+        {
+            totalStars += StarSystem.Instance.GetStarsForLevel(i);
+            maxStars += 3;  // Since each level can have a maximum of 3 stars
+        }
+
+        // Update the total stars text (e.g., "0/15")
+        if (totalStarsText != null)
+        {
+            totalStarsText.text = $"{totalStars}/{maxStars}";
+        }
     }
 }
