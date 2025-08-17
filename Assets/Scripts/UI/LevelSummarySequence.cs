@@ -141,7 +141,7 @@ public class LevelSummarySequence : MonoBehaviour
         metSavings = runtimeCharacter.currentWeeklyBudget >= currentObjective.savingsGoal;
     }
 
-    StarSystem.Instance.AssignStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, metNutrition, metSatisfaction, metSavings);
+    StarSystem.Instance.AssignStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID, metNutrition, metSatisfaction, metSavings);
 
 
     bool adviceShown = false;

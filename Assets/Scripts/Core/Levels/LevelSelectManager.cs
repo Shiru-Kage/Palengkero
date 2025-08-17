@@ -38,7 +38,8 @@ public class LevelSelectManager : MonoBehaviour
 
         if (starUI != null)
         {
-            starUI.UpdateStarsForSelectedLevel(levelIndex);
+            string characterID = CharacterSelectionManager.Instance.SelectedCharacterID;
+            starUI.UpdateStarsForSelectedLevel(levelIndex, characterID);
         }
         else
         {

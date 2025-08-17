@@ -5,7 +5,7 @@ using UnityEngine;
 public class StarSystem : MonoBehaviour
 {
     public static StarSystem Instance { get; private set; }
-    private Dictionary<int, int> levelStars = new Dictionary<int, int>();
+    private Dictionary<string, Dictionary<int, int>> characterLevelStars = new Dictionary<string, Dictionary<int, int>>(); 
     private const int MAX_STARS = 3;
 
     private void Awake()
@@ -21,7 +21,7 @@ public class StarSystem : MonoBehaviour
         }
     }
 
-    public void AssignStarsForLevel(int levelIndex, bool metNutrition, bool metSatisfaction, bool metSavings)
+    public void AssignStarsForLevel(int levelIndex, string characterID, bool metNutrition, bool metSatisfaction, bool metSavings)
     {
         int stars = 0;
 
@@ -31,60 +31,82 @@ public class StarSystem : MonoBehaviour
 
         stars = Mathf.Clamp(stars, 0, MAX_STARS);
 
-        if (levelStars.ContainsKey(levelIndex))
+        if (!characterLevelStars.ContainsKey(characterID))
         {
-            levelStars[levelIndex] = stars; 
+            characterLevelStars[characterID] = new Dictionary<int, int>();
         }
-        else
-        {
-            levelStars.Add(levelIndex, stars);
-        }
+
+        characterLevelStars[characterID][levelIndex] = stars;
+
+        UpdateStarUI(characterID);
     }
 
-    public void AssignStarsForLevel(int levelIndex, int stars)
+    public void AssignStarsForLevel(int levelIndex, string characterID, int stars)
     {
         stars = Mathf.Clamp(stars, 0, MAX_STARS);
 
-        if (levelStars.ContainsKey(levelIndex))
+        if (!characterLevelStars.ContainsKey(characterID))
         {
-            levelStars[levelIndex] = stars;
-        }
-        else
-        {
-            levelStars.Add(levelIndex, stars);
+            characterLevelStars[characterID] = new Dictionary<int, int>();
         }
 
-        Debug.Log($"Level {levelIndex} Stars (Loaded): {stars}");
+        characterLevelStars[characterID][levelIndex] = stars;
+
+        UpdateStarUI(characterID);
     }
 
-    public int GetStarsForLevel(int levelIndex)
+    private void UpdateStarUI(string characterID)
     {
-        return levelStars.ContainsKey(levelIndex) ? levelStars[levelIndex] : 0;
+        StarUI starUI = Object.FindAnyObjectByType<StarUI>(); 
+        if (starUI != null)
+        {
+            for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
+            {
+                starUI.UpdateStarsForSelectedLevel(i, characterID);
+            }
+            starUI.UpdateTotalStarsText(characterID); 
+        }
     }
 
-    public int GetTotalStars()
+    public int GetStarsForLevel(int levelIndex, string characterID)
+    {
+        if (characterLevelStars.ContainsKey(characterID) && characterLevelStars[characterID].ContainsKey(levelIndex))
+        {
+            return characterLevelStars[characterID][levelIndex];
+        }
+        return 0;
+    }
+
+    public int GetTotalStarsForCharacter(string characterID)
     {
         int totalStars = 0;
-        foreach (var stars in levelStars.Values)
+        if (characterLevelStars.ContainsKey(characterID))
         {
-            totalStars += stars;
+            foreach (var stars in characterLevelStars[characterID].Values)
+            {
+                totalStars += stars;
+            }
         }
         return totalStars;
     }
 
-    public bool HasMaxStarsForLevel(int levelIndex)
+    public bool HasMaxStarsForLevel(int levelIndex, string characterID)
     {
-        return GetStarsForLevel(levelIndex) == MAX_STARS;
+        return GetStarsForLevel(levelIndex, characterID) == MAX_STARS;
     }
 
     public void ResetStarsForAllLevels()
     {
-        List<int> keys = new List<int>(levelStars.Keys); 
-        foreach (int levelIndex in keys)
-        {
-            levelStars[levelIndex] = 0;
-        }
+        characterLevelStars.Clear();
+        Debug.Log("All stars have been reset for all characters.");
+    }
 
-        Debug.Log("All stars have been reset to 0.");
+    public void ResetStarsForCharacter(string characterID)
+    {
+        if (characterLevelStars.ContainsKey(characterID))
+        {
+            characterLevelStars[characterID].Clear();
+            Debug.Log($"Stars reset for character: {characterID}");
+        }
     }
 }

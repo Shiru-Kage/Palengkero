@@ -30,12 +30,11 @@ public class SaveGameManager : MonoBehaviour
             unlockedLevels = LevelStateManager.Instance.GetUnlockedLevelsForCurrentCharacter()
         };
 
-        // Save stars for each level of the character
         if (charName == CharacterSelectionManager.Instance.SelectedCharacterData.characterName)
         {
             for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
             {
-                int stars = StarSystem.Instance.GetStarsForLevel(i);
+                int stars = StarSystem.Instance.GetStarsForLevel(i, CharacterSelectionManager.Instance.SelectedCharacterID);
                 characterProgress.levelStars.Add(stars);
             }
         }
