@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Video; 
+using UnityEngine.Video;
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Character/Character Data")]
 public class CharacterData : ScriptableObject
 {
@@ -17,5 +17,6 @@ public class CharacterData : ScriptableObject
     public Color textColor;
     public AudioClip voiceClip;
     public RuntimeAnimatorController characterAnimator;
-    public VideoClip cutsceneVideo; 
+    public VideoClip openingCutscene; 
+    public VideoClip[] endingCutscenes;
 }

@@ -72,15 +72,6 @@ public class CharacterSelectionManager : MonoBehaviour
         Debug.LogError("Character ID not found: " + characterID);
         return null;
     }
-
-    public void LoadCharacterFromID(string characterID)
-    {
-        var prefab = GetPrefabByCharacterID(characterID);
-        if (prefab != null)
-        {
-            SetSelectedPrefab(prefab);
-        }
-    }
 }
 
 public class RuntimeCharacter

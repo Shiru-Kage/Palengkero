@@ -80,7 +80,7 @@ public class LevelSummarySequence : MonoBehaviour
         {
             yield return ShowObjectiveWithAnimation(currentObjective.nutritionGoal, nutritionGoalText, "Nutrition Goal: ", wellBeingMeter.CurrentNutrition, false);
             yield return ShowObjectiveWithAnimation(currentObjective.satisfactionGoal, satisfactionGoalText, "Satisfaction Goal: ", wellBeingMeter.CurrentSatisfaction, false);
-            yield return ShowObjectiveWithAnimation(currentObjective.savingsGoal, savingsGoalText, "Savings Goal: ₱", currentObjective.savingsGoal, true);
+            yield return ShowObjectiveWithAnimation(currentObjective.savingsGoal, savingsGoalText, "Savings Goal: ", currentObjective.savingsGoal, true);
         }
 
         float levelTimeSpent = levelTimer.CurrentTime;

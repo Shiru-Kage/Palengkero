@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class StarSystem : MonoBehaviour
 {
@@ -17,8 +19,19 @@ public class StarSystem : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
+            DontDestroyOnLoad(gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        UpdateStarUI(CharacterSelectionManager.Instance.SelectedCharacterID);
     }
 
     public void AssignStarsForLevel(int levelIndex, string characterID, bool metNutrition, bool metSatisfaction, bool metSavings)
@@ -57,15 +70,19 @@ public class StarSystem : MonoBehaviour
 
     private void UpdateStarUI(string characterID)
     {
-        StarUI starUI = Object.FindAnyObjectByType<StarUI>(); 
-        if (starUI != null)
+        StarUI starUI = Object.FindAnyObjectByType<StarUI>();
+        if (starUI == null)
         {
-            for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
-            {
-                starUI.UpdateStarsForSelectedLevel(i, characterID);
-            }
-            starUI.UpdateTotalStarsText(characterID); 
+            return;
         }
+        if (starUI != null)
+            {
+                for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
+                {
+                    starUI.UpdateStarsForSelectedLevel(i, characterID);
+                }
+                starUI.UpdateTotalStarsText(characterID);
+            }
     }
 
     public int GetStarsForLevel(int levelIndex, string characterID)

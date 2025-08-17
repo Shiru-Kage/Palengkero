@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
   m_Name: Carlito
   m_EditorClassIdentifier: 
-  characterID: 1
+  characterID: Carlito
   characterName: Carlito
   characterIndustry: 'Retail '
   characterDifficulty: Easy
@@ -26,5 +26,8 @@ MonoBehaviour:
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
   characterAnimator: {fileID: 9100000, guid: 358f431969669b444842e768e0924e90, type: 2}
-  cutsceneAnimator: {fileID: 0}
-  cutsceneVideo: {fileID: 32900000, guid: c6e0b23fe3a12c94eb331373d5ffcc6b, type: 3}
+  openingCutscene: {fileID: 32900000, guid: c6e0b23fe3a12c94eb331373d5ffcc6b, type: 3}
+  endingCutscenes:
+  - {fileID: 32900000, guid: 1737fc6181ca10b45b63b8716e5f4c63, type: 3}
+  - {fileID: 32900000, guid: e2743fbe4601b144fa422c4edbce5a27, type: 3}
+  - {fileID: 32900000, guid: c156b278d49d64d42bdcc02ea195fabd, type: 3}

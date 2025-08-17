@@ -15,7 +15,6 @@ public class Cutscene : MonoBehaviour
 
     private void Start()
     {
-        // 🔄 Automatically find the CharacterSelectionManager singleton instance
         characterSelectionManager = CharacterSelectionManager.Instance;
 
         if (videoPlayer == null || characterSelectionManager == null)
@@ -34,7 +33,7 @@ public class Cutscene : MonoBehaviour
         {
             CharacterData selectedCharacter = characterSelectionManager.SelectedCharacterData;
 
-            VideoClip cutsceneVideo = selectedCharacter.cutsceneVideo;
+            VideoClip cutsceneVideo = selectedCharacter.openingCutscene;
 
             if (cutsceneVideo != null)
             {
