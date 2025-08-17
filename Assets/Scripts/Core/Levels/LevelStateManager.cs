@@ -100,15 +100,14 @@ public class LevelStateManager : MonoBehaviour
         }
     }
 
-    // ✅ Reset level data for all characters
     public void ResetAllCharacterLevelData()
     {
-        foreach (var characterName in new List<string>(characterLevelLocks.Keys))  // Use a copy of keys to avoid modification issues
+        foreach (var characterName in new List<string>(characterLevelLocks.Keys)) 
         {
             bool[] resetLevels = new bool[allLevels.Length];
-            resetLevels[0] = true;  // Keep the first level unlocked
+            resetLevels[0] = true; 
             SetUnlockedLevelsForCurrentCharacterForCharacter(characterName, resetLevels);
-            SetLevelIndex(0);  // Reset level index to 0 for all characters
+            SetLevelIndex(0); 
         }
     }
 
