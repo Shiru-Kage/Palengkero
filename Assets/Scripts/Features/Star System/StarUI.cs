@@ -10,7 +10,6 @@ public class StarUI : MonoBehaviour
     [SerializeField] private Sprite emptyStarSprite;  
     [SerializeField] private TextMeshProUGUI totalStarsText;
 
-
     private void Start()
     {
         UpdateStarsForSelectedLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID);
@@ -19,20 +18,27 @@ public class StarUI : MonoBehaviour
 
     public void UpdateStarsForSelectedLevel(int levelIndex, string characterID)
     {
-        int stars = StarSystem.Instance.GetStarsForLevel(levelIndex, characterID); 
+        StarSystem.LevelStars levelStars = StarSystem.Instance.GetStarsForLevel(levelIndex, characterID); 
 
+        // Reset all stars to empty
         for (int i = 0; i < starImages.Length; i++)
         {
-            if (i < stars)
-            {
-                starImages[i].sprite = fullStarSprite;
-            }
-            else
-            {
-                starImages[i].sprite = emptyStarSprite;
-            }
+            starImages[i].sprite = emptyStarSprite;
+            starImages[i].color = new Color(1f, 1f, 1f, 1f);  // Full opacity
+        }
 
-            starImages[i].color = new Color(1f, 1f, 1f, 1f); 
+        // Update the star images based on how many objectives are met (nutrition, satisfaction, savings)
+        if (levelStars.nutritionStars > 0)
+        {
+            starImages[0].sprite = fullStarSprite;
+        }
+        if (levelStars.satisfactionStars > 0)
+        {
+            starImages[1].sprite = fullStarSprite;
+        }
+        if (levelStars.savingsStars > 0)
+        {
+            starImages[2].sprite = fullStarSprite;
         }
     }
 
@@ -43,8 +49,10 @@ public class StarUI : MonoBehaviour
 
         for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
         {
-            totalStars += StarSystem.Instance.GetStarsForLevel(i, characterID);  
-            maxStars += 3; 
+            StarSystem.LevelStars levelStars = StarSystem.Instance.GetStarsForLevel(i, characterID);  
+            // Count how many stars are earned per level (nutrition + satisfaction + savings)
+            totalStars += levelStars.nutritionStars + levelStars.satisfactionStars + levelStars.savingsStars;
+            maxStars += 3;  // Max stars per level (nutrition, satisfaction, savings)
         }
 
         if (totalStarsText != null)
@@ -53,3 +61,4 @@ public class StarUI : MonoBehaviour
         }
     }
 }
+

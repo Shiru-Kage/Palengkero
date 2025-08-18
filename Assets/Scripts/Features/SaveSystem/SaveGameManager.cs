@@ -32,10 +32,18 @@ public class SaveGameManager : MonoBehaviour
 
         // Save stars for each level of the character
         for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
-        {
-            int stars = StarSystem.Instance.GetStarsForLevel(i, charID);  // Get stars for this character
-            characterProgress.levelStars.Add(stars);
-        }
+            {
+                // Get LevelStars for this character and level
+                var levelStars = StarSystem.Instance.GetStarsForLevel(i, charID);
+                
+                characterProgress.nutritionStars.Add(levelStars.nutritionStars);
+                characterProgress.satisfactionStars.Add(levelStars.satisfactionStars);
+                characterProgress.savingsStars.Add(levelStars.savingsStars);
+                
+                // Calculate the total stars for the level
+                int totalStars = levelStars.nutritionStars + levelStars.satisfactionStars + levelStars.savingsStars;
+                characterProgress.levelStars.Add(totalStars);
+            }
 
         saveData.characterProgressData.Add(characterProgress);
     }

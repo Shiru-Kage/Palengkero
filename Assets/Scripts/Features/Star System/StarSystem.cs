@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class StarSystem : MonoBehaviour
 {
     public static StarSystem Instance { get; private set; }
-    private Dictionary<string, Dictionary<int, int>> characterLevelStars = new Dictionary<string, Dictionary<int, int>>(); 
+
+    // Dictionary to store the stars for each level for each character
+    private Dictionary<string, Dictionary<int, LevelStars>> characterLevelStars = new Dictionary<string, Dictionary<int, LevelStars>>(); 
+
     private const int MAX_STARS = 3;
 
     private void Awake()
@@ -33,36 +36,35 @@ public class StarSystem : MonoBehaviour
         UpdateStarUI(CharacterSelectionManager.Instance.SelectedCharacterID);
     }
 
-    public void AssignStarsForLevel(int levelIndex, string characterID, bool metNutrition, bool metSatisfaction, bool metSavings)
+    // Structure to hold stars for each objective (nutrition, satisfaction, savings)
+    public struct LevelStars
     {
-        int stars = 0;
-
-        if (metNutrition) stars++;
-        if (metSatisfaction) stars++;
-        if (metSavings) stars++;
-
-        stars = Mathf.Clamp(stars, 0, MAX_STARS);
-
-        if (!characterLevelStars.ContainsKey(characterID))
-        {
-            characterLevelStars[characterID] = new Dictionary<int, int>();
-        }
-
-        characterLevelStars[characterID][levelIndex] = stars;
-
-        UpdateStarUI(characterID);
+        public int nutritionStars;
+        public int satisfactionStars;
+        public int savingsStars;
     }
 
-    public void AssignStarsForLevel(int levelIndex, string characterID, int stars)
+    // Assign stars based on objectives met
+    public void AssignStarsForLevel(int levelIndex, string characterID, bool metNutrition, bool metSatisfaction, bool metSavings)
     {
-        stars = Mathf.Clamp(stars, 0, MAX_STARS);
+        LevelStars levelStars = new LevelStars();
 
+        // Assign stars based on which objectives are met
+        levelStars.nutritionStars = metNutrition ? 1 : 0;
+        levelStars.satisfactionStars = metSatisfaction ? 1 : 0;
+        levelStars.savingsStars = metSavings ? 1 : 0;
+
+        // Ensure the total stars don't exceed the max of 3
+        int totalStars = levelStars.nutritionStars + levelStars.satisfactionStars + levelStars.savingsStars;
+        totalStars = Mathf.Clamp(totalStars, 0, MAX_STARS);
+
+        // Store the stars for this level and character
         if (!characterLevelStars.ContainsKey(characterID))
         {
-            characterLevelStars[characterID] = new Dictionary<int, int>();
+            characterLevelStars[characterID] = new Dictionary<int, LevelStars>();
         }
 
-        characterLevelStars[characterID][levelIndex] = stars;
+        characterLevelStars[characterID][levelIndex] = levelStars;
 
         UpdateStarUI(characterID);
     }
@@ -81,55 +83,47 @@ public class StarSystem : MonoBehaviour
         starUI.UpdateTotalStarsText(characterID);
     }
 
-    public int GetStarsForLevel(int levelIndex, string characterID)
+    // Get the stars for a specific level
+    public LevelStars GetStarsForLevel(int levelIndex, string characterID)
     {
         if (characterLevelStars.ContainsKey(characterID) && characterLevelStars[characterID].ContainsKey(levelIndex))
         {
             return characterLevelStars[characterID][levelIndex];
         }
-        return 0;
+        return new LevelStars();  // Default to no stars
     }
 
+    // Get the total stars for a character (sum of all levels)
     public int GetTotalStarsForCharacter(string characterID)
     {
         int totalStars = 0;
         if (characterLevelStars.ContainsKey(characterID))
         {
-            foreach (var stars in characterLevelStars[characterID].Values)
+            foreach (var levelStars in characterLevelStars[characterID].Values)
             {
-                totalStars += stars;
+                totalStars += levelStars.nutritionStars + levelStars.satisfactionStars + levelStars.savingsStars;
             }
         }
         return totalStars;
     }
 
-    public bool HasMaxStarsForLevel(int levelIndex, string characterID)
-    {
-        return GetStarsForLevel(levelIndex, characterID) == MAX_STARS;
-    }
-
-    // Additional methods for category checks
+    // Check if a specific objective has been met for a level
     public bool HasNutritionStarForLevel(int levelIndex, string characterID)
     {
-        return GetStarsForLevel(levelIndex, characterID) > 0; // If level has at least 1 star, it means nutrition is met
+        return GetStarsForLevel(levelIndex, characterID).nutritionStars > 0;
     }
 
     public bool HasSatisfactionStarForLevel(int levelIndex, string characterID)
     {
-        return GetStarsForLevel(levelIndex, characterID) > 1; // If level has at least 2 stars, it means satisfaction is met
+        return GetStarsForLevel(levelIndex, characterID).satisfactionStars > 0;
     }
 
     public bool HasSavingsStarForLevel(int levelIndex, string characterID)
     {
-        return GetStarsForLevel(levelIndex, characterID) == 3; // If level has 3 stars, it means savings is met
+        return GetStarsForLevel(levelIndex, characterID).savingsStars > 0;
     }
 
-    public void ResetStarsForAllLevels()
-    {
-        characterLevelStars.Clear();
-        Debug.Log("All stars have been reset for all characters.");
-    }
-
+    // Reset stars for all levels for a specific character
     public void ResetStarsForCharacter(string characterID)
     {
         if (characterLevelStars.ContainsKey(characterID))
@@ -137,5 +131,11 @@ public class StarSystem : MonoBehaviour
             characterLevelStars[characterID].Clear();
             Debug.Log($"Stars reset for character: {characterID}");
         }
+    }
+
+    public void ResetStarsForAllLevels()
+    {
+        characterLevelStars.Clear();
+        Debug.Log("All stars have been reset for all characters.");
     }
 }

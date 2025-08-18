@@ -39,10 +39,13 @@ public class OverAllPerformanceUI : MonoBehaviour
         // Get level-specific stars from StarSystem
         for (int i = 0; i < totalLevels; i++)
         {
-            int stars = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID);
-            nutritionStars[i] = stars > 0;  // Nutrition star logic
-            satisfactionStars[i] = stars > 1;  // Satisfaction star logic
-            savingsStars[i] = stars == 3;  // Savings star logic
+            // Get the LevelStars struct for each level
+            var levelStars = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID);
+
+            // Set flags based on the individual stars for each category
+            nutritionStars[i] = levelStars.nutritionStars > 0;  // Nutrition star logic
+            satisfactionStars[i] = levelStars.satisfactionStars > 0;  // Satisfaction star logic
+            savingsStars[i] = levelStars.savingsStars > 0;  // Savings star logic
         }
 
         // Set performance summary text
@@ -76,25 +79,41 @@ public class OverAllPerformanceUI : MonoBehaviour
         float satisfactionPercentage = (float)satisfactionStars.Count(star => star) / satisfactionStars.Length;
         float savingsPercentage = (float)savingsStars.Count(star => star) / savingsStars.Length;
 
-        // Assuming PieChart divides the circle into 3 sections (nutrition, satisfaction, savings)
-        // Update each section of the pie chart with the respective percentage
-        nutritionPieSection.fillAmount = nutritionPercentage;  // Set PieChart section for Nutrition
-        satisfactionPieSection.fillAmount = satisfactionPercentage;  // Set PieChart section for Satisfaction
-        savingsPieSection.fillAmount = savingsPercentage;  // Set PieChart section for Savings
+        // Total percentage to make sure no section exceeds the total pie chart (1.0 or 100%)
+        float totalPercentage = nutritionPercentage + satisfactionPercentage + savingsPercentage;
+
+        // Ensure the total does not exceed 100%
+        if (totalPercentage > 1f)
+        {
+            nutritionPercentage /= totalPercentage;
+            satisfactionPercentage /= totalPercentage;
+            savingsPercentage /= totalPercentage;
+        }
+
+        // Update pie chart sections with the cumulative fillAmount
+        nutritionPieSection.fillAmount = nutritionPercentage;
+        satisfactionPieSection.fillAmount = nutritionPercentage + satisfactionPercentage;
+        savingsPieSection.fillAmount = nutritionPercentage + satisfactionPercentage + savingsPercentage;
     }
+
 
     // Get the most noticeable habit based on player's performance
     string GetMostNoticedHabit(bool[] nutritionStars, bool[] satisfactionStars, bool[] savingsStars)
     {
-        if (nutritionStars.Count(star => star) == nutritionStars.Length)
+        // Determine which category has the highest completion rate
+        int nutritionCount = nutritionStars.Count(star => star);
+        int satisfactionCount = satisfactionStars.Count(star => star);
+        int savingsCount = savingsStars.Count(star => star);
+
+        if (nutritionCount == nutritionStars.Length)
         {
             return "Excellent Nutrition Habit";
         }
-        else if (satisfactionStars.Count(star => star) == satisfactionStars.Length)
+        else if (satisfactionCount == satisfactionStars.Length)
         {
             return "High Satisfaction";
         }
-        else if (savingsStars.Count(star => star) == savingsStars.Length)
+        else if (savingsCount == savingsStars.Length)
         {
             return "Strong Savings Habit";
         }

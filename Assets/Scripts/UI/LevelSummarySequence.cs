@@ -175,30 +175,32 @@ public class LevelSummarySequence : MonoBehaviour
     }
 
     if (LevelStateManager.Instance.CurrentLevelIndex == LevelStateManager.Instance.AllLevels.Length - 1 &&
-            StarSystem.Instance.GetStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID) > 0)
+        (StarSystem.Instance.GetStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID).nutritionStars > 0 ||
+        StarSystem.Instance.GetStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID).satisfactionStars > 0 ||
+        StarSystem.Instance.GetStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID).savingsStars > 0))
+    {
+        // Transition to the Endings scene if the last level is completed
+        levelSelect.gameObject.SetActive(true);
+        levelSelect.onClick.RemoveAllListeners();
+        levelSelect.onClick.AddListener(() =>
         {
-            // Transition to the Endings scene if the last level is completed
-            levelSelect.gameObject.SetActive(true);
-            levelSelect.onClick.RemoveAllListeners();
-            levelSelect.onClick.AddListener(() =>
-            {
-                SceneManager.LoadScene("Ending"); // Load the Endings scene
-            });
-        }
-        else
+            SceneManager.LoadScene("Ending"); // Load the Endings scene
+        });
+    }
+    else
+    {
+        // Otherwise, allow to move to next level
+        levelSelect.gameObject.SetActive(true);
+        levelSelect.onClick.RemoveAllListeners();
+        levelSelect.onClick.AddListener(() =>
         {
-            // Otherwise, allow to move to next level
-            levelSelect.gameObject.SetActive(true);
-            levelSelect.onClick.RemoveAllListeners();
-            levelSelect.onClick.AddListener(() =>
+            if (metNutrition || metSatisfaction || metSavings)
             {
-                if (metNutrition || metSatisfaction || metSavings)
-                {
-                    LevelStateManager.Instance.UnlockNextLevel();
-                }
-                ReturnToLevelSelect();
-            });
-        }
+                LevelStateManager.Instance.UnlockNextLevel();
+            }
+            ReturnToLevelSelect();
+        });
+    }
 }
 
 

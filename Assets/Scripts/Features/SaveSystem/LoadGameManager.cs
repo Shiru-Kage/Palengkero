@@ -27,7 +27,10 @@ public class LoadGameManager : MonoBehaviour
 
             for (int i = 0; i < entry.levelStars.Count; i++)
             {
-                StarSystem.Instance.AssignStarsForLevel(i, entry.characterID, entry.levelStars[i]);
+                bool metNutrition = entry.nutritionStars[i] > 0;
+                bool metSatisfaction = entry.satisfactionStars[i] > 0;
+                bool metSavings = entry.savingsStars[i] > 0;
+                StarSystem.Instance.AssignStarsForLevel(i, entry.characterID, metNutrition, metSatisfaction, metSavings);
             }
         }
     }
@@ -44,7 +47,11 @@ public class LoadGameManager : MonoBehaviour
         // Load stars for the selected character
         for (int i = 0; i < selectedEntry.levelStars.Count; i++)
         {
-            StarSystem.Instance.AssignStarsForLevel(i, selectedEntry.characterID, selectedEntry.levelStars[i]);
+            bool metNutrition = selectedEntry.nutritionStars[i] > 0;
+            bool metSatisfaction = selectedEntry.satisfactionStars[i] > 0;
+            bool metSavings = selectedEntry.savingsStars[i] > 0;
+
+            StarSystem.Instance.AssignStarsForLevel(i, selectedEntry.characterID, metNutrition, metSatisfaction, metSavings);
         }
     }
 

@@ -9,7 +9,7 @@ public class Endings : MonoBehaviour
 
     private string selectedCharacterID;
     private int totalStars;
-    private int[] levelStars;
+    private StarSystem.LevelStars[] levelStars; // Changed to store LevelStars struct
     private CharacterData selectedCharacterData;
 
     void Start()
@@ -25,11 +25,11 @@ public class Endings : MonoBehaviour
 
         // Get the total stars and level-specific stars for the selected character
         totalStars = StarSystem.Instance.GetTotalStarsForCharacter(selectedCharacterID);
-        levelStars = new int[LevelStateManager.Instance.AllLevels.Length];
+        levelStars = new StarSystem.LevelStars[LevelStateManager.Instance.AllLevels.Length];
 
         for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
         {
-            levelStars[i] = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID);
+            levelStars[i] = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID); // Fetch LevelStars for each level
         }
 
         // Check if all levels are completed
@@ -48,7 +48,7 @@ public class Endings : MonoBehaviour
     bool AreAllLevelsCompleted()
     {
         // Check if the player has completed all levels by having at least 1 star per level
-        return levelStars.All(stars => stars > 0);
+        return levelStars.All(stars => stars.nutritionStars > 0 || stars.satisfactionStars > 0 || stars.savingsStars > 0);
     }
 
     void PlayEndingBasedOnStars()
@@ -78,36 +78,25 @@ public class Endings : MonoBehaviour
     bool IsSmartSaver()
     {
         // Check if the player earned 15 stars, with full stars in all categories (Nutrition, Satisfaction, Savings)
-        return totalStars == 15 && levelStars.All(stars => stars == 3) && AllLevelsMetFullCriteria();
+        return totalStars == 15 && levelStars.All(stars => stars.nutritionStars == 1 && stars.satisfactionStars == 1 && stars.savingsStars == 1);
     }
 
     bool IsBareMinimumSurvivor()
     {
         // Check if total stars are between 7 and 14 and no levels have 0 stars
-        return totalStars >= 7 && totalStars <= 14 && levelStars.Count(stars => stars == 0) == 0;
+        return totalStars >= 7 && totalStars <= 14 && levelStars.Count(stars => stars.nutritionStars + stars.satisfactionStars + stars.savingsStars == 0) == 0;
     }
 
     bool IsStrugglingSpender()
     {
         // Check if total stars are 0–6 or has 0-star performance in 3+ levels
-        return totalStars <= 6 || levelStars.Count(stars => stars == 0) >= 3 || levelStars.Where((stars, index) => !HasNutritionAndSavingsStars(index)).Count() >= 3;
+        return totalStars <= 6 || levelStars.Count(stars => stars.nutritionStars + stars.satisfactionStars + stars.savingsStars == 0) >= 3;
     }
 
     bool IsOverworkedMalnourished()
     {
         // Check if the player earned Savings star in 4+ levels and Nutrition star in ≤ 1 level
-        return levelStars.Count(stars => stars == 3) >= 4 && levelStars.Count(stars => stars == 1) <= 1;
-    }
-
-    bool AllLevelsMetFullCriteria()
-    {
-        // Check if all levels meet Nutrition, Satisfaction, and Savings stars (i.e., 3 stars per level)
-        return levelStars.All(star => star == 3);
-    }
-
-    bool HasNutritionAndSavingsStars(int levelIndex)
-    {
-        return StarSystem.Instance.HasNutritionStarForLevel(levelIndex, selectedCharacterID) && StarSystem.Instance.HasSavingsStarForLevel(levelIndex, selectedCharacterID);
+        return levelStars.Count(stars => stars.savingsStars > 0) >= 4 && levelStars.Count(stars => stars.nutritionStars > 0) <= 1;
     }
 
     void PlayEnding(string endingName)
