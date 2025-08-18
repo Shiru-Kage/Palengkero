@@ -5,47 +5,39 @@ using System.Linq;
 
 public class OverAllPerformanceUI : MonoBehaviour
 {
-    // UI Elements to display performance
     [Header("UI Elements")]
     public TextMeshProUGUI performanceSummaryText;
     public Image nutritionBar;
     public Image satisfactionBar;
     public Image savingsBar;
-    public Image nutritionPieSection;  // Pie Chart section for Nutrition
-    public Image satisfactionPieSection;  // Pie Chart section for Satisfaction
-    public Image savingsPieSection;  // Pie Chart section for Savings
+    public Image nutritionPieSection; 
+    public Image satisfactionPieSection;  
+    public Image savingsPieSection;  
 
     private string selectedCharacterID;
 
     void Start()
     {
         selectedCharacterID = CharacterSelectionManager.Instance.SelectedCharacterID;
-
-        // Call method to update performance UI
         UpdatePerformanceUI();
     }
 
     void UpdatePerformanceUI()
     {
-        // Get the total stars and level-specific stars from StarSystem
         int totalStars = StarSystem.Instance.GetTotalStarsForCharacter(selectedCharacterID);
 
-        // Use StarSystem to fetch the level-specific stars for the selected character
         int totalLevels = LevelStateManager.Instance.AllLevels.Length;
         bool[] nutritionStars = new bool[totalLevels];
         bool[] satisfactionStars = new bool[totalLevels];
         bool[] savingsStars = new bool[totalLevels];
 
-        // Get level-specific stars from StarSystem
         for (int i = 0; i < totalLevels; i++)
         {
-            // Get the LevelStars struct for each level
             var levelStars = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID);
 
-            // Set flags based on the individual stars for each category
-            nutritionStars[i] = levelStars.nutritionStars > 0;  // Nutrition star logic
-            satisfactionStars[i] = levelStars.satisfactionStars > 0;  // Satisfaction star logic
-            savingsStars[i] = levelStars.savingsStars > 0;  // Savings star logic
+            nutritionStars[i] = levelStars.nutritionStars > 0;  
+            satisfactionStars[i] = levelStars.satisfactionStars > 0;  
+            savingsStars[i] = levelStars.savingsStars > 0;
         }
 
         // Set performance summary text
@@ -56,10 +48,8 @@ public class OverAllPerformanceUI : MonoBehaviour
         SetPerformanceBar(satisfactionBar, satisfactionStars.Count(star => star), totalLevels);
         SetPerformanceBar(savingsBar, savingsStars.Count(star => star), totalLevels);
 
-        // Update PieChart (or any other overall performance visualization)
         UpdatePieChart(nutritionStars, satisfactionStars, savingsStars);
 
-        // Update the most noticeable habit based on performance
         string noticeableHabit = GetMostNoticedHabit(nutritionStars, satisfactionStars, savingsStars);
         Debug.Log($"Most Noticeable Habit: {noticeableHabit}");
     }
@@ -71,30 +61,45 @@ public class OverAllPerformanceUI : MonoBehaviour
         bar.fillAmount = fillAmount;
     }
 
-    // Update PieChart (overall performance)
     void UpdatePieChart(bool[] nutritionStars, bool[] satisfactionStars, bool[] savingsStars)
     {
-        // Calculate percentages for each category
-        float nutritionPercentage = (float)nutritionStars.Count(star => star) / nutritionStars.Length;
-        float satisfactionPercentage = (float)satisfactionStars.Count(star => star) / satisfactionStars.Length;
-        float savingsPercentage = (float)savingsStars.Count(star => star) / savingsStars.Length;
+        float nutritionAchieved = nutritionStars.Count(star => star);
+        float satisfactionAchieved = satisfactionStars.Count(star => star);
+        float savingsAchieved = savingsStars.Count(star => star);
 
-        // Total percentage to make sure no section exceeds the total pie chart (1.0 or 100%)
+        // Total levels
+        int totalLevels = LevelStateManager.Instance.AllLevels.Length;
+
+        // Calculate percentage for each category
+        float nutritionPercentage = nutritionAchieved / totalLevels;
+        float satisfactionPercentage = satisfactionAchieved / totalLevels;
+        float savingsPercentage = savingsAchieved / totalLevels;
+
+        // Total percentage to ensure no section exceeds 100%
         float totalPercentage = nutritionPercentage + satisfactionPercentage + savingsPercentage;
 
-        // Ensure the total does not exceed 100%
         if (totalPercentage > 1f)
         {
-            nutritionPercentage /= totalPercentage;
-            satisfactionPercentage /= totalPercentage;
-            savingsPercentage /= totalPercentage;
+            float scaleFactor = 1f / totalPercentage;
+            nutritionPercentage *= scaleFactor;
+            satisfactionPercentage *= scaleFactor;
+            savingsPercentage *= scaleFactor;
         }
 
-        // Update pie chart sections with the cumulative fillAmount
+        float currentAngle = 0f;
+
         nutritionPieSection.fillAmount = nutritionPercentage;
-        satisfactionPieSection.fillAmount = nutritionPercentage + satisfactionPercentage;
-        savingsPieSection.fillAmount = nutritionPercentage + satisfactionPercentage + savingsPercentage;
+        nutritionPieSection.transform.rotation = Quaternion.Euler(0, 0, -currentAngle * 360f); 
+        currentAngle += nutritionPercentage;
+
+        satisfactionPieSection.fillAmount = satisfactionPercentage;
+        satisfactionPieSection.transform.rotation = Quaternion.Euler(0, 0, -currentAngle * 360f); 
+        currentAngle += satisfactionPercentage;
+
+        savingsPieSection.fillAmount = savingsPercentage;
+        savingsPieSection.transform.rotation = Quaternion.Euler(0, 0, -currentAngle * 360f); 
     }
+
 
 
     // Get the most noticeable habit based on player's performance
