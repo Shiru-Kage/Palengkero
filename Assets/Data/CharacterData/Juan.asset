@@ -28,7 +28,7 @@ MonoBehaviour:
   characterAnimator: {fileID: 9100000, guid: 45a3f8e369c225345bbe403769d87401, type: 2}
   openingCutscene: {fileID: 32900000, guid: be673348712e85c43898e473d5712380, type: 3}
   endingCutscenes:
-  - {fileID: 32900000, guid: 1737fc6181ca10b45b63b8716e5f4c63, type: 3}
-  - {fileID: 32900000, guid: e2743fbe4601b144fa422c4edbce5a27, type: 3}
   - {fileID: 32900000, guid: c156b278d49d64d42bdcc02ea195fabd, type: 3}
+  - {fileID: 32900000, guid: e2743fbe4601b144fa422c4edbce5a27, type: 3}
+  - {fileID: 32900000, guid: 1737fc6181ca10b45b63b8716e5f4c63, type: 3}
   - {fileID: 32900000, guid: d827b39c5ad5fa042a392aa15cd4526d, type: 3}

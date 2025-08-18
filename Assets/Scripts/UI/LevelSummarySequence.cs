@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LevelSummarySequence : MonoBehaviour
@@ -173,23 +174,31 @@ public class LevelSummarySequence : MonoBehaviour
         yield return FadeInText(adviceText);
     }
 
-    if (levelSelect != null)
-    {
-        levelSelect.gameObject.SetActive(true);
-        levelSelect.onClick.RemoveAllListeners();
-        levelSelect.onClick.AddListener(() =>
+    if (LevelStateManager.Instance.CurrentLevelIndex == LevelStateManager.Instance.AllLevels.Length - 1 &&
+            StarSystem.Instance.GetStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID) > 0)
         {
-            if (metNutrition || metSatisfaction || metSavings)
+            // Transition to the Endings scene if the last level is completed
+            levelSelect.gameObject.SetActive(true);
+            levelSelect.onClick.RemoveAllListeners();
+            levelSelect.onClick.AddListener(() =>
             {
-                LevelStateManager.Instance.UnlockNextLevel();
-            }
-            ReturnToLevelSelect();
-        });
-    }
-    else
-    {
-        Debug.LogWarning("Level Select button is missing or destroyed.");
-    }
+                SceneManager.LoadScene("Ending"); // Load the Endings scene
+            });
+        }
+        else
+        {
+            // Otherwise, allow to move to next level
+            levelSelect.gameObject.SetActive(true);
+            levelSelect.onClick.RemoveAllListeners();
+            levelSelect.onClick.AddListener(() =>
+            {
+                if (metNutrition || metSatisfaction || metSavings)
+                {
+                    LevelStateManager.Instance.UnlockNextLevel();
+                }
+                ReturnToLevelSelect();
+            });
+        }
 }
 
 
@@ -207,6 +216,6 @@ public class LevelSummarySequence : MonoBehaviour
 
     private void ReturnToLevelSelect()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("LevelSelect");
     }
 }

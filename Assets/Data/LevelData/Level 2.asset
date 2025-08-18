@@ -15,10 +15,9 @@ MonoBehaviour:
   levelIcon: {fileID: 21300000, guid: 057b570a827fefd40a0cf927cf7fca53, type: 3}
   levelName: 
   levelNumber: 2
-  minNPCToSpawn: 2
-  maxNPCToSpawn: 5
-  minSpawnInterval: 10
-  maxSpawnInterval: 15
+  numberOfStalls: 6
+  levelCleared: 0
+  levelDescription: 
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
     nutritionGoal: 115
@@ -32,5 +31,7 @@ MonoBehaviour:
     nutritionGoal: 140
     satisfactionGoal: 95
     savingsGoal: 600
-  levelDescription: 
-  levelCleared: 0
+  minNPCToSpawn: 2
+  maxNPCToSpawn: 5
+  minSpawnInterval: 10
+  maxSpawnInterval: 15

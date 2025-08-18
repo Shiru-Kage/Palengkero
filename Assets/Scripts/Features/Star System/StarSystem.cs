@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class StarSystem : MonoBehaviour
 {
     public static StarSystem Instance { get; private set; }
@@ -75,14 +74,11 @@ public class StarSystem : MonoBehaviour
         {
             return;
         }
-        if (starUI != null)
-            {
-                for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
-                {
-                    starUI.UpdateStarsForSelectedLevel(i, characterID);
-                }
-                starUI.UpdateTotalStarsText(characterID);
-            }
+        for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
+        {
+            starUI.UpdateStarsForSelectedLevel(i, characterID);
+        }
+        starUI.UpdateTotalStarsText(characterID);
     }
 
     public int GetStarsForLevel(int levelIndex, string characterID)
@@ -110,6 +106,22 @@ public class StarSystem : MonoBehaviour
     public bool HasMaxStarsForLevel(int levelIndex, string characterID)
     {
         return GetStarsForLevel(levelIndex, characterID) == MAX_STARS;
+    }
+
+    // Additional methods for category checks
+    public bool HasNutritionStarForLevel(int levelIndex, string characterID)
+    {
+        return GetStarsForLevel(levelIndex, characterID) > 0; // If level has at least 1 star, it means nutrition is met
+    }
+
+    public bool HasSatisfactionStarForLevel(int levelIndex, string characterID)
+    {
+        return GetStarsForLevel(levelIndex, characterID) > 1; // If level has at least 2 stars, it means satisfaction is met
+    }
+
+    public bool HasSavingsStarForLevel(int levelIndex, string characterID)
+    {
+        return GetStarsForLevel(levelIndex, characterID) == 3; // If level has 3 stars, it means savings is met
     }
 
     public void ResetStarsForAllLevels()
