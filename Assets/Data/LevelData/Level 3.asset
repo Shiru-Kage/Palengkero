@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   levelIcon: {fileID: 21300000, guid: cf66abc51844f7245bc5f9e7dbb35d3d, type: 3}
-  levelName: 
+  levelTileMap: {fileID: 0}
+  levelName: 'Managing Unexpected Expenses  '
   levelNumber: 3
   numberOfStalls: 6
   levelCleared: 0

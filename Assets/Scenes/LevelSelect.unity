@@ -1962,7 +1962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5199979006384268662, guid: eb8b4dfd2b43fcd4fbfb0be88df814ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb8b4dfd2b43fcd4fbfb0be88df814ef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4510,7 +4510,7 @@ MonoBehaviour:
   - {fileID: 1463449843}
   - {fileID: 1499551345}
   - {fileID: 1298871323}
-  fullStarSprite: {fileID: 5199979006384268662, guid: eb8b4dfd2b43fcd4fbfb0be88df814ef, type: 3}
+  fullStarSprite: {fileID: 21300000, guid: eb8b4dfd2b43fcd4fbfb0be88df814ef, type: 3}
   emptyStarSprite: {fileID: 21300000, guid: 774eb8236373e43459e7160b7021e61a, type: 3}
   totalStarsText: {fileID: 204670384}
 --- !u!1 &1932947170

@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CharacterSpawner characterSpawner;
     [SerializeField] private StallManager stallManager;
 
+    private GameObject currentTilemapObject;
+
     private void Start()
     {
         if (LevelStateManager.Instance != null)
@@ -80,6 +82,36 @@ public class LevelManager : MonoBehaviour
         ItemDatabaseManager.Instance.AdjustPricesBasedOnLevel(levelIndex);
         CharacterSelectionManager.Instance?.ResetRuntimeCharacterBudget();
         UpdateUI(levels[levelIndex]);
+        InstantiateTilemap(levels[levelIndex]);
+    }
+
+    private void InstantiateTilemap(LevelData currentLevel)
+    {
+        if (currentTilemapObject != null)
+        {
+            Destroy(currentTilemapObject);  // Destroy the previous level's Tilemap if any
+        }
+
+        if (currentLevel.levelTileMap != null)
+        {
+            // Find the Grid GameObject in the scene
+            Transform gridTransform = GameObject.Find("Grid")?.transform;
+
+            if (gridTransform != null)
+            {
+                // Instantiate the levelTileMap under the "Grid" object
+                currentTilemapObject = Instantiate(currentLevel.levelTileMap, gridTransform.position, Quaternion.identity);
+                currentTilemapObject.transform.SetParent(gridTransform);  // Set the parent to "Grid"
+            }
+            else
+            {
+                Debug.LogWarning("Grid GameObject not found in the scene.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No Tilemap assigned in LevelData.");
+        }
     }
 
     private void UpdateUI(LevelData currentLevel)

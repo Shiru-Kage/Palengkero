@@ -7,6 +7,7 @@ public class LevelData : ScriptableObject
 {
     [Header("Level Settings")]
     public Sprite levelIcon;
+    public GameObject levelTileMap;
     public string levelName;
     public int levelNumber;
     public int numberOfStalls = 1;

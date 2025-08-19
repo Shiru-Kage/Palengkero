@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   levelIcon: {fileID: 21300000, guid: 057b570a827fefd40a0cf927cf7fca53, type: 3}
-  levelName: 
+  levelTileMap: {fileID: 0}
+  levelName: Haggling & Market Competition
   levelNumber: 2
   numberOfStalls: 6
   levelCleared: 0
