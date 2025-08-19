@@ -17,7 +17,6 @@ public class Stall : Interactable
 
     private string discountedItemId = null;
 
-    // MANUAL ASSIGNMENT
     [SerializeField]
     public bool useManualItems = false;
 
