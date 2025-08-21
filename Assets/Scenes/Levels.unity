@@ -6338,7 +6338,7 @@ GameObject:
   - component: {fileID: 1329547856}
   - component: {fileID: 1329547857}
   - component: {fileID: 1329547858}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6892,7 +6892,7 @@ GameObject:
   - component: {fileID: 1445396369}
   - component: {fileID: 1445396371}
   - component: {fileID: 1445396370}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

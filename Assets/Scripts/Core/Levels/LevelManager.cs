@@ -90,6 +90,7 @@ public class LevelManager : MonoBehaviour
         if (currentTilemapObject != null)
         {
             Destroy(currentTilemapObject);  // Destroy the previous level's Tilemap if any
+            PathfindingGrid.Instance.UpdateGrid();
         }
 
         if (currentLevel.levelTileMap != null)

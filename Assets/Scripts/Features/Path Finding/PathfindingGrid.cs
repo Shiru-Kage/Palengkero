@@ -11,10 +11,8 @@ public class PathfindingGrid : MonoBehaviour
     [Header("Grid Settings")]
     [SerializeField] private Grid unityGrid;
     [SerializeField] private Vector2Int size = new Vector2Int(10, 10);
-    public Vector2Int GetGridSize()
-    {
-        return size;
-    }
+    public Vector2Int GetGridSize() => size;
+
     [SerializeField] private LayerMask obstacleMask;
 
     private bool[,] walkable;
@@ -29,7 +27,12 @@ public class PathfindingGrid : MonoBehaviour
     public void GenerateGrid()
     {
         walkable = new bool[size.x, size.y];
+        UpdateGrid(); // Initially populate the grid
+    }
 
+    public void UpdateGrid()
+    {
+        // Update walkable status of each grid cell
         for (int x = 0; x < size.x; x++)
         {
             for (int y = 0; y < size.y; y++)
@@ -56,6 +59,12 @@ public class PathfindingGrid : MonoBehaviour
         return x >= 0 && y >= 0 && x < size.x && y < size.y && walkable[x, y];
     }
 
+    // Method to manually update the grid (call from other scripts)
+    public void RefreshGrid()
+    {
+        UpdateGrid();
+    }
+
     private void OnDrawGizmos()
     {
         if (unityGrid == null) return;
@@ -69,15 +78,15 @@ public class PathfindingGrid : MonoBehaviour
                 Gizmos.DrawWireCube(worldPos, unityGrid.cellSize * 0.95f);
 
                 bool blocked;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (!Application.isPlaying)
                 {
                     blocked = Physics2D.OverlapBox(worldPos, Vector2.one * 0.8f, 0f, obstacleMask);
                 }
                 else
-    #endif
+#endif
                 {
-                    blocked = !IsWalkable(x, y);
+                    blocked = !IsWalkable(x, y); // Use runtime grid data
                 }
 
                 Gizmos.color = blocked ? new Color(1f, 0f, 0f, 0.4f) : new Color(0f, 1f, 0f, 0.2f);
@@ -85,5 +94,4 @@ public class PathfindingGrid : MonoBehaviour
             }
         }
     }
-
 }
