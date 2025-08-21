@@ -13,10 +13,17 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
 
     private Transform cachedTransform;
 
+    private Vector2Int currentGridPos;  
+    private Vector2Int targetGridPos;
+    private bool isMoving = false;      
+
     private void Awake()
     {
-        inputActions = InputManager.GetInputActions(); // global/static access
+        inputActions = InputManager.GetInputActions(); 
         cachedTransform = transform;
+
+        currentGridPos = PathfindingGrid.Instance.GetGridPosition(transform.position);
+        targetGridPos = currentGridPos;
     }
 
     private void OnEnable()
@@ -43,10 +50,23 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
     {
         Vector2 input = context.ReadValue<Vector2>();
 
-        moveInput = Mathf.Abs(input.x) > Mathf.Abs(input.y)
-            ? new Vector2(input.x, 0f)
-            : new Vector2(0f, input.y);
+        if (input == Vector2.zero)
+        {
+            moveInput = Vector2.zero;
+        }
+        else
+        {
+            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+            {
+                moveInput = new Vector2(Mathf.Sign(input.x), 0f); 
+            }
+            else
+            {
+                moveInput = new Vector2(0f, Mathf.Sign(input.y));
+            }
+        }
     }
+
 
     private void HandleInteract(InputAction.CallbackContext context)
     {
@@ -76,11 +96,40 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         }
     }
 
-
     private void Update()
     {
-        cachedTransform.Translate(moveInput * moveSpeed * Time.deltaTime);
+        if (moveInput != Vector2.zero && !isMoving)
+        {
+            Vector2Int direction = new Vector2Int((int)moveInput.x, (int)moveInput.y);
+
+            targetGridPos = currentGridPos + direction;
+
+            if (PathfindingGrid.Instance.IsWalkable(targetGridPos.x, targetGridPos.y))
+            {
+                isMoving = true;
+            }
+        }
+
+        if (isMoving)
+        {
+            Vector3 targetWorldPos = PathfindingGrid.Instance.GetWorldPosition(targetGridPos.x, targetGridPos.y);
+            cachedTransform.position = Vector3.MoveTowards(cachedTransform.position, targetWorldPos, moveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(cachedTransform.position, targetWorldPos) < 0.1f)
+            {
+                currentGridPos = targetGridPos; 
+                isMoving = false;  
+                SnapToGrid();      
+            }
+        }
     }
+
+    private void SnapToGrid()
+    {
+        Vector3 targetWorldPos = PathfindingGrid.Instance.GetWorldPosition(currentGridPos.x, currentGridPos.y);
+        cachedTransform.position = targetWorldPos;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Interactable interactable))
@@ -100,7 +149,6 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             }
         }
     }
-
 
     private void OnTriggerExit2D(Collider2D other)
     {

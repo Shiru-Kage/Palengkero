@@ -23,6 +23,7 @@ public class PathfindingGrid : MonoBehaviour
     {
         if (!Application.isPlaying) return;
         Instance = this;
+        GenerateGrid();
     }
 
     public void GenerateGrid()
@@ -76,7 +77,7 @@ public class PathfindingGrid : MonoBehaviour
                 else
     #endif
                 {
-                    blocked = !IsWalkable(x, y); // Use runtime grid data
+                    blocked = !IsWalkable(x, y);
                 }
 
                 Gizmos.color = blocked ? new Color(1f, 0f, 0f, 0.4f) : new Color(0f, 1f, 0f, 0.2f);
