@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
 {
-    [SerializeField] private NPCData npcData;
-    public NPCData Data => npcData;
+    [SerializeField] private CharacterData npcData;
+    public CharacterData Data => npcData;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 2f;

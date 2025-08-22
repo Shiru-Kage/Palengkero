@@ -17,6 +17,22 @@ public class CharacterData : ScriptableObject
     public Color textColor;
     public AudioClip voiceClip;
     public RuntimeAnimatorController characterAnimator;
-    public VideoClip openingCutscene; 
+    public VideoClip openingCutscene;
     public VideoClip[] endingCutscenes;
+    
+    [Header("NPC Behavior Settings")]
+
+    [Header("Preferences")]
+    [Range(0, 100)]
+    public int preferCheapItemsChance = 50;
+
+    [Range(0, 100)]
+    public int preferHighNutritionChance = 50;
+
+    [Range(0, 100)]
+    public int preferHighSatisfactionChance = 50;
+    
+    [Header("Buying likelihood")]
+    [Range(0, 100)]
+    public int buyLikelihood = 50;
 }
