@@ -20,7 +20,7 @@ MonoBehaviour:
   characterMonthlyIncome: "\u20B113,000 - \u20B114,999"
   characterWeeklyBudget: 2800
   characterSprite: {fileID: -848950568071791416, guid: 12caafa19ff1ed04aae0f7d3e77ff6de, type: 3}
-  characterFrameSprite: {fileID: 797296067685068265, guid: c970c9285f5301f4597cb359f8e7917e, type: 3}
+  characterSelectFrameSprite: {fileID: 797296067685068265, guid: c970c9285f5301f4597cb359f8e7917e, type: 3}
   characterDescription: A hardworking family man, Tonyo sends a good chunk of his
     wage back to the province. Between rising food costs and bills.
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -32,3 +32,7 @@ MonoBehaviour:
   - {fileID: 32900000, guid: e2743fbe4601b144fa422c4edbce5a27, type: 3}
   - {fileID: 32900000, guid: 1737fc6181ca10b45b63b8716e5f4c63, type: 3}
   - {fileID: 32900000, guid: d827b39c5ad5fa042a392aa15cd4526d, type: 3}
+  preferCheapItemsChance: 0
+  preferHighNutritionChance: 0
+  preferHighSatisfactionChance: 0
+  buyLikelihood: 0

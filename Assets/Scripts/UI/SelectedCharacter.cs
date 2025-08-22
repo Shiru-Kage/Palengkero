@@ -44,7 +44,7 @@ public class SelectedCharacter : MonoBehaviour
         industryText.text = "Industry: " + data.characterIndustry;
         incomeText.text = "Income: " + data.characterMonthlyIncome + "/Month";
         descriptionText.text = data.characterDescription;
-        characterFrameImage.sprite = data.characterFrameSprite;
+        characterFrameImage.sprite = data.characterSelectFrameSprite;
         difficulty.text = data.characterDifficulty;
         if (characterAnimator != null && data.characterAnimator != null)
         {

@@ -20,7 +20,7 @@ MonoBehaviour:
   characterMonthlyIncome: "\u20B115,000 - \u20B117,999"
   characterWeeklyBudget: 3200
   characterSprite: {fileID: 824734146875366258, guid: a9bdb48b6af1f9249b385afd78c1f21d, type: 3}
-  characterFrameSprite: {fileID: -7800151483077857245, guid: 2380f0fc8b1caac4eb4702e510755a7f, type: 3}
+  characterSelectFrameSprite: {fileID: -7800151483077857245, guid: 2380f0fc8b1caac4eb4702e510755a7f, type: 3}
   characterDescription: Working graveyard shifts, Cora grabs groceries between work
     and sleep. With student loans and family contributions, she's learned how to
     manage finances tightly.
@@ -33,3 +33,7 @@ MonoBehaviour:
   - {fileID: 32900000, guid: e2743fbe4601b144fa422c4edbce5a27, type: 3}
   - {fileID: 32900000, guid: 1737fc6181ca10b45b63b8716e5f4c63, type: 3}
   - {fileID: 32900000, guid: d827b39c5ad5fa042a392aa15cd4526d, type: 3}
+  preferCheapItemsChance: 0
+  preferHighNutritionChance: 0
+  preferHighSatisfactionChance: 0
+  buyLikelihood: 0
