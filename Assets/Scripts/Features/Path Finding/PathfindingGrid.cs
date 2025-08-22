@@ -62,7 +62,7 @@ public class PathfindingGrid : MonoBehaviour
     {
         UpdateGrid();
     }
-
+/*
     private void OnDrawGizmos()
     {
         if (unityGrid == null) return;
@@ -91,5 +91,5 @@ public class PathfindingGrid : MonoBehaviour
                 Gizmos.DrawCube(worldPos, unityGrid.cellSize * 0.9f);
             }
         }
-    }
+    }*/
 }
