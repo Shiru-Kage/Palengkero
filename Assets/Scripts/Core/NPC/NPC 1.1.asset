@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
-  m_Name: Vendor
+  m_Name: NPC 1.1
   m_EditorClassIdentifier: 
-  characterID: 
-  characterName: Vendor
-  characterIndustry: Seller
-  characterDifficulty: 
+  characterID: NPC 1
+  characterName: NPC 1
+  characterIndustry: 0
+  characterDifficulty: 0
   characterAge: 0
   characterMonthlyIncome: 0
   characterWeeklyBudget: 0
   characterSprite: {fileID: 0}
   characterFrameSprite: {fileID: 0}
-  characterDescription: seller
-  textColor: {r: 1, g: 1, b: 1, a: 1}
+  characterDescription: 
+  textColor: {r: 0, g: 0, b: 0, a: 0}
   voiceClip: {fileID: 0}
   characterAnimator: {fileID: 0}
   openingCutscene: {fileID: 0}
   endingCutscenes: []
-  preferCheapItemsChance: 25
-  preferHighNutritionChance: 25
-  preferHighSatisfactionChance: 50
-  buyLikelihood: 60
+  preferCheapItemsChance: 44
+  preferHighNutritionChance: 31
+  preferHighSatisfactionChance: 69
+  buyLikelihood: 50

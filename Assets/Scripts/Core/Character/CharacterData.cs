@@ -21,16 +21,19 @@ public class CharacterData : ScriptableObject
     public VideoClip[] endingCutscenes;
     
     [Header("NPC Behavior Settings")]
-
+    
     [Header("Preferences")]
+    [HideInInspector]
     [Range(0, 100)]
-    public int preferCheapItemsChance = 50;
+    public int preferCheapItemsChance = 0;
 
+    [HideInInspector]
     [Range(0, 100)]
-    public int preferHighNutritionChance = 50;
+    public int preferHighNutritionChance = 0;
 
+    [HideInInspector]
     [Range(0, 100)]
-    public int preferHighSatisfactionChance = 50;
+    public int preferHighSatisfactionChance = 0;
     
     [Header("Buying likelihood")]
     [Range(0, 100)]
