@@ -9,11 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68be214b822dfef4e957654088f3a37d, type: 3}
+  m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
   m_Name: NPC 1
   m_EditorClassIdentifier: 
-  npcSprite: {fileID: 0}
-  preferCheapItemsChance: 0
-  preferHighNutritionChance: 100
-  preferHighSatisfactionChance: 0
+  characterID: NPC 1
+  characterName: NPC 1
+  characterIndustry: 0
+  characterDifficulty: 0
+  characterAge: 0
+  characterMonthlyIncome: 0
+  characterWeeklyBudget: 0
+  characterSprite: {fileID: 0}
+  characterFrameSprite: {fileID: 0}
+  characterDescription: 
+  textColor: {r: 0, g: 0, b: 0, a: 0}
+  voiceClip: {fileID: 0}
+  characterAnimator: {fileID: 0}
+  openingCutscene: {fileID: 0}
+  endingCutscenes: []
+  preferCheapItemsChance: 25
+  preferHighNutritionChance: 25
+  preferHighSatisfactionChance: 50
   buyLikelihood: 60

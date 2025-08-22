@@ -65,5 +65,12 @@ public class CharacterDataEditor : Editor
             characterData.preferHighNutritionChance = highNutritionChance;
             characterData.preferHighSatisfactionChance = highSatisfactionChance;
         }
+
+        if (GUILayout.Button("Reset to 0"))
+        {
+            characterData.preferCheapItemsChance = 0;
+            characterData.preferHighNutritionChance = 0;
+            characterData.preferHighSatisfactionChance = 0;
+        }
     }
 }

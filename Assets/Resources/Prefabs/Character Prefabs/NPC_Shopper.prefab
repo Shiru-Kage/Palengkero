@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ef3093820f05b499e64a2ab88cf9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcData: {fileID: 11400000, guid: c10c56a53483af742b6127c85beac01e, type: 2}
+  npcData: {fileID: 11400000, guid: 658d3d048ab1b6846ae4a7241e8955b6, type: 2}
   moveSpeed: 3
   arrivalThreshold: 0.05
   minIdleTime: 1

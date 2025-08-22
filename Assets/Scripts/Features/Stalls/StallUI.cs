@@ -83,7 +83,7 @@ public class StallUI : MonoBehaviour
             informationPanel = infoPanel.gameObject;
         }
 
-        Transform boxes = stallInnerUIContainer.Find("Boxes");
+        Transform boxes = stallInnerUIContainer.Find("Stall Tables");
 
         if (boxes != null)
         {

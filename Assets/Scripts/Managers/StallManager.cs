@@ -7,8 +7,8 @@ public class StallManager : MonoBehaviour
     [SerializeField] private GameObject stallPrefab;
     [SerializeField] private HaggleSystem haggleSystem;
     [SerializeField] private Transform stallCanvas;
-    [SerializeField] private Transform stallInnerUIContainer;    
-    [SerializeField] private GameObject stallInnerUICanvasObject; 
+    [SerializeField] private GameObject stallUICanvasObject; 
+    [SerializeField] private Transform stallInnerUIContainer;
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPoint;
@@ -29,7 +29,7 @@ public class StallManager : MonoBehaviour
         }
 
         if (stallPrefab == null || haggleSystem == null || spawnPoint == null ||
-            stallInnerUIContainer == null || stallInnerUICanvasObject == null)
+            stallInnerUIContainer == null || stallUICanvasObject == null)
         {
             Debug.LogError("StallManager is missing required references.");
             return;
@@ -52,12 +52,12 @@ public class StallManager : MonoBehaviour
             }
 
             stallUI.AssignUIContainer(stallInnerUIContainer);
-            stallUI.SetUICanvasObject(stallInnerUICanvasObject);
+            stallUI.SetUICanvasObject(stallUICanvasObject);
             stallUI.SetupUIReferences();
 
             Button[] itemButtons = stallUI.GetItemButtons();
 
-            stall.Initialize(haggleSystem, stallInnerUICanvasObject, itemButtons);
+            stall.Initialize(haggleSystem, stallUICanvasObject, itemButtons);
         }
     }
 }
