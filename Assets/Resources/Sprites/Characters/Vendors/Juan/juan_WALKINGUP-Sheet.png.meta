@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 81a4edb33726f8040ab44e9a809c7ecd
+guid: e8418d496131b4640bf918bc83060f95
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -848950568071791416
-    second: juan_IDLE_0
+      213: 1543123226517095478
+    second: juan_WALKINGUP-Sheet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: juan_IDLE_0
+      name: juan_WALKINGUP-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,14 +128,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8ccf63ec4fbe734f0800000000000000
-      internalID: -848950568071791416
+      spriteID: 634c43116664a6510800000000000000
+      internalID: 1543123226517095478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: juan_IDLE_1
+      name: juan_WALKINGUP-Sheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: feaab6068dd542344bcdf50fd97bc989
-      internalID: -2084682862
+      spriteID: 0084f96f5e8288644b4224b306f8ec65
+      internalID: -536212111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: juan_IDLE_2
+      name: juan_WALKINGUP-Sheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -172,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43fd9087bcd0b334b80db98b302d5680
-      internalID: -982221685
+      spriteID: ec27e05658758f94bac65aa2a1d98de6
+      internalID: 2127918934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: juan_IDLE_3
+      name: juan_WALKINGUP-Sheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e815ef6e5a77484fbdc2955fdffba09
-      internalID: -1089243047
+      spriteID: 94e23f4bb5e4e1f4d9675b58e9a7cadc
+      internalID: -1255236463
       vertices: []
       indices: 
       edges: []
@@ -204,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 15ee4c33a37976246b2a60a9ed006f01
+    spriteID: a78c0a682ec49024381ec8c8907c2ec0
     internalID: 0
     vertices: []
     indices: 
@@ -214,10 +214,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      juan_IDLE_0: -848950568071791416
-      juan_IDLE_1: -2084682862
-      juan_IDLE_2: -982221685
-      juan_IDLE_3: -1089243047
+      juan_WALKINGUP-Sheet_0: 1543123226517095478
+      juan_WALKINGUP-Sheet_1: -536212111
+      juan_WALKINGUP-Sheet_2: 2127918934
+      juan_WALKINGUP-Sheet_3: -1255236463
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

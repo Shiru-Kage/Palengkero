@@ -89,20 +89,18 @@ public class LevelManager : MonoBehaviour
     {
         if (currentTilemapObject != null)
         {
-            Destroy(currentTilemapObject);  // Destroy the previous level's Tilemap if any
+            Destroy(currentTilemapObject);  
             PathfindingGrid.Instance.UpdateGrid();
         }
 
         if (currentLevel.levelTileMap != null)
         {
-            // Find the Grid GameObject in the scene
             Transform gridTransform = GameObject.Find("Grid")?.transform;
 
             if (gridTransform != null)
             {
-                // Instantiate the levelTileMap under the "Grid" object
                 currentTilemapObject = Instantiate(currentLevel.levelTileMap, gridTransform.position, Quaternion.identity);
-                currentTilemapObject.transform.SetParent(gridTransform);  // Set the parent to "Grid"
+                currentTilemapObject.transform.SetParent(gridTransform);  
             }
             else
             {

@@ -27,12 +27,11 @@ public class PathfindingGrid : MonoBehaviour
     public void GenerateGrid()
     {
         walkable = new bool[size.x, size.y];
-        UpdateGrid(); // Initially populate the grid
+        UpdateGrid(); 
     }
 
     public void UpdateGrid()
     {
-        // Update walkable status of each grid cell
         for (int x = 0; x < size.x; x++)
         {
             for (int y = 0; y < size.y; y++)
@@ -59,7 +58,6 @@ public class PathfindingGrid : MonoBehaviour
         return x >= 0 && y >= 0 && x < size.x && y < size.y && walkable[x, y];
     }
 
-    // Method to manually update the grid (call from other scripts)
     public void RefreshGrid()
     {
         UpdateGrid();
@@ -86,7 +84,7 @@ public class PathfindingGrid : MonoBehaviour
                 else
 #endif
                 {
-                    blocked = !IsWalkable(x, y); // Use runtime grid data
+                    blocked = !IsWalkable(x, y); 
                 }
 
                 Gizmos.color = blocked ? new Color(1f, 0f, 0f, 0.4f) : new Color(0f, 1f, 0f, 0.2f);

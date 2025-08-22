@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 81a4edb33726f8040ab44e9a809c7ecd
+guid: 527bfd70dd845144481f725822d0f270
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -848950568071791416
-    second: juan_IDLE_0
+      213: 2269904117286576182
+    second: boy1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: juan_IDLE_0
+      name: boy1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 13
         y: 0
-        width: 64
-        height: 96
+        width: 42
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8ccf63ec4fbe734f0800000000000000
-      internalID: -848950568071791416
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: juan_IDLE_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: feaab6068dd542344bcdf50fd97bc989
-      internalID: -2084682862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: juan_IDLE_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43fd9087bcd0b334b80db98b302d5680
-      internalID: -982221685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: juan_IDLE_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e815ef6e5a77484fbdc2955fdffba09
-      internalID: -1089243047
+      spriteID: 6302019a4c1508f10800000000000000
+      internalID: 2269904117286576182
       vertices: []
       indices: 
       edges: []
@@ -204,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 15ee4c33a37976246b2a60a9ed006f01
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -213,11 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      juan_IDLE_0: -848950568071791416
-      juan_IDLE_1: -2084682862
-      juan_IDLE_2: -982221685
-      juan_IDLE_3: -1089243047
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
