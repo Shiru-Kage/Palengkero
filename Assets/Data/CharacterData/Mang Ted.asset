@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
-  m_Name: Vendor
+  m_Name: Mang Ted
   m_EditorClassIdentifier: 
   characterID: Mang Ted
   characterName: Mang Ted
@@ -19,8 +19,10 @@ MonoBehaviour:
   characterAge: 0
   characterMonthlyIncome: 0
   characterWeeklyBudget: 0
-  characterSprite: {fileID: 6820345295734769107, guid: fd5929c48fbda4b49a0078c75363bd97, type: 3}
-  characterSelectSprite: {fileID: 0}
+  characterSprites:
+  - {fileID: 6820345295734769107, guid: fd5929c48fbda4b49a0078c75363bd97, type: 3}
+  - {fileID: -6975723331300792595, guid: 1700af0a4e77600489165ec72a2e2f7c, type: 3}
+  characterSelectFrameSprite: {fileID: 0}
   characterDescription: seller
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
