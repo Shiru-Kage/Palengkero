@@ -15,6 +15,9 @@ public class PathfindingGrid : MonoBehaviour
 
     [SerializeField] private LayerMask obstacleMask;
 
+    [Header("Gizmo Settings")]
+    public bool showGizmos = true;
+
     private bool[,] walkable;
 
     private void Awake()
@@ -62,10 +65,10 @@ public class PathfindingGrid : MonoBehaviour
     {
         UpdateGrid();
     }
-/*
+
     private void OnDrawGizmos()
     {
-        if (unityGrid == null) return;
+        if (unityGrid == null || !showGizmos) return; 
 
         for (int x = 0; x < size.x; x++)
         {
@@ -91,5 +94,5 @@ public class PathfindingGrid : MonoBehaviour
                 Gizmos.DrawCube(worldPos, unityGrid.cellSize * 0.9f);
             }
         }
-    }*/
+    }
 }

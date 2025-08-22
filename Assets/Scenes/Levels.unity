@@ -2714,6 +2714,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 776
+  showGizmos: 0
 --- !u!1 &270069486
 GameObject:
   m_ObjectHideFlags: 0
