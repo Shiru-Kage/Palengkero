@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class StallManager : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameObject stallPrefab;
+    [SerializeField] private GameObject[] stallPrefabs;
     [SerializeField] private HaggleSystem haggleSystem;
     [SerializeField] private Transform stallCanvas;
-    [SerializeField] private GameObject stallUICanvasObject; 
+    [SerializeField] private GameObject stallUICanvasObject;
     [SerializeField] private Transform stallInnerUIContainer;
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPoint;
-    private int numberOfStalls;                   
+    private int numberOfStalls;
 
     public void SpawnStalls()
     {
@@ -28,7 +28,7 @@ public class StallManager : MonoBehaviour
             return;
         }
 
-        if (stallPrefab == null || haggleSystem == null || spawnPoint == null ||
+        if (stallPrefabs == null || stallPrefabs.Length == 0 || haggleSystem == null || spawnPoint == null ||
             stallInnerUIContainer == null || stallUICanvasObject == null)
         {
             Debug.LogError("StallManager is missing required references.");
@@ -37,6 +37,8 @@ public class StallManager : MonoBehaviour
 
         for (int i = 0; i < numberOfStalls; i++)
         {
+            GameObject stallPrefab = stallPrefabs[i % stallPrefabs.Length];
+
             Vector3 position = spawnPoint.position;
 
             GameObject stallInstance = Instantiate(stallPrefab, position, spawnPoint.rotation, stallCanvas);

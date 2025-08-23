@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 4043979214030717336}
   - component: {fileID: 4524069568572524114}
   m_Layer: 0
-  m_Name: Stall
+  m_Name: Stall 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
