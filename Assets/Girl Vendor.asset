@@ -20,8 +20,8 @@ MonoBehaviour:
   characterMonthlyIncome: 0
   characterWeeklyBudget: 0
   characterSprites:
-  - {fileID: -3807961883772049412, guid: ed5bc14cb05b37c47bed9c9ed087a627, type: 3}
-  - {fileID: 1032039262693989627, guid: 6ee7fda7191774442a9f177315896d11, type: 3}
+  - {fileID: 21300000, guid: ed5bc14cb05b37c47bed9c9ed087a627, type: 3}
+  - {fileID: 21300000, guid: 6ee7fda7191774442a9f177315896d11, type: 3}
   characterSelectFrameSprite: {fileID: 0}
   characterDescription: seller
   textColor: {r: 1, g: 1, b: 1, a: 1}
