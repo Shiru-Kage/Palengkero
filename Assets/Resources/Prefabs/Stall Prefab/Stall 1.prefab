@@ -434,7 +434,6 @@ MonoBehaviour:
   - shrimp
   - tilapia
   - cabbage
-  - carrots
 --- !u!114 &4043979214030717336
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e8418d496131b4640bf918bc83060f95
+guid: dfdba8fdcb909bb48a03cb014a94946f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1543123226517095478
-    second: juan_WALKINGUP-Sheet_0
+      213: 1275931883182957489
+    second: Fish & Seafood Roof_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: juan_WALKINGUP-Sheet_0
+      name: Fish & Seafood Roof_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 64
-        height: 96
+        y: 767
+        width: 1920
+        height: 313
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 634c43116664a6510800000000000000
-      internalID: 1543123226517095478
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: juan_WALKINGUP-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0084f96f5e8288644b4224b306f8ec65
-      internalID: -536212111
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: juan_WALKINGUP-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec27e05658758f94bac65aa2a1d98de6
-      internalID: 2127918934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: juan_WALKINGUP-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94e23f4bb5e4e1f4d9675b58e9a7cadc
-      internalID: -1255236463
+      spriteID: 1b327be994505b110800000000000000
+      internalID: 1275931883182957489
       vertices: []
       indices: 
       edges: []
@@ -204,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a78c0a682ec49024381ec8c8907c2ec0
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -214,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      juan_WALKINGUP-Sheet_0: 1543123226517095478
-      juan_WALKINGUP-Sheet_1: -536212111
-      juan_WALKINGUP-Sheet_2: 2127918934
-      juan_WALKINGUP-Sheet_3: -1255236463
+      Fish & Seafood Roof_0: 1275931883182957489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

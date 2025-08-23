@@ -7,6 +7,9 @@ public class Stall : Interactable
     [SerializeField] private StallCooldown stallCooldown;
     public StallCooldown GetStallCooldown() => stallCooldown;
 
+    private Stall_Inner_UI stallInnerUI;
+    private StallUI stallUIComponent;
+    
     private HaggleSystem haggleSystem;
     private GameObject stallUI;
     private Button[] itemButtons;
@@ -31,6 +34,8 @@ public class Stall : Interactable
 
         AssignItems();
         isInitialized = true;
+
+        stallInnerUI = Object.FindAnyObjectByType<Stall_Inner_UI>();
     }
 
     private void AssignItems()
@@ -90,11 +95,12 @@ public class Stall : Interactable
         if (stallUI != null)
         {
             stallUI.SetActive(true);
-            var ui = Object.FindAnyObjectByType<StallUI>();
+            var ui = GetComponent<StallUI>();
             if (ui != null)
             {
                 ui.SetStallReference(this);
                 ui.DisplayItems(assignedItems, stockAmounts);
+                stallInnerUI.UpdateUI(ui);
             }
         }
     }

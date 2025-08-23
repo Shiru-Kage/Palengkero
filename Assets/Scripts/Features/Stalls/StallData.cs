@@ -9,8 +9,10 @@ public class StallData : ScriptableObject
     public Sprite lowerStallIcon;
     public Sprite stallBackground;
     public Sprite stallUIBackground;
+    public Sprite stallUIRoofBackground;
+
     [Header("Stall Vendor")]
-    public GameObject vendor;
+    public CharacterData vendor;
 
     [HideInInspector]
     public List<StallItemEntry> items;

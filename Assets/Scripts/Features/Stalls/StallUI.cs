@@ -8,6 +8,8 @@ public class StallUI : MonoBehaviour
     [SerializeField] private StallCooldown stallCooldown;
     [SerializeField] private StallData stallData;
 
+    public StallData GetStallData() => stallData;
+
     [Header("Stall UI")]
     [SerializeField] private Image upperStallHalf;
     [SerializeField] private Image lowerStallHalf;
