@@ -59,7 +59,6 @@ public class NPC_Shopper : MonoBehaviour, ICharacterAnimatorData
 
     private void FollowPath()
     {
-        // Handle idle countdown first
         if (isIdle)
         {
             idleTimer -= Time.deltaTime;

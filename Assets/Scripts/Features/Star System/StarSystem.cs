@@ -7,7 +7,6 @@ public class StarSystem : MonoBehaviour
 {
     public static StarSystem Instance { get; private set; }
 
-    // Dictionary to store the stars for each level for each character
     private Dictionary<string, Dictionary<int, LevelStars>> characterLevelStars = new Dictionary<string, Dictionary<int, LevelStars>>(); 
 
     private const int MAX_STARS = 3;
@@ -36,7 +35,6 @@ public class StarSystem : MonoBehaviour
         UpdateStarUI(CharacterSelectionManager.Instance.SelectedCharacterID);
     }
 
-    // Structure to hold stars for each objective (nutrition, satisfaction, savings)
     public struct LevelStars
     {
         public int nutritionStars;
@@ -44,21 +42,17 @@ public class StarSystem : MonoBehaviour
         public int savingsStars;
     }
 
-    // Assign stars based on objectives met
     public void AssignStarsForLevel(int levelIndex, string characterID, bool metNutrition, bool metSatisfaction, bool metSavings)
     {
         LevelStars levelStars = new LevelStars();
 
-        // Assign stars based on which objectives are met
         levelStars.nutritionStars = metNutrition ? 1 : 0;
         levelStars.satisfactionStars = metSatisfaction ? 1 : 0;
         levelStars.savingsStars = metSavings ? 1 : 0;
 
-        // Ensure the total stars don't exceed the max of 3
         int totalStars = levelStars.nutritionStars + levelStars.satisfactionStars + levelStars.savingsStars;
         totalStars = Mathf.Clamp(totalStars, 0, MAX_STARS);
 
-        // Store the stars for this level and character
         if (!characterLevelStars.ContainsKey(characterID))
         {
             characterLevelStars[characterID] = new Dictionary<int, LevelStars>();
@@ -83,17 +77,15 @@ public class StarSystem : MonoBehaviour
         starUI.UpdateTotalStarsText(characterID);
     }
 
-    // Get the stars for a specific level
     public LevelStars GetStarsForLevel(int levelIndex, string characterID)
     {
         if (characterLevelStars.ContainsKey(characterID) && characterLevelStars[characterID].ContainsKey(levelIndex))
         {
             return characterLevelStars[characterID][levelIndex];
         }
-        return new LevelStars();  // Default to no stars
+        return new LevelStars(); 
     }
 
-    // Get the total stars for a character (sum of all levels)
     public int GetTotalStarsForCharacter(string characterID)
     {
         int totalStars = 0;
@@ -107,7 +99,6 @@ public class StarSystem : MonoBehaviour
         return totalStars;
     }
 
-    // Check if a specific objective has been met for a level
     public bool HasNutritionStarForLevel(int levelIndex, string characterID)
     {
         return GetStarsForLevel(levelIndex, characterID).nutritionStars > 0;
@@ -123,7 +114,6 @@ public class StarSystem : MonoBehaviour
         return GetStarsForLevel(levelIndex, characterID).savingsStars > 0;
     }
 
-    // Reset stars for all levels for a specific character
     public void ResetStarsForCharacter(string characterID)
     {
         if (characterLevelStars.ContainsKey(characterID))

@@ -7,8 +7,13 @@ using UnityEngine.UI;
 
 public class DialogueBoxController : MonoBehaviour
 {
-    public TextMeshProUGUI barText;
-    public TextMeshProUGUI personNameTextDisplay;
+    public TextMeshProUGUI[] barTexts;
+    public TextMeshProUGUI[] personNameTextDisplays;
+
+    [SerializeField] private GameObject vendorDialogueBox; 
+    [SerializeField] private GameObject currentDialogueBox;
+    public GameObject GetVendorDialogueBox() => vendorDialogueBox;
+    public GameObject GetCurrentDialogueBox() => currentDialogueBox;
 
     private int sentenceIndex = -1;
     private StoryScene currentScene;
@@ -44,8 +49,15 @@ public class DialogueBoxController : MonoBehaviour
 
     public void ClearText()
     {
-        barText.text = "";
-        personNameTextDisplay.text = "";
+        foreach (var barText in barTexts)
+        {
+            barText.text = "";
+        }
+
+        foreach (var personNameText in personNameTextDisplays)
+        {
+            personNameText.text = "";
+        }
     }
 
     public void PlayScene(StoryScene scene)
@@ -67,6 +79,8 @@ public class DialogueBoxController : MonoBehaviour
         if (sentenceIndex >= currentScene.sentences.Count)
         {
             Debug.LogWarning("No more sentences to play.");
+            currentDialogueBox.SetActive(false);
+            vendorDialogueBox.SetActive(false);
             events.OnDialogueEnd.Invoke();
             return;
         }
@@ -87,7 +101,10 @@ public class DialogueBoxController : MonoBehaviour
 
         if (sentence.speakers == null || sentence.speakers.Length == 0)
         {
-            personNameTextDisplay.text = "";
+            foreach (var personNameText in personNameTextDisplays)
+            {
+                personNameText.text = "";
+            }
             yield return StartCoroutine(TypeText(sentence.text));
             yield return new WaitForSeconds(1f);
             if (IsLastSentence())
@@ -112,15 +129,51 @@ public class DialogueBoxController : MonoBehaviour
 
         activeSpeaker ??= sentence.speakers[0];
 
-        personNameTextDisplay.text = activeSpeaker.characterName;
-        personNameTextDisplay.color = activeSpeaker.textColor;
+        foreach (var personNameText in personNameTextDisplays)
+        {
+            personNameText.text = activeSpeaker.characterName;
+            personNameText.color = activeSpeaker.textColor;
+        }
 
         PlayAudio(activeSpeaker, sentence.dialogueAudio);
         ActDialogueBoxShake(sentence);
 
+        Debug.Log($"Active Speaker: {activeSpeaker.characterName}, Industry: {activeSpeaker.characterIndustry}");
+
+        bool isVendor = activeSpeaker.characterIndustry == "Vendor";
+        Debug.Log($"Is Vendor: {isVendor}");
+
+        ToggleVendorDialogueBox(isVendor);
+
+        // **HIDE Action**
+        if (sentence.dialogueBoxActionTypes == StoryScene.Sentence.DialogueBoxActionType.HIDE)
+        {
+            HideCurrentDialogueBox();
+        }
+
+        // **SHOW Action**
+        if (sentence.dialogueBoxActionTypes == StoryScene.Sentence.DialogueBoxActionType.SHOW)
+        {
+            ShowCurrentDialogueBox();
+        }
+
         yield return StartCoroutine(TypeText(sentence.text));
     }
 
+    private void HideCurrentDialogueBox()
+    {
+        if (currentDialogueBox != null)
+        {
+            currentDialogueBox.SetActive(false);
+        }
+    }
+    private void ShowCurrentDialogueBox()
+    {
+        if (currentDialogueBox != null)
+        {
+            currentDialogueBox.SetActive(true);
+        }
+    }
 
     public int GetCurrentSentenceIndex()
     {
@@ -144,7 +197,11 @@ public class DialogueBoxController : MonoBehaviour
 
     private IEnumerator TypeText(string text)
     {
-        barText.text = "";
+        foreach (var barText in barTexts)
+        {
+            barText.text = "";
+        }
+
         state = State.PLAYING;
         int charIndex = 0;
 
@@ -152,13 +209,19 @@ public class DialogueBoxController : MonoBehaviour
         {
             if (skipAttempt)
             {
-                barText.text = text;
+                foreach (var barText in barTexts)
+                {
+                    barText.text = text;
+                }
                 skipAttempt = false;
                 state = State.COMPLETED;
                 yield break;
             }
 
-            barText.text += text[charIndex];
+            foreach (var barText in barTexts)
+            {
+                barText.text += text[charIndex];
+            }
             charIndex++;
             yield return new WaitForSeconds(typingDelay);
         }
@@ -166,11 +229,33 @@ public class DialogueBoxController : MonoBehaviour
         state = State.COMPLETED;
     }
 
-
     public void SkipPrinting()
     {
         if (state == State.PLAYING)
             skipAttempt = true;
+    }
+
+    public void ToggleVendorDialogueBox(bool isVendor)
+    {
+        if (!isVendor)
+        {
+            if (currentDialogueBox != null)
+            {
+                currentDialogueBox.SetActive(true);  
+            }
+        }
+        else
+        {
+            if (currentDialogueBox != null)
+            {
+                currentDialogueBox.SetActive(false);
+            }
+
+            if (vendorDialogueBox != null)
+            {
+                vendorDialogueBox.SetActive(true); 
+            }
+        }
     }
 
     private void PlayAudio(CharacterData speaker, AudioClip overrideClip = null)

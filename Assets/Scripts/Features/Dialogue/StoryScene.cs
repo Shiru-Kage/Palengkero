@@ -17,7 +17,7 @@ public class StoryScene : GameScene
         public DialogueBoxActionType dialogueBoxActionTypes;
         public enum DialogueBoxActionType
         {
-            NONE, SHAKE, SIDEWAYS
+            NONE, SHAKE, SIDEWAYS, HIDE, SHOW
         }
         public List<DialogueChoice> dialogueChoice;
         [System.Serializable]

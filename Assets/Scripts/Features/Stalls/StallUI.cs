@@ -160,7 +160,6 @@ public class StallUI : MonoBehaviour
         if (purchaseButton != null) purchaseButton.gameObject.SetActive(false);
         if (haggleButton != null) haggleButton.gameObject.SetActive(false);
         if (informationPanel != null) informationPanel.SetActive(false);
-        if (stallInnerUIContainer != null) stallInnerUIContainer.gameObject.SetActive(false);
     }
 
     public void DisplayDetailsAfterHaggle()
@@ -168,7 +167,6 @@ public class StallUI : MonoBehaviour
         if (purchaseButton != null) purchaseButton.gameObject.SetActive(true);
         if (haggleButton != null) haggleButton.gameObject.SetActive(true);
         if (informationPanel != null) informationPanel.SetActive(true);
-        if (stallInnerUIContainer != null) stallInnerUIContainer.gameObject.SetActive(true);
     }
 
     public void DisplayItems(ItemData[] items, int[] stocks)

@@ -49,32 +49,11 @@ public class DialogueManager : MonoBehaviour
         if (currentScene is StoryScene storyScene)
         {
             Debug.Log("Playing this scene for the first time.");
-            Transform dialogueUI = dialogueController.transform.Find("Dialogue Box");
-            if (dialogueUI != null) dialogueUI.gameObject.SetActive(true);
-
-            if (dialogueUI.gameObject.activeSelf)
-            {
-                dialogueController.PlayScene(storyScene);
-            }
-            else
-            {
-                return;
-            }
+            ShowDialogueBox();
+            dialogueController.PlayScene(storyScene);
         }
 
         events.OnSceneStart.Invoke();
-    }
-
-    void Update()
-    {
-        if (currentScene != null)
-        {
-            ShowDialogueBox();
-        }
-        else
-        {
-            HideDialogueBox();
-        }
     }
 
     public void HandleInput(Vector2 position)
@@ -123,7 +102,10 @@ public class DialogueManager : MonoBehaviour
     public void PlayScene(GameScene scene)
     {
         StartCoroutine(SwitchScene(scene));
-
+        if (currentScene != null)
+        {
+            ShowDialogueBox();
+        }
         // Ensure OnSceneEnd only fires when the dialogue ends
         dialogueController.events.OnDialogueEnd.AddListener(HandleDialogueEnd);
     }
@@ -141,6 +123,7 @@ public class DialogueManager : MonoBehaviour
             dialogueController.PlayScene(storyScene);
             //backgroundChanger.SetImage(storyScene.background);
             state = State.IDLE;
+            
         }
         else
         {
@@ -153,29 +136,59 @@ public class DialogueManager : MonoBehaviour
 
     public void HideDialogueBox()
     {
-        Transform dialogueUI = dialogueController.transform.Find("Dialogue Box");
+        GameObject dialogueUI = dialogueController.GetCurrentDialogueBox();
+        GameObject dialogueVendorUI = dialogueController.GetVendorDialogueBox();
         if (dialogueUI != null)
         {
             dialogueUI.gameObject.SetActive(false);
+
             //backgroundChanger.gameObject.SetActive(false); 
         }
+        dialogueVendorUI.gameObject.SetActive(false);
     }
 
     public void ShowDialogueBox()
     {
-        Transform dialogueUI = dialogueController.transform.Find("Dialogue Box");
+        GameObject dialogueUI = dialogueController.GetCurrentDialogueBox();
         if (dialogueUI != null)
         {
             dialogueUI.gameObject.SetActive(true);
             //backgroundChanger.gameObject.SetActive(true); 
         }
+        if (currentScene is StoryScene storyScene)
+        {
+            StoryScene.Sentence currentSentence = storyScene.sentences[dialogueController.GetCurrentSentenceIndex()];
+            CharacterData activeSpeaker = GetActiveSpeaker(currentSentence);
+
+            if (activeSpeaker != null)
+            {
+                dialogueController.ToggleVendorDialogueBox(activeSpeaker.characterIndustry == "Vendor");
+                Debug.LogWarning($"Active Speaker: {activeSpeaker.characterName}, Industry: {activeSpeaker.characterIndustry}");
+            }
+            else
+            {
+                Debug.LogWarning("Active Speaker is null");
+            }
+        }
     }
+
+    private CharacterData GetActiveSpeaker(StoryScene.Sentence sentence)
+    {
+        if (sentence.speakers.Length > 0)
+        {
+            return sentence.speakers[0]; 
+        }
+        return null;
+    }
+
 
     private void HandleDialogueEnd()
     {
-        // Unsubscribe to avoid firing multiple times
         dialogueController.events.OnDialogueEnd.RemoveListener(HandleDialogueEnd);
-        HideDialogueBox();
+        if (currentScene == null)
+        {
+            HideDialogueBox();
+        }
         events.OnSceneEnd.Invoke();
     }
 

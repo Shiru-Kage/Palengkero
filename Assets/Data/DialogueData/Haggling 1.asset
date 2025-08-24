@@ -36,4 +36,5 @@ MonoBehaviour:
     dialogueAudio: {fileID: 0}
     dialogueBoxActionTypes: 0
     dialogueChoice: []
+  background: {fileID: 0}
   nextScene: {fileID: 0}
