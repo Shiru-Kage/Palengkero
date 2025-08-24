@@ -142,6 +142,7 @@ public class Stall : Interactable
     public void ApplyHaggleDiscount(string itemId)
     {
         discountedItemId = itemId;
+        UpdateSelectedItemUIAfterHaggle();
     }
 
     public void ResetDiscount()
@@ -222,7 +223,7 @@ public class Stall : Interactable
         }
     }
 
-    public void UpdateSelectedItemUIAfterHaggle()
+    private void UpdateSelectedItemUIAfterHaggle()
     {
         if (selectedItemIndex < 0 || selectedItemIndex >= assignedItems.Length) return;
 
@@ -235,7 +236,7 @@ public class Stall : Interactable
             finalPrice = Mathf.Round(finalPrice);
         }
 
-        var ui = Object.FindAnyObjectByType<StallUI>();
+        var ui = GetComponent<StallUI>();
         if (ui != null)
             ui.UpdateSelectedItemPrice(finalPrice);
     }

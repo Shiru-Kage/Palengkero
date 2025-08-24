@@ -138,11 +138,7 @@ public class DialogueBoxController : MonoBehaviour
         PlayAudio(activeSpeaker, sentence.dialogueAudio);
         ActDialogueBoxShake(sentence);
 
-        Debug.Log($"Active Speaker: {activeSpeaker.characterName}, Industry: {activeSpeaker.characterIndustry}");
-
         bool isVendor = activeSpeaker.characterIndustry == "Vendor";
-        Debug.Log($"Is Vendor: {isVendor}");
-
         ToggleVendorDialogueBox(isVendor);
 
         // **HIDE Action**

@@ -36,7 +36,7 @@ public class ItemDatabaseManager : MonoBehaviour
 
             foreach (var item in itemDatabase.items)
             {
-                item.icon = Resources.Load<Sprite>($"Sprites/Items/{item.iconName}");
+                item.icon = Resources.Load<Sprite>($"ResourceSprites/Items/{item.iconName}");
 
                 if (item.icon == null)
                 {

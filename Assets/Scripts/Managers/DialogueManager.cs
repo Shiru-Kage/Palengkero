@@ -106,7 +106,6 @@ public class DialogueManager : MonoBehaviour
         {
             ShowDialogueBox();
         }
-        // Ensure OnSceneEnd only fires when the dialogue ends
         dialogueController.events.OnDialogueEnd.AddListener(HandleDialogueEnd);
     }
 
@@ -163,7 +162,6 @@ public class DialogueManager : MonoBehaviour
             if (activeSpeaker != null)
             {
                 dialogueController.ToggleVendorDialogueBox(activeSpeaker.characterIndustry == "Vendor");
-                Debug.LogWarning($"Active Speaker: {activeSpeaker.characterName}, Industry: {activeSpeaker.characterIndustry}");
             }
             else
             {

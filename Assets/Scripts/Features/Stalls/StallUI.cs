@@ -155,14 +155,14 @@ public class StallUI : MonoBehaviour
         if (stallInnerUICanvasObject != null) stallInnerUICanvasObject.SetActive(false);
     }
 
-    private void HideDetailsAfterHaggle()
+    public void HideDetailsAfterHaggle()
     {
         if (purchaseButton != null) purchaseButton.gameObject.SetActive(false);
         if (haggleButton != null) haggleButton.gameObject.SetActive(false);
         if (informationPanel != null) informationPanel.SetActive(false);
     }
 
-    public void DisplayDetailsAfterHaggle()
+    private void DisplayDetailsAfterHaggle()
     {
         if (purchaseButton != null) purchaseButton.gameObject.SetActive(true);
         if (haggleButton != null) haggleButton.gameObject.SetActive(true);
@@ -242,6 +242,7 @@ public class StallUI : MonoBehaviour
         priceInfo.text = discountedPrice < originalPrice
             ? $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{discountedPrice}"
             : $"Price: ₱{originalPrice}";
+        DisplayDetailsAfterHaggle();
     }
 
     public void SetBlinking(bool shouldBlink)
