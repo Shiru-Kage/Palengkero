@@ -36,3 +36,5 @@ MonoBehaviour:
   maxNPCToSpawn: 5
   minSpawnInterval: 10
   maxSpawnInterval: 15
+  minStallItemStock: 3
+  maxStallItemStock: 4

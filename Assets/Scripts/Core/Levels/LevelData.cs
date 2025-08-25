@@ -22,6 +22,12 @@ public class LevelData : ScriptableObject
     public float minSpawnInterval = 10f;
     public float maxSpawnInterval = 15f;
 
+    [Header("Stall Settings")]
+    [Tooltip("Minimum stock of items available in the stall.")]
+    public int minStallItemStock = 1; // New minimum item stock
+    [Tooltip("Maximum stock of items available in the stall.")]
+    public int maxStallItemStock = 5; // New maximum item stock
+
     public CharacterObjective GetObjectiveFor(CharacterData characterData)
     {
         return objectivesPerCharacter.Find(obj => obj.character == characterData);

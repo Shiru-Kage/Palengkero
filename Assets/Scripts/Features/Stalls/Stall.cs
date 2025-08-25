@@ -43,44 +43,48 @@ public class Stall : Interactable
         var db = ItemDatabaseManager.Instance;
         if (db == null || db.itemDatabase == null) return;
 
-        if (useManualItems && manuallyAssignedItemIDs != null && manuallyAssignedItemIDs.Count > 0)
-        {
-            int itemLimit = Mathf.Min(itemButtons.Length, manuallyAssignedItemIDs.Count);
-            assignedItems = new ItemData[itemLimit];
-            stockAmounts = new int[itemLimit];
+        LevelData currentLevelData = LevelStateManager.Instance.GetCurrentLevelData();
 
-            for (int i = 0; i < itemLimit; i++)
-            {
-                ItemData item = db.GetItem(manuallyAssignedItemIDs[i]);
-                if (item != null)
-                {
-                    assignedItems[i] = item;
-                    stockAmounts[i] = Random.Range(1, item.stockLimit + 1);
-                }
-                else
-                {
-                    Debug.LogWarning($"Manual Item ID {manuallyAssignedItemIDs[i]} not found in database.");
-                }
-            }
+        if (currentLevelData == null)
+        {
+            Debug.LogError("Current level data is missing!");
+            return;
         }
-        else
+
+        int minItemsToStock = currentLevelData.minStallItemStock;
+        int maxItemsToStock = currentLevelData.maxStallItemStock;
+
+        int itemCount = Random.Range(minItemsToStock, maxItemsToStock + 1);
+        itemCount = Mathf.Min(itemCount, itemButtons.Length);  
+
+        assignedItems = new ItemData[itemCount];
+        stockAmounts = new int[itemCount];
+
+        for (int i = 0; i < itemCount; i++)
         {
-            var databaseItems = new List<ItemData>(db.itemDatabase.items);
-            int itemCount = Mathf.Min(itemButtons.Length, databaseItems.Count);
+            ItemData item = null;
 
-            assignedItems = new ItemData[itemCount];
-            stockAmounts = new int[itemCount];
-
-            for (int i = 0; i < databaseItems.Count; i++)
+            if (useManualItems && manuallyAssignedItemIDs != null && manuallyAssignedItemIDs.Count > 0)
             {
-                int j = Random.Range(i, databaseItems.Count);
-                (databaseItems[i], databaseItems[j]) = (databaseItems[j], databaseItems[i]);
+                if (i < manuallyAssignedItemIDs.Count)
+                {
+                    item = db.GetItem(manuallyAssignedItemIDs[i]);
+                }
+            }
+            else
+            {
+                List<ItemData> databaseItems = new List<ItemData>(db.itemDatabase.items);
+                item = databaseItems[Random.Range(0, databaseItems.Count)];
             }
 
-            for (int i = 0; i < itemCount; i++)
+            if (item != null)
             {
-                assignedItems[i] = databaseItems[i];
-                stockAmounts[i] = Random.Range(1, assignedItems[i].stockLimit + 1);
+                assignedItems[i] = item;
+                stockAmounts[i] = Random.Range(1, item.stockLimit + 1);
+            }
+            else
+            {
+                Debug.LogWarning("No valid item found to assign to button.");
             }
         }
     }
