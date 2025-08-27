@@ -7,6 +7,7 @@ public class OverAllPerformanceUI : MonoBehaviour
 {
     [Header("UI Elements")]
     public TextMeshProUGUI performanceSummaryText;
+    public TextMeshProUGUI noticeableHabitText;
     public Image nutritionBar;
     public Image satisfactionBar;
     public Image savingsBar;
@@ -51,7 +52,7 @@ public class OverAllPerformanceUI : MonoBehaviour
         UpdatePieChart(nutritionStars, satisfactionStars, savingsStars);
 
         string noticeableHabit = GetMostNoticedHabit(nutritionStars, satisfactionStars, savingsStars);
-        Debug.Log($"Most Noticeable Habit: {noticeableHabit}");
+        noticeableHabitText.text = $"Most Noticeable Habit: {noticeableHabit}";
     }
 
     // Set performance bars (for nutrition, satisfaction, savings)

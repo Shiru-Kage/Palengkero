@@ -217,8 +217,8 @@ MonoBehaviour:
   npcData: {fileID: 11400000, guid: 658d3d048ab1b6846ae4a7241e8955b6, type: 2}
   moveSpeed: 3
   arrivalThreshold: 0.05
-  minIdleTime: 1
-  maxIdleTime: 3
+  minIdleTime: 4
+  maxIdleTime: 6
 --- !u!114 &8027389661964756491
 MonoBehaviour:
   m_ObjectHideFlags: 0

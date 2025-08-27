@@ -13,7 +13,7 @@ public class HaggleSystem : MonoBehaviour
 
     private DialogueManager dialogueManager;
     private int attemptCount = 0;
-    private int[] successRates = new int[] { 100, 30, 20 }; //{ 40, 30, 20 };
+    private int[] successRates = new int[] { 40, 30, 20 }; //{ 40, 30, 20 };
     private bool waitingForResult = false;
 
     private Stall currentHaggledStall;

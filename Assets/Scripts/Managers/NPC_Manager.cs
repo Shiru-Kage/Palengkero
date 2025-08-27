@@ -3,7 +3,8 @@ using UnityEngine;
 public class NPC_Manager : MonoBehaviour
 {
     [Header("NPC Settings")]
-    [SerializeField] private GameObject npcPrefab;  // NPC prefab to spawn
+    [SerializeField] private GameObject npcPrefab;
+    [SerializeField] private int maxNPCInLevel = 20;
     private int npcsToSpawnAtOnce;
     private float spawnInterval;
 
@@ -46,6 +47,10 @@ public class NPC_Manager : MonoBehaviour
 
     private void SpawnNPCs()
     {
+        int currentNPCs = GameObject.FindObjectsByType<NPC_Shopper>(FindObjectsSortMode.None).Length;
+        int spawnableNPCs = Mathf.Min(npcsToSpawnAtOnce, maxNPCInLevel - currentNPCs);
+        if (spawnableNPCs <= 0) return;
+
         for (int i = 0; i < npcsToSpawnAtOnce; i++)
         {
             Instantiate(npcPrefab, spawnPoint.position, Quaternion.identity);

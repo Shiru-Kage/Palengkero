@@ -58,45 +58,45 @@ public class Endings : MonoBehaviour
             Debug.Log("Playing 'Smart Saver' Ending");
             PlayEnding("SmartSaverEnding");
         }
+        else if (IsOverSpender())  
+        {
+            Debug.Log("Playing 'Struggling Spender' Ending");
+            PlayEnding("OverSpenderEnding");
+        }
+        else if (IsOverworkedMalnourished()) 
+        {
+            Debug.Log("Playing 'Overworked & Malnourished' Ending");
+            PlayEnding("OverworkedMalnourishedEnding");
+
+        }
         else if (IsBareMinimumSurvivor())
         {
             Debug.Log("Playing 'Bare Minimum Survivor' Ending");
             PlayEnding("BareMinimumSurvivorEnding");
         }
-        else if (IsStrugglingSpender())
-        {
-            Debug.Log("Playing 'Struggling Spender' Ending");
-            PlayEnding("StrugglingSpenderEnding");
-        }
-        else if (IsOverworkedMalnourished())
-        {
-            Debug.Log("Playing 'Overworked & Malnourished' Ending");
-            PlayEnding("OverworkedMalnourishedEnding");
-        }
     }
 
     bool IsSmartSaver()
     {
-        // Check if the player earned 15 stars, with full stars in all categories (Nutrition, Satisfaction, Savings)
         return totalStars == 15 && levelStars.All(stars => stars.nutritionStars == 1 && stars.satisfactionStars == 1 && stars.savingsStars == 1);
     }
 
     bool IsBareMinimumSurvivor()
     {
-        // Check if total stars are between 7 and 14 and no levels have 0 stars
-        return totalStars >= 7 && totalStars <= 14 && levelStars.Count(stars => stars.nutritionStars + stars.satisfactionStars + stars.savingsStars == 0) == 0;
+        return totalStars >= 6 && totalStars <= 14;
     }
-
-    bool IsStrugglingSpender()
+    bool IsOverSpender()
     {
-        // Check if total stars are 0–6 or has 0-star performance in 3+ levels
-        return totalStars <= 6 || levelStars.Count(stars => stars.nutritionStars + stars.satisfactionStars + stars.savingsStars == 0) >= 3;
+        return totalStars <= 10 &&
+            levelStars.All(stars => stars.savingsStars == 0);
     }
-
     bool IsOverworkedMalnourished()
     {
-        // Check if the player earned Savings star in 4+ levels and Nutrition star in ≤ 1 level
-        return levelStars.Count(stars => stars.savingsStars > 0) >= 4 && levelStars.Count(stars => stars.nutritionStars > 0) <= 1;
+        bool hasSufficientSavings = levelStars.Any(stars => stars.savingsStars >= 1);
+        bool hasNeglectedNutrition = levelStars.All(stars => stars.nutritionStars <= 1);
+        bool hasNeglectedSatisfaction = levelStars.All(stars => stars.satisfactionStars <= 1);
+
+        return hasSufficientSavings && hasNeglectedNutrition && hasNeglectedSatisfaction;
     }
 
     void PlayEnding(string endingName)
@@ -130,7 +130,7 @@ public class Endings : MonoBehaviour
         {
             case "SmartSaverEnding": return 0;
             case "BareMinimumSurvivorEnding": return 1;
-            case "StrugglingSpenderEnding": return 2;
+            case "OverSpenderEnding": return 2;
             case "OverworkedMalnourishedEnding": return 3;
             default: return -1;
         }

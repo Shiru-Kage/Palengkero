@@ -143,7 +143,9 @@ public class LevelSummarySequence : MonoBehaviour
     }
 
     StarSystem.Instance.AssignStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID, metNutrition, metSatisfaction, metSavings);
-
+    float levelTimeSpent = levelTimer.CurrentTime;
+    timeSpentText.text = $"Time Spent: {levelTimeSpent:F1} seconds";
+    LevelStateManager.Instance.SaveLevelTime(levelTimeSpent);
 
     bool adviceShown = false;
 

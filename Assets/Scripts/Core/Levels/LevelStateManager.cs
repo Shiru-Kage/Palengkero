@@ -10,6 +10,8 @@ public class LevelStateManager : MonoBehaviour
     [SerializeField] private LevelData[] allLevels;
     public LevelData[] AllLevels => allLevels;
     private Dictionary<string, bool[]> characterLevelLocks = new Dictionary<string, bool[]>();
+    private Dictionary<string, float[]> characterLevelTimes = new Dictionary<string, float[]>();
+
 
     public int CurrentLevelIndex { get; private set; } = 0;
 
@@ -36,6 +38,12 @@ public class LevelStateManager : MonoBehaviour
             bool[] levelLocks = new bool[allLevels.Length];
             levelLocks[0] = true;
             characterLevelLocks[characterName] = levelLocks;
+        }
+
+        if (!characterLevelTimes.ContainsKey(characterName))
+        {
+            float[] levelTimes = new float[allLevels.Length];
+            characterLevelTimes[characterName] = levelTimes;
         }
     }
 
@@ -102,12 +110,12 @@ public class LevelStateManager : MonoBehaviour
 
     public void ResetAllCharacterLevelData()
     {
-        foreach (var characterName in new List<string>(characterLevelLocks.Keys)) 
+        foreach (var characterName in new List<string>(characterLevelLocks.Keys))
         {
             bool[] resetLevels = new bool[allLevels.Length];
-            resetLevels[0] = true; 
+            resetLevels[0] = true;
             SetUnlockedLevelsForCurrentCharacterForCharacter(characterName, resetLevels);
-            SetLevelIndex(0); 
+            SetLevelIndex(0);
         }
     }
 
@@ -123,5 +131,30 @@ public class LevelStateManager : MonoBehaviour
         {
             characterLevelLocks.Add(characterName, levels);
         }
+    }
+    
+    public void SaveLevelTime(float timeSpent)
+    {
+        if (string.IsNullOrEmpty(currentCharacterName)) return;
+
+        if (!characterLevelTimes.ContainsKey(currentCharacterName))
+        {
+            characterLevelTimes[currentCharacterName] = new float[allLevels.Length];
+        }
+
+        characterLevelTimes[currentCharacterName][CurrentLevelIndex] = timeSpent;
+    }
+
+    public float GetLevelTime(int levelIndex)
+    {
+        if (string.IsNullOrEmpty(currentCharacterName)) return 0f;
+
+        if (characterLevelTimes.TryGetValue(currentCharacterName, out var times) && 
+            levelIndex >= 0 && levelIndex < times.Length)
+        {
+            return times[levelIndex];
+        }
+
+        return 0f;
     }
 }
