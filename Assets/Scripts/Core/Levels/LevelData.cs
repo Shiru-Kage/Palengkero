@@ -24,9 +24,9 @@ public class LevelData : ScriptableObject
 
     [Header("Stall Settings")]
     [Tooltip("Minimum stock of items available in the stall.")]
-    public int minStallItemStock = 1; // New minimum item stock
+    public int minStallItemStock = 1;
     [Tooltip("Maximum stock of items available in the stall.")]
-    public int maxStallItemStock = 5; // New maximum item stock
+    public int maxStallItemStock = 5;
 
     public CharacterObjective GetObjectiveFor(CharacterData characterData)
     {

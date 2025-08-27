@@ -11,7 +11,7 @@ public class LevelStateManager : MonoBehaviour
     public LevelData[] AllLevels => allLevels;
     private Dictionary<string, bool[]> characterLevelLocks = new Dictionary<string, bool[]>();
     private Dictionary<string, float[]> characterLevelTimes = new Dictionary<string, float[]>();
-
+    private Dictionary<string, int> characterMaxEverUnlockedIndex = new Dictionary<string, int>();
 
     public int CurrentLevelIndex { get; private set; } = 0;
 
@@ -45,6 +45,11 @@ public class LevelStateManager : MonoBehaviour
             float[] levelTimes = new float[allLevels.Length];
             characterLevelTimes[characterName] = levelTimes;
         }
+
+        if (!characterMaxEverUnlockedIndex.ContainsKey(characterName))
+            characterMaxEverUnlockedIndex[characterName] = 0;
+        else
+            characterMaxEverUnlockedIndex[characterName] = Mathf.Max(characterMaxEverUnlockedIndex[characterName], 0);
     }
 
     public void SetLevelIndex(int index)
@@ -70,6 +75,37 @@ public class LevelStateManager : MonoBehaviour
         if (CurrentLevelIndex + 1 < characterLevelLocks[currentCharacterName].Length)
         {
             characterLevelLocks[currentCharacterName][CurrentLevelIndex + 1] = true;
+            MarkEverUnlockedForCurrentCharacter(CurrentLevelIndex + 1);
+        }
+    }
+
+    public void LockCurrentLevel()
+    {
+        if (string.IsNullOrEmpty(currentCharacterName)) return;
+
+        if (CurrentLevelIndex >= 0 && CurrentLevelIndex < characterLevelLocks[currentCharacterName].Length)
+        {
+            characterLevelLocks[currentCharacterName][CurrentLevelIndex] = false;
+            Debug.Log($"[LevelStateManager] Locked current level {CurrentLevelIndex} for {currentCharacterName}.");
+        }
+        else
+        {
+            Debug.LogWarning("[LevelStateManager] Invalid CurrentLevelIndex, cannot lock current level.");
+        }
+    }
+
+    public void LockPreviousLevel()
+    {
+        if (string.IsNullOrEmpty(currentCharacterName)) return;
+
+        if (CurrentLevelIndex - 1 >= 0 && CurrentLevelIndex - 1 < characterLevelLocks[currentCharacterName].Length)
+        {
+            characterLevelLocks[currentCharacterName][CurrentLevelIndex - 1] = false;
+            Debug.Log($"[LevelStateManager] Locked level {CurrentLevelIndex - 1} for {currentCharacterName}.");
+        }
+        else
+        {
+            Debug.LogWarning("[LevelStateManager] No previous level to lock.");
         }
     }
 
@@ -116,6 +152,8 @@ public class LevelStateManager : MonoBehaviour
             resetLevels[0] = true;
             SetUnlockedLevelsForCurrentCharacterForCharacter(characterName, resetLevels);
             SetLevelIndex(0);
+
+            characterMaxEverUnlockedIndex[characterName] = 0;
         }
     }
 
@@ -132,7 +170,7 @@ public class LevelStateManager : MonoBehaviour
             characterLevelLocks.Add(characterName, levels);
         }
     }
-    
+
     public void SaveLevelTime(float timeSpent)
     {
         if (string.IsNullOrEmpty(currentCharacterName)) return;
@@ -149,12 +187,36 @@ public class LevelStateManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(currentCharacterName)) return 0f;
 
-        if (characterLevelTimes.TryGetValue(currentCharacterName, out var times) && 
+        if (characterLevelTimes.TryGetValue(currentCharacterName, out var times) &&
             levelIndex >= 0 && levelIndex < times.Length)
         {
             return times[levelIndex];
         }
 
         return 0f;
+    }
+
+    public void MarkEverUnlockedForCurrentCharacter(int levelIndex)
+    {
+        if (string.IsNullOrEmpty(currentCharacterName)) return;
+        if (!characterMaxEverUnlockedIndex.ContainsKey(currentCharacterName))
+            characterMaxEverUnlockedIndex[currentCharacterName] = 0;
+
+        if (levelIndex > characterMaxEverUnlockedIndex[currentCharacterName])
+            characterMaxEverUnlockedIndex[currentCharacterName] = levelIndex;
+    }
+
+    public int GetMaxEverUnlockedLevelIndexForCurrentCharacter()
+    {
+        if (string.IsNullOrEmpty(currentCharacterName)) return 0;
+        return characterMaxEverUnlockedIndex.TryGetValue(currentCharacterName, out var idx) ? idx : 0;
+    }
+    
+    public bool[] GetEverUnlockedButtonsForCurrentCharacter()
+    {
+        int max = GetMaxEverUnlockedLevelIndexForCurrentCharacter();
+        var arr = new bool[allLevels.Length];
+        for (int i = 0; i < arr.Length; i++) arr[i] = (i <= max);
+        return arr;
     }
 }

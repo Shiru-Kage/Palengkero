@@ -193,6 +193,7 @@ public class Stall : Interactable
         if (levelManager != null)
             levelManager.UpdateBudgetDisplay();
 
+        StallManager.Instance?.ReduceGlobalItemCount(1);
         return true;
     }
 
@@ -208,6 +209,8 @@ public class Stall : Interactable
 
         stockAmounts[index]--;
         Debug.Log($"NPC purchased {item.itemName}!");
+        StallManager.Instance?.ReduceGlobalItemCount(1);
+
         return true;
     }
 
@@ -262,6 +265,18 @@ public class Stall : Interactable
             }
         }
         return -1;
+    }
+    public int GetTotalAssignedItemCount()
+    {
+        int total = 0;
+        if (stockAmounts != null)
+        {
+            foreach (int stock in stockAmounts)
+            {
+                total += stock;
+            }
+        }
+        return total;
     }
 
     public Vector3 GetApproachPoint()

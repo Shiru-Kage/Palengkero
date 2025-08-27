@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 public class LevelSelectUI : MonoBehaviour
 {
@@ -7,13 +8,13 @@ public class LevelSelectUI : MonoBehaviour
 
     [Header("Level Buttons")]
     [SerializeField] private Button[] levelButtons;
+    [SerializeField] private Button playButton;
 
     [Header("UI References")]
     [SerializeField] private Image levelSprite;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI levelDescriptionText;
     [SerializeField] private LevelObjectiveUI objectiveUI;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,7 +27,7 @@ public class LevelSelectUI : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         UpdateLevelButtons();
     }
@@ -55,23 +56,28 @@ public class LevelSelectUI : MonoBehaviour
             objectiveUI.UpdateObjectiveUI(objective);
         else
             Debug.LogWarning("Objective UI reference missing in LevelSelectUI.");
+        UpdateLevelButtons();
     }
 
 
-    public void UpdateLevelButtons()
+    private void UpdateLevelButtons()
     {
+        if (LevelStateManager.Instance == null)
+        {
+            Debug.LogWarning("LevelStateManager not yet ready, skipping UpdateLevelButtons.");
+            return;
+        }
+        int maxEverUnlocked = LevelStateManager.Instance.GetMaxEverUnlockedLevelIndexForCurrentCharacter();
         for (int i = 0; i < levelButtons.Length; i++)
         {
-            if (LevelStateManager.Instance.IsLevelUnlocked(i))
-            {
-                levelButtons[i].interactable = true;
-            }
-            else
-            {
-                levelButtons[i].interactable = false;
-            }
+            levelButtons[i].interactable = (i <= maxEverUnlocked);
         }
+
+        int currentIndex = LevelStateManager.Instance.CurrentLevelIndex;
+        playButton.interactable = LevelStateManager.Instance.IsLevelUnlocked(currentIndex);
     }
+
+
 
     public void RefreshLevelButtons()
     {

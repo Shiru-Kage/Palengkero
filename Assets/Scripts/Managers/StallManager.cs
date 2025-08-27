@@ -3,16 +3,31 @@ using UnityEngine.UI;
 
 public class StallManager : MonoBehaviour
 {
+    public static StallManager Instance { get; private set; }
+
     [Header("References")]
     [SerializeField] private GameObject[] stallPrefabs;
     [SerializeField] private HaggleSystem haggleSystem;
     [SerializeField] private Transform stallCanvas;
     [SerializeField] private GameObject stallUICanvasObject;
     [SerializeField] private Transform stallInnerUIContainer;
+    [SerializeField] private GameObject endLevelScreen;
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPoint;
     private int numberOfStalls;
+
+    private int totalAssignedItems; 
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     public void SpawnStalls()
     {
@@ -34,6 +49,8 @@ public class StallManager : MonoBehaviour
             Debug.LogError("StallManager is missing required references.");
             return;
         }
+
+        totalAssignedItems = 0;
 
         for (int i = 0; i < numberOfStalls; i++)
         {
@@ -60,6 +77,28 @@ public class StallManager : MonoBehaviour
             Button[] itemButtons = stallUI.GetItemButtons();
 
             stall.Initialize(haggleSystem, stallUICanvasObject, itemButtons);
+
+            int stallAssignedItems = stall.GetTotalAssignedItemCount();
+            totalAssignedItems += stallAssignedItems;
+        }
+
+        Debug.Log($"[StallManager] Total assigned items across all stalls: {totalAssignedItems}");
+    }
+
+    public void ReduceGlobalItemCount(int amount = 1)
+    {
+        totalAssignedItems -= amount;
+        if (totalAssignedItems <= 0)
+        {
+            totalAssignedItems = 0;
+            var summary = FindAnyObjectByType<LevelSummarySequence>();
+            if (summary != null)
+            {
+                endLevelScreen.SetActive(true);
+                summary.BeginSummarySequence();
+            }
         }
     }
+
+    public int GetRemainingGlobalItems() => totalAssignedItems;
 }

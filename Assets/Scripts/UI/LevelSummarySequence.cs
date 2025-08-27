@@ -198,6 +198,7 @@ public class LevelSummarySequence : MonoBehaviour
         {
             if (metNutrition || metSatisfaction || metSavings)
             {
+                LevelStateManager.Instance.LockCurrentLevel();
                 LevelStateManager.Instance.UnlockNextLevel();
             }
             ReturnToLevelSelect();
