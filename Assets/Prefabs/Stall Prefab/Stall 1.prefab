@@ -98,7 +98,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!61 &549172735050590910
 BoxCollider2D:
@@ -243,7 +243,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!1 &8063097523033287634
 GameObject:
@@ -350,7 +350,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &5039137848367267752
 MonoBehaviour:
@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafde2c8b3a5d2c4e914d0896f7a0519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineColor: {r: 0.2344047, g: 1, b: 0.015686274, a: 1}
+  highlightColor: {r: 0.12475185, g: 0.93962264, b: 0, a: 1}
   blinkSpeed: 2
-  outlineThickness: 10
+  uiOutlineThickness: 5
+  spriteScaleIncrease: 0

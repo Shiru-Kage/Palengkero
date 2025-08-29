@@ -4,26 +4,48 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour, ICharacterAnimatorData
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private GameObject playerIndicator;
+
+    [Header("AFK Settings")]
+    [SerializeField] private float afkThreshold = 10f;
+    [SerializeField] private HighlightEffect[] highlightEffects;
+
+    private Timer timer;
+    private float afkElapsed = 0f;
+    private bool isAFK = false;
+
+    private int selectedUIBobbingTweenId = -1;
+    private int selectedUIScalingTweenId = -1;
 
     private Interactable currentInteractable;
-
     private InputSystem_Actions inputActions;
+
     private Vector2 moveInput;
     public Vector2 MoveInput => moveInput;
 
     private Transform cachedTransform;
-
-    private Vector2Int currentGridPos;  
+    private Vector2Int currentGridPos;
     private Vector2Int targetGridPos;
-    private bool isMoving = false;      
+
+    private bool isMoving = false;
 
     private void Awake()
     {
-        inputActions = InputManager.GetInputActions(); 
+        inputActions = InputManager.GetInputActions();
         cachedTransform = transform;
 
         currentGridPos = PathfindingGrid.Instance.GetGridPosition(transform.position);
         targetGridPos = currentGridPos;
+    }
+
+    private void Start()
+    {
+        playerIndicator.SetActive(false);
+        timer = Object.FindFirstObjectByType<Timer>();
+        if (timer == null)
+        {
+            Debug.LogWarning("No Timer found in the scene!");
+        }
     }
 
     private void OnEnable()
@@ -58,11 +80,28 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         {
             if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
             {
-                moveInput = new Vector2(Mathf.Sign(input.x), 0f); 
+                moveInput = new Vector2(Mathf.Sign(input.x), 0f);
             }
             else
             {
                 moveInput = new Vector2(0f, Mathf.Sign(input.y));
+            }
+        }
+
+        if (moveInput != Vector2.zero)
+        {
+            afkElapsed = 0f;
+            if (isAFK)
+            {
+                isAFK = false;
+                playerIndicator.SetActive(false);
+                LeanTween.cancel(playerIndicator);
+
+                foreach (var effect in highlightEffects)
+                {
+                    if (effect != null)
+                        effect.SetHighlight(false);
+                }
             }
         }
     }
@@ -98,6 +137,19 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
 
     private void Update()
     {
+        if (timer != null && timer.IsRunning && currentInteractable == null)
+        {
+            if (moveInput == Vector2.zero && !isMoving)
+            {
+                afkElapsed += Time.deltaTime;
+                if (!isAFK && afkElapsed >= afkThreshold)
+                {
+                    isAFK = true;
+                    AFK();
+                }
+            }
+        }
+
         if (moveInput != Vector2.zero && !isMoving)
         {
             Vector2Int direction = new Vector2Int((int)moveInput.x, (int)moveInput.y);
@@ -117,9 +169,9 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
 
             if (Vector3.Distance(cachedTransform.position, targetWorldPos) < 0.1f)
             {
-                currentGridPos = targetGridPos; 
-                isMoving = false;  
-                SnapToGrid();      
+                currentGridPos = targetGridPos;
+                isMoving = false;
+                SnapToGrid();
             }
         }
     }
@@ -141,7 +193,6 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             if (cooldown != null && cooldown.isCoolingDown)
                 return;
 
-            // Special case for stalls (to remember player proximity)
             var stall = other.GetComponent<StallUI>();
             if (stall != null)
             {
@@ -164,5 +215,38 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
 
             currentInteractable = null;
         }
+    }
+
+    private void AFK()
+    {
+        playerIndicator.SetActive(true);
+
+        foreach (var effect in highlightEffects)
+        {
+            if (effect != null)
+                effect.SetBlinking(true);
+        }
+
+        if (selectedUIBobbingTweenId != -1)
+        {
+            LeanTween.cancel(selectedUIBobbingTweenId);
+            selectedUIBobbingTweenId = -1;
+        }
+
+        if (selectedUIScalingTweenId != -1)
+        {
+            LeanTween.cancel(selectedUIScalingTweenId);
+            selectedUIScalingTweenId = -1;
+        }
+
+        selectedUIBobbingTweenId = LeanTween.moveY(playerIndicator, playerIndicator.transform.position.y + 0.5f, 0.5f)
+            .setEaseInOutSine()
+            .setLoopPingPong()
+            .id;
+
+        selectedUIScalingTweenId = LeanTween.scale(playerIndicator, Vector3.one * 1.05f, 0.5f)
+            .setEaseInOutSine()
+            .setLoopPingPong()
+            .id;
     }
 }

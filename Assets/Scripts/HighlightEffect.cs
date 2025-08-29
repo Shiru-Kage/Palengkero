@@ -1,61 +1,97 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System.Collections;
 
-[RequireComponent(typeof(Outline))]
 public class HighlightEffect : MonoBehaviour
 {
-    [Header("Outline Settings")]
-    [SerializeField] private Color outlineColor = Color.yellow;
+    [Header("General Settings")]
+    [SerializeField] private Color highlightColor = Color.yellow;
     [SerializeField] private float blinkSpeed = 2f;
-    [SerializeField] private float outlineThickness = 2f;
 
-    private Outline outline;
-    private Color originalColor;
+    [Header("UI Outline Settings")]
+    [SerializeField] private float uiOutlineThickness = 2f;
+
+    [Header("Sprite Highlight Settings")]
+    [SerializeField] private float spriteScaleIncrease = 0.05f; // % scale increase for sprite copy
+
+    private Outline uiOutline;
+    private SpriteRenderer spriteRenderer;
+    private GameObject spriteHighlightCopy;
+
+    private Color originalUIColor;
     private Coroutine blinkRoutine;
 
     private void Awake()
     {
-        outline = GetComponent<Outline>();
-        if (outline != null)
+        uiOutline = GetComponent<Outline>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (uiOutline != null)
         {
-            originalColor = outline.effectColor;
-            outline.effectColor = outlineColor;
-            SetOutlineThickness(outlineThickness);
-            outline.enabled = false;
+            originalUIColor = uiOutline.effectColor;
+            uiOutline.enabled = false;
+            uiOutline.effectDistance = new Vector2(uiOutlineThickness, uiOutlineThickness);
         }
+
+        if (spriteRenderer != null)
+        {
+            CreateSpriteHighlightCopy();
+        }
+    }
+
+    private void CreateSpriteHighlightCopy()
+    {
+        spriteHighlightCopy = new GameObject("HighlightCopy");
+        spriteHighlightCopy.transform.SetParent(transform);
+        spriteHighlightCopy.transform.localPosition = Vector3.zero;
+        spriteHighlightCopy.transform.localRotation = Quaternion.identity;
+        spriteHighlightCopy.transform.localScale = Vector3.one * (1f + spriteScaleIncrease);
+
+        var copyRenderer = spriteHighlightCopy.AddComponent<SpriteRenderer>();
+        copyRenderer.sprite = spriteRenderer.sprite;
+        copyRenderer.color = highlightColor;
+        copyRenderer.sortingLayerID = spriteRenderer.sortingLayerID;
+        copyRenderer.sortingOrder = spriteRenderer.sortingOrder + 1;
+
+        spriteHighlightCopy.SetActive(false);
     }
 
     public void SetBlinking(bool shouldBlink)
     {
-        if (outline == null) return;
+        if (uiOutline == null && spriteHighlightCopy == null) return;
 
         if (shouldBlink)
             StartBlinking();
         else
             StopBlinking();
     }
+
     public void SetHighlight(bool enabled)
     {
-        if (outline == null) return;
-
         StopBlinking();
-        outline.enabled = enabled;
-        if (enabled)
+
+        if (uiOutline != null)
         {
-            outline.effectColor = outlineColor;
-            SetOutlineThickness(outlineThickness);
+            uiOutline.enabled = enabled;
+            if (enabled)
+            {
+                uiOutline.effectColor = highlightColor;
+                uiOutline.effectDistance = new Vector2(uiOutlineThickness, uiOutlineThickness);
+            }
+        }
+
+        if (spriteHighlightCopy != null)
+        {
+            spriteHighlightCopy.SetActive(enabled);
+            if (enabled)
+                spriteHighlightCopy.GetComponent<SpriteRenderer>().color = highlightColor;
         }
     }
 
     private void StartBlinking()
     {
         if (blinkRoutine == null)
-        {
-            outline.enabled = true;
-            SetOutlineThickness(outlineThickness);
-            blinkRoutine = StartCoroutine(BlinkOutline());
-        }
+            blinkRoutine = StartCoroutine(BlinkRoutine());
     }
 
     private void StopBlinking()
@@ -66,26 +102,41 @@ public class HighlightEffect : MonoBehaviour
             blinkRoutine = null;
         }
 
-        outline.effectColor = originalColor;
-        outline.enabled = false;
+        if (uiOutline != null)
+        {
+            uiOutline.enabled = false;
+            uiOutline.effectColor = originalUIColor;
+        }
+
+        if (spriteHighlightCopy != null)
+        {
+            spriteHighlightCopy.SetActive(false);
+        }
     }
 
-    private IEnumerator BlinkOutline()
+    private IEnumerator BlinkRoutine()
     {
         float t = 0f;
-        Color baseColor = outlineColor;
+        Color baseColor = highlightColor;
+
+        if (uiOutline != null) uiOutline.enabled = true;
+        if (spriteHighlightCopy != null) spriteHighlightCopy.SetActive(true);
+
+        var sr = spriteHighlightCopy != null ? spriteHighlightCopy.GetComponent<SpriteRenderer>() : null;
 
         while (true)
         {
             t += Time.unscaledDeltaTime * blinkSpeed;
-            baseColor.a = Mathf.PingPong(t, 1f);
-            outline.effectColor = baseColor;
+            float alpha = Mathf.PingPong(t, 1f);
+            baseColor.a = alpha;
+
+            if (uiOutline != null)
+                uiOutline.effectColor = baseColor;
+
+            if (sr != null)
+                sr.color = baseColor;
+
             yield return null;
         }
-    }
-
-    private void SetOutlineThickness(float thickness)
-    {
-        outline.effectDistance = new Vector2(thickness, thickness);
     }
 }
