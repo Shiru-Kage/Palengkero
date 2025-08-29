@@ -1070,7 +1070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3123,7 +3123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284015d111a6d984a8724216016a2027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 852f3b77d618a254a9189af1e6b14390, type: 3}
+  uiCursor: {fileID: 2800000, guid: d2a40cd4cd97ad847ba4a3bd6a5e538b, type: 3}
 --- !u!1 &1809944754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3392,7 +3393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
