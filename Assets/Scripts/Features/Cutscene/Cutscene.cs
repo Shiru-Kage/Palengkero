@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Cutscene : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Cutscene : MonoBehaviour
     private CharacterSelectionManager characterSelectionManager;
 
     [Header("UI")]
-    [SerializeField] private Button skipButton;
+    [SerializeField] private TextMeshProUGUI skipButton;
 
     private void Start()
     {

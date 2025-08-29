@@ -2637,7 +2637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 2387922796341994356}
-  skipButton: {fileID: 0}
+  skipButton: {fileID: 6110640150435307151}
 --- !u!1 &1751234764
 GameObject:
   m_ObjectHideFlags: 0
