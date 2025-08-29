@@ -14,6 +14,7 @@ public class StallUI : MonoBehaviour
     [SerializeField] private Image upperStallHalf;
     [SerializeField] private Image lowerStallHalf;
     [SerializeField] private Image backgroundImage;
+    [SerializeField] private HighlightEffect highlightEffect;
 
     private Transform stallInnerUIContainer;
     private GameObject stallInnerUICanvasObject;
@@ -29,30 +30,10 @@ public class StallUI : MonoBehaviour
     private TextMeshProUGUI descriptionInfo;
 
     private Button[] itemButtons;
-    private Outline outline;
-    private Coroutine blinkRoutine;
-    private Color originalColor;
-
     private Stall currentStall; 
-
-    [Header("Outline Settings")]
-    [SerializeField] private Color outlineColor = Color.yellow;
-    [SerializeField] private float blinkSpeed = 2f;
-    [SerializeField] private float outlineThickness = 2f;
 
     [HideInInspector] public bool isPlayerNearby = false;
 
-    private void Awake()
-    {
-        outline = GetComponent<Outline>();
-        if (outline != null)
-        {
-            originalColor = outline.effectColor;
-            outline.effectColor = outlineColor;
-            SetOutlineThickness(outlineThickness);
-            outline.enabled = false;
-        }
-    }
 
     private void Start()
     {
@@ -245,57 +226,11 @@ public class StallUI : MonoBehaviour
         DisplayDetailsAfterHaggle();
     }
 
-    public void SetBlinking(bool shouldBlink)
+    public void SetHighlight(bool active)
     {
-        if (outline == null) return;
-        if (stallCooldown != null && stallCooldown.isCoolingDown)
+        if (highlightEffect != null)
         {
-            StopBlinkingOutline();
-            return;
+            highlightEffect.SetBlinking(active);
         }
-
-        if (shouldBlink) StartBlinkingOutline();
-        else StopBlinkingOutline();
-    }
-
-    private void StartBlinkingOutline()
-    {
-        if (blinkRoutine == null)
-        {
-            outline.enabled = true;
-            SetOutlineThickness(outlineThickness);
-            blinkRoutine = StartCoroutine(BlinkOutline());
-        }
-    }
-
-    private void StopBlinkingOutline()
-    {
-        if (blinkRoutine != null)
-        {
-            StopCoroutine(blinkRoutine);
-            blinkRoutine = null;
-        }
-
-        outline.effectColor = originalColor;
-        outline.enabled = false;
-    }
-
-    private IEnumerator BlinkOutline()
-    {
-        float t = 0f;
-        Color baseColor = outlineColor;
-
-        while (true)
-        {
-            t += Time.unscaledDeltaTime * blinkSpeed;
-            baseColor.a = Mathf.PingPong(t, 1f);
-            outline.effectColor = baseColor;
-            yield return null;
-        }
-    }
-
-    private void SetOutlineThickness(float thickness)
-    {
-        outline.effectDistance = new Vector2(thickness, thickness);
     }
 }

@@ -137,15 +137,16 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             Debug.Log("Entered trigger with: " + interactable.gameObject.name);
             currentInteractable = interactable;
 
+            var cooldown = other.GetComponent<StallCooldown>();
+            if (cooldown != null && cooldown.isCoolingDown)
+                return;
+
+            // Special case for stalls (to remember player proximity)
             var stall = other.GetComponent<StallUI>();
             if (stall != null)
             {
-                StallCooldown cooldown = stall.GetComponent<StallCooldown>();
-                if (cooldown != null && !cooldown.isCoolingDown)
-                {
-                    stall.SetBlinking(true);
-                    stall.isPlayerNearby = true;
-                }
+                stall.SetHighlight(true);
+                stall.isPlayerNearby = true;
             }
         }
     }
@@ -157,7 +158,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             var stall = other.GetComponent<StallUI>();
             if (stall != null)
             {
-                stall.SetBlinking(false);
+                stall.SetHighlight(false);
                 stall.isPlayerNearby = false;
             }
 

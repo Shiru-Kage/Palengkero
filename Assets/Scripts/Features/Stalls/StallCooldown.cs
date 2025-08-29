@@ -30,11 +30,10 @@ public class StallCooldown : MonoBehaviour
     {
         isCoolingDown = true;
 
-        StallUI stallUI = GetComponent<StallUI>();
-        if (stallUI != null)
-        {
-            stallUI.SetBlinking(false);
-        }
+        HighlightEffect highlight = GetComponent<HighlightEffect>();
+        if (highlight != null)
+            highlight.SetBlinking(false);
+
 
         if (stallUpperHalf != null)
             stallUpperHalf.color = cooldownColor;
@@ -58,11 +57,12 @@ public class StallCooldown : MonoBehaviour
             yield return null;
         }
 
-        isCoolingDown = false;
-
-        if (stallUI != null && stallUI.isPlayerNearby)
+            isCoolingDown = false;
+        
+        StallUI stallUI = GetComponent<StallUI>();
+        if (stallUI != null && stallUI.isPlayerNearby && highlight != null)
         {
-            stallUI.SetBlinking(true);
+            highlight.SetBlinking(true);
         }
     }
 }

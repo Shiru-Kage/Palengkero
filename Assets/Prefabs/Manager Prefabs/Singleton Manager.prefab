@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3521736806769775435}
   - component: {fileID: 4305478765811230560}
   - component: {fileID: 9020987342369923903}
+  - component: {fileID: 8320306288110857663}
+  - component: {fileID: 5149600311062414156}
   m_Layer: 0
   m_Name: Singleton Manager
   m_TagString: Untagged
@@ -83,3 +85,29 @@ MonoBehaviour:
   itemDatabase:
     items: []
   priceIncreasePercentage: 100
+--- !u!114 &8320306288110857663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344866156676854580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72aa5fe3e7f595b4a89f1a3adbe6f9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5149600311062414156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344866156676854580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284015d111a6d984a8724216016a2027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursor: {fileID: 2800000, guid: 852f3b77d618a254a9189af1e6b14390, type: 3}
+  uiCursor: {fileID: 2800000, guid: d2a40cd4cd97ad847ba4a3bd6a5e538b, type: 3}

@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 48882865127751798}
   - component: {fileID: 4043979214030717336}
   - component: {fileID: 4524069568572524114}
+  - component: {fileID: 4736857392336864720}
   m_Layer: 0
   m_Name: Stall 1
   m_TagString: Untagged
@@ -349,7 +350,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5039137848367267752
 MonoBehaviour:
@@ -451,9 +452,7 @@ MonoBehaviour:
   upperStallHalf: {fileID: 8545598447460841515}
   lowerStallHalf: {fileID: 7500578385570423591}
   backgroundImage: {fileID: 5761644937060326194}
-  outlineColor: {r: 0, g: 1, b: 0.07339382, a: 1}
-  blinkSpeed: 2
-  outlineThickness: 5
+  highlightEffect: {fileID: 4736857392336864720}
   isPlayerNearby: 0
 --- !u!114 &4524069568572524114
 MonoBehaviour:
@@ -473,3 +472,18 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   cooldownDuration: 5
   isCoolingDown: 0
+--- !u!114 &4736857392336864720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8063097523033287634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafde2c8b3a5d2c4e914d0896f7a0519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  blinkSpeed: 2
+  outlineThickness: 2
