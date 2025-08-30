@@ -3,7 +3,6 @@ using UnityEngine;
 public class NPC_Manager : MonoBehaviour
 {
     [Header("NPC Settings")]
-    [SerializeField] private GameObject npcPrefab;
     [SerializeField] private int maxNPCInLevel = 20;
     private int npcsToSpawnAtOnce;
     private float spawnInterval;
@@ -12,10 +11,11 @@ public class NPC_Manager : MonoBehaviour
     [SerializeField] private Timer timer;
 
     [Header("Spawn Point Settings")]
-    [SerializeField] private Transform spawnPoint; 
+    [SerializeField] private Transform spawnPoint;
 
-    private float timeElapsed = 0f; 
-    private int spawnCount = 0;
+    private float timeElapsed = 0f;
+    private GameObject[] npcTypes;
+    private int[] npcTypeLikelihoods;
 
     private void Start()
     {
@@ -25,6 +25,17 @@ public class NPC_Manager : MonoBehaviour
         {
             npcsToSpawnAtOnce = Random.Range(currentLevelData.minNPCToSpawn, currentLevelData.maxNPCToSpawn + 1);
             spawnInterval = Random.Range(currentLevelData.minSpawnInterval, currentLevelData.maxSpawnInterval);
+
+            npcTypes = currentLevelData.typeOfNPCs;
+            npcTypeLikelihoods = currentLevelData.npcTypeLikelihoods;
+
+            if (npcTypes.Length != npcTypeLikelihoods.Length)
+            {
+                Debug.LogWarning("typeOfNPCs and npcTypeLikelihoods length mismatch! Defaulting to equal likelihoods.");
+                npcTypeLikelihoods = new int[npcTypes.Length];
+                for (int i = 0; i < npcTypes.Length; i++)
+                    npcTypeLikelihoods[i] = 1;
+            }
         }
         else
         {
@@ -51,11 +62,32 @@ public class NPC_Manager : MonoBehaviour
         int spawnableNPCs = Mathf.Min(npcsToSpawnAtOnce, maxNPCInLevel - currentNPCs);
         if (spawnableNPCs <= 0) return;
 
-        for (int i = 0; i < npcsToSpawnAtOnce; i++)
+        for (int i = 0; i < spawnableNPCs; i++)
         {
-            Instantiate(npcPrefab, spawnPoint.position, Quaternion.identity);
+            GameObject npcToSpawn = ChooseNPCType();
+            if (npcToSpawn != null)
+                Instantiate(npcToSpawn, spawnPoint.position, Quaternion.identity);
+        }
+    }
+
+    private GameObject ChooseNPCType()
+    {
+        if (npcTypes == null || npcTypes.Length == 0) return null;
+
+        int totalWeight = 0;
+        foreach (var w in npcTypeLikelihoods)
+            totalWeight += w;
+
+        int roll = Random.Range(0, totalWeight);
+        int cumulative = 0;
+
+        for (int i = 0; i < npcTypes.Length; i++)
+        {
+            cumulative += npcTypeLikelihoods[i];
+            if (roll < cumulative)
+                return npcTypes[i];
         }
 
-        spawnCount++;
+        return npcTypes[0];
     }
 }

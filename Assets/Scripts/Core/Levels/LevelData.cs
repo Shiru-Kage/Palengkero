@@ -21,6 +21,8 @@ public class LevelData : ScriptableObject
     public int maxNPCToSpawn = 5;
     public float minSpawnInterval = 10f;
     public float maxSpawnInterval = 15f;
+    public int[] npcTypeLikelihoods;
+    public GameObject[] typeOfNPCs;
 
     [Header("Stall Settings")]
     [Tooltip("Minimum stock of items available in the stall.")]
