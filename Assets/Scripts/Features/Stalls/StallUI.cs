@@ -24,6 +24,7 @@ public class StallUI : MonoBehaviour
 
     private Transform stallInnerUIContainer;
     private GameObject stallInnerUICanvasObject;
+    private GameObject unableToPurchase;
     private GameObject informationPanel;
 
     private Button purchaseButton;
@@ -70,6 +71,16 @@ public class StallUI : MonoBehaviour
             descriptionInfo = infoPanel.Find("Texts/Flavor text")?.GetComponent<TextMeshProUGUI>();
 
             informationPanel = infoPanel.gameObject;
+        }
+
+        Transform confirmationPanel = stallInnerUICanvasObject.transform.Find("Purchase Confirmation");
+        if (confirmationPanel != null)
+        {
+            unableToPurchase = confirmationPanel.gameObject;
+        }
+        else
+        {
+            Debug.LogWarning("confirmationPanel is null");
         }
 
         Transform boxes = stallInnerUIContainer.Find("Stall Tables");
@@ -267,6 +278,22 @@ public class StallUI : MonoBehaviour
             ? $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{discountedPrice}"
             : $"Price: ₱{originalPrice}";
         DisplayDetailsAfterHaggle();
+    }
+
+    public void ShowUnableToPurchasePanel()
+    {
+        if (unableToPurchase != null)
+        {
+            unableToPurchase.SetActive(true);
+            StartCoroutine(HideUnableToPurchaseAfterDelay(2f));
+        }
+    }
+
+    private IEnumerator HideUnableToPurchaseAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (unableToPurchase != null)
+            unableToPurchase.SetActive(false);
     }
 
     public void SetHighlight(bool active)

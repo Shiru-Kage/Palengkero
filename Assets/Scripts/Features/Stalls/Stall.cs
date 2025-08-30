@@ -190,6 +190,12 @@ public class Stall : Interactable
             {
                 Debug.Log("Not enough budget.");
                 stockAmounts[index]++;
+                var stallUI = GetComponent<StallUI>();
+                if (stallUI != null)
+                {
+                    stallUI.HideDetailsAfterHaggle();
+                    stallUI.ShowUnableToPurchasePanel();
+                }
                 return false;
             }
 
@@ -218,11 +224,15 @@ public class Stall : Interactable
 
     public void OnPurchaseButtonPressed(BuyerType buyerType)
     {
-        PurchaseItem(selectedItemIndex, buyerType);
+        bool success = PurchaseItem(selectedItemIndex, buyerType);
 
         StallUI stallUI = GetComponent<StallUI>();
         if (stallUI != null)
         {
+            if (!success && buyerType == BuyerType.Player)
+            {
+                return;
+            }
             stallUI.HideDetailsAfterPurchase();
         }
 
