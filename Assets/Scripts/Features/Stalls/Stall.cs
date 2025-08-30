@@ -188,7 +188,6 @@ public class Stall : Interactable
 
             if (runtimeCharacter.currentWeeklyBudget < finalPrice)
             {
-                Debug.Log("Not enough budget.");
                 stockAmounts[index]++;
                 var stallUI = GetComponent<StallUI>();
                 if (stallUI != null)
@@ -210,11 +209,19 @@ public class Stall : Interactable
             LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
             if (levelManager != null)
                 levelManager.UpdateBudgetDisplay();
-
-            Debug.Log($"Player purchased {item.itemName}!");
         }
         else if (buyerType == BuyerType.NPC)
         {
+            var player = Object.FindFirstObjectByType<PlayerController>();
+            if (player != null && player.CurrentInteractable == this)
+            {
+                StallUI stallUI = GetComponent<StallUI>();
+                if (stallUI != null)
+                {
+                    stallUI.RefreshItemDetails(item, stockAmounts[index]);
+                    stallUI.UpdateDisplayItemsForPlayer(assignedItems, stockAmounts, this);
+                }
+            }
             Debug.Log($"NPC purchased {item.itemName}!");
         }
 
@@ -306,10 +313,15 @@ public class Stall : Interactable
         }
         return reservedBy == npc; 
     }
+    
+    public bool CanReserve(NPC_Shopper_Behavior npc)
+    {
+        return reservedBy == null || reservedBy == npc;
+    }
 
     public void ReleaseReservation(NPC_Shopper_Behavior npc)
     {
         if (reservedBy == npc)
-        reservedBy = null;
+            reservedBy = null;
     }
 }

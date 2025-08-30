@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
     private int selectedUIScalingTweenId = -1;
 
     private Interactable currentInteractable;
+    public Interactable CurrentInteractable => currentInteractable;
+
     private InputSystem_Actions inputActions;
 
     private Vector2 moveInput;
@@ -186,7 +188,6 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
     {
         if (other.TryGetComponent(out Interactable interactable))
         {
-            Debug.Log("Entered trigger with: " + interactable.gameObject.name);
             currentInteractable = interactable;
 
             var cooldown = other.GetComponent<StallCooldown>();

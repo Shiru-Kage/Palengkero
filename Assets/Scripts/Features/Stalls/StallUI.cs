@@ -222,6 +222,14 @@ public class StallUI : MonoBehaviour
             if (iconImage != null)
             {
                 iconImage.sprite = items[i].icon;
+                if (stocks[i] <= 0)
+                {
+                    iconImage.color = Color.black;
+                }
+                else
+                {
+                    iconImage.color = Color.white;
+                }
             }
             else
             {
@@ -241,13 +249,48 @@ public class StallUI : MonoBehaviour
             });
         }
     }
-
+    public void UpdateDisplayItemsForPlayer(ItemData[] items, int[] stocks, Stall stall)
+    {
+        var player = Object.FindFirstObjectByType<PlayerController>();
+        if (player != null && player.CurrentInteractable == stall)
+        {
+            DisplayItems(items, stocks);
+        }
+    }
+    public void RefreshItemDetails(ItemData item, int stock)
+    {
+        DisplayItemDetails(item, stock);
+    }
 
     private void DisplayItemDetails(ItemData item, int stock)
     {
-        itemName.text = item.itemName;
+        if (stock <= 0)
+        {
+            itemIcon.sprite = item.icon;
+            itemIcon.color = Color.black;
+
+            if (itemName != null) itemName.text = item.itemName;
+            if (stockInfo != null)
+            {
+                stockInfo.text = "Item out of stock";
+                stockInfo.alignment = TMPro.TextAlignmentOptions.Center;
+                stockInfo.fontSize = 50;
+                stockInfo.color = Color.red;
+            }
+            if (priceInfo != null) priceInfo.text = "";
+            if (descriptionInfo != null) descriptionInfo.text = "";
+            if (haggleButton != null) haggleButton.gameObject.SetActive(false);
+            return;
+        }
+
         itemIcon.sprite = item.icon;
+        itemIcon.color = Color.white;
+
+        itemName.text = item.itemName;
         stockInfo.text = $"Stock amount: {stock}x";
+        stockInfo.alignment = TMPro.TextAlignmentOptions.Left; 
+        stockInfo.fontSize = 25;                               
+        stockInfo.color = Color.black;                         
 
         float price = item.price;
         float finalPrice = price;

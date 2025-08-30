@@ -7465,7 +7465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2195500998275818353, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3502803849452955186, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7611,6 +7611,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 4251022948282965557, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251022948282965557, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4955008066808511240, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7620,12 +7628,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4955008066808511240, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 510
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955008066808511240, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955008066808511240, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 4955008066808511240, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -140
       objectReference: {fileID: 0}
     - target: {fileID: 5312774640397905632, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_Enabled
@@ -7847,6 +7863,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7699375586747601169, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699375586747601169, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8130634927518645674, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7856,8 +7880,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8130634927518645674, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 510
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130634927518645674, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 8130634927518645674, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7924,8 +7952,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8701515221858534573, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 510
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701515221858534573, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 8701515221858534573, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -14177,7 +14209,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!1 &6146298961150761464
 GameObject:

@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class StallManager : MonoBehaviour
 {
     public static StallManager Instance { get; private set; }
+    private List<Stall> allStalls = new List<Stall>();
 
     [Header("References")]
     [SerializeField] private GameObject[] stallPrefabs;
@@ -78,6 +80,8 @@ public class StallManager : MonoBehaviour
 
             stall.Initialize(haggleSystem, stallUICanvasObject, itemButtons);
 
+            allStalls.Add(stall);
+
             int stallAssignedItems = stall.GetTotalAssignedItemCount();
             totalAssignedItems += stallAssignedItems;
         }
@@ -98,6 +102,16 @@ public class StallManager : MonoBehaviour
                 summary.BeginSummarySequence();
             }
         }
+    }
+
+    public Stall RequestAvailableStall(NPC_Shopper_Behavior npc)
+    {
+        var available = allStalls.FindAll(s => !s.IsReserved && s.GetTotalAssignedItemCount() > 0);
+        if (available.Count == 0) return null;
+
+        Stall chosen = available[Random.Range(0, available.Count)];
+        chosen.ReserveFor(npc);
+        return chosen;
     }
 
     public int GetRemainingGlobalItems() => totalAssignedItems;

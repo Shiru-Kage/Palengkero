@@ -9,7 +9,6 @@ public class Stall_Inner_UI : MonoBehaviour
 
     public void UpdateUI(StallUI stallUI)
     {
-        Debug.Log("UpdateUI Is being called.");
         if (stallUI != null)
         {
             var stallData = stallUI.GetStallData();
@@ -19,7 +18,6 @@ public class Stall_Inner_UI : MonoBehaviour
 
             if (stallData.vendor != null)
             {
-                Debug.Log("stallData.vendor is being called");
                 CharacterData vendorData = stallData.vendor;
                 if (vendorData != null && vendorData.characterSprites.Length > 0)
                 {
