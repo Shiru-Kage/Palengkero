@@ -16,6 +16,12 @@ public class StallUI : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private HighlightEffect highlightEffect;
 
+    [Header("Purcahsed Item Settings")]
+    [SerializeField] private GameObject purchasedItem;
+    [SerializeField] private float purchaseEffectScale = 1.2f;    
+    [SerializeField] private float purchaseEffectMoveY = 50f;  
+    [SerializeField] private float purchaseEffectDuration = 0.5f;
+
     private Transform stallInnerUIContainer;
     private GameObject stallInnerUICanvasObject;
     private GameObject informationPanel;
@@ -114,7 +120,16 @@ public class StallUI : MonoBehaviour
         if (purchaseButton != null)
         {
             purchaseButton.onClick.RemoveAllListeners();
-            purchaseButton.onClick.AddListener(() => currentStall.OnPurchaseButtonPressed(BuyerType.Player));
+            purchaseButton.onClick.AddListener(() =>
+            {
+                var (item, _) = currentStall.GetItemAndStock(currentStall.SelectedItemIndex);
+
+                if (item != null)
+                {
+                    currentStall.OnPurchaseButtonPressed(BuyerType.Player);
+                    PlayPurchaseEffect(item);
+                }
+            });
         }
 
         if (haggleButton != null)
@@ -126,6 +141,34 @@ public class StallUI : MonoBehaviour
                 HideDetailsAfterHaggle();
             });
         }
+    }
+
+    private void PlayPurchaseEffect(ItemData purchasedData)
+    {
+        if (purchasedItem == null || purchasedData == null) return;
+
+        purchasedItem.SetActive(true);
+
+        Image purchasedImage = purchasedItem.GetComponent<Image>();
+        if (purchasedImage != null)
+            purchasedImage.sprite = purchasedData.icon;
+
+        RectTransform rect = purchasedItem.GetComponent<RectTransform>();
+        CanvasGroup canvasGroup = purchasedItem.GetComponent<CanvasGroup>();
+        if (canvasGroup == null) canvasGroup = purchasedItem.AddComponent<CanvasGroup>();
+
+        rect.localScale = Vector3.one;
+        rect.anchoredPosition = Vector2.zero;
+        canvasGroup.alpha = 1f;
+
+        LeanTween.scale(rect, Vector3.one * purchaseEffectScale, purchaseEffectDuration * 0.6f).setEaseOutBack();
+
+        LeanTween.moveY(rect, rect.anchoredPosition.y + purchaseEffectMoveY, purchaseEffectDuration).setEaseOutQuad();
+
+        LeanTween.alphaCanvas(canvasGroup, 0f, purchaseEffectDuration).setOnComplete(() =>
+        {
+            purchasedItem.SetActive(false);
+        });
     }
 
     public void HideDetailsAfterPurchase()

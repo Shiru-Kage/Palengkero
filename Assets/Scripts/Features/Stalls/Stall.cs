@@ -289,7 +289,7 @@ public class Stall : Interactable
 
     public bool ReserveFor(NPC_Shopper_Behavior npc)
     {
-        if (reservedBy == null)   // stall is free
+        if (reservedBy == null) 
         {
             reservedBy = npc;
             return true;

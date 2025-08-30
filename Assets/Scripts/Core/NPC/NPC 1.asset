@@ -19,8 +19,8 @@ MonoBehaviour:
   characterAge: 0
   characterMonthlyIncome: 0
   characterWeeklyBudget: 0
-  characterSprite: {fileID: 0}
-  characterFrameSprite: {fileID: 0}
+  characterSprites: []
+  characterSelectFrameSprite: {fileID: 0}
   characterDescription: 
   textColor: {r: 0, g: 0, b: 0, a: 0}
   voiceClip: {fileID: 0}
@@ -30,4 +30,4 @@ MonoBehaviour:
   preferCheapItemsChance: 25
   preferHighNutritionChance: 25
   preferHighSatisfactionChance: 50
-  buyLikelihood: 60
+  buyLikelihood: 100

@@ -176,6 +176,11 @@ public class NPC_Shopper_Behavior : MonoBehaviour
             if (purchaseSuccess)
             {
                 Debug.Log($"{shopper.name} successfully bought {itemToBuy.itemName} from the stall!");
+                StallUI stallUI = currentStallTarget.GetComponent<StallUI>();
+                if (stallUI != null)
+                {
+                    stallUI.SendMessage("PlayPurchaseEffect", itemToBuy, SendMessageOptions.DontRequireReceiver);
+                }
                 return true;
             }
             else

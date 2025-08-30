@@ -7419,6 +7419,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 361268101}
+    - target: {fileID: 3538172703135122794, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3542814140634939117, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -13257,7 +13261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6144792121099221818, guid: b5d8ee026b860c848be00b68b54ba876, type: 3}
       propertyPath: m_SortingOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6145849322209940155, guid: b5d8ee026b860c848be00b68b54ba876, type: 3}
       propertyPath: m_Spacing
