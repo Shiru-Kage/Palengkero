@@ -114,7 +114,7 @@ public class StallUI : MonoBehaviour
         if (purchaseButton != null)
         {
             purchaseButton.onClick.RemoveAllListeners();
-            purchaseButton.onClick.AddListener(() => currentStall.OnPurchaseButtonPressed());
+            purchaseButton.onClick.AddListener(() => currentStall.OnPurchaseButtonPressed(BuyerType.Player));
         }
 
         if (haggleButton != null)

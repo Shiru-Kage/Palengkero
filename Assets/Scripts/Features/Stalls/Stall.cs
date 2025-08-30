@@ -2,6 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+public enum BuyerType
+{
+    Player,
+    NPC
+}
+
 public class Stall : Interactable
 {
     [SerializeField] private StallCooldown stallCooldown;
@@ -9,11 +15,13 @@ public class Stall : Interactable
 
     private Stall_Inner_UI stallInnerUI;
     private StallUI stallUIComponent;
-    
     private HaggleSystem haggleSystem;
     private GameObject stallUI;
     private Button[] itemButtons;
     private ItemData[] assignedItems;
+    private NPC_Shopper_Behavior reservedBy;
+
+    public bool IsReserved => reservedBy != null;
     private int[] stockAmounts;
     private int selectedItemIndex = -1;
     private bool isInitialized = false;
@@ -55,7 +63,7 @@ public class Stall : Interactable
         int maxItemsToStock = currentLevelData.maxStallItemStock;
 
         int itemCount = Random.Range(minItemsToStock, maxItemsToStock + 1);
-        itemCount = Mathf.Min(itemCount, itemButtons.Length);  
+        itemCount = Mathf.Min(itemCount, itemButtons.Length);
 
         assignedItems = new ItemData[itemCount];
         stockAmounts = new int[itemCount];
@@ -154,51 +162,7 @@ public class Stall : Interactable
         discountedItemId = null;
     }
 
-    public bool PurchaseItem(int index)
-    {
-        if (index < 0 || index >= assignedItems.Length) return false;
-
-        ItemData item = assignedItems[index];
-        int stock = stockAmounts[index];
-
-        if (item == null || stock <= 0) return false;
-
-        var runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
-        if (runtimeCharacter == null) return false;
-
-        float finalPrice = item.price;
-
-        if (item.id == discountedItemId)
-        {
-            finalPrice *= 0.5f;
-            finalPrice = Mathf.Round(finalPrice);
-        }
-
-        if (runtimeCharacter.currentWeeklyBudget < finalPrice)
-        {
-            Debug.Log("Not enough budget.");
-            return false;
-        }
-
-        stockAmounts[index]--;
-        runtimeCharacter.currentWeeklyBudget -= (int)finalPrice;
-
-        Inventory.Instance.AddItem(item, 1);  
-        if (item.id == discountedItemId)
-            ResetDiscount();
-
-        WellBeingEvents.OnWellBeingChanged?.Invoke(item.nutrition, item.satisfaction);
-
-        LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
-        if (levelManager != null)
-            levelManager.UpdateBudgetDisplay();
-
-        StallManager.Instance?.ReduceGlobalItemCount(1);
-        return true;
-    }
-
-
-    public bool PurchaseItemForNPC(int index)
+    public bool PurchaseItem(int index, BuyerType buyerType)
     {
         if (index < 0 || index >= assignedItems.Length) return false;
 
@@ -208,15 +172,53 @@ public class Stall : Interactable
         if (item == null || stock <= 0) return false;
 
         stockAmounts[index]--;
-        Debug.Log($"NPC purchased {item.itemName}!");
-        StallManager.Instance?.ReduceGlobalItemCount(1);
 
+        if (buyerType == BuyerType.Player)
+        {
+            var runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
+            if (runtimeCharacter == null) return false;
+
+            float finalPrice = item.price;
+
+            if (item.id == discountedItemId)
+            {
+                finalPrice *= 0.5f;
+                finalPrice = Mathf.Round(finalPrice);
+            }
+
+            if (runtimeCharacter.currentWeeklyBudget < finalPrice)
+            {
+                Debug.Log("Not enough budget.");
+                stockAmounts[index]++;
+                return false;
+            }
+
+            runtimeCharacter.currentWeeklyBudget -= (int)finalPrice;
+
+            Inventory.Instance.AddItem(item, 1);
+            if (item.id == discountedItemId)
+                ResetDiscount();
+
+            WellBeingEvents.OnWellBeingChanged?.Invoke(item.nutrition, item.satisfaction);
+
+            LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
+            if (levelManager != null)
+                levelManager.UpdateBudgetDisplay();
+
+            Debug.Log($"Player purchased {item.itemName}!");
+        }
+        else if (buyerType == BuyerType.NPC)
+        {
+            Debug.Log($"NPC purchased {item.itemName}!");
+        }
+
+        StallManager.Instance?.ReduceGlobalItemCount(1);
         return true;
     }
 
-    public void OnPurchaseButtonPressed()
+    public void OnPurchaseButtonPressed(BuyerType buyerType)
     {
-        PurchaseItem(selectedItemIndex);
+        PurchaseItem(selectedItemIndex, buyerType);
 
         StallUI stallUI = GetComponent<StallUI>();
         if (stallUI != null)
@@ -283,5 +285,21 @@ public class Stall : Interactable
     {
         Vector2Int gridPos = PathfindingGrid.Instance.GetGridPosition(interactionTransform.position + (Vector3)boxOffset);
         return PathfindingGrid.Instance.GetWorldPosition(gridPos.x, gridPos.y);
+    }
+
+    public bool ReserveFor(NPC_Shopper_Behavior npc)
+    {
+        if (reservedBy == null)   // stall is free
+        {
+            reservedBy = npc;
+            return true;
+        }
+        return reservedBy == npc; 
+    }
+
+    public void ReleaseReservation(NPC_Shopper_Behavior npc)
+    {
+        if (reservedBy == npc)
+        reservedBy = null;
     }
 }

@@ -53,9 +53,8 @@ public class NPC_Shopper_Behavior : MonoBehaviour
     {
         if (Random.Range(0, 100) < shopper.Data.buyLikelihood)
         {
-            // pick a stall with at least one item in stock
             Stall stallToVisit = ChooseStallWithStock();
-            if (stallToVisit != null)
+            if (stallToVisit != null && stallToVisit.ReserveFor(this))
             {
                 SetTargetToStallBoxOffset(stallToVisit);
                 currentStallTarget = stallToVisit;
@@ -122,7 +121,7 @@ public class NPC_Shopper_Behavior : MonoBehaviour
                 {
                     hasPurchasedItem = true;
                 }
-
+                currentStallTarget.ReleaseReservation(this);
                 shopper.UnlockTarget();
                 currentState = NPCState.Roaming;
                 hasPurchasedItem = false;
@@ -173,7 +172,7 @@ public class NPC_Shopper_Behavior : MonoBehaviour
         if (itemToBuy != null)
         {
             int itemIndex = currentStallTarget.GetItemIndex(itemToBuy);
-            bool purchaseSuccess = currentStallTarget.PurchaseItemForNPC(itemIndex);
+            bool purchaseSuccess = currentStallTarget.PurchaseItem(itemIndex, BuyerType.NPC);
             if (purchaseSuccess)
             {
                 Debug.Log($"{shopper.name} successfully bought {itemToBuy.itemName} from the stall!");
