@@ -64,7 +64,6 @@ public class NPC_Shopper_Behavior : MonoBehaviour
             }
             else
             {
-                Debug.Log($"{shopper.name} found no stalls with available stock.");
                 currentState = NPCState.Roaming;
             }
         }
@@ -143,7 +142,6 @@ public class NPC_Shopper_Behavior : MonoBehaviour
 
         ItemData itemToBuy = null;
 
-        // preference order
         if (Random.Range(0, 100) < shopper.Data.preferCheapItemsChance)
         {
             itemToBuy = GetCheapItem(currentStallTarget);
