@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
+  m_Name: Green NPC
+  m_EditorClassIdentifier: 
+  characterID: Green NPC
+  characterName: Green NPC
+  characterIndustry: 0
+  characterDifficulty: 0
+  characterAge: 0
+  characterMonthlyIncome: 0
+  characterWeeklyBudget: 0
+  characterSprites: []
+  characterSelectFrameSprite: {fileID: 0}
+  characterDescription: 
+  textColor: {r: 0, g: 0, b: 0, a: 0}
+  voiceClip: {fileID: 0}
+  characterAnimator: {fileID: 0}
+  openingCutscene: {fileID: 0}
+  endingCutscenes: []
+  preferCheapItemsChance: 50
+  preferHighNutritionChance: 25
+  preferHighSatisfactionChance: 25
+  buyLikelihood: 70
