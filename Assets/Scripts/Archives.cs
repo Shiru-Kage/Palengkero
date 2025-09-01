@@ -22,7 +22,6 @@ public class Archives : MonoBehaviour
 
     private void GenerateArchives()
     {
-        // Clear existing slots
         foreach (Transform child in openings) Destroy(child.gameObject);
         foreach (Transform child in endings) Destroy(child.gameObject);
 
@@ -36,7 +35,6 @@ public class Archives : MonoBehaviour
 
             var cutsceneData = character.cutscene;
 
-            // OPENING (avoid duplicates by name)
             if (!string.IsNullOrEmpty(cutsceneData.openingCutsceneName) &&
                 cutsceneData.openingCutscene != null &&
                 !addedOpenings.Contains(cutsceneData.openingCutsceneName))
@@ -52,7 +50,6 @@ public class Archives : MonoBehaviour
             }
         }
 
-        // ENDINGS → sort by EndingType order
         foreach (EndingType type in System.Enum.GetValues(typeof(EndingType)))
         {
             foreach (CharacterData character in allCharacters)
@@ -87,7 +84,6 @@ public class Archives : MonoBehaviour
         }
     }
 
-
     private void CreateArchiveSlot(Transform parent, string characterName, string cutsceneName, Sprite icon)
     {
         GameObject slot = Instantiate(archiveSlot, parent);
@@ -101,7 +97,6 @@ public class Archives : MonoBehaviour
         if (title != null)
             title.text = $"{cutsceneName}";
 
-        // Check unlock status from ArchiveManager
         bool unlocked = ArchiveManager.Instance.IsCutsceneUnlocked(characterName, cutsceneName);
 
         if (lockObj != null)

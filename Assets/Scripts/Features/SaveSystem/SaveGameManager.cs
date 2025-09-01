@@ -75,13 +75,13 @@ public class SaveGameManager : MonoBehaviour
         {
             savedConfirmation.SetActive(true);
             StopAllCoroutines();
-            StartCoroutine(HideSavedConfirmationRoutine(2f)); // always hides after delay
+            StartCoroutine(HideSavedConfirmationRoutine(2f));
         }
     }
 
     private IEnumerator HideSavedConfirmationRoutine(float delay)
     {
-        yield return new WaitForSecondsRealtime(delay); // unaffected by timeScale or pause
+        yield return new WaitForSecondsRealtime(delay);
         if (savedConfirmation != null)
         {
             savedConfirmation.SetActive(false);

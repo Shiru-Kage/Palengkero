@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class ArchiveManager : MonoBehaviour
 {
     public static ArchiveManager Instance { get; private set; }
-
-    // Dictionary: characterName -> HashSet of unlocked cutscene names
     private Dictionary<string, HashSet<string>> unlockedCutscenes = new Dictionary<string, HashSet<string>>();
 
     private void Awake()
@@ -17,11 +15,9 @@ public class ArchiveManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadFromFile();
     }
 
-    /// <summary>
-    /// Unlocks a cutscene for a character.
-    /// </summary>
     public void UnlockCutscene(string characterName, string cutsceneName)
     {
         if (!unlockedCutscenes.ContainsKey(characterName))
@@ -32,15 +28,41 @@ public class ArchiveManager : MonoBehaviour
         if (unlockedCutscenes[characterName].Add(cutsceneName))
         {
             Debug.Log($"[ArchiveManager] Unlocked {cutsceneName} for {characterName}.");
-            // TODO: Save system hook here
+            SaveToFile();
         }
     }
 
-    /// <summary>
-    /// Checks if a cutscene is unlocked.
-    /// </summary>
     public bool IsCutsceneUnlocked(string characterName, string cutsceneName)
     {
         return unlockedCutscenes.ContainsKey(characterName) && unlockedCutscenes[characterName].Contains(cutsceneName);
+    }
+
+    private void SaveToFile()
+    {
+        var saveData = new ArchiveSaveData();
+
+        foreach (var kvp in unlockedCutscenes)
+        {
+            saveData.unlockedArchives.Add(new ArchiveEntry
+            {
+                characterName = kvp.Key,
+                cutsceneNames = new List<string>(kvp.Value)
+            });
+        }
+
+        SaveSystem.SaveArchives(saveData);
+    }
+
+    private void LoadFromFile()
+    {
+        var saveData = SaveSystem.LoadArchives();
+        unlockedCutscenes.Clear();
+
+        foreach (var entry in saveData.unlockedArchives)
+        {
+            unlockedCutscenes[entry.characterName] = new HashSet<string>(entry.cutsceneNames);
+        }
+
+        Debug.Log($"[ArchiveManager] Loaded {saveData.unlockedArchives.Count} archive entries.");
     }
 }

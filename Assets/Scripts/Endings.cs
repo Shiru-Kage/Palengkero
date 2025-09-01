@@ -28,7 +28,6 @@ public class Endings : MonoBehaviour
 
         cutscenes = selectedCharacterData.cutscene;
 
-        // Get stars
         totalStars = StarSystem.Instance.GetTotalStarsForCharacter(selectedCharacterID);
         levelStars = new StarSystem.LevelStars[LevelStateManager.Instance.AllLevels.Length];
 
@@ -37,7 +36,6 @@ public class Endings : MonoBehaviour
             levelStars[i] = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID);
         }
 
-        // Play ending if completed
         if (AreAllLevelsCompleted())
         {
             PlayEndingBasedOnStars();
@@ -100,8 +98,7 @@ public class Endings : MonoBehaviour
 
     bool IsOverSpender()
     {
-        return totalStars <= 10 &&
-               levelStars.All(stars => stars.savingsStars == 0);
+        return totalStars <= 10 && levelStars.All(stars => stars.savingsStars == 0);
     }
 
     bool IsOverworkedMalnourished()
@@ -124,7 +121,6 @@ public class Endings : MonoBehaviour
             videoPlayer.clip = ending.cutsceneVideo;
             videoPlayer.Play();
 
-            // ✅ Mark as unlocked in Archives
             ArchiveManager.Instance.UnlockCutscene(selectedCharacterData.characterName, ending.cutsceneName);
         }
         else
