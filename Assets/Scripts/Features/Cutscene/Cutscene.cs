@@ -34,11 +34,11 @@ public class Cutscene : MonoBehaviour
         {
             CharacterData selectedCharacter = characterSelectionManager.SelectedCharacterData;
 
-            VideoClip cutsceneVideo = selectedCharacter.openingCutscene;
+            Character_Cutscenes cutscenes = selectedCharacter.cutscene;
 
-            if (cutsceneVideo != null)
+            if (cutscenes != null && cutscenes.openingCutscene != null)
             {
-                videoPlayer.clip = cutsceneVideo;
+                videoPlayer.clip = cutscenes.openingCutscene; ;
                 videoPlayer.Play();
                 skipButton.gameObject.SetActive(true);
                 Debug.Log("Playing cutscene for " + selectedCharacter.characterName);
@@ -46,6 +46,7 @@ public class Cutscene : MonoBehaviour
             else
             {
                 Debug.LogError("No video found for the selected character.");
+                OnVideoEnd(videoPlayer);
             }
         }
         else

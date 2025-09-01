@@ -11,6 +11,7 @@ public class Endings : MonoBehaviour
     private int totalStars;
     private StarSystem.LevelStars[] levelStars; // Changed to store LevelStars struct
     private CharacterData selectedCharacterData;
+    private Character_Cutscenes cutscenes;
 
     void Start()
     {
@@ -22,6 +23,8 @@ public class Endings : MonoBehaviour
             Debug.LogError("Character data not found!");
             return;
         }
+
+        cutscenes = selectedCharacterData.cutscene;
 
         // Get the total stars and level-specific stars for the selected character
         totalStars = StarSystem.Instance.GetTotalStarsForCharacter(selectedCharacterID);
@@ -101,26 +104,29 @@ public class Endings : MonoBehaviour
 
     void PlayEnding(string endingName)
     {
-        if (selectedCharacterData.endingCutscenes != null && selectedCharacterData.endingCutscenes.Length > 0)
+        if (cutscenes == null || cutscenes.endingCutscenes == null || cutscenes.endingCutscenes.Length == 0)
         {
-            int endingIndex = GetEndingIndex(endingName);
-            if (endingIndex >= 0 && endingIndex < selectedCharacterData.endingCutscenes.Length)
+            Debug.LogError("No ending cutscenes available for this character!");
+            return;
+        }
+
+        int endingIndex = GetEndingIndex(endingName);
+        if (endingIndex >= 0 && endingIndex < cutscenes.endingCutscenes.Length)
+        {
+            VideoClip clip = cutscenes.endingCutscenes[endingIndex];
+            if (clip != null && videoPlayer != null)
             {
-                VideoClip clip = selectedCharacterData.endingCutscenes[endingIndex];
-                if (clip != null && videoPlayer != null)
-                {
-                    videoPlayer.clip = clip;
-                    videoPlayer.Play();
-                }
-                else
-                {
-                    Debug.LogError($"Ending video {endingName} not found!");
-                }
+                videoPlayer.clip = clip;
+                videoPlayer.Play();
+            }
+            else
+            {
+                Debug.LogError($"Ending video '{endingName}' not found for {selectedCharacterData.characterName}!");
             }
         }
         else
         {
-            Debug.LogError("No ending cutscenes available for this character!");
+            Debug.LogError($"Ending index not valid for '{endingName}'!");
         }
     }
 

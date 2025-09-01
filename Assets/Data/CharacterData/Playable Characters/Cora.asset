@@ -19,7 +19,7 @@ MonoBehaviour:
   characterAge: 25
   characterMonthlyIncome: "\u20B115,000 - \u20B117,999"
   characterWeeklyBudget: 3200
-  characterSprite: {fileID: 824734146875366258, guid: a9bdb48b6af1f9249b385afd78c1f21d, type: 3}
+  characterSprites: []
   characterSelectFrameSprite: {fileID: -7800151483077857245, guid: 2380f0fc8b1caac4eb4702e510755a7f, type: 3}
   characterDescription: Working graveyard shifts, Cora grabs groceries between work
     and sleep. With student loans and family contributions, she's learned how to
@@ -27,12 +27,7 @@ MonoBehaviour:
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
   characterAnimator: {fileID: 9100000, guid: 460a30ae5d6c482419b9262d6db13464, type: 2}
-  openingCutscene: {fileID: 32900000, guid: c284fd4022beea242b2fd78f39152643, type: 3}
-  endingCutscenes:
-  - {fileID: 32900000, guid: c156b278d49d64d42bdcc02ea195fabd, type: 3}
-  - {fileID: 32900000, guid: e2743fbe4601b144fa422c4edbce5a27, type: 3}
-  - {fileID: 32900000, guid: 1737fc6181ca10b45b63b8716e5f4c63, type: 3}
-  - {fileID: 32900000, guid: d827b39c5ad5fa042a392aa15cd4526d, type: 3}
+  cutscene: {fileID: 11400000, guid: 382f6ff1bbf77a14a8b5616f1e283d69, type: 2}
   preferCheapItemsChance: 0
   preferHighNutritionChance: 0
   preferHighSatisfactionChance: 0

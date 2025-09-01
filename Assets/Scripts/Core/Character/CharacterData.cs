@@ -17,8 +17,7 @@ public class CharacterData : ScriptableObject
     public Color textColor;
     public AudioClip voiceClip;
     public RuntimeAnimatorController characterAnimator;
-    public VideoClip openingCutscene;
-    public VideoClip[] endingCutscenes;
+    public Character_Cutscenes cutscene;
     
     [Header("NPC Behavior Settings")]
     
