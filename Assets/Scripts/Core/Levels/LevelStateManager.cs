@@ -142,6 +142,8 @@ public class LevelStateManager : MonoBehaviour
         {
             characterLevelLocks.Add(currentCharacterName, levels);
         }
+        int maxUnlocked = GetMaxEverUnlockedLevelIndexForCurrentCharacter();
+        Debug.Log($"[LevelStateManager] {currentCharacterName} max unlocked level index restored = {maxUnlocked}");
     }
 
     public void ResetAllCharacterLevelData()
@@ -208,8 +210,18 @@ public class LevelStateManager : MonoBehaviour
 
     public int GetMaxEverUnlockedLevelIndexForCurrentCharacter()
     {
-        if (string.IsNullOrEmpty(currentCharacterName)) return 0;
-        return characterMaxEverUnlockedIndex.TryGetValue(currentCharacterName, out var idx) ? idx : 0;
+        if (string.IsNullOrEmpty(currentCharacterName) || 
+            !characterLevelLocks.ContainsKey(currentCharacterName))
+            return 0;
+
+        var levels = characterLevelLocks[currentCharacterName];
+        int max = 0;
+        for (int i = 0; i < levels.Length; i++)
+        {
+            if (levels[i])
+                max = i;
+        }
+        return max;
     }
     
     public bool[] GetEverUnlockedButtonsForCurrentCharacter()
