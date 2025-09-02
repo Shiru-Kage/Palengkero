@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using UnityEngine.Video;
 using System.Collections.Generic;
+using TMPro;
 
 public class Archives : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Archives : MonoBehaviour
 
     [Header("Data Source")]
     [SerializeField] private CharacterData[] allCharacters;
+
+    [Header("Cutscene Player")]
+    [SerializeField] private Cutscene cutscenePlayer; // 🔹 Reference to your Cutscene script
 
     private void Start()
     {
@@ -43,7 +47,8 @@ public class Archives : MonoBehaviour
                     openings,
                     character.characterName,
                     cutsceneData.openingCutsceneName,
-                    cutsceneData.openingIcon
+                    cutsceneData.openingIcon,
+                    cutsceneData.openingCutscene // 🔹 pass the clip
                 );
 
                 addedOpenings.Add(cutsceneData.openingCutsceneName);
@@ -74,7 +79,8 @@ public class Archives : MonoBehaviour
                             endings,
                             character.characterName,
                             endingName,
-                            ending.cutsceneIcon
+                            ending.cutsceneIcon,
+                            ending.cutsceneVideo // 🔹 pass the clip
                         );
 
                         addedEndings.Add(endingName);
@@ -84,7 +90,7 @@ public class Archives : MonoBehaviour
         }
     }
 
-    private void CreateArchiveSlot(Transform parent, string characterName, string cutsceneName, Sprite icon)
+    private void CreateArchiveSlot(Transform parent, string characterName, string cutsceneName, Sprite icon, VideoClip clip)
     {
         GameObject slot = Instantiate(archiveSlot, parent);
 
@@ -113,8 +119,16 @@ public class Archives : MonoBehaviour
             imageButton.interactable = unlocked;
             imageButton.onClick.AddListener(() =>
             {
-                Debug.Log($"Play cutscene: {cutsceneName}");
-                // TODO: Hook this into your cutscene player
+                Debug.Log($"Play archived cutscene: {cutsceneName}");
+                if (cutscenePlayer != null)
+                {
+                    cutscenePlayer.PlayArchivedCutscene(clip, characterName, cutsceneName);
+                    gameObject.SetActive(false); // 🔹 Hide Archives menu when playing
+                }
+                else
+                {
+                    Debug.LogError("Cutscene player not assigned in Archives!");
+                }
             });
         }
     }

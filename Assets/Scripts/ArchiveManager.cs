@@ -5,6 +5,7 @@ public class ArchiveManager : MonoBehaviour
 {
     public static ArchiveManager Instance { get; private set; }
     private Dictionary<string, HashSet<string>> unlockedCutscenes = new Dictionary<string, HashSet<string>>();
+    private HashSet<string> viewedCutscenes = new HashSet<string>();
 
     private void Awake()
     {
@@ -64,5 +65,19 @@ public class ArchiveManager : MonoBehaviour
         }
 
         Debug.Log($"[ArchiveManager] Loaded {saveData.unlockedArchives.Count} archive entries.");
+    }
+
+    public bool HasViewedCutscene(string cutsceneName)
+    {
+        return viewedCutscenes.Contains(cutsceneName);
+    }
+
+    public void MarkCutsceneAsViewed(string cutsceneName)
+    {
+        if (!viewedCutscenes.Contains(cutsceneName))
+        {
+            viewedCutscenes.Add(cutsceneName);
+            Debug.Log($"[ArchiveManager] Marked {cutsceneName} as viewed.");
+        }
     }
 }
