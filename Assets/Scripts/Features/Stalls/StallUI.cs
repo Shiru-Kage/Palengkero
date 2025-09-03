@@ -53,6 +53,16 @@ public class StallUI : MonoBehaviour
     public void SetUICanvasObject(GameObject canvasObject) => stallInnerUICanvasObject = canvasObject;
     public Button[] GetItemButtons() => itemButtons;
 
+    private void CheckAndTogglePlayerMovement()
+    {
+        var player = Object.FindFirstObjectByType<PlayerController>();
+        if (player != null)
+        {
+            bool uiActive = stallInnerUICanvasObject != null && stallInnerUICanvasObject.activeSelf;
+            player.ToggleMovement(!uiActive);
+        }
+    }
+
     public void SetupUIReferences()
     {
         if (stallInnerUIContainer == null)
@@ -110,6 +120,7 @@ public class StallUI : MonoBehaviour
         purchaseButton = stallInnerUIContainer.parent.Find("Purchase")?.GetComponent<Button>();
 
         ValidateUI();
+        CheckAndTogglePlayerMovement();
     }
 
     private void ValidateUI()
@@ -188,6 +199,7 @@ public class StallUI : MonoBehaviour
         if (haggleButton != null) haggleButton.gameObject.SetActive(false);
         if (informationPanel != null) informationPanel.SetActive(false);
         if (stallInnerUICanvasObject != null) stallInnerUICanvasObject.SetActive(false);
+        CheckAndTogglePlayerMovement();
     }
 
     public void HideDetailsAfterHaggle()

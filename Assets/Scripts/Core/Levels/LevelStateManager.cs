@@ -12,6 +12,7 @@ public class LevelStateManager : MonoBehaviour
     private Dictionary<string, bool[]> characterLevelLocks = new Dictionary<string, bool[]>();
     private Dictionary<string, float[]> characterLevelTimes = new Dictionary<string, float[]>();
     private Dictionary<string, int> characterMaxEverUnlockedIndex = new Dictionary<string, int>();
+    private bool skipCutsceneOnLoad = false;
 
     public int CurrentLevelIndex { get; private set; } = 0;
 
@@ -210,7 +211,7 @@ public class LevelStateManager : MonoBehaviour
 
     public int GetMaxEverUnlockedLevelIndexForCurrentCharacter()
     {
-        if (string.IsNullOrEmpty(currentCharacterName) || 
+        if (string.IsNullOrEmpty(currentCharacterName) ||
             !characterLevelLocks.ContainsKey(currentCharacterName))
             return 0;
 
@@ -223,12 +224,23 @@ public class LevelStateManager : MonoBehaviour
         }
         return max;
     }
-    
+
     public bool[] GetEverUnlockedButtonsForCurrentCharacter()
     {
         int max = GetMaxEverUnlockedLevelIndexForCurrentCharacter();
         var arr = new bool[allLevels.Length];
         for (int i = 0; i < arr.Length; i++) arr[i] = (i <= max);
         return arr;
+    }
+    
+    
+    public void SetSkipCutsceneOnLoad(bool value)
+    {
+        skipCutsceneOnLoad = value;
+    }
+
+    public bool GetSkipCutsceneOnLoad()
+    {
+        return skipCutsceneOnLoad;
     }
 }

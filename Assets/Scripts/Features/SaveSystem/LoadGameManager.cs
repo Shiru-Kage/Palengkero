@@ -53,6 +53,7 @@ public class LoadGameManager : MonoBehaviour
                 StarSystem.Instance.AssignStarsForLevel(i, selectedEntry.characterID, metNutrition, metSatisfaction, metSavings);
             }
         }
+        LevelStateManager.Instance.SetSkipCutsceneOnLoad(true);
 
         SceneChanger.instance.ChangeScene("CharacterSelect");
     }

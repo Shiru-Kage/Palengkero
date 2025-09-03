@@ -114,5 +114,14 @@ public class StallManager : MonoBehaviour
         return chosen;
     }
 
+    public void ToggleMovement(bool enable)
+    {
+        var player = Object.FindFirstObjectByType<PlayerController>();
+        if (player != null)
+        {
+            player.ToggleMovement(enable);
+        }
+    }
+
     public int GetRemainingGlobalItems() => totalAssignedItems;
 }

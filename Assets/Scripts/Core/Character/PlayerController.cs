@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
     private Vector2Int targetGridPos;
 
     private bool isMoving = false;
+    private bool movementBlocked = false;
+    public bool GetMovementBlocked() => movementBlocked;
 
     private void Awake()
     {
@@ -70,8 +72,16 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         }
     }
 
+    public void ToggleMovement(bool enable)
+    {
+        movementBlocked = !enable;
+        if (!enable)
+            moveInput = Vector2.zero;
+    }
+
     private void HandleMove(InputAction.CallbackContext context)
     {
+        if (movementBlocked) return;
         Vector2 input = context.ReadValue<Vector2>();
 
         if (input == Vector2.zero)
@@ -129,6 +139,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
 
         if (isInside)
         {
+            ToggleMovement(false);
             interactable.Interact();
         }
         else

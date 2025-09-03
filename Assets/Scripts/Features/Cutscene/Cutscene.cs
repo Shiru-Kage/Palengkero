@@ -9,13 +9,13 @@ public class Cutscene : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;
 
     private CharacterSelectionManager characterSelectionManager;
-    private CharacterData selectedCharacter;   // store reference
-    private Character_Cutscenes cutscenes;     // store reference
+    private CharacterData selectedCharacter;   
+    private Character_Cutscenes cutscenes;
+    private bool hasViewed;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI skipButton;
 
-    // 🔹 Flags and temp storage
     private bool isArchiveCutscene = false;
     private string archiveCharacterName;
     private string archiveCutsceneName;
@@ -48,10 +48,17 @@ public class Cutscene : MonoBehaviour
                 videoPlayer.clip = cutscenes.openingCutscene;
                 videoPlayer.Play();
 
-                bool hasViewed = ArchiveManager.Instance.HasViewedCutscene(cutscenes.openingCutsceneName);
+                if (LevelStateManager.Instance.GetSkipCutsceneOnLoad())
+                {
+                    hasViewed = true;
+                    LevelStateManager.Instance.SetSkipCutsceneOnLoad(false);
+                    Debug.Log("Cutscene started after load → skip forced ON.");
+                }
+                else
+                {
+                    hasViewed = ArchiveManager.Instance.HasViewedCutscene(cutscenes.openingCutsceneName);
+                }
 
-                // First time = locked skip button
-                // After first time = allow skip
                 skipButton.gameObject.SetActive(hasViewed);
 
                 Debug.Log($"Playing opening cutscene for {selectedCharacter.characterName}. First time? {!hasViewed}");
@@ -76,14 +83,12 @@ public class Cutscene : MonoBehaviour
 
         if (clip != null)
         {
-            // store just metadata (no ScriptableObject instantiation!)
             archiveCharacterName = characterName;
             archiveCutsceneName = cutsceneName;
 
             videoPlayer.clip = clip;
             videoPlayer.Play();
 
-            // Always allow skipping in Archive
             skipButton.gameObject.SetActive(true);
 
             Debug.Log($"Playing archived cutscene: {cutsceneName} for {characterName}");
@@ -99,7 +104,6 @@ public class Cutscene : MonoBehaviour
         skipButton.gameObject.SetActive(false);
         gameObject.SetActive(false);
 
-        // Only unlock and mark viewed if it was a normal playthrough
         if (!isArchiveCutscene && cutscenes != null && !string.IsNullOrEmpty(cutscenes.openingCutsceneName))
         {
             ArchiveManager.Instance.UnlockCutscene(
@@ -107,13 +111,11 @@ public class Cutscene : MonoBehaviour
                 cutscenes.openingCutsceneName
             );
 
-            // ✅ Mark as viewed after first playthrough
             ArchiveManager.Instance.MarkCutsceneAsViewed(cutscenes.openingCutsceneName);
 
             Debug.Log($"Unlocked opening cutscene: {cutscenes.openingCutsceneName}");
         }
 
-        // Only change scene after real opening cutscenes
         if (SceneChanger.instance != null && !isArchiveCutscene)
         {
             SceneChanger.instance.ChangeScene("LevelSelect");
