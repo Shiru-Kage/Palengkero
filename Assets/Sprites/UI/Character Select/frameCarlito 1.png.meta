@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f8a1beb0e541a5445898b400ba919187
+guid: af497e7912615e244a2a795076968acb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8541540834015036711
-    second: SmallerCanals_0
+      213: 736041423354105381
+    second: frameCarlito_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SmallerCanals_0
+      name: frameCarlito_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 150
-        height: 250
+        width: 1500
+        height: 800
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,52 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9da3a02ddd9567980800000000000000
-      internalID: -8541540834015036711
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SmallerCanals_1
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 0
-        width: 150
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9c35042cfe9b6f47904b223eaeaf41d
-      internalID: 457745520
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SmallerCanals_2
-      rect:
-        serializedVersion: 2
-        x: 300
-        y: 0
-        width: 150
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 57ce8f9ffab1c4943bce88b44823b1e6
-      internalID: 778480501
+      spriteID: 52e8efa56c1f63a00800000000000000
+      internalID: 736041423354105381
       vertices: []
       indices: 
       edges: []
@@ -182,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ffff57efc3a788644add80d29edcb0b4
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -192,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SmallerCanals_0: -8541540834015036711
-      SmallerCanals_1: 457745520
-      SmallerCanals_2: 778480501
+      frameCarlito_0: 736041423354105381
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

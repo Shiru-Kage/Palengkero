@@ -117,9 +117,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 300
-        width: 150
-        height: 150
+        y: 287
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,10 +138,10 @@ TextureImporter:
       name: WaterPool_1
       rect:
         serializedVersion: 2
-        x: 150
-        y: 300
-        width: 150
-        height: 150
+        x: 138
+        y: 287
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: WaterPool_2
       rect:
         serializedVersion: 2
-        x: 300
-        y: 300
-        width: 150
-        height: 150
+        x: 276
+        y: 287
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,9 +183,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 150
-        width: 150
-        height: 150
+        y: 144
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,7 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b3430f742553bb428050f42306052a1
+      spriteID: 9ed5ab8cc6ca98b45bbe0e1f27db7c0a
       internalID: 502150656
       vertices: []
       indices: 
@@ -204,10 +204,10 @@ TextureImporter:
       name: WaterPool_4
       rect:
         serializedVersion: 2
-        x: 150
-        y: 150
-        width: 150
-        height: 150
+        x: 138
+        y: 144
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,7 +216,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ec81108ab8e9114491cf4cba0bd5e71
+      spriteID: 2a4e69fc3df10454ea677fb29915e652
       internalID: 1044782145
       vertices: []
       indices: 
@@ -226,10 +226,10 @@ TextureImporter:
       name: WaterPool_5
       rect:
         serializedVersion: 2
-        x: 300
-        y: 150
-        width: 150
-        height: 150
+        x: 276
+        y: 144
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,7 +238,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3708069f266e61e43b01fe8cadde8785
+      spriteID: 2ce58b452d0eff547b8f4b4c5c0db708
       internalID: 719845952
       vertices: []
       indices: 
@@ -249,9 +249,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 150
-        height: 150
+        y: 1
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,7 +260,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3e0110cce8f6b64c9ad781c2409626d
+      spriteID: 2bd6007a6e33cab4688ff3ce11d0aae9
       internalID: -1547057522
       vertices: []
       indices: 
@@ -270,10 +270,10 @@ TextureImporter:
       name: WaterPool_7
       rect:
         serializedVersion: 2
-        x: 150
-        y: 0
-        width: 150
-        height: 150
+        x: 138
+        y: 1
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -282,7 +282,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f6404c21a90650428b44e9862a4457d
+      spriteID: 6829611706e142542b3ee282fe7c4c05
       internalID: 1430592687
       vertices: []
       indices: 
@@ -292,10 +292,10 @@ TextureImporter:
       name: WaterPool_8
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
-        width: 150
-        height: 150
+        x: 276
+        y: 1
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,7 +304,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53661c287aa68744fbf8111201879eef
+      spriteID: a05f2521d5b0141489befd2ffe7874c2
       internalID: 388713533
       vertices: []
       indices: 

@@ -4,19 +4,25 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI weeklyBudgetText;
-
     [Header("Objective UI Handler")]
     [SerializeField] private LevelObjectiveUI objectiveUI;
+    [SerializeField] private TextMeshProUGUI weeklyBudgetText;
 
     [Header("Spawners")]
     [SerializeField] private CharacterSpawner characterSpawner;
     [SerializeField] private StallManager stallManager;
 
+    [Header("Tutorial")]
+    [SerializeField] private bool tutorial;
+
     private GameObject currentTilemapObject;
 
     private void Start()
     {
+        if (tutorial == true)
+        {
+            TutorialManager.Instance.StartTutorial();
+        }
         if (LevelStateManager.Instance != null)
         {
             SetLevel(LevelStateManager.Instance.CurrentLevelIndex);

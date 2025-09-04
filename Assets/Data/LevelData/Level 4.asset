@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 4
   m_EditorClassIdentifier: 
   levelIcon: {fileID: 21300000, guid: 3b55bb2df9dcc1147bea9463dac8a684, type: 3}
-  levelTileMap: {fileID: 0}
+  levelTileMap: {fileID: 4792319248656287721, guid: 0425efb7656e1a6428f6d3efb044b502, type: 3}
   levelName: 'Adapting to Market Rush Hours '
   levelNumber: 4
   numberOfStalls: 6
@@ -36,3 +36,7 @@ MonoBehaviour:
   maxNPCToSpawn: 5
   minSpawnInterval: 10
   maxSpawnInterval: 15
+  npcTypeLikelihoods: 
+  typeOfNPCs: []
+  minStallItemStock: 1
+  maxStallItemStock: 5
