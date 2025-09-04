@@ -1,44 +1,125 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using System.Collections;
 using System.Collections.Generic;
 
 public class TutorialManager : MonoBehaviour
 {
-    [Header("Default Character Settings")]
-    [SerializeField] private GameObject defaultCharacterPrefab; 
-    [SerializeField] private List<TutorialStep> steps;
-    private int currentStepIndex = -1;
-    private bool isTutorialActive = false;
     public static TutorialManager Instance { get; private set; }
+    private int currentProgress = 0;
+
+    [SerializeField] private GameObject defaultCharacterPrefab;
+    [SerializeField] private List<TutorialStep> tutorialSteps;  // Correct variable name
+
+    [SerializeField] private int nextSceneIndex;
+
+    [Header("UI Integration")]
+    [SerializeField] private TutorialUI tutorialUI;
+
+    private bool isTutorialActive = false;
+
+    [System.Serializable]
+    public class TutorialStep
+    {
+        public bool pause;  // Whether to pause time during this step
+        public int moveToNext;  // Step index to move to next (or -1 to stay)
+        public float timer;  // Time to wait before moving to the next step
+        public UnityEvent onTrigger;  // Actions to trigger at the start of this step
+        public UnityEvent onStepComplete;  // Actions to trigger when the step is completed
+        public string requiredAction;  // The action needed to proceed (e.g., "MovePlayer")
+        public string instructionText;  // The tutorial instruction text
+    }
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        if (isTutorialActive)
+        {
+            StartTutorial();
+        }
     }
 
     public void StartTutorial()
     {
         isTutorialActive = true;
         SelectDefaultCharacter();
-        currentStepIndex = -1;
-        AdvanceStep();
+        currentProgress = 0;
+        HandleTutorial();
     }
 
-    private void AdvanceStep()
+    public void Next()
+    {
+        Time.timeScale = 1;
+        currentProgress++;
+        HandleTutorial();
+    }
+
+    public void CompleteTutorial(int tutorialIndex)
+    {
+        if (currentProgress != tutorialIndex) return;
+        HandleEnd(tutorialSteps[tutorialIndex]);
+    }
+    public void Previous()
+    {
+        Time.timeScale = 1;
+        currentProgress--;
+        HandleTutorial();
+    }
+    private void HandleTutorial()
+    {
+        if (currentProgress >= tutorialSteps.Count) return;
+
+        TutorialStep currentStep = tutorialSteps[currentProgress];
+        currentStep.onTrigger?.Invoke(); // Trigger any actions (e.g., highlighting UI)
+
+        Time.timeScale = currentStep.pause ? 0 : 1;  // Pause the game during this step
+
+        if (currentStep.timer > 0)
+        {
+            StartCoroutine(RemoveTutorialDelay(currentStep.timer, currentStep));
+        }
+
+        tutorialUI.ShowTutorialStep(currentStep);  // Update tutorial UI
+    }
+
+    private void HandleEnd(TutorialStep step)
+    {
+        if (step.moveToNext >= 0)
+        {
+            Next();
+        }
+
+        step.onStepComplete?.Invoke(); // Call onStepComplete actions after the tutorial ends
+    }
+
+    private IEnumerator RemoveTutorialDelay(float delay, TutorialStep step)
+    {
+        yield return new WaitForSeconds(delay);
+        HandleEnd(step);
+    }
+
+    public void NotifyAction(string action)
     {
         if (!isTutorialActive) return;
 
-        currentStepIndex++;
-        if (currentStepIndex >= steps.Count)
-        {
-            Debug.Log("Tutorial completed!");
-            EndTutorial();
-            return;
-        }
+        if (currentProgress < 0 || currentProgress >= tutorialSteps.Count) return;
 
-        var step = steps[currentStepIndex];
-        Debug.Log($"Starting step: {step.instructionText}");
-        step.onStepStart?.Invoke();
+        var step = tutorialSteps[currentProgress];
+        if (step.requiredAction == action)
+        {
+            step.onStepComplete?.Invoke();
+            Next();
+        }
     }
 
     private void SelectDefaultCharacter()
@@ -54,22 +135,13 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void NotifyAction(string action)
+    public int GetCurrentProgress()
     {
-        if (!isTutorialActive) return;
-
-        if (currentStepIndex < 0 || currentStepIndex >= steps.Count) return;
-
-        var step = steps[currentStepIndex];
-        if (step.requiredAction == action)
-        {
-            step.onStepComplete?.Invoke();
-            AdvanceStep();
-        }
+        return currentProgress;
     }
-
-    private void EndTutorial()
+    
+    public int GetTutorialStepsCount()
     {
-        isTutorialActive = false;
+        return tutorialSteps.Count;
     }
 }

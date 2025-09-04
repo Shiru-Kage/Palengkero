@@ -149,6 +149,7 @@ public class StallUI : MonoBehaviour
                 if (item != null)
                 {
                     currentStall.OnPurchaseButtonPressed(BuyerType.Player);
+                    TutorialManager.Instance.NotifyAction("Purchase");
                     PlayPurchaseEffect(item);
                 }
             });

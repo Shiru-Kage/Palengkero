@@ -82,6 +82,16 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
     private void HandleMove(InputAction.CallbackContext context)
     {
         if (movementBlocked) return;
+
+        if (context.performed)
+        {
+            Vector2 movementInput = context.ReadValue<Vector2>();
+
+            if (movementInput != Vector2.zero)  // The player is moving
+            {
+                TutorialManager.Instance.NotifyAction("MovePlayer");
+            }
+        }
         Vector2 input = context.ReadValue<Vector2>();
 
         if (input == Vector2.zero)
@@ -126,6 +136,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             Debug.Log("No interactable in range.");
             return;
         }
+        TutorialManager.Instance.NotifyAction("Interact");
 
         var interactable = currentInteractable;
         Transform origin = interactable.interactionTransform ?? interactable.transform;
