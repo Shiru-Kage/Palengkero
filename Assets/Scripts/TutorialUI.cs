@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
+using System.Collections;
 public class TutorialUI : MonoBehaviour
 {
     [Header("UI Elements")]
@@ -22,7 +22,7 @@ public class TutorialUI : MonoBehaviour
         tutorialText.text = step.instructionText;  // Show the text immediately
 
         // Only show the buttons if the timer is set to -1
-        if (step.timer == -1 && string.IsNullOrEmpty(step.requiredAction))
+        if (step.timer <= -1 && string.IsNullOrEmpty(step.requiredAction))
         {
             nextStep.gameObject.SetActive(true);
             previousStep.gameObject.SetActive(true);
@@ -41,6 +41,13 @@ public class TutorialUI : MonoBehaviour
         nextStep.gameObject.SetActive(false);
         previousStep.gameObject.SetActive(false);
     }
+
+    public IEnumerator HideTutorialPanelAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HideTutorial();
+    }
+
 
     // Hide the tutorial UI after the tutorial is complete
     public void HideTutorial()

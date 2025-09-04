@@ -18,11 +18,14 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TutorialUI tutorialUI;
 
     private bool isTutorialActive = false;
+    public bool IsTutorialActive() => isTutorialActive;
+    private Coroutine hideTutorialCoroutine = null;
 
     [System.Serializable]
     public class TutorialStep
     {
         public bool pause;  // Whether to pause time during this step
+        public bool hideAfterDelay;
         public int moveToNext;  // Step index to move to next (or -1 to stay)
         public float timer;  // Time to wait before moving to the next step
         public UnityEvent onTrigger;  // Actions to trigger at the start of this step
@@ -80,6 +83,12 @@ public class TutorialManager : MonoBehaviour
         if (currentProgress >= tutorialSteps.Count) return;
 
         TutorialStep currentStep = tutorialSteps[currentProgress];
+
+        if (hideTutorialCoroutine != null)
+        {
+            StopCoroutine(hideTutorialCoroutine);
+        }
+
         currentStep.onTrigger?.Invoke(); // Trigger any actions (e.g., highlighting UI)
 
         Time.timeScale = currentStep.pause ? 0 : 1;  // Pause the game during this step
@@ -90,6 +99,10 @@ public class TutorialManager : MonoBehaviour
         }
 
         tutorialUI.ShowTutorialStep(currentStep);  // Update tutorial UI
+        if (currentStep.hideAfterDelay)
+        {
+            hideTutorialCoroutine = StartCoroutine(HideTutorialAfterDelay(5f));  // Set 3 seconds or any other duration
+        }
     }
 
     private void HandleEnd(TutorialStep step)
@@ -121,7 +134,11 @@ public class TutorialManager : MonoBehaviour
             Next();
         }
     }
-
+    private IEnumerator HideTutorialAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        tutorialUI.HideTutorial(); // Hide the tutorial UI after the delay
+    }
     private void SelectDefaultCharacter()
     {
         if (defaultCharacterPrefab != null)

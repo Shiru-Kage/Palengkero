@@ -160,13 +160,17 @@ public class LevelManager : MonoBehaviour
         if (characterSpawner != null)
         {
             characterSpawner.SpawnSelectedCharacter();
+            if (TutorialManager.Instance.IsTutorialActive())
+            {
+                stallManager.ToggleMovement(false);
+            }
         }
         else
         {
             Debug.LogWarning("CharacterSpawner reference missing on LevelManager.");
         }
 
-        if (stallManager != null)
+        if (stallManager != null && tutorial == false)
         {
             stallManager.SpawnStalls();
         }
