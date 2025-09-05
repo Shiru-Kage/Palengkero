@@ -1,7 +1,6 @@
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 [CustomEditor(typeof(CharacterData))]
 public class CharacterDataEditor : Editor
@@ -74,3 +73,4 @@ public class CharacterDataEditor : Editor
         }
     }
 }
+#endif

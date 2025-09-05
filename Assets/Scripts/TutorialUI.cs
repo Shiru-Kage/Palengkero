@@ -5,23 +5,21 @@ using System.Collections;
 public class TutorialUI : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private GameObject tutorialPanel;  // Main tutorial UI container
-    [SerializeField] private TextMeshProUGUI tutorialText;  // The text box that displays tutorial instructions
+    [SerializeField] private GameObject tutorialPanel;
+    [SerializeField] private TextMeshProUGUI tutorialText; 
     [SerializeField] private Button nextStep;
     [SerializeField] private Button previousStep;
 
     private void Awake()
     {
-        HideAllElements();  // Initially hide all elements
+        HideAllElements(); 
     }
 
-    // Display the tutorial step with instruction text
     public void ShowTutorialStep(TutorialManager.TutorialStep step)
     {
         tutorialPanel.SetActive(true);
-        tutorialText.text = step.instructionText;  // Show the text immediately
+        tutorialText.text = step.instructionText;  
 
-        // Only show the buttons if the timer is set to -1
         if (step.timer <= -1 && string.IsNullOrEmpty(step.requiredAction))
         {
             nextStep.gameObject.SetActive(true);
@@ -34,7 +32,6 @@ public class TutorialUI : MonoBehaviour
         }
     }
 
-    // Hide all tutorial elements
     private void HideAllElements()
     {
         tutorialPanel.SetActive(false);
@@ -48,8 +45,6 @@ public class TutorialUI : MonoBehaviour
         HideTutorial();
     }
 
-
-    // Hide the tutorial UI after the tutorial is complete
     public void HideTutorial()
     {
         tutorialPanel.SetActive(false);

@@ -1,6 +1,5 @@
 #if UNITY_EDITOR
 using UnityEditor;
-#endif
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
@@ -105,3 +104,4 @@ public class StallEditor : Editor
         return count;
     }
 }
+#endif
