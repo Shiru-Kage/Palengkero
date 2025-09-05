@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cf0c09a2206361c43bd4f47cb261e323, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6489a0c83e7562740b8c39a23b24f5d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cb23eb650e5cb8449a0877b0b60cecc0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1158e8d8926358441a859dc7d234d7be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -362,7 +362,6 @@ GameObject:
   - component: {fileID: 4043979214030717336}
   - component: {fileID: 4524069568572524114}
   - component: {fileID: 2484737136427826084}
-  - component: {fileID: 8690029316437998532}
   m_Layer: 0
   m_Name: Stall 6
   m_TagString: Untagged
@@ -420,7 +419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cf0c09a2206361c43bd4f47cb261e323, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6489a0c83e7562740b8c39a23b24f5d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -550,7 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stallCooldown: {fileID: 4524069568572524114}
-  stallData: {fileID: 11400000, guid: 020cc5c68f18c174faa89ee2238b4164, type: 2}
+  stallData: {fileID: 11400000, guid: 89fbc02152a01c74d8bb5fe94b937b34, type: 2}
   upperStallHalf: {fileID: 8545598447460841515}
   lowerStallHalf: {fileID: 7500578385570423591}
   backgroundImage: {fileID: 5761644937060326194}
@@ -594,18 +593,3 @@ MonoBehaviour:
   blinkSpeed: 2
   uiOutlineThickness: 5
   spriteScaleIncrease: 0
---- !u!114 &8690029316437998532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8063097523033287634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1

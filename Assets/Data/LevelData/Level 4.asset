@@ -40,3 +40,4 @@ MonoBehaviour:
   typeOfNPCs: []
   minStallItemStock: 1
   maxStallItemStock: 5
+  backgroundType: 1

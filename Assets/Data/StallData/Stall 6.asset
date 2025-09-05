@@ -15,7 +15,12 @@ MonoBehaviour:
   upperStallIcon: {fileID: 21300000, guid: 1158e8d8926358441a859dc7d234d7be, type: 3}
   lowerStallIcon: {fileID: 21300000, guid: 6489a0c83e7562740b8c39a23b24f5d8, type: 3}
   stallBackground: {fileID: 21300000, guid: 6489a0c83e7562740b8c39a23b24f5d8, type: 3}
-  stallUIBackground: {fileID: 21300000, guid: 3b55bb2df9dcc1147bea9463dac8a684, type: 3}
   stallUIRoofBackground: {fileID: 21300000, guid: 8513c66f94314ab49a9c8d5228063eef, type: 3}
-  vendor: {fileID: 11400000, guid: 125e0733fb58aaa46927deb211842a64, type: 2}
+  morningBackgrounds:
+  - {fileID: 21300000, guid: 8aba3d9e7d7fcae4badc72e0bf013aec, type: 3}
+  afternoonBackgrounds:
+  - {fileID: 21300000, guid: fd45260ac24d8e6469c89b0a4f2a2ae9, type: 3}
+  nightBackgrounds:
+  - {fileID: -7714200910283266295, guid: 229cc5fb0fcb62a47b468f3913be0cbc, type: 3}
+  vendor: {fileID: 11400000, guid: 16d68bc5252630f4fb4f3b0bfa391f28, type: 2}
   items: []

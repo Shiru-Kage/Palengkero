@@ -43,3 +43,4 @@ MonoBehaviour:
   - {fileID: 6444193704485106208, guid: 944741d1d80538b44bdee3482e76d872, type: 3}
   minStallItemStock: 1
   maxStallItemStock: 1
+  backgroundType: 0

@@ -45,7 +45,10 @@ public class NPC_Manager : MonoBehaviour
 
     private void Update()
     {
-        if (TutorialManager.Instance.IsTutorialActive()) return;
+        if (TutorialManager.Instance != null)
+        {
+            if (TutorialManager.Instance.IsTutorialActive()) return;
+        }
         if (timer.IsRunning)
         {
             timeElapsed += Time.deltaTime;

@@ -36,3 +36,8 @@ MonoBehaviour:
   maxNPCToSpawn: 5
   minSpawnInterval: 10
   maxSpawnInterval: 15
+  npcTypeLikelihoods: 
+  typeOfNPCs: []
+  minStallItemStock: 1
+  maxStallItemStock: 5
+  backgroundType: 1

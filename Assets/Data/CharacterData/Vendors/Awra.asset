@@ -20,15 +20,14 @@ MonoBehaviour:
   characterMonthlyIncome: 0
   characterWeeklyBudget: 0
   characterSprites:
-  - {fileID: 21300000, guid: fd5929c48fbda4b49a0078c75363bd97, type: 3}
-  - {fileID: 21300000, guid: 1700af0a4e77600489165ec72a2e2f7c, type: 3}
+  - {fileID: 21300000, guid: 5218fc3736a1ed94685378918a080f17, type: 3}
+  - {fileID: 21300000, guid: cc16c336965dca347b6b9181b46ac79c, type: 3}
   characterSelectFrameSprite: {fileID: 0}
   characterDescription: seller
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
   characterAnimator: {fileID: 0}
-  openingCutscene: {fileID: 0}
-  endingCutscenes: []
+  cutscene: {fileID: 0}
   preferCheapItemsChance: 0
   preferHighNutritionChance: 0
   preferHighSatisfactionChance: 0

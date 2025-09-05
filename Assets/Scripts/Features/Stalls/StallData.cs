@@ -9,6 +9,10 @@ public class StallData : ScriptableObject
     public Sprite lowerStallIcon;
     public Sprite stallBackground;
     public Sprite stallUIRoofBackground;
+    [Tooltip("Background for different times of the day.")]
+    public Sprite[] morningBackgrounds;
+    public Sprite[] afternoonBackgrounds;
+    public Sprite[] nightBackgrounds;
 
     [Header("Stall Vendor")]
     public CharacterData vendor;

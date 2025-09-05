@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 527bfd70dd845144481f725822d0f270
+guid: 229cc5fb0fcb62a47b468f3913be0cbc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2269904117286576182
-    second: boy1_0
+      213: -7714200910283266295
+    second: Stall Background Night 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boy1_0
+      name: Stall Background Night 1_0
       rect:
         serializedVersion: 2
-        x: 13
+        x: 0
         y: 0
-        width: 42
-        height: 94
+        width: 1920
+        height: 951
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6302019a4c1508f10800000000000000
-      internalID: 2269904117286576182
+      spriteID: 9072298c427a1f490800000000000000
+      internalID: -7714200910283266295
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      boy1_0: 2269904117286576182
+      Stall Background Night 1_0: -7714200910283266295
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,7 +14,8 @@ public class Stall_Inner_UI : MonoBehaviour
             var stallData = stallUI.GetStallData();
             LevelData currentLevelData = LevelStateManager.Instance.GetCurrentLevelData();
 
-            stall_InnerBG.sprite = currentLevelData.stallUIBackground;
+            Sprite selectedBackground = GetBackgroundForCurrentTimeOfDay(currentLevelData.backgroundType, stallData);
+            stall_InnerBG.sprite = selectedBackground;
             stall_InnerRoofBG.sprite = stallData.stallUIRoofBackground;
 
             if (stallData.vendor != null)
@@ -22,7 +23,7 @@ public class Stall_Inner_UI : MonoBehaviour
                 CharacterData vendorData = stallData.vendor;
                 if (vendorData != null && vendorData.characterSprites.Length > 0)
                 {
-                    vendor.sprite = vendorData.characterSprites[0]; 
+                    vendor.sprite = vendorData.characterSprites[0];
                 }
                 else
                 {
@@ -37,6 +38,22 @@ public class Stall_Inner_UI : MonoBehaviour
         else
         {
             Debug.LogWarning("stallUI Is null.");
+        }
+    }
+    
+    private Sprite GetBackgroundForCurrentTimeOfDay(BackgroundType backgroundType, StallData stallData)
+    {
+        switch (backgroundType)
+        {
+            case BackgroundType.Morning:
+                return stallData.morningBackgrounds.Length > 0 ? stallData.morningBackgrounds[0] : null;
+            case BackgroundType.Afternoon:
+                return stallData.afternoonBackgrounds.Length > 0 ? stallData.afternoonBackgrounds[0] : null;
+            case BackgroundType.Night:
+                return stallData.nightBackgrounds.Length > 0 ? stallData.nightBackgrounds[0] : null;
+            default:
+                Debug.LogWarning("Unknown BackgroundType. Defaulting to Morning.");
+                return stallData.morningBackgrounds.Length > 0 ? stallData.morningBackgrounds[0] : null;
         }
     }
 }

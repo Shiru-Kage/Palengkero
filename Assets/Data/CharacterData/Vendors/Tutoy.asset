@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf4f8a92fc9017445aeed909d189c64d, type: 3}
-  m_Name: Mang Pon
+  m_Name: Tutoy
   m_EditorClassIdentifier: 
-  characterID: Mang Ted
-  characterName: Mang Ted
+  characterID: Girl Vendor
+  characterName: Girl Vendor
   characterIndustry: Vendor
   characterDifficulty: 
   characterAge: 0
   characterMonthlyIncome: 0
   characterWeeklyBudget: 0
   characterSprites:
-  - {fileID: 21300000, guid: 50a411538768b7c40a109fe6b9236238, type: 3}
-  - {fileID: 21300000, guid: 275120c2e3f42c34abf4cebcc48e3fc7, type: 3}
+  - {fileID: 21300000, guid: 4147f6a372f0dba4f9604498b0f97356, type: 3}
+  - {fileID: 21300000, guid: 527bfd70dd845144481f725822d0f270, type: 3}
   characterSelectFrameSprite: {fileID: 0}
   characterDescription: seller
   textColor: {r: 1, g: 1, b: 1, a: 1}

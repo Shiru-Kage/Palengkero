@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 527bfd70dd845144481f725822d0f270
+guid: fd45260ac24d8e6469c89b0a4f2a2ae9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2269904117286576182
-    second: boy1_0
+      213: -7052783001391295408
+    second: Stall Background Afternoon 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boy1_0
+      name: Stall Background Afternoon 1_0
       rect:
         serializedVersion: 2
-        x: 13
+        x: 0
         y: 0
-        width: 42
-        height: 94
+        width: 1920
+        height: 831
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6302019a4c1508f10800000000000000
-      internalID: 2269904117286576182
+      spriteID: 054982c3a3b7f1e90800000000000000
+      internalID: -7052783001391295408
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      boy1_0: 2269904117286576182
+      Stall Background Afternoon 1_0: -7052783001391295408
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

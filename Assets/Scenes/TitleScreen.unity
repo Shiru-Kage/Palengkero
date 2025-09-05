@@ -15933,7 +15933,6 @@ MonoBehaviour:
   preferencesButton: {fileID: 440876717}
   aboutButton: {fileID: 1470445559}
   controlsButton: {fileID: 1368743416}
-  settingButton: {fileID: 431796019}
 --- !u!1 &1832593640
 GameObject:
   m_ObjectHideFlags: 0

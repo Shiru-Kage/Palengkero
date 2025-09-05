@@ -89,7 +89,10 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
 
             if (movementInput != Vector2.zero)  // The player is moving
             {
-                TutorialManager.Instance.NotifyAction("MovePlayer");
+                if (TutorialManager.Instance != null)
+                {
+                    TutorialManager.Instance.NotifyAction("MovePlayer");
+                }
             }
         }
         Vector2 input = context.ReadValue<Vector2>();
@@ -136,7 +139,10 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             Debug.Log("No interactable in range.");
             return;
         }
-        TutorialManager.Instance.NotifyAction("Interact");
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.NotifyAction("Interact");
+        }
 
         var interactable = currentInteractable;
         Transform origin = interactable.interactionTransform ?? interactable.transform;

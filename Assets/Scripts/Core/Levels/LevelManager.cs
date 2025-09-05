@@ -21,7 +21,10 @@ public class LevelManager : MonoBehaviour
     {
         if (tutorial == true)
         {
-            TutorialManager.Instance.StartTutorial();
+            if (TutorialManager.Instance != null)
+            {
+                TutorialManager.Instance.StartTutorial();
+            }
         }
         if (LevelStateManager.Instance != null)
         {
@@ -160,9 +163,12 @@ public class LevelManager : MonoBehaviour
         if (characterSpawner != null)
         {
             characterSpawner.SpawnSelectedCharacter();
-            if (TutorialManager.Instance.IsTutorialActive())
+            if (TutorialManager.Instance != null)
             {
-                stallManager.ToggleMovement(false);
+                if (TutorialManager.Instance.IsTutorialActive())
+                {
+                    stallManager.ToggleMovement(false);
+                }
             }
         }
         else
