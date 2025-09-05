@@ -8,7 +8,6 @@ public class StallData : ScriptableObject
     public Sprite upperStallIcon;
     public Sprite lowerStallIcon;
     public Sprite stallBackground;
-    public Sprite stallUIBackground;
     public Sprite stallUIRoofBackground;
 
     [Header("Stall Vendor")]

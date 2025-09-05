@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db37cb1507c7014f95df19794e8a2dc, type: 3}
+  m_Name: Stall 5
+  m_EditorClassIdentifier: 
+  upperStallIcon: {fileID: 21300000, guid: 637f492892ad13341be1b3eb0023a493, type: 3}
+  lowerStallIcon: {fileID: 21300000, guid: 4eaf00be3ca00884299404211131fa84, type: 3}
+  stallBackground: {fileID: 21300000, guid: 4eaf00be3ca00884299404211131fa84, type: 3}
+  stallUIBackground: {fileID: 21300000, guid: 3b55bb2df9dcc1147bea9463dac8a684, type: 3}
+  stallUIRoofBackground: {fileID: 21300000, guid: a1793f216bb3d624980c1b7480aa13d4, type: 3}
+  vendor: {fileID: 11400000, guid: 125e0733fb58aaa46927deb211842a64, type: 2}
+  items: []

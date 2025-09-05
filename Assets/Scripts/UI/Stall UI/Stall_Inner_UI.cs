@@ -12,8 +12,9 @@ public class Stall_Inner_UI : MonoBehaviour
         if (stallUI != null)
         {
             var stallData = stallUI.GetStallData();
+            LevelData currentLevelData = LevelStateManager.Instance.GetCurrentLevelData();
 
-            stall_InnerBG.sprite = stallData.stallUIBackground;
+            stall_InnerBG.sprite = currentLevelData.stallUIBackground;
             stall_InnerRoofBG.sprite = stallData.stallUIRoofBackground;
 
             if (stallData.vendor != null)

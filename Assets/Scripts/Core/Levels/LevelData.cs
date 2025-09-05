@@ -29,6 +29,7 @@ public class LevelData : ScriptableObject
     public int minStallItemStock = 1;
     [Tooltip("Maximum stock of items available in the stall.")]
     public int maxStallItemStock = 5;
+    public Sprite stallUIBackground;
 
     public CharacterObjective GetObjectiveFor(CharacterData characterData)
     {
