@@ -10,7 +10,7 @@ public class TutorialManager : MonoBehaviour
     private int currentProgress = 0;
 
     [SerializeField] private GameObject defaultCharacterPrefab;
-    [SerializeField] private List<TutorialStep> tutorialSteps;  // Correct variable name
+    [SerializeField] private List<TutorialStep> tutorialSteps;
 
     [SerializeField] private int nextSceneIndex;
 
@@ -24,14 +24,14 @@ public class TutorialManager : MonoBehaviour
     [System.Serializable]
     public class TutorialStep
     {
-        public bool pause;  // Whether to pause time during this step
+        public bool pause; 
         public bool hideAfterDelay;
-        public int moveToNext;  // Step index to move to next (or -1 to stay)
-        public float timer;  // Time to wait before moving to the next step
-        public UnityEvent onTrigger;  // Actions to trigger at the start of this step
-        public UnityEvent onStepComplete;  // Actions to trigger when the step is completed
-        public string requiredAction;  // The action needed to proceed (e.g., "MovePlayer")
-        public string instructionText;  // The tutorial instruction text
+        public int moveToNext; 
+        public float timer; 
+        public UnityEvent onTrigger;  
+        public UnityEvent onStepComplete;  
+        public string requiredAction;  
+        public string instructionText;
     }
 
     private void Awake()
@@ -89,19 +89,19 @@ public class TutorialManager : MonoBehaviour
             StopCoroutine(hideTutorialCoroutine);
         }
 
-        currentStep.onTrigger?.Invoke(); // Trigger any actions (e.g., highlighting UI)
+        currentStep.onTrigger?.Invoke();
 
-        Time.timeScale = currentStep.pause ? 0 : 1;  // Pause the game during this step
+        Time.timeScale = currentStep.pause ? 0 : 1; 
 
         if (currentStep.timer > 0)
         {
             StartCoroutine(RemoveTutorialDelay(currentStep.timer, currentStep));
         }
 
-        tutorialUI.ShowTutorialStep(currentStep);  // Update tutorial UI
+        tutorialUI.ShowTutorialStep(currentStep); 
         if (currentStep.hideAfterDelay)
         {
-            hideTutorialCoroutine = StartCoroutine(HideTutorialAfterDelay(5f));  // Set 3 seconds or any other duration
+            hideTutorialCoroutine = StartCoroutine(HideTutorialAfterDelay(5f));
         }
     }
 
@@ -112,7 +112,7 @@ public class TutorialManager : MonoBehaviour
             Next();
         }
 
-        step.onStepComplete?.Invoke(); // Call onStepComplete actions after the tutorial ends
+        step.onStepComplete?.Invoke();
     }
 
     private IEnumerator RemoveTutorialDelay(float delay, TutorialStep step)
@@ -137,7 +137,7 @@ public class TutorialManager : MonoBehaviour
     private IEnumerator HideTutorialAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        tutorialUI.HideTutorial(); // Hide the tutorial UI after the delay
+        tutorialUI.HideTutorial();
     }
     private void SelectDefaultCharacter()
     {
