@@ -5,7 +5,11 @@ public class ArchiveManager : MonoBehaviour
 {
     public static ArchiveManager Instance { get; private set; }
     private Dictionary<string, HashSet<string>> unlockedCutscenes = new Dictionary<string, HashSet<string>>();
+    private Dictionary<string, InventoryItem> purchasedItems  = new Dictionary<string, InventoryItem>();
+    private HashSet<string> unlockedItems = new HashSet<string>();
     private HashSet<string> viewedCutscenes = new HashSet<string>();
+
+    private ArchiveItems archiveItems;
 
     private void Awake()
     {
@@ -32,6 +36,15 @@ public class ArchiveManager : MonoBehaviour
             SaveToFile();
         }
     }
+    public void UnlockItem(string itemId)
+    {
+        if (!unlockedItems.Contains(itemId))
+        {
+            unlockedItems.Add(itemId);
+            SaveToFile();
+        }
+    }
+    
 
     public bool IsCutsceneUnlocked(string characterName, string cutsceneName)
     {
@@ -40,7 +53,10 @@ public class ArchiveManager : MonoBehaviour
 
     private void SaveToFile()
     {
-        var saveData = new ArchiveSaveData();
+        var saveData = new ArchiveSaveData
+        {
+            unlockedItems = new List<string>(unlockedItems) 
+        };
 
         foreach (var kvp in unlockedCutscenes)
         {
@@ -63,9 +79,20 @@ public class ArchiveManager : MonoBehaviour
         {
             unlockedCutscenes[entry.characterName] = new HashSet<string>(entry.cutsceneNames);
         }
+        unlockedItems = new HashSet<string>(saveData.unlockedItems);
+
+        foreach (var itemId in unlockedItems)
+        {
+            var item = ItemDatabaseManager.Instance.GetItem(itemId);
+            if (item != null)
+            {
+                purchasedItems[itemId] = new InventoryItem(item, 1);
+            }
+        }
 
         Debug.Log($"[ArchiveManager] Loaded {saveData.unlockedArchives.Count} archive entries.");
     }
+
 
     public bool HasViewedCutscene(string cutsceneName)
     {
@@ -79,5 +106,31 @@ public class ArchiveManager : MonoBehaviour
             viewedCutscenes.Add(cutsceneName);
             Debug.Log($"[ArchiveManager] Marked {cutsceneName} as viewed.");
         }
+    }
+
+    public void OnItemPurchased(InventoryItem purchasedItem)
+    {
+        if (!purchasedItems.ContainsKey(purchasedItem.itemData.id))
+        {
+            purchasedItems.Add(purchasedItem.itemData.id, purchasedItem);
+            UnlockItem(purchasedItem.itemData.id);
+
+            if (archiveItems != null)
+            {
+                archiveItems.UnlockItemInArchive(purchasedItem);
+            }
+
+            Debug.Log($"{purchasedItem.itemData.itemName} has been unlocked in the archive.");
+        }
+    }
+
+    public void SetArchiveItemsReference(ArchiveItems archiveUI)
+    {
+        archiveItems = archiveUI;
+    }
+
+    public bool IsItemUnlocked(string itemId)
+    {
+        return purchasedItems.ContainsKey(itemId);
     }
 }

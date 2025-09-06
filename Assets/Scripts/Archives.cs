@@ -17,7 +17,7 @@ public class Archives : MonoBehaviour
     [SerializeField] private CharacterData[] allCharacters;
 
     [Header("Cutscene Player")]
-    [SerializeField] private Cutscene cutscenePlayer; // 🔹 Reference to your Cutscene script
+    [SerializeField] private Cutscene cutscenePlayer;
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public class Archives : MonoBehaviour
                     character.characterName,
                     cutsceneData.openingCutsceneName,
                     cutsceneData.openingIcon,
-                    cutsceneData.openingCutscene // 🔹 pass the clip
+                    cutsceneData.openingCutscene
                 );
 
                 addedOpenings.Add(cutsceneData.openingCutsceneName);
@@ -80,7 +80,7 @@ public class Archives : MonoBehaviour
                             character.characterName,
                             endingName,
                             ending.cutsceneIcon,
-                            ending.cutsceneVideo // 🔹 pass the clip
+                            ending.cutsceneVideo
                         );
 
                         addedEndings.Add(endingName);
@@ -123,7 +123,7 @@ public class Archives : MonoBehaviour
                 if (cutscenePlayer != null)
                 {
                     cutscenePlayer.PlayArchivedCutscene(clip, characterName, cutsceneName);
-                    gameObject.SetActive(false); // 🔹 Hide Archives menu when playing
+                    gameObject.SetActive(false);
                 }
                 else
                 {

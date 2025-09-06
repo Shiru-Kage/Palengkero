@@ -112,7 +112,6 @@ public class SettingsManager : MonoBehaviour
 
     private IEnumerator SwitchPanels(GameObject newPanel, CanvasGroup newPanelCanvasGroup, string title)
     {
-        // Fade out the currently active panel and title text simultaneously
         List<Coroutine> fadingCoroutines = new List<Coroutine>();
 
         if (preferences.activeSelf)
@@ -131,30 +130,23 @@ public class SettingsManager : MonoBehaviour
             fadingCoroutines.Add(StartCoroutine(FadePanel(titleTextCanvasGroup, 0f)));
         }
 
-        // Wait for both fade operations to finish simultaneously
         foreach (var fadeCoroutine in fadingCoroutines)
         {
             yield return fadeCoroutine;
         }
 
-        // Deactivate all panels after fading out
         preferences.SetActive(false);
         about.SetActive(false);
         controls.SetActive(false);
 
-        // Activate the new panel and fade it in along with the title text
         newPanel.SetActive(true);
         SetTitleText(title);
 
-        // Start both fade-in coroutines for the new panel and title text
         var fadePanelIn = StartCoroutine(FadePanel(newPanelCanvasGroup, 1f));
         var fadeTitleIn = StartCoroutine(FadePanel(titleTextCanvasGroup, 1f));
 
-        // Wait for both fade-in operations to finish simultaneously
         yield return fadePanelIn;
         yield return fadeTitleIn;
-
-        // Set the new title text
     }
 
     private IEnumerator FadeAndDeactivatePanel(CanvasGroup canvasGroup, GameObject panel)

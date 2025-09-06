@@ -209,6 +209,8 @@ public class Stall : Interactable
             LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
             if (levelManager != null)
                 levelManager.UpdateBudgetDisplay();
+
+            ArchiveManager.Instance.OnItemPurchased(new InventoryItem(item, 1));
         }
         else if (buyerType == BuyerType.NPC)
         {
@@ -222,7 +224,6 @@ public class Stall : Interactable
                     stallUI.UpdateDisplayItemsForPlayer(assignedItems, stockAmounts, this);
                 }
             }
-            Debug.Log($"NPC purchased {item.itemName}!");
         }
 
         StallManager.Instance?.ReduceGlobalItemCount(1);

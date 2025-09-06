@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void AddItem(ItemData itemData, int quantity)

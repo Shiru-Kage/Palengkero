@@ -19,6 +19,17 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject informationPanel;
     [SerializeField] private GameObject inventoryPanel;
 
+    public Image GetSelectedImage() => selectedItemImage;
+    public TextMeshProUGUI GetItemNameText() => itemNameText;
+    public Transform GetSlotContainer() => slotContainer;
+    public TextMeshProUGUI GetPriceText() => priceText;
+    public TextMeshProUGUI GetNutritionText() =>  nutritionText;
+    public TextMeshProUGUI GetSatisfactionText() =>  satisfactionText;
+    public TextMeshProUGUI GetflavorText() =>  flavorText;
+
+    public GameObject GetItemSlotPrefab() => itemSlotPrefab;
+    public GameObject GetInformationPanel() =>  informationPanel;
+
     private void OnEnable()
     {
         Inventory.Instance.OnInventoryUpdated += DisplayInventory;
@@ -44,7 +55,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void DisplayInventory()
+    public virtual void DisplayInventory()
     {
         foreach (Transform child in slotContainer)
         {

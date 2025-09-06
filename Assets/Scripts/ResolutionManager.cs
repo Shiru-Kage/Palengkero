@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class ResolutionManager : MonoBehaviour
 {
-    // UI Buttons to switch between aspect ratios and toggle fullscreen/windowed mode
     public Button aspectRatio16_9Button;
     public Button aspectRatio4_3Button;
     public Button aspectRatio16_10Button;

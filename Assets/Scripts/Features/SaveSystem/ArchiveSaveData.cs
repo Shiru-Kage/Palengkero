@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class ArchiveSaveData
 {
     public List<ArchiveEntry> unlockedArchives = new();
+    public List<string> unlockedItems = new List<string>();
 }
 
 [System.Serializable]

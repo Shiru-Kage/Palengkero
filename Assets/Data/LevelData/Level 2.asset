@@ -36,8 +36,11 @@ MonoBehaviour:
   maxNPCToSpawn: 5
   minSpawnInterval: 10
   maxSpawnInterval: 15
-  npcTypeLikelihoods: 
-  typeOfNPCs: []
+  npcTypeLikelihoods: 190000001900000019000000
+  typeOfNPCs:
+  - {fileID: 6444193704485106208, guid: 0d232dbc14b708c4da9212eeac152d46, type: 3}
+  - {fileID: 6444193704485106208, guid: 654cf5c5cb3aee542bfad422ea3a6920, type: 3}
+  - {fileID: 6444193704485106208, guid: 944741d1d80538b44bdee3482e76d872, type: 3}
   minStallItemStock: 3
   maxStallItemStock: 4
-  backgroundType: 1
+  backgroundType: 0
