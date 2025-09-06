@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05985c5146c32aa4faefb67a36e7f985, type: 3}
   m_Name: Level 4
   m_EditorClassIdentifier: 
-  levelIcon: {fileID: 21300000, guid: 3b55bb2df9dcc1147bea9463dac8a684, type: 3}
+  levelIcon: {fileID: 783217574279282422, guid: 0783d3b89a86cc943bddb04dce48dfe2, type: 3}
   levelTileMap: {fileID: 4792319248656287721, guid: 0425efb7656e1a6428f6d3efb044b502, type: 3}
   levelName: 'Adapting to Market Rush Hours '
   levelNumber: 4

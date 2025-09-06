@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -34,63 +35,56 @@ public class SettingsManager : MonoBehaviour
         aboutCanvasGroup = about.GetComponent<CanvasGroup>();
         controlsCanvasGroup = controls.GetComponent<CanvasGroup>();
 
-        // Add CanvasGroup to titleText for fading
         titleTextCanvasGroup = titleText.GetComponent<CanvasGroup>();
         if (titleTextCanvasGroup == null)
         {
-            titleTextCanvasGroup = titleText.gameObject.AddComponent<CanvasGroup>(); // If no CanvasGroup, add one
+            titleTextCanvasGroup = titleText.gameObject.AddComponent<CanvasGroup>();
         }
 
         settingCanvasGroup.alpha = 0;
         preferencesCanvasGroup.alpha = 0;
         aboutCanvasGroup.alpha = 0;
         controlsCanvasGroup.alpha = 0;
-        titleTextCanvasGroup.alpha = 0; // Make sure titleText starts hidden
+        titleTextCanvasGroup.alpha = 0; 
 
-        // Ensure all panels are initially inactive
         settingPanel.SetActive(false);
         preferences.SetActive(false);
         about.SetActive(false);
         controls.SetActive(false);
 
-        // Set event listeners for the buttons
         preferencesButton.onClick.AddListener(ShowPreferences);
         aboutButton.onClick.AddListener(ShowAbout);
         controlsButton.onClick.AddListener(ShowControls);
     }
 
-    // Show Settings Panel
     public void ShowSettings()
     {
         SetUIObjectsActive(false);
         settingPanel.SetActive(true);
+        titleText.gameObject.SetActive(true);
         StartCoroutine(FadePanel(settingCanvasGroup, 1f));
         StartCoroutine(FadePanel(preferencesCanvasGroup, 0f));
         StartCoroutine(FadePanel(aboutCanvasGroup, 0f));
         StartCoroutine(FadePanel(controlsCanvasGroup, 0f));
-        StartCoroutine(FadePanel(titleTextCanvasGroup, 1f)); // Fade title text in
+        StartCoroutine(FadePanel(titleTextCanvasGroup, 1f));
         SetTitleText("Settings");
     }
 
-    // Show Preferences Panel
     public void ShowPreferences()
     {
         StartCoroutine(SwitchPanels(preferences, preferencesCanvasGroup, "Preferences"));
     }
 
-    // Show About Panel
     public void ShowAbout()
     {
         StartCoroutine(SwitchPanels(about, aboutCanvasGroup, "About"));
     }
 
-    // Show Controls Panel
     public void ShowControls()
     {
         StartCoroutine(SwitchPanels(controls, controlsCanvasGroup, "Controls"));
     }
 
-    // Close all panels and reset UI objects
     public void CloseAllPanels()
     {
         SetUIObjectsActive(true);
@@ -98,12 +92,9 @@ public class SettingsManager : MonoBehaviour
         StartCoroutine(FadeAndDeactivatePanel(preferencesCanvasGroup, preferences));
         StartCoroutine(FadeAndDeactivatePanel(aboutCanvasGroup, about));
         StartCoroutine(FadeAndDeactivatePanel(controlsCanvasGroup, controls));
-        StartCoroutine(FadeAndDeactivatePanel(titleTextCanvasGroup, titleText.gameObject)); // Fade out title text
-
-        titleText.text = "";
+        StartCoroutine(FadeAndDeactivatePanel(titleTextCanvasGroup, titleText.gameObject));
     }
 
-    // Fade a panel to a target alpha value
     private IEnumerator FadePanel(CanvasGroup canvasGroup, float targetAlpha)
     {
         float startAlpha = canvasGroup.alpha;
@@ -119,43 +110,59 @@ public class SettingsManager : MonoBehaviour
         canvasGroup.alpha = targetAlpha;
     }
 
-    // Handle switching panels with fade effect
     private IEnumerator SwitchPanels(GameObject newPanel, CanvasGroup newPanelCanvasGroup, string title)
     {
-        // Fade out the currently active panel
-        if (preferences.activeSelf)
-            yield return StartCoroutine(FadePanel(preferencesCanvasGroup, 0f));
-        else if (about.activeSelf)
-            yield return StartCoroutine(FadePanel(aboutCanvasGroup, 0f));
-        else if (controls.activeSelf)
-            yield return StartCoroutine(FadePanel(controlsCanvasGroup, 0f));
+        // Fade out the currently active panel and title text simultaneously
+        List<Coroutine> fadingCoroutines = new List<Coroutine>();
 
-        // Deactivate all panels first
+        if (preferences.activeSelf)
+        {
+            fadingCoroutines.Add(StartCoroutine(FadePanel(preferencesCanvasGroup, 0f)));
+            fadingCoroutines.Add(StartCoroutine(FadePanel(titleTextCanvasGroup, 0f)));
+        }
+        else if (about.activeSelf)
+        {
+            fadingCoroutines.Add(StartCoroutine(FadePanel(aboutCanvasGroup, 0f)));
+            fadingCoroutines.Add(StartCoroutine(FadePanel(titleTextCanvasGroup, 0f)));
+        }
+        else if (controls.activeSelf)
+        {
+            fadingCoroutines.Add(StartCoroutine(FadePanel(controlsCanvasGroup, 0f)));
+            fadingCoroutines.Add(StartCoroutine(FadePanel(titleTextCanvasGroup, 0f)));
+        }
+
+        // Wait for both fade operations to finish simultaneously
+        foreach (var fadeCoroutine in fadingCoroutines)
+        {
+            yield return fadeCoroutine;
+        }
+
+        // Deactivate all panels after fading out
         preferences.SetActive(false);
         about.SetActive(false);
         controls.SetActive(false);
 
-        // Fade out the title text before switching
-        yield return StartCoroutine(FadePanel(titleTextCanvasGroup, 0f));
-
-        // Activate the new panel and fade it in
+        // Activate the new panel and fade it in along with the title text
         newPanel.SetActive(true);
-        yield return StartCoroutine(FadePanel(newPanelCanvasGroup, 1f));
-
-        // Update the title text and fade it in
         SetTitleText(title);
-        yield return StartCoroutine(FadePanel(titleTextCanvasGroup, 1f)); // Fade title text in
+
+        // Start both fade-in coroutines for the new panel and title text
+        var fadePanelIn = StartCoroutine(FadePanel(newPanelCanvasGroup, 1f));
+        var fadeTitleIn = StartCoroutine(FadePanel(titleTextCanvasGroup, 1f));
+
+        // Wait for both fade-in operations to finish simultaneously
+        yield return fadePanelIn;
+        yield return fadeTitleIn;
+
+        // Set the new title text
     }
 
-
-    // Fade out and deactivate the panel
     private IEnumerator FadeAndDeactivatePanel(CanvasGroup canvasGroup, GameObject panel)
     {
-        yield return StartCoroutine(FadePanel(canvasGroup, 0f)); // Fade the panel out
-        panel.SetActive(false); // Deactivate panel after fading
+        yield return StartCoroutine(FadePanel(canvasGroup, 0f)); 
+        panel.SetActive(false); 
     }
 
-    // Set the active state of all UI objects
     private void SetUIObjectsActive(bool isActive)
     {
         foreach (var uiObject in uiObjects)
@@ -163,8 +170,6 @@ public class SettingsManager : MonoBehaviour
             uiObject.SetActive(isActive);
         }
     }
-
-    // Update the title text based on the active panel
     private void SetTitleText(string panelName)
     {
         titleText.text = panelName;
