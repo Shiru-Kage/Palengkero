@@ -1,9 +1,11 @@
 using UnityEngine;
+using TMPro;
 
 public class NPC_Manager : MonoBehaviour
 {
     [Header("NPC Settings")]
     [SerializeField] private int maxNPCInLevel = 20;
+    [SerializeField] private TextMeshProUGUI currentNPCcount;
     private int npcsToSpawnAtOnce;
     private float spawnInterval;
 
@@ -58,6 +60,7 @@ public class NPC_Manager : MonoBehaviour
                 timeElapsed = 0f;
             }
         }
+        UpdateNPCCountUI();
     }
 
     private void SpawnNPCs()
@@ -93,5 +96,15 @@ public class NPC_Manager : MonoBehaviour
         }
 
         return npcTypes[0];
+    }
+
+    private void UpdateNPCCountUI()
+    {
+        int currentNPCs = GameObject.FindObjectsByType<NPC_Shopper>(FindObjectsSortMode.None).Length;
+
+        if (currentNPCcount != null)
+        {
+            currentNPCcount.text = $"{currentNPCs}/10";
+        }
     }
 }

@@ -10822,7 +10822,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 095532a65b88a6148ace76127b6a4738, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55fc7880de378e949b0fc584623daf84, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12859,6 +12859,10 @@ PrefabInstance:
       propertyPath: maxNPCInLevel
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3639178882297668901, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: currentNPCcount
+      value: 
+      objectReference: {fileID: 1424548584}
     - target: {fileID: 5828795787040725207, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
       propertyPath: m_Name
       value: GameManager
