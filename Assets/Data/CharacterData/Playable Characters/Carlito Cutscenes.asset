@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openingCutsceneName: Carlito - Opening
   openingCutscene: {fileID: 32900000, guid: c6e0b23fe3a12c94eb331373d5ffcc6b, type: 3}
-  openingIcon: {fileID: 0}
+  openingIcon: {fileID: 21300000, guid: 315e063f92006244b8b6888158f1e876, type: 3}
   endingCutscenes:
   - endingType: 0
     cutsceneName: Carlito - Smart Saver

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openingCutsceneName: Cora - Opening
   openingCutscene: {fileID: 32900000, guid: c284fd4022beea242b2fd78f39152643, type: 3}
-  openingIcon: {fileID: 0}
+  openingIcon: {fileID: 21300000, guid: b608c1260349e3b4f8717993bd29a32c, type: 3}
   endingCutscenes:
   - endingType: 0
     cutsceneName: Cora - Smart Saver

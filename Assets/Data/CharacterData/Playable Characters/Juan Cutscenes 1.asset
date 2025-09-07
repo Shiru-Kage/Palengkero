@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openingCutsceneName: Juan - Opening
   openingCutscene: {fileID: 32900000, guid: be673348712e85c43898e473d5712380, type: 3}
-  openingIcon: {fileID: 0}
+  openingIcon: {fileID: 21300000, guid: 36a7a8521279dd4469e28beac1bc9a1d, type: 3}
   endingCutscenes:
   - endingType: 0
     cutsceneName: Juan - Smart Saver

@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
+    [Header("Audio")]
+    [SerializeField] private AudioClip pauseSound;
 
     private InputSystem_Actions inputActions;
     private bool isPaused = false;
@@ -33,9 +35,14 @@ public class PauseManager : MonoBehaviour
     public void TogglePause()
     {
         if (isPaused)
+        {
             ResumeGame();
+        }
         else
+        {
             PauseGame();
+            PlayPauseSound();
+        }
     }
 
     public void PauseGame()
@@ -65,9 +72,16 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-
     public bool IsPaused()
     {
         return isPaused;
+    }
+
+    private void PlayPauseSound()
+    {
+        if (pauseSound != null)
+        {
+            AudioManager.Instance.PlaySFX(pauseSound);
+        }
     }
 }

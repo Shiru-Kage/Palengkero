@@ -9,6 +9,8 @@ public class CursorManager : MonoBehaviour
     [Header("Cursor Textures")]
     [SerializeField] private Texture2D defaultCursor;
     [SerializeField] private Texture2D uiCursor;
+    [Header("Audio")]
+    [SerializeField] private AudioClip clickSound;
 
     private Vector2 defaultHotspot;
     private Vector2 uiHotspot;
@@ -18,6 +20,8 @@ public class CursorManager : MonoBehaviour
     {
         Texture2D newCursor = defaultCursor;
         Vector2 hotspot = defaultHotspot;
+
+        bool overUI = false;
 
         if (EventSystem.current != null)
         {
@@ -37,6 +41,7 @@ public class CursorManager : MonoBehaviour
                 {
                     newCursor = uiCursor;
                     hotspot = uiHotspot;
+                    overUI = true;
                     break;
                 }
 
@@ -51,6 +56,11 @@ public class CursorManager : MonoBehaviour
         if (newCursor != currentCursor)
         {
             SetCursor(newCursor, hotspot);
+        }
+
+        if (overUI && Input.GetMouseButtonDown(0))
+        {
+            PlayClickSound();
         }
     }
 
@@ -68,5 +78,13 @@ public class CursorManager : MonoBehaviour
     {
         Cursor.SetCursor(texture, hotspot, CursorMode.Auto);
         currentCursor = texture;
+    }
+
+    private void PlayClickSound()
+    {
+        if (clickSound != null)
+        {
+            AudioManager.Instance.PlaySFX(clickSound);
+        }
     }
 }

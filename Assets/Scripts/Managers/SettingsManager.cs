@@ -8,11 +8,16 @@ public class SettingsManager : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private GameObject settingPanel;
-    [SerializeField] private GameObject[] uiObjects;
     [SerializeField] private GameObject preferences;
     [SerializeField] private GameObject about;
     [SerializeField] private GameObject controls;
     [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private GameObject[] uiObjects;
+
+    [Header("Audio References")]
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Button muteAudio;
 
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 0.5f;
@@ -45,7 +50,7 @@ public class SettingsManager : MonoBehaviour
         preferencesCanvasGroup.alpha = 0;
         aboutCanvasGroup.alpha = 0;
         controlsCanvasGroup.alpha = 0;
-        titleTextCanvasGroup.alpha = 0; 
+        titleTextCanvasGroup.alpha = 0;
 
         settingPanel.SetActive(false);
         preferences.SetActive(false);
@@ -55,6 +60,34 @@ public class SettingsManager : MonoBehaviour
         preferencesButton.onClick.AddListener(ShowPreferences);
         aboutButton.onClick.AddListener(ShowAbout);
         controlsButton.onClick.AddListener(ShowControls);
+
+        musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+        muteAudio.onClick.AddListener(ToggleMuteAudio);
+
+        InitializeSliders();
+    }
+
+    private void InitializeSliders()
+    {
+        musicSlider.value = AudioManager.Instance.musicVolume;
+        sfxSlider.value = AudioManager.Instance.sfxVolume;
+    }
+
+    private void OnMusicVolumeChanged(float value)
+    {
+        AudioManager.Instance.SetMusicVolume(value);
+    }
+
+    private void OnSFXVolumeChanged(float value)
+    {
+        AudioManager.Instance.SetSFXVolume(value); 
+    }
+
+    private void ToggleMuteAudio()
+    {
+        bool isMuted = AudioListener.volume == 0;
+        AudioListener.volume = isMuted ? 1f : 0f;
     }
 
     public void ShowSettings()
@@ -151,8 +184,8 @@ public class SettingsManager : MonoBehaviour
 
     private IEnumerator FadeAndDeactivatePanel(CanvasGroup canvasGroup, GameObject panel)
     {
-        yield return StartCoroutine(FadePanel(canvasGroup, 0f)); 
-        panel.SetActive(false); 
+        yield return StartCoroutine(FadePanel(canvasGroup, 0f));
+        panel.SetActive(false);
     }
 
     private void SetUIObjectsActive(bool isActive)
@@ -166,4 +199,6 @@ public class SettingsManager : MonoBehaviour
     {
         titleText.text = panelName;
     }
+    
+    
 }
