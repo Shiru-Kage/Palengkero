@@ -136,7 +136,7 @@ public class SettingsManager : MonoBehaviour
         while (timeElapsed < fadeDuration)
         {
             canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, timeElapsed / fadeDuration);
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             yield return null;
         }
 

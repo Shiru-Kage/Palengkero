@@ -3,7 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour
 {
+    [Header("Settings References")]
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private SettingsManager settings;
     [Header("Audio")]
     [SerializeField] private AudioClip pauseSound;
 
@@ -55,6 +57,7 @@ public class PauseManager : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
+        settings.CloseAllPanels();
         ApplyTimePause(false);
         isPaused = false;
     }
