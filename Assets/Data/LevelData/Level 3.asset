@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05985c5146c32aa4faefb67a36e7f985, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  levelIcon: {fileID: 21300000, guid: cf66abc51844f7245bc5f9e7dbb35d3d, type: 3}
-  levelTileMap: {fileID: 0}
+  levelIcon: {fileID: 21300000, guid: 78f6d651cd22f8f43b874f10f3936e54, type: 3}
+  levelTileMap: {fileID: 8218492297282385699, guid: e16c644a065b582418ddceac2d90ef0b, type: 3}
+  backgroundMusic: {fileID: 0}
   levelName: 'Managing Unexpected Expenses  '
   levelNumber: 3
   numberOfStalls: 6
@@ -41,6 +42,6 @@ MonoBehaviour:
   - {fileID: 6444193704485106208, guid: 0d232dbc14b708c4da9212eeac152d46, type: 3}
   - {fileID: 6444193704485106208, guid: 654cf5c5cb3aee542bfad422ea3a6920, type: 3}
   - {fileID: 6444193704485106208, guid: 944741d1d80538b44bdee3482e76d872, type: 3}
-  minStallItemStock: 1
+  minStallItemStock: 3
   maxStallItemStock: 5
   backgroundType: 1

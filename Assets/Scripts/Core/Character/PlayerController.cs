@@ -139,6 +139,13 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             Debug.Log("No interactable in range.");
             return;
         }
+        var stallCooldown = currentInteractable.GetComponent<StallCooldown>();
+        if (stallCooldown != null && stallCooldown.isCoolingDown)
+        {
+            Debug.Log("Interactable is on cooldown.");
+            return;  // Prevent interaction if on cooldown
+        }
+
         if (TutorialManager.Instance != null)
         {
             TutorialManager.Instance.NotifyAction("Interact");

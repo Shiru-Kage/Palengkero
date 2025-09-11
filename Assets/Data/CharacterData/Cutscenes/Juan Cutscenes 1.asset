@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d78576f084f90242bb794b90bf232a6, type: 3}
+  m_Name: Juan Cutscenes 1
+  m_EditorClassIdentifier: 
+  openingCutsceneName: Juan - Opening
+  openingCutscene: {fileID: 32900000, guid: be673348712e85c43898e473d5712380, type: 3}
+  openingIcon: {fileID: 21300000, guid: 36a7a8521279dd4469e28beac1bc9a1d, type: 3}
+  endingCutscenes:
+  - endingType: 0
+    cutsceneName: Juan - Smart Saver
+    cutsceneVideo: {fileID: 32900000, guid: 6a382248db74a82479676521640b6870, type: 3}
+    cutsceneIcon: {fileID: -8578418458684398838, guid: fb87b1d37b612394ea4d27c4073e748d, type: 3}
+  - endingType: 1
+    cutsceneName: Juan - Bare Minimum Survivor
+    cutsceneVideo: {fileID: 32900000, guid: c31bffcceb87c3d4a88f40692328ecd4, type: 3}
+    cutsceneIcon: {fileID: 6272176178551689794, guid: 42f1e33188e04874e83b1f813632f3c9, type: 3}
+  - endingType: 2
+    cutsceneName: Juan - Over Spender
+    cutsceneVideo: {fileID: 32900000, guid: e342fe663428d5440bbc4ae6d5397a68, type: 3}
+    cutsceneIcon: {fileID: -855298285791758126, guid: 07386bf1cdb29024f9aed107f061825e, type: 3}
+  - endingType: 3
+    cutsceneName: Juan - Neglected Health
+    cutsceneVideo: {fileID: 32900000, guid: 93dca40385d676e469626c7932ddca1f, type: 3}
+    cutsceneIcon: {fileID: -4333720463083865623, guid: 07f19788d5a868f4cb49f9fd685a681f, type: 3}

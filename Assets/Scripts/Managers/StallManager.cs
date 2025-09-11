@@ -16,7 +16,10 @@ public class StallManager : MonoBehaviour
     [SerializeField] private GameObject endLevelScreen;
 
     [Header("Spawn Settings")]
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private int numberOfRows = 3; 
+    [SerializeField] private int numberOfColumns = 3; 
+    [SerializeField] private Vector3 cellOffset = new Vector3(0.5f, 0.5f, 0f);
+    [SerializeField] private Vector3 cellSpacing = new Vector3(1f, 1f, 0f);
     private int numberOfStalls;
 
     private int totalAssignedItems; 
@@ -37,7 +40,7 @@ public class StallManager : MonoBehaviour
 
         if (currentLevelData != null)
         {
-            numberOfStalls = currentLevelData.numberOfStalls;
+            numberOfStalls = currentLevelData.numberOfStalls; 
         }
         else
         {
@@ -45,7 +48,7 @@ public class StallManager : MonoBehaviour
             return;
         }
 
-        if (stallPrefabs == null || stallPrefabs.Length == 0 || haggleSystem == null || spawnPoint == null ||
+        if (stallPrefabs == null || stallPrefabs.Length == 0 || haggleSystem == null ||
             stallInnerUIContainer == null || stallUICanvasObject == null)
         {
             Debug.LogError("StallManager is missing required references.");
@@ -54,39 +57,58 @@ public class StallManager : MonoBehaviour
 
         totalAssignedItems = 0;
 
-        for (int i = 0; i < numberOfStalls; i++)
+        int stallsSpawned = 0;
+
+        for (int row = 0; row < numberOfRows && stallsSpawned < numberOfStalls; row++)
         {
-            GameObject stallPrefab = stallPrefabs[i % stallPrefabs.Length];
-
-            Vector3 position = spawnPoint.position;
-
-            GameObject stallInstance = Instantiate(stallPrefab, position, spawnPoint.rotation, stallCanvas);
-
-            Stall stall = stallInstance.GetComponent<Stall>();
-            StallUI stallUI = stallInstance.GetComponent<StallUI>();
-            StallCooldown stallCooldown = stallInstance.GetComponentInChildren<StallCooldown>();
-
-            if (stall == null || stallUI == null)
+            for (int col = 0; col < numberOfColumns && stallsSpawned < numberOfStalls; col++)
             {
-                Debug.LogError($"Stall prefab missing Stall or StallUI component (Stall #{i + 1}).");
-                continue;
+                Vector3 worldPosition = GetCellWorldPosition(row, col);
+
+                int stallIndex = row * numberOfColumns + col;
+                if (stallIndex >= stallPrefabs.Length) break;
+
+                GameObject stallPrefab = stallPrefabs[stallIndex];
+                GameObject stallInstance = Instantiate(stallPrefab, worldPosition, Quaternion.identity, stallCanvas);
+
+                Stall stall = stallInstance.GetComponent<Stall>();
+                StallUI stallUI = stallInstance.GetComponent<StallUI>();
+                StallCooldown stallCooldown = stallInstance.GetComponentInChildren<StallCooldown>();
+
+                stallUI.AssignUIContainer(stallInnerUIContainer);
+                stallUI.SetUICanvasObject(stallUICanvasObject);
+                stallUI.SetupUIReferences();
+
+                Button[] itemButtons = stallUI.GetItemButtons();
+
+                stall.Initialize(haggleSystem, stallUICanvasObject, itemButtons);
+
+                allStalls.Add(stall);
+
+                int stallAssignedItems = stall.GetTotalAssignedItemCount();
+                totalAssignedItems += stallAssignedItems;
+
+                stallsSpawned++;  
+
+                if (stallsSpawned >= numberOfStalls) break; 
             }
-
-            stallUI.AssignUIContainer(stallInnerUIContainer);
-            stallUI.SetUICanvasObject(stallUICanvasObject);
-            stallUI.SetupUIReferences();
-
-            Button[] itemButtons = stallUI.GetItemButtons();
-
-            stall.Initialize(haggleSystem, stallUICanvasObject, itemButtons);
-
-            allStalls.Add(stall);
-
-            int stallAssignedItems = stall.GetTotalAssignedItemCount();
-            totalAssignedItems += stallAssignedItems;
         }
 
         Debug.Log($"[StallManager] Total assigned items across all stalls: {totalAssignedItems}");
+    }
+
+
+    private Vector3 GetCellWorldPosition(int row, int col)
+    {
+        Vector2Int gridSize = PathfindingGrid.Instance.GetGridSize();
+        
+        row = Mathf.Clamp(row, 0, gridSize.y - 1);
+        col = Mathf.Clamp(col, 0, gridSize.x - 1);
+
+        Vector3 cellCenter = PathfindingGrid.Instance.GetWorldPosition(col, row);
+        Vector3 spacingAdjustment = new Vector3(col * cellSpacing.x, row * cellSpacing.y, 0f);
+        
+        return cellCenter + cellOffset + spacingAdjustment;
     }
 
     public void ReduceGlobalItemCount(int amount = 1)

@@ -18,6 +18,8 @@ public class SceneChanger : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneIndex);
     }
+
+    
     public void QuitGame()
     {
         Application.Quit();
