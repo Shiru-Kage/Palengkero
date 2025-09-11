@@ -41,6 +41,7 @@ MonoBehaviour:
     savingsGoal: 500
   minNPCToSpawn: 1
   maxNPCToSpawn: 1
+  NPCperLevel: 10
   minSpawnInterval: 10
   maxSpawnInterval: 5
   npcTypeLikelihoods: 320000001900000019000000

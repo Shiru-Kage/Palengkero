@@ -20,6 +20,7 @@ public class LevelData : ScriptableObject
     [Header("Level NPC Settings")]
     public int minNPCToSpawn = 1;
     public int maxNPCToSpawn = 5;
+    public int NPCperLevel = 10;
     public float minSpawnInterval = 10f;
     public float maxSpawnInterval = 15f;
     public int[] npcTypeLikelihoods;

@@ -28,8 +28,8 @@ MonoBehaviour:
 
     - Family mechanic enabled
 
-    - Increased NPC presence at
-    start of level
+    - Increased NPC presence at start
+    of level
 
 '
   objectivesPerCharacter:
@@ -46,7 +46,8 @@ MonoBehaviour:
     satisfactionGoal: 95
     savingsGoal: 600
   minNPCToSpawn: 2
-  maxNPCToSpawn: 5
+  maxNPCToSpawn: 2
+  NPCperLevel: 10
   minSpawnInterval: 10
   maxSpawnInterval: 15
   npcTypeLikelihoods: 190000001900000019000000

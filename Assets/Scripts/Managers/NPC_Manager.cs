@@ -4,7 +4,6 @@ using TMPro;
 public class NPC_Manager : MonoBehaviour
 {
     [Header("NPC Settings")]
-    [SerializeField] private int maxNPCInLevel = 20;
     [SerializeField] private TextMeshProUGUI currentNPCcount;
     private int npcsToSpawnAtOnce;
     private float spawnInterval;
@@ -66,6 +65,9 @@ public class NPC_Manager : MonoBehaviour
     private void SpawnNPCs()
     {
         int currentNPCs = GameObject.FindObjectsByType<NPC_Shopper>(FindObjectsSortMode.None).Length;
+        LevelData currentLevelData = LevelStateManager.Instance.GetCurrentLevelData();
+        int maxNPCInLevel = currentLevelData.NPCperLevel;
+
         int spawnableNPCs = Mathf.Min(npcsToSpawnAtOnce, maxNPCInLevel - currentNPCs);
         if (spawnableNPCs <= 0) return;
 

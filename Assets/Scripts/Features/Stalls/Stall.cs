@@ -192,6 +192,7 @@ public class Stall : Interactable
                 var stallUI = GetComponent<StallUI>();
                 if (stallUI != null)
                 {
+                    stallUI.PlayPurchaseSound();
                     stallUI.HideDetailsAfterHaggle();
                     stallUI.ShowUnableToPurchasePanel();
                 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e9bff8a9a180d45803cc37543e5442, type: 3}
+  m_Name: Primary
+  m_EditorClassIdentifier: 
+  familyMembers:
+  - callerName: Younger Sibling
+    callerDescription: Salamat kapatid! Kailangan ko toh para sa school
+    familyDeduction: 500
+  - callerName: Father
+    callerDescription: Salamat anak sa pag tutulong sa bills
+    familyDeduction: 300
+  - callerName: Mother
+    callerDescription: Pasensya na anak, para toh sa kalusugan natin.
+    familyDeduction: 100

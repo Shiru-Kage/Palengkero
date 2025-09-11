@@ -15,11 +15,12 @@ public class StallUI : MonoBehaviour
     [SerializeField] private Image lowerStallHalf;
     [SerializeField] private Image backgroundImage;
     [SerializeField] private HighlightEffect highlightEffect;
+    [SerializeField] private AudioClip purchaseSound;
 
     [Header("Purcahsed Item Settings")]
     [SerializeField] private GameObject purchasedItem;
-    [SerializeField] private float purchaseEffectScale = 1.2f;    
-    [SerializeField] private float purchaseEffectMoveY = 50f;  
+    [SerializeField] private float purchaseEffectScale = 1.2f;
+    [SerializeField] private float purchaseEffectMoveY = 50f;
     [SerializeField] private float purchaseEffectDuration = 0.5f;
 
     private Transform stallInnerUIContainer;
@@ -37,7 +38,7 @@ public class StallUI : MonoBehaviour
     private TextMeshProUGUI descriptionInfo;
 
     private Button[] itemButtons;
-    private Stall currentStall; 
+    private Stall currentStall;
 
     [HideInInspector] public bool isPlayerNearby = false;
 
@@ -304,9 +305,9 @@ public class StallUI : MonoBehaviour
 
         itemName.text = item.itemName;
         stockInfo.text = $"Stock amount: {stock}x";
-        stockInfo.alignment = TMPro.TextAlignmentOptions.Left; 
-        stockInfo.fontSize = 25;                               
-        stockInfo.color = Color.black;                         
+        stockInfo.alignment = TMPro.TextAlignmentOptions.Left;
+        stockInfo.fontSize = 25;
+        stockInfo.color = Color.black;
 
         float price = item.price;
         float finalPrice = price;
@@ -360,6 +361,14 @@ public class StallUI : MonoBehaviour
         if (highlightEffect != null)
         {
             highlightEffect.SetBlinking(active);
+        }
+    }
+    
+    public void PlayPurchaseSound()
+    {
+        if (purchaseSound != null)
+        {
+            AudioManager.Instance.PlaySFX(purchaseSound);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class CursorManager : MonoBehaviour
 {
+    public static CursorManager Instance { get; private set; }
     [Header("Cursor Textures")]
     [SerializeField] private Texture2D defaultCursor;
     [SerializeField] private Texture2D uiCursor;
@@ -15,6 +16,18 @@ public class CursorManager : MonoBehaviour
     private Vector2 defaultHotspot;
     private Vector2 uiHotspot;
     private Texture2D currentCursor;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this; 
+        DontDestroyOnLoad(gameObject); 
+    }
 
     void Update()
     {

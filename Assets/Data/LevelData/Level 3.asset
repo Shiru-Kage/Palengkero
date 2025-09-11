@@ -35,7 +35,8 @@ MonoBehaviour:
     satisfactionGoal: 105
     savingsGoal: 700
   minNPCToSpawn: 2
-  maxNPCToSpawn: 10
+  maxNPCToSpawn: 3
+  NPCperLevel: 10
   minSpawnInterval: 10
   maxSpawnInterval: 15
   npcTypeLikelihoods: 190000001900000019000000

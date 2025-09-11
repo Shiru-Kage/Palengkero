@@ -128,6 +128,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayMultipleSFX(List<AudioClip> clips)
+    {
+        foreach (var clip in clips)
+        {
+            PlaySFX(clip);
+        }
+    }
+
     private IEnumerator ReturnAudioSourceAfterPlay(AudioSource audioSource, float clipLength)
     {
         yield return new WaitForSecondsRealtime(clipLength);

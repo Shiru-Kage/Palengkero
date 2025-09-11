@@ -555,6 +555,7 @@ MonoBehaviour:
   lowerStallHalf: {fileID: 7500578385570423591}
   backgroundImage: {fileID: 5761644937060326194}
   highlightEffect: {fileID: 2484737136427826084}
+  purchaseSound: {fileID: 8300000, guid: b7314b375176e884a8c4c269f66eefc1, type: 3}
   purchasedItem: {fileID: 6124362666994928663}
   purchaseEffectScale: 1.8
   purchaseEffectMoveY: 100
