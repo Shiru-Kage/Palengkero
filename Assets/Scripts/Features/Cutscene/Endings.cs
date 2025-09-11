@@ -12,6 +12,10 @@ public class Endings : MonoBehaviour
     private StarSystem.LevelStars[] levelStars;
     private CharacterData selectedCharacterData;
     private Character_Cutscenes cutscenes;
+    [SerializeField] private Animator characterAnimator;
+
+    private float originalMusicVolume;
+    private float originalSFXVolume;
 
     void Start()
     {
@@ -46,6 +50,11 @@ public class Endings : MonoBehaviour
         }
 
         videoPlayer.loopPointReached += OnVideoEnd;
+        if (characterAnimator != null && selectedCharacterData.characterAnimator != null)
+        {
+            characterAnimator.runtimeAnimatorController = selectedCharacterData.characterAnimator;
+            characterAnimator.Play("Idle", 0);
+        }
     }
 
     bool AreAllLevelsCompleted()
@@ -114,6 +123,12 @@ public class Endings : MonoBehaviour
     {
         if (cutscenes == null || cutscenes.endingCutscenes == null) return;
 
+        originalMusicVolume = AudioManager.Instance.musicVolume;
+        originalSFXVolume = AudioManager.Instance.sfxVolume;
+
+        AudioManager.Instance.SetMusicVolume(0.1f); 
+        AudioManager.Instance.SetSFXVolume(0.1f);
+
         var ending = cutscenes.endingCutscenes.FirstOrDefault(e => e.endingType == type);
 
         if (ending != null && ending.cutsceneVideo != null)
@@ -131,6 +146,8 @@ public class Endings : MonoBehaviour
 
     private void OnVideoEnd(VideoPlayer vp)
     {
+        AudioManager.Instance.SetMusicVolume(originalMusicVolume);
+        AudioManager.Instance.SetSFXVolume(originalSFXVolume);
         videoPlayer.gameObject.SetActive(false);
         statistics.gameObject.SetActive(true);
     }
