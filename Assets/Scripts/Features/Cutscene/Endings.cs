@@ -78,15 +78,20 @@ public class Endings : MonoBehaviour
             Debug.Log("Playing 'Over Spender' Ending");
             PlayEnding(EndingType.OverSpender);
         }
-        else if (IsOverworkedMalnourished())
+        else
         {
-            Debug.Log("Playing 'Overworked & Malnourished' Ending");
-            PlayEnding(EndingType.OverworkedMalnourished);
-        }
-        else if (IsBareMinimumSurvivor())
-        {
-            Debug.Log("Playing 'Bare Minimum Survivor' Ending");
-            PlayEnding(EndingType.BareMinimumSurvivor);
+            bool isOverworkedMalnourished = IsOverworkedMalnourished();
+            
+            if (isOverworkedMalnourished)
+            {
+                Debug.Log("Playing 'Overworked & Malnourished' Ending");
+                PlayEnding(EndingType.OverworkedMalnourished);
+            }
+            else if (IsBareMinimumSurvivor())
+            {
+                Debug.Log("Playing 'Bare Minimum Survivor' Ending");
+                PlayEnding(EndingType.BareMinimumSurvivor);
+            }
         }
     }
 
@@ -102,7 +107,11 @@ public class Endings : MonoBehaviour
 
     bool IsBareMinimumSurvivor()
     {
-        return totalStars >= 6 && totalStars <= 14;
+        return totalStars >= 6 && totalStars <= 14 &&
+            levelStars.Any(stars => stars.nutritionStars > 0) &&
+            levelStars.Any(stars => stars.satisfactionStars > 0) &&
+            levelStars.Any(stars => stars.savingsStars > 0) &&
+            !IsOverworkedMalnourished();
     }
 
     bool IsOverSpender()
@@ -112,12 +121,26 @@ public class Endings : MonoBehaviour
 
     bool IsOverworkedMalnourished()
     {
-        bool hasSufficientSavings = levelStars.Any(stars => stars.savingsStars >= 1);
-        bool hasNeglectedNutrition = levelStars.All(stars => stars.nutritionStars <= 1);
-        bool hasNeglectedSatisfaction = levelStars.All(stars => stars.satisfactionStars <= 1);
+        int totalSavingsStars = 0;
+        int totalNutritionStars = 0;
+        int totalSatisfactionStars = 0;
+
+        bool[] unlockedLevels = LevelStateManager.Instance.GetUnlockedLevelsForCurrentCharacter();
+
+        for (int i = 0; i < levelStars.Length; i++)
+        {
+            totalSavingsStars += levelStars[i].savingsStars;
+            totalNutritionStars += levelStars[i].nutritionStars;
+            totalSatisfactionStars += levelStars[i].satisfactionStars;
+        }
+
+        bool hasSufficientSavings = totalSavingsStars >= 1;  
+        bool hasNeglectedNutrition = totalNutritionStars <= 1; 
+        bool hasNeglectedSatisfaction = totalSatisfactionStars <= 1; 
 
         return hasSufficientSavings && hasNeglectedNutrition && hasNeglectedSatisfaction;
     }
+
 
     void PlayEnding(EndingType type)
     {
