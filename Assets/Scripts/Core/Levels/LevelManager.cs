@@ -142,7 +142,7 @@ public class LevelManager : MonoBehaviour
 
         if (objectiveUI != null)
         {
-            objectiveUI.UpdateObjectiveUI(objective);
+            objectiveUI.UpdateObjectiveUI(objective, currentLevel);
         }
         else
         {

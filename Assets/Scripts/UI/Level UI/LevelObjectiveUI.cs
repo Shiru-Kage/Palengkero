@@ -7,6 +7,7 @@ public class LevelObjectiveUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nutritionGoalText;
     [SerializeField] private TextMeshProUGUI satisfactionGoalText;
     [SerializeField] private TextMeshProUGUI savingsGoalText;
+    [SerializeField] private TextMeshProUGUI levelModifiers;
 
     private CharacterObjective currentObjective;
     public CharacterObjective CurrentObjective => currentObjective;
@@ -31,15 +32,17 @@ public class LevelObjectiveUI : MonoBehaviour
         WellBeingEvents.OnWellBeingChanged -= HandleWellBeingChanged;
     }
 
-    public void UpdateObjectiveUI(CharacterObjective objective)
+    public void UpdateObjectiveUI(CharacterObjective objective, LevelData currentLevel)
     {
         currentObjective = objective;
+    
 
         if (objective != null)
         {
             nutritionGoalText.text = $"Nutrition Goal: {objective.nutritionGoal}";
             satisfactionGoalText.text = $"Satisfaction Goal: {objective.satisfactionGoal}";
             savingsGoalText.text = $"Savings Goal: ₱{objective.savingsGoal}";
+            levelModifiers.text = $"Level description: \n{currentLevel.levelDescription}";
         }
         else
         {

@@ -45,7 +45,7 @@ public class SelectedCharacter : MonoBehaviour
         incomeText.text = "Income: " + data.characterMonthlyIncome + "/Month";
         descriptionText.text = data.characterDescription;
         characterFrameImage.sprite = data.characterSelectFrameSprite;
-        difficulty.text = data.characterDifficulty;
+        difficulty.text = "Difficulty: " + data.characterDifficulty;
         if (characterAnimator != null && data.characterAnimator != null)
         {
             characterAnimator.runtimeAnimatorController = data.characterAnimator;

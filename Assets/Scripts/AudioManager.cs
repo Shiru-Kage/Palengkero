@@ -55,28 +55,25 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusicWithFadeIn(AudioClip clip, float fadeDuration = 1f)
     {
-        // If the music is already playing, fade it out first
         if (musicSource.isPlaying)
         {
             StartCoroutine(FadeOutMusic(fadeDuration));
         }
 
-        // Set up the music source with the new clip and start fading in
         StartCoroutine(FadeInMusic(clip, fadeDuration));
     }
 
     private IEnumerator FadeInMusic(AudioClip clip, float fadeDuration)
     {
         musicSource.clip = clip;
-        musicSource.volume = 0f;  // Start volume at 0
+        musicSource.volume = 0f; 
         musicSource.Play();
 
-        float elapsedTime = 0f;  // Track elapsed time for fading
+        float elapsedTime = 0f;  
         while (elapsedTime < fadeDuration)
         {
-            // Gradually increase the volume over time
             musicSource.volume = Mathf.Lerp(0f, musicVolume, elapsedTime / fadeDuration);
-            elapsedTime += Time.deltaTime;  // Increment time
+            elapsedTime += Time.deltaTime; 
             yield return null;
         }
 
@@ -103,7 +100,6 @@ public class AudioManager : MonoBehaviour
     {
         if (clip == null) return;
 
-        // Only play the clip if it's not already playing
         if (musicSource.clip == clip && musicSource.isPlaying)
         {
             return;
@@ -113,7 +109,7 @@ public class AudioManager : MonoBehaviour
         musicSource.volume = musicVolume;
         musicSource.Play();
 
-        backgroundMusicClip = clip;  // Store the current background music clip
+        backgroundMusicClip = clip; 
         Debug.Log("Playing background music: " + clip.name);
     }
 

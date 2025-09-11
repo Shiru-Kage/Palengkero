@@ -807,7 +807,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -155}
-  m_SizeDelta: {x: 520, y: 150}
+  m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &538469388
 MonoBehaviour:
@@ -4413,6 +4413,7 @@ MonoBehaviour:
   nutritionGoalText: {fileID: 1378377180}
   satisfactionGoalText: {fileID: 1468986605}
   savingsGoalText: {fileID: 1189085209}
+  levelModifiers: {fileID: 538469388}
 --- !u!114 &1916743978
 MonoBehaviour:
   m_ObjectHideFlags: 0

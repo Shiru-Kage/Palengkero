@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Page 1
   m_EditorClassIdentifier: 
   pageText: Welcome to Palengkero! Hope you enjoy our game!
-  pageImage: {fileID: 4867661476491135586, guid: e1df5005db925884f928922abc469d7d, type: 3}
+  pageImage: {fileID: 21300000, guid: a57a6a586f930b04ca71ccbb5e6c0f5c, type: 3}

@@ -53,7 +53,7 @@ public class LevelSelectUI : MonoBehaviour
             levelSprite.sprite = currentLevel.levelIcon;
 
         if (objectiveUI != null)
-            objectiveUI.UpdateObjectiveUI(objective);
+            objectiveUI.UpdateObjectiveUI(objective, currentLevel);
         else
             Debug.LogWarning("Objective UI reference missing in LevelSelectUI.");
         UpdateLevelButtons();
