@@ -23,6 +23,8 @@ public class ResolutionManager : MonoBehaviour
 
     private void Start()
     {
+        Screen.fullScreen = true;
+
         aspectRatio16_9Button.onClick.AddListener(() => SetResolution(ratio16_9));
         aspectRatio4_3Button.onClick.AddListener(() => SetResolution(ratio4_3));
         aspectRatio16_10Button.onClick.AddListener(() => SetResolution(ratio16_10));

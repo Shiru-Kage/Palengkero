@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageText: The items you buy from the shop shows its price but you dont know their
     nutritional or satisfactional value until you view them in your inventory!
-  pageImage: {fileID: 4867661476491135586, guid: e1df5005db925884f928922abc469d7d, type: 3}
+  pageImage: {fileID: 21300000, guid: a3c836b983b2ce343a5f0a445aafec98, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageText: To open your inventory you can press I or click the basket icon on the
     bottom right.
-  pageImage: {fileID: 4867661476491135586, guid: e1df5005db925884f928922abc469d7d, type: 3}
+  pageImage: {fileID: 21300000, guid: 655e38f2985a66449b245f93904965ba, type: 3}

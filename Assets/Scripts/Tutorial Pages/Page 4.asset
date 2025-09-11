@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageText: 'To buy goods you can interact with the stall by standing in the middle
     then pressing F to open the stall. '
-  pageImage: {fileID: 4867661476491135586, guid: e1df5005db925884f928922abc469d7d, type: 3}
+  pageImage: {fileID: 21300000, guid: 6093a3a02e8051543945bc6f59cad56a, type: 3}

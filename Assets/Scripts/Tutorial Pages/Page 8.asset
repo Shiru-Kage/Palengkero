@@ -15,4 +15,4 @@ MonoBehaviour:
   pageText: This is the Family Aid mechanic! Every 5 min your family will call and
     take away some of your existing budget! The Younger sibling will take 500, the
     father will take 300 and the mother will take 200!
-  pageImage: {fileID: 4867661476491135586, guid: e1df5005db925884f928922abc469d7d, type: 3}
+  pageImage: {fileID: 21300000, guid: 4c3a3000ee5cc1c4485d19ab8f74769a, type: 3}

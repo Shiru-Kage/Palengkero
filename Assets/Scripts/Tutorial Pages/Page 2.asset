@@ -15,4 +15,4 @@ MonoBehaviour:
   pageText: Lets talk about the main Objective of the Game. Manage your weekly budget
     wisely while shopping in the market. Balance Nutrition, Satisfaction, and Savings
     to secure the best possible ending for your family!
-  pageImage: {fileID: 0}
+  pageImage: {fileID: 21300000, guid: 10f81f8e3d090ff49ab36b141d5469e5, type: 3}

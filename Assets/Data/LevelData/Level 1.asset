@@ -17,7 +17,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 8300000, guid: ce06959b05036c04ba3c91de873346bc, type: 3}
   levelName: Budgeting & The Marketplace
   levelNumber: 1
-  numberOfStalls: 3
+  numberOfStalls: 6
   levelCleared: 0
   levelDescription: '- 3 Vendor stalls
 
