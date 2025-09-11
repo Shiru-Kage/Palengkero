@@ -10,11 +10,6 @@ public class LevelSelectManager : MonoBehaviour
         {
             SetLevel(LevelStateManager.Instance.CurrentLevelIndex);
         }
-        else
-        {
-            Debug.LogWarning("LevelStateManager not found. Defaulting to index 0.");
-            SetLevel(0);
-        }
     }
 
     public void SetLevel(int levelIndex)

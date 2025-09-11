@@ -20,6 +20,9 @@ public class Cutscene : MonoBehaviour
     private string archiveCharacterName;
     private string archiveCutsceneName;
 
+    private float originalMusicVolume;
+    private float originalSFXVolume;
+
     private void Start()
     {
         characterSelectionManager = CharacterSelectionManager.Instance;
@@ -45,6 +48,12 @@ public class Cutscene : MonoBehaviour
 
             if (cutscenes != null && cutscenes.openingCutscene != null)
             {
+                originalMusicVolume = AudioManager.Instance.musicVolume;
+                originalSFXVolume = AudioManager.Instance.sfxVolume;
+
+                AudioManager.Instance.SetMusicVolume(0.1f); 
+                AudioManager.Instance.SetSFXVolume(0.1f);
+
                 videoPlayer.clip = cutscenes.openingCutscene;
                 videoPlayer.Play();
 
@@ -83,6 +92,12 @@ public class Cutscene : MonoBehaviour
 
         if (clip != null)
         {
+            originalMusicVolume = AudioManager.Instance.musicVolume;
+            originalSFXVolume = AudioManager.Instance.sfxVolume;
+
+            AudioManager.Instance.SetMusicVolume(0.1f);
+            AudioManager.Instance.SetSFXVolume(0.1f);
+
             archiveCharacterName = characterName;
             archiveCutsceneName = cutsceneName;
 
@@ -103,6 +118,9 @@ public class Cutscene : MonoBehaviour
     {
         skipButton.gameObject.SetActive(false);
         gameObject.SetActive(false);
+
+        AudioManager.Instance.SetMusicVolume(originalMusicVolume);
+        AudioManager.Instance.SetSFXVolume(originalSFXVolume);
 
         if (!isArchiveCutscene && cutscenes != null && !string.IsNullOrEmpty(cutscenes.openingCutsceneName))
         {

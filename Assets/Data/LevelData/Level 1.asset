@@ -14,12 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelIcon: {fileID: 21300000, guid: f7af5df3b35e6914c8a95a549e5ea2e6, type: 3}
   levelTileMap: {fileID: 5652705767546750107, guid: c5b5a992f36c31147a379d4d9b9c2714, type: 3}
-  backgroundMusic: {fileID: 8300000, guid: fcc9373d612ccd846936d39a566b149e, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: ce06959b05036c04ba3c91de873346bc, type: 3}
   levelName: Budgeting & The Marketplace
   levelNumber: 1
-  numberOfStalls: 6
+  numberOfStalls: 3
   levelCleared: 0
-  levelDescription: This level is about blah blah blah blah blah
+  levelDescription: '- 3 Vendor stalls
+
+    - Fixed prices
+
+    - Few NPC shoppers
+
+'
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
     nutritionGoal: 105
@@ -36,7 +42,7 @@ MonoBehaviour:
   minNPCToSpawn: 1
   maxNPCToSpawn: 1
   minSpawnInterval: 10
-  maxSpawnInterval: 10
+  maxSpawnInterval: 5
   npcTypeLikelihoods: 320000001900000019000000
   typeOfNPCs:
   - {fileID: 6444193704485106208, guid: 0d232dbc14b708c4da9212eeac152d46, type: 3}

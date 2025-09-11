@@ -90,6 +90,7 @@ public class LevelManager : MonoBehaviour
         LevelStateManager.Instance.SetLevelIndex(levelIndex);
         ItemDatabaseManager.Instance.AdjustPricesBasedOnLevel(levelIndex);
         CharacterSelectionManager.Instance?.ResetRuntimeCharacterBudget();
+        AudioManager.Instance.PlayBackgroundMusic(levels[levelIndex].backgroundMusic);
         UpdateUI(levels[levelIndex]);
         InstantiateTilemap(levels[levelIndex]);
     }

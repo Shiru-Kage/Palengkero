@@ -88,6 +88,12 @@ public class SettingsManager : MonoBehaviour
     {
         bool isMuted = AudioListener.volume == 0;
         AudioListener.volume = isMuted ? 1f : 0f;
+
+        Transform muteTextTransform = muteAudio.transform.GetChild(0);
+        if (muteTextTransform != null)
+        {
+            muteTextTransform.gameObject.SetActive(!isMuted);
+        }
     }
 
     public void ShowSettings()

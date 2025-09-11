@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelIcon: {fileID: 21300000, guid: 0783d3b89a86cc943bddb04dce48dfe2, type: 3}
   levelTileMap: {fileID: 4792319248656287721, guid: 0425efb7656e1a6428f6d3efb044b502, type: 3}
-  backgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 471816da0e40eee499539e5996e53926, type: 3}
   levelName: 'Adapting to Market Rush Hours '
   levelNumber: 4
   numberOfStalls: 6
   levelCleared: 0
-  levelDescription: 
+  levelDescription: "- 6 vendor stalls\r\n- 20% price increase from base\r\r\n- Limited
+    stock remains\r\n- More  NPCs\r\n"
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
     nutritionGoal: 135
@@ -33,10 +34,10 @@ MonoBehaviour:
     nutritionGoal: 165
     satisfactionGoal: 115
     savingsGoal: 800
-  minNPCToSpawn: 1
-  maxNPCToSpawn: 5
-  minSpawnInterval: 10
-  maxSpawnInterval: 15
+  minNPCToSpawn: 3
+  maxNPCToSpawn: 15
+  minSpawnInterval: 20
+  maxSpawnInterval: 25
   npcTypeLikelihoods: 320000001900000019000000
   typeOfNPCs:
   - {fileID: 6444193704485106208, guid: 0d232dbc14b708c4da9212eeac152d46, type: 3}

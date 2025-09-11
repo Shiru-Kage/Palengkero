@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelIcon: {fileID: 21300000, guid: 78f6d651cd22f8f43b874f10f3936e54, type: 3}
   levelTileMap: {fileID: 8218492297282385699, guid: e16c644a065b582418ddceac2d90ef0b, type: 3}
-  backgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 996361a073c751f44a47ad2d31deaf96, type: 3}
   levelName: 'Managing Unexpected Expenses  '
   levelNumber: 3
-  numberOfStalls: 6
+  numberOfStalls: 5
   levelCleared: 0
-  levelDescription: 
+  levelDescription: "- 5 vendor stalls\r\n- 10% price increase from previous level\r\r\n-
+    More frequent family requests\r\n- Limited stock for certain stalls\r\r\n"
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
     nutritionGoal: 125
@@ -33,8 +34,8 @@ MonoBehaviour:
     nutritionGoal: 150
     satisfactionGoal: 105
     savingsGoal: 700
-  minNPCToSpawn: 1
-  maxNPCToSpawn: 5
+  minNPCToSpawn: 2
+  maxNPCToSpawn: 10
   minSpawnInterval: 10
   maxSpawnInterval: 15
   npcTypeLikelihoods: 190000001900000019000000
