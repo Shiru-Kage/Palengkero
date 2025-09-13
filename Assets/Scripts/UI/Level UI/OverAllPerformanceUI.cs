@@ -6,8 +6,10 @@ using System.Linq;
 public class OverAllPerformanceUI : MonoBehaviour
 {
     [Header("UI Elements")]
-    public TextMeshProUGUI performanceSummaryText;
-    public TextMeshProUGUI noticeableHabitText;
+    [SerializeField] private TextMeshProUGUI performanceSummaryText;
+    [SerializeField] private TextMeshProUGUI noticeableHabitText;
+    [SerializeField] private TextMeshProUGUI endingText;
+    [SerializeField] private Endings endingsScript;
     public Image nutritionBar;
     public Image satisfactionBar;
     public Image savingsBar;
@@ -21,6 +23,7 @@ public class OverAllPerformanceUI : MonoBehaviour
     {
         selectedCharacterID = CharacterSelectionManager.Instance.SelectedCharacterID;
         UpdatePerformanceUI();
+        DisplayEnding();
     }
 
     void UpdatePerformanceUI()
@@ -41,10 +44,8 @@ public class OverAllPerformanceUI : MonoBehaviour
             savingsStars[i] = levelStars.savingsStars > 0;
         }
 
-        // Set performance summary text
         performanceSummaryText.text = $"Total Stars: {totalStars}/15";
 
-        // Set performance bars (nutrition, satisfaction, savings)
         SetPerformanceBar(nutritionBar, nutritionStars.Count(star => star), totalLevels);
         SetPerformanceBar(satisfactionBar, satisfactionStars.Count(star => star), totalLevels);
         SetPerformanceBar(savingsBar, savingsStars.Count(star => star), totalLevels);
@@ -55,7 +56,6 @@ public class OverAllPerformanceUI : MonoBehaviour
         noticeableHabitText.text = $"Most Noticeable Habit: {noticeableHabit}";
     }
 
-    // Set performance bars (for nutrition, satisfaction, savings)
     void SetPerformanceBar(Image bar, int starsMet, int totalLevels)
     {
         float fillAmount = (float)starsMet / totalLevels;
@@ -68,15 +68,12 @@ public class OverAllPerformanceUI : MonoBehaviour
         float satisfactionAchieved = satisfactionStars.Count(star => star);
         float savingsAchieved = savingsStars.Count(star => star);
 
-        // Total levels
         int totalLevels = LevelStateManager.Instance.AllLevels.Length;
 
-        // Calculate percentage for each category
         float nutritionPercentage = nutritionAchieved / totalLevels;
         float satisfactionPercentage = satisfactionAchieved / totalLevels;
         float savingsPercentage = savingsAchieved / totalLevels;
 
-        // Total percentage to ensure no section exceeds 100%
         float totalPercentage = nutritionPercentage + satisfactionPercentage + savingsPercentage;
 
         if (totalPercentage > 1f)
@@ -101,12 +98,13 @@ public class OverAllPerformanceUI : MonoBehaviour
         savingsPieSection.transform.rotation = Quaternion.Euler(0, 0, -currentAngle * 360f); 
     }
 
+    void DisplayEnding()
+    {
+        endingText.text = "Ending: " + endingsScript.GetEndingName();
+    }
 
-
-    // Get the most noticeable habit based on player's performance
     string GetMostNoticedHabit(bool[] nutritionStars, bool[] satisfactionStars, bool[] savingsStars)
     {
-        // Determine which category has the highest completion rate
         int nutritionCount = nutritionStars.Count(star => star);
         int satisfactionCount = satisfactionStars.Count(star => star);
         int savingsCount = savingsStars.Count(star => star);

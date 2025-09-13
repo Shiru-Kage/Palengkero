@@ -13,6 +13,8 @@ public class Endings : MonoBehaviour
     private CharacterData selectedCharacterData;
     private Character_Cutscenes cutscenes;
     [SerializeField] private Animator characterAnimator;
+    private string endingName;
+
 
     private float originalMusicVolume;
     private float originalSFXVolume;
@@ -71,11 +73,13 @@ public class Endings : MonoBehaviour
         if (IsSmartSaver())
         {
             Debug.Log("Playing 'Smart Saver' Ending");
+            endingName = "Smart Saver";
             PlayEnding(EndingType.SmartSaver);
         }
         else if (IsOverSpender())
         {
             Debug.Log("Playing 'Over Spender' Ending");
+            endingName = "Over Spender";
             PlayEnding(EndingType.OverSpender);
         }
         else
@@ -85,14 +89,21 @@ public class Endings : MonoBehaviour
             if (isOverworkedMalnourished)
             {
                 Debug.Log("Playing 'Overworked & Malnourished' Ending");
+                endingName = "Neglected Health"; 
                 PlayEnding(EndingType.OverworkedMalnourished);
             }
             else if (IsBareMinimumSurvivor())
             {
                 Debug.Log("Playing 'Bare Minimum Survivor' Ending");
+                endingName = "Bare Minimum Survivor";
                 PlayEnding(EndingType.BareMinimumSurvivor);
             }
         }
+    }
+
+    public string GetEndingName()
+    {
+        return endingName;
     }
 
     bool IsSmartSaver()
