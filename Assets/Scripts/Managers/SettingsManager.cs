@@ -11,6 +11,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private GameObject preferences;
     [SerializeField] private GameObject about;
     [SerializeField] private GameObject controls;
+    [SerializeField] private GameObject credits;
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private GameObject[] uiObjects;
 
@@ -26,11 +27,13 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Button preferencesButton;
     [SerializeField] private Button aboutButton;
     [SerializeField] private Button controlsButton;
+    [SerializeField] private Button creditsButton;
 
     private CanvasGroup settingCanvasGroup;
     private CanvasGroup preferencesCanvasGroup;
     private CanvasGroup aboutCanvasGroup;
     private CanvasGroup controlsCanvasGroup;
+    private CanvasGroup creditsCanvasGroup;
     private CanvasGroup titleTextCanvasGroup;
 
     private void Awake()
@@ -39,6 +42,7 @@ public class SettingsManager : MonoBehaviour
         preferencesCanvasGroup = preferences.GetComponent<CanvasGroup>();
         aboutCanvasGroup = about.GetComponent<CanvasGroup>();
         controlsCanvasGroup = controls.GetComponent<CanvasGroup>();
+        creditsCanvasGroup = credits.GetComponent<CanvasGroup>(); 
 
         titleTextCanvasGroup = titleText.GetComponent<CanvasGroup>();
         if (titleTextCanvasGroup == null)
@@ -50,16 +54,19 @@ public class SettingsManager : MonoBehaviour
         preferencesCanvasGroup.alpha = 0;
         aboutCanvasGroup.alpha = 0;
         controlsCanvasGroup.alpha = 0;
+        controlsCanvasGroup.alpha = 0;
         titleTextCanvasGroup.alpha = 0;
 
         settingPanel.SetActive(false);
         preferences.SetActive(false);
         about.SetActive(false);
         controls.SetActive(false);
+        credits.SetActive(false);
 
         preferencesButton.onClick.AddListener(ShowPreferences);
         aboutButton.onClick.AddListener(ShowAbout);
         controlsButton.onClick.AddListener(ShowControls);
+        creditsButton.onClick.AddListener(ShowCredits);
 
         musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
         sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
@@ -123,6 +130,10 @@ public class SettingsManager : MonoBehaviour
     {
         StartCoroutine(SwitchPanels(controls, controlsCanvasGroup, "Controls"));
     }
+    public void ShowCredits()
+    {
+        StartCoroutine(SwitchPanels(credits, creditsCanvasGroup, "Credits"));
+    }
 
     public void CloseAllPanels()
     {
@@ -131,6 +142,7 @@ public class SettingsManager : MonoBehaviour
         StartCoroutine(FadeAndDeactivatePanel(preferencesCanvasGroup, preferences));
         StartCoroutine(FadeAndDeactivatePanel(aboutCanvasGroup, about));
         StartCoroutine(FadeAndDeactivatePanel(controlsCanvasGroup, controls));
+        StartCoroutine(FadeAndDeactivatePanel(creditsCanvasGroup, credits));
         StartCoroutine(FadeAndDeactivatePanel(titleTextCanvasGroup, titleText.gameObject));
     }
 
@@ -168,15 +180,21 @@ public class SettingsManager : MonoBehaviour
             fadingCoroutines.Add(StartCoroutine(FadePanel(controlsCanvasGroup, 0f)));
             fadingCoroutines.Add(StartCoroutine(FadePanel(titleTextCanvasGroup, 0f)));
         }
+        else if (credits.activeSelf)
+        {
+            fadingCoroutines.Add(StartCoroutine(FadePanel(creditsCanvasGroup, 0f)));
+            fadingCoroutines.Add(StartCoroutine(FadePanel(titleTextCanvasGroup, 0f)));
+        }
 
         foreach (var fadeCoroutine in fadingCoroutines)
-        {
-            yield return fadeCoroutine;
-        }
+            {
+                yield return fadeCoroutine;
+            }
 
         preferences.SetActive(false);
         about.SetActive(false);
         controls.SetActive(false);
+        credits.SetActive(false);
 
         newPanel.SetActive(true);
         SetTitleText(title);
@@ -205,6 +223,4 @@ public class SettingsManager : MonoBehaviour
     {
         titleText.text = panelName;
     }
-    
-    
 }
