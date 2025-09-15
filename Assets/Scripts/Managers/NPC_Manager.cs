@@ -17,9 +17,11 @@ public class NPC_Manager : MonoBehaviour
     private float timeElapsed = 0f;
     private GameObject[] npcTypes;
     private int[] npcTypeLikelihoods;
+    private LevelManager levelmanager;
 
     private void Start()
     {
+        levelmanager = GetComponent<LevelManager>();
         LevelData currentLevelData = LevelStateManager.Instance.GetCurrentLevelData();
 
         if (currentLevelData != null)
@@ -48,7 +50,7 @@ public class NPC_Manager : MonoBehaviour
     {
         if (TutorialManager.Instance != null)
         {
-            if (TutorialManager.Instance.IsTutorialActive()) return;
+            if (levelmanager.IsTutorialActive()) return;
         }
         if (timer.IsRunning)
         {

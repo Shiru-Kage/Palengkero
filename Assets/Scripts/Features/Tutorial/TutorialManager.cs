@@ -16,9 +16,6 @@ public class TutorialManager : MonoBehaviour
 
     [Header("UI Integration")]
     [SerializeField] private TutorialUI tutorialUI;
-
-    private bool isTutorialActive = false;
-    public bool IsTutorialActive() => isTutorialActive;
     private Coroutine hideTutorialCoroutine = null;
 
     [System.Serializable]
@@ -44,17 +41,8 @@ public class TutorialManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        if (isTutorialActive)
-        {
-            StartTutorial();
-        }
-    }
-
     public void StartTutorial()
     {
-        isTutorialActive = true;
         SelectDefaultCharacter();
         currentProgress = 0;
         HandleTutorial();
@@ -123,8 +111,6 @@ public class TutorialManager : MonoBehaviour
 
     public void NotifyAction(string action)
     {
-        if (!isTutorialActive) return;
-
         if (currentProgress < 0 || currentProgress >= tutorialSteps.Count) return;
 
         var step = tutorialSteps[currentProgress];

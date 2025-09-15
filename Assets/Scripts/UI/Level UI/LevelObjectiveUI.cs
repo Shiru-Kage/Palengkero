@@ -42,7 +42,14 @@ public class LevelObjectiveUI : MonoBehaviour
             nutritionGoalText.text = $"Nutrition Goal: {objective.nutritionGoal}";
             satisfactionGoalText.text = $"Satisfaction Goal: {objective.satisfactionGoal}";
             savingsGoalText.text = $"Savings Goal: ₱{objective.savingsGoal}";
-            levelModifiers.text = $"Level description: \n{currentLevel.levelDescription}";
+            if (levelModifiers == null)
+            {
+                levelModifiers.text = $"Tutorial!";
+            }
+            else
+            {
+                levelModifiers.text = $"Level description: \n{currentLevel.levelDescription}";
+            }
         }
         else
         {

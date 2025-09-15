@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
 
     [Header("Tutorial")]
     [SerializeField] private bool tutorial;
+    public bool IsTutorialActive() =>tutorial;
+
 
     private GameObject currentTilemapObject;
 
@@ -166,7 +168,7 @@ public class LevelManager : MonoBehaviour
             characterSpawner.SpawnSelectedCharacter();
             if (TutorialManager.Instance != null)
             {
-                if (TutorialManager.Instance.IsTutorialActive())
+                if (tutorial == true)
                 {
                     stallManager.ToggleMovement(false);
                 }
