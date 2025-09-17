@@ -23,12 +23,12 @@ public class InventoryUI : MonoBehaviour
     public TextMeshProUGUI GetItemNameText() => itemNameText;
     public Transform GetSlotContainer() => slotContainer;
     public TextMeshProUGUI GetPriceText() => priceText;
-    public TextMeshProUGUI GetNutritionText() =>  nutritionText;
-    public TextMeshProUGUI GetSatisfactionText() =>  satisfactionText;
-    public TextMeshProUGUI GetflavorText() =>  flavorText;
+    public TextMeshProUGUI GetNutritionText() => nutritionText;
+    public TextMeshProUGUI GetSatisfactionText() => satisfactionText;
+    public TextMeshProUGUI GetflavorText() => flavorText;
 
     public GameObject GetItemSlotPrefab() => itemSlotPrefab;
-    public GameObject GetInformationPanel() =>  informationPanel;
+    public GameObject GetInformationPanel() => informationPanel;
 
     private void OnEnable()
     {
@@ -113,5 +113,23 @@ public class InventoryUI : MonoBehaviour
         {
             itemNameText.text = inventoryItem.itemData.itemName;
         }
+    }
+    
+    public void ClearInventory()
+    {
+        Inventory.Instance.ClearInventory();
+        foreach (Transform child in slotContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        informationPanel.SetActive(false);
+
+        selectedItemImage.sprite = null;
+        priceText.text = "Price: ";
+        nutritionText.text = "Nutrition: ";
+        satisfactionText.text = "Satisfaction: ";
+        flavorText.text = "Flavor: ";
+        itemNameText.text = "";
     }
 }

@@ -35,6 +35,8 @@ public class LevelSummarySequence : MonoBehaviour
     [SerializeField] private Timer levelTimer;
     [SerializeField] private WellBeingMeter wellBeingMeter;
 
+    [SerializeField] private InventoryUI inventory;
+
     private CharacterObjective currentObjective;
 
     private void Awake()
@@ -49,6 +51,10 @@ public class LevelSummarySequence : MonoBehaviour
         levelSelect.gameObject.SetActive(false);
     }
 
+    void Start()
+    {
+        inventory = FindAnyObjectByType<InventoryUI>();
+    }
     public void BeginSummarySequence()
     {
         var objectiveUI = Object.FindAnyObjectByType<LevelObjectiveUI>();
@@ -196,6 +202,7 @@ public class LevelSummarySequence : MonoBehaviour
         levelSelect.onClick.RemoveAllListeners();
         levelSelect.onClick.AddListener(() =>
         {
+            inventory.ClearInventory();
             if (metNutrition || metSatisfaction || metSavings)
             {
                 LevelStateManager.Instance.LockCurrentLevel();

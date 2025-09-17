@@ -23,6 +23,12 @@ public class Inventory : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void ClearInventory()
+    {
+        items.Clear();
+        OnInventoryUpdated?.Invoke();
+    }
+
     public void AddItem(ItemData itemData, int quantity)
     {
         InventoryItem existingItem = items.Find(i => i.itemData.id == itemData.id);

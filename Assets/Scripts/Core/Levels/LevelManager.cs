@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     [Header("Objective UI Handler")]
     [SerializeField] private LevelObjectiveUI objectiveUI;
     [SerializeField] private TextMeshProUGUI weeklyBudgetText;
+    [SerializeField] private WellBeingMeter wellBeingMeter;
 
     [Header("Spawners")]
     [SerializeField] private CharacterSpawner characterSpawner;
