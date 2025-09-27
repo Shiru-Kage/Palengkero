@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class WellBeingMeter : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Image nutritionBar;
-    [SerializeField] private Image satisfactionBar;
+    [SerializeField] private Image nutritionBar1; 
+    [SerializeField] private Image nutritionBar2;
+    [SerializeField] private Image satisfactionBar1; 
+    [SerializeField] private Image satisfactionBar2;
+    [Header("Text References")]
+    [SerializeField] private TextMeshProUGUI nutritionText;
+    [SerializeField] private TextMeshProUGUI satisfactionText; 
 
     [Header("Settings")]
     [SerializeField] private int maxNutrition = 200;
@@ -33,24 +39,39 @@ public class WellBeingMeter : MonoBehaviour
 
     private void HandleWellBeingChanged(int nutritionDelta, int satisfactionDelta)
     {
-        // Update nutrition and satisfaction values
         currentNutrition = Mathf.Clamp(currentNutrition + nutritionDelta, 0, maxNutrition);
         currentSatisfaction = Mathf.Clamp(currentSatisfaction + satisfactionDelta, 0, maxSatisfaction);
 
-        // Update the fill amount of the bars
         UpdateBars();
     }
 
     private void UpdateBars()
     {
-        if (nutritionBar != null)
+        if (nutritionBar1 != null && nutritionBar2 != null)
         {
-            nutritionBar.fillAmount = (float)currentNutrition / maxNutrition;
+            float firstBarFill = Mathf.Clamp(currentNutrition, 0, 100) / 100f;
+            float secondBarFill = Mathf.Clamp(currentNutrition - 100, 0, 100) / 100f;
+
+            nutritionBar1.fillAmount = firstBarFill;
+            nutritionBar2.fillAmount = secondBarFill;
         }
 
-        if (satisfactionBar != null)
+        if (satisfactionBar1 != null && satisfactionBar2 != null)
         {
-            satisfactionBar.fillAmount = (float)currentSatisfaction / maxSatisfaction;
+            float firstBarFill = Mathf.Clamp(currentSatisfaction, 0, 100) / 100f;
+            float secondBarFill = Mathf.Clamp(currentSatisfaction - 100, 0, 100) / 100f;
+
+            satisfactionBar1.fillAmount = firstBarFill;
+            satisfactionBar2.fillAmount = secondBarFill;
+        }
+        if (nutritionText != null)
+        {
+            nutritionText.text = $"{currentNutrition}/{maxNutrition}";
+        }
+
+        if (satisfactionText != null)
+        {
+            satisfactionText.text = $"{currentSatisfaction}/{maxSatisfaction}";
         }
     }
 

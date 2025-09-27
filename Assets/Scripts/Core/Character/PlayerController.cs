@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             inputActions.Player.Move.performed += HandleMove;
             inputActions.Player.Move.canceled += HandleMove;
             inputActions.Player.Interact.performed += HandleInteract;
+            inputActions.Player.Indicator.performed += HandleIndicator;
         }
     }
 
@@ -69,6 +70,15 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
             inputActions.Player.Move.performed -= HandleMove;
             inputActions.Player.Move.canceled -= HandleMove;
             inputActions.Player.Interact.performed -= HandleInteract;
+            inputActions.Player.Indicator.performed -= HandleIndicator; 
+        }
+    }
+
+    private void HandleIndicator(InputAction.CallbackContext context)
+    {
+        if (context.performed || context.canceled)
+        {
+            TriggerAFKIndicator(context);
         }
     }
 
@@ -87,7 +97,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         {
             Vector2 movementInput = context.ReadValue<Vector2>();
 
-            if (movementInput != Vector2.zero)  // The player is moving
+            if (movementInput != Vector2.zero) 
             {
                 if (TutorialManager.Instance != null)
                 {
@@ -131,7 +141,6 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         }
     }
 
-
     private void HandleInteract(InputAction.CallbackContext context)
     {
         if (currentInteractable == null)
@@ -143,7 +152,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         if (stallCooldown != null && stallCooldown.isCoolingDown)
         {
             Debug.Log("Interactable is on cooldown.");
-            return;  // Prevent interaction if on cooldown
+            return; 
         }
 
         if (TutorialManager.Instance != null)
@@ -172,8 +181,40 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         }
     }
 
+    private void TriggerAFKIndicator(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (!isAFK)
+            {
+                isAFK = true;
+                AFK();
+            }
+        }
+        else if (context.canceled)
+        {
+            isAFK = false;
+            playerIndicator.SetActive(false);
+            LeanTween.cancel(playerIndicator);
+
+            foreach (var effect in highlightEffects)
+            {
+                if (effect != null)
+                    effect.SetHighlight(false);
+            }
+        }
+    }
+
     private void Update()
     {
+        if (playerIndicator != null && isAFK)
+        {
+            Vector3 indicatorPosition = cachedTransform.position;
+            indicatorPosition.y += 1f;
+
+            playerIndicator.transform.position = indicatorPosition;
+        }
+        
         if (timer != null && timer.IsRunning && currentInteractable == null)
         {
             if (moveInput == Vector2.zero && !isMoving)
