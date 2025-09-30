@@ -4347,7 +4347,7 @@ MonoBehaviour:
   poolSize: 10
   sfxVolume: 0.5
   musicVolume: 1
-  backgroundMusicClip: {fileID: 8300000, guid: cafffda2de89f9f488063e6f7aa1052c, type: 3}
+  backgroundMusicClip: {fileID: 8300000, guid: dcb4a98b2f3ec47448a29b25ad191548, type: 3}
 --- !u!1 &583294631
 GameObject:
   m_ObjectHideFlags: 0
