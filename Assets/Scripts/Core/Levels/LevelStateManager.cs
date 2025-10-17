@@ -58,6 +58,7 @@ public class LevelStateManager : MonoBehaviour
         if (index >= 0 && index < allLevels.Length)
         {
             CurrentLevelIndex = index;
+            Debug.Log($"CurrentLevelIndex set to {CurrentLevelIndex}");  // Add this log
         }
     }
 
@@ -77,6 +78,7 @@ public class LevelStateManager : MonoBehaviour
         {
             characterLevelLocks[currentCharacterName][CurrentLevelIndex + 1] = true;
             MarkEverUnlockedForCurrentCharacter(CurrentLevelIndex + 1);
+            SetLevelIndex(CurrentLevelIndex + 1);
         }
     }
 
@@ -94,6 +96,7 @@ public class LevelStateManager : MonoBehaviour
             Debug.LogWarning("[LevelStateManager] Invalid CurrentLevelIndex, cannot lock current level.");
         }
     }
+
 
     public void LockPreviousLevel()
     {
@@ -203,9 +206,8 @@ public class LevelStateManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(currentCharacterName)) return;
         if (!characterMaxEverUnlockedIndex.ContainsKey(currentCharacterName))
-            characterMaxEverUnlockedIndex[currentCharacterName] = 0;
-
-        if (levelIndex > characterMaxEverUnlockedIndex[currentCharacterName])
+            characterMaxEverUnlockedIndex[currentCharacterName] = levelIndex;
+        else if (levelIndex > characterMaxEverUnlockedIndex[currentCharacterName])
             characterMaxEverUnlockedIndex[currentCharacterName] = levelIndex;
     }
 

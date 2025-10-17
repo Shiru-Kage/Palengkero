@@ -5170,6 +5170,12 @@ MonoBehaviour:
   satisfactionGoalText: {fileID: 1468986605}
   savingsGoalText: {fileID: 1189085209}
   levelModifiers: {fileID: 538469388}
+  nutritionImage: {fileID: 0}
+  satisfactionImage: {fileID: 0}
+  savingsImage: {fileID: 0}
+  completionImage: {fileID: 0}
+  exitImage: {fileID: 0}
+  pulseDuration: 1
 --- !u!114 &1916743978
 MonoBehaviour:
   m_ObjectHideFlags: 0

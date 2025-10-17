@@ -68,13 +68,8 @@ public class LevelSelectUI : MonoBehaviour
             return;
         }
         int maxEverUnlocked = LevelStateManager.Instance.GetMaxEverUnlockedLevelIndexForCurrentCharacter();
-        for (int i = 0; i < levelButtons.Length; i++)
-        {
-            levelButtons[i].interactable = (i <= maxEverUnlocked);
-        }
 
         int currentIndex = LevelStateManager.Instance.CurrentLevelIndex;
-        playButton.interactable = LevelStateManager.Instance.IsLevelUnlocked(currentIndex);
     }
 
 

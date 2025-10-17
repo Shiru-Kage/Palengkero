@@ -24,7 +24,6 @@ public class LoadGameManager : MonoBehaviour
                 LevelStateManager.Instance.SetSelectedCharacter(entry.characterName);
                 LevelStateManager.Instance.SetLevelIndex(entry.currentLevelIndex);
                 LevelStateManager.Instance.SetUnlockedLevelsForCurrentCharacter(entry.unlockedLevels);
-
                 for (int i = 0; i < entry.levelStars.Count; i++)
                 {
                     bool metNutrition = entry.nutritionStars[i] > 0;

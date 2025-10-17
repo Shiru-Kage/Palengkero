@@ -23,8 +23,6 @@ public class FamilyAidSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI callerDescriptionText; 
     [SerializeField] private TextMeshProUGUI callerNameText;  
     [SerializeField] private GameObject aidReachedObject;
-    [SerializeField] private float aidDisplayDuration = 3f;
-
     private float maxFillTime;
     private float currentFillTime;
 
@@ -100,8 +98,6 @@ public class FamilyAidSystem : MonoBehaviour
         {
             aidReachedObject.SetActive(true);
             Debug.Log("[Family Aid] Aid interval reached. Aid activated.");
-
-            StartCoroutine(DeactivateAidReachedObject());
         }
     }
 
@@ -115,17 +111,6 @@ public class FamilyAidSystem : MonoBehaviour
         if (callerNameText != null)
         {
             callerNameText.text = selectedMember.callerName;
-        }
-    }
-
-    private IEnumerator DeactivateAidReachedObject()
-    {
-        yield return new WaitForSeconds(aidDisplayDuration);
-
-        if (aidReachedObject != null)
-        {
-            aidReachedObject.SetActive(false);
-            Debug.Log("[Family Aid] Aid display deactivated after delay.");
         }
     }
 

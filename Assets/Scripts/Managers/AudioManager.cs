@@ -110,7 +110,6 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
 
         backgroundMusicClip = clip; 
-        Debug.Log("Playing background music: " + clip.name);
     }
 
     private AudioSource GetAvailableAudioSource()

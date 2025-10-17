@@ -11,12 +11,12 @@ public class SaveData
 [System.Serializable]
 public class CharacterProgressEntry
 {
-    public string characterID;  
-    public string characterName; 
-    public int currentLevelIndex;  
-    public bool[] unlockedLevels; 
-    public List<int> levelStars = new List<int>();  
-    public List<int> nutritionStars = new List<int>(); 
-    public List<int> satisfactionStars = new List<int>(); 
+    public string characterID;
+    public string characterName;
+    public int currentLevelIndex;
+    public bool[] unlockedLevels;
+    public List<int> levelStars = new List<int>();
+    public List<int> nutritionStars = new List<int>();
+    public List<int> satisfactionStars = new List<int>();
     public List<int> savingsStars = new List<int>(); 
 }

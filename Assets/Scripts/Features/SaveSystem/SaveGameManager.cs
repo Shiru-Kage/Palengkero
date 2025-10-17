@@ -41,7 +41,8 @@ public class SaveGameManager : MonoBehaviour
             string charID = pd.Data.characterID;
             string charName = pd.Data.characterName;
             LevelStateManager.Instance.SetSelectedCharacter(charName);
-
+            
+            
             var characterProgress = new CharacterProgressEntry
             {
                 characterID = charID,
@@ -49,6 +50,7 @@ public class SaveGameManager : MonoBehaviour
                 currentLevelIndex = LevelStateManager.Instance.CurrentLevelIndex,
                 unlockedLevels = LevelStateManager.Instance.GetUnlockedLevelsForCurrentCharacter()
             };
+
 
             for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
             {
@@ -63,20 +65,27 @@ public class SaveGameManager : MonoBehaviour
             }
 
             saveData.characterProgressData.Add(characterProgress);
+                    Debug.Log($"Saving character progress: {charName}, Level: {LevelStateManager.Instance.CurrentLevelIndex}, Stars: {characterProgress.levelStars}");
         }
 
         SaveSystem.SaveToSlot(slotIndex, saveData);
         Debug.Log($"Game saved to slot {slotIndex}");
 
-        if (savePrompt != null)
-            savePrompt.SetActive(false); 
+        LevelSelectUI.Instance.RefreshLevelButtons();
+        UpdateSavedConfirmation();
+    }
 
+    private void UpdateSavedConfirmation()
+    {
         if (savedConfirmation != null)
         {
             savedConfirmation.SetActive(true);
             StopAllCoroutines();
             StartCoroutine(HideSavedConfirmationRoutine(2f));
         }
+
+        if (savePrompt != null)
+            savePrompt.SetActive(false);
     }
 
     private IEnumerator HideSavedConfirmationRoutine(float delay)
