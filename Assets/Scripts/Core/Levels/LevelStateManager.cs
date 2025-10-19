@@ -17,6 +17,7 @@ public class LevelStateManager : MonoBehaviour
     public int CurrentLevelIndex { get; private set; } = 0;
 
     private string currentCharacterName;
+    public string CurrentCharacterName => currentCharacterName;
 
     void Awake()
     {

@@ -14,6 +14,7 @@ public class Stall : Interactable
     public StallCooldown GetStallCooldown() => stallCooldown;
 
     private Stall_Inner_UI stallInnerUI;
+    private LogBookUI logBookUI;
     private StallUI stallUIComponent;
     private HaggleSystem haggleSystem;
     private GameObject stallUI;
@@ -44,6 +45,7 @@ public class Stall : Interactable
         isInitialized = true;
 
         stallInnerUI = Object.FindAnyObjectByType<Stall_Inner_UI>();
+        logBookUI = Object.FindAnyObjectByType<LogBookUI>();
     }
 
     private void AssignItems()
@@ -212,6 +214,7 @@ public class Stall : Interactable
                 levelManager.UpdateBudgetDisplay();
 
             ArchiveManager.Instance.OnItemPurchased(new InventoryItem(item, 1));
+            logBookUI.AddLog($"- Purchased {item.itemName} for <color=red>{item.price} PHP</color>");
         }
         else if (buyerType == BuyerType.NPC)
         {

@@ -21,8 +21,10 @@ public class FamilyAidSystem : MonoBehaviour
 
     [Header("UI Elements for Selected Family Member")]
     [SerializeField] private TextMeshProUGUI callerDescriptionText; 
-    [SerializeField] private TextMeshProUGUI callerNameText;  
+    [SerializeField] private TextMeshProUGUI callerNameText;
     [SerializeField] private GameObject aidReachedObject;
+    [SerializeField] private LogBookUI logBookUI;
+
     private float maxFillTime;
     private float currentFillTime;
 
@@ -65,7 +67,7 @@ public class FamilyAidSystem : MonoBehaviour
             if (selectedMember != null)
             {
                 character.currentWeeklyBudget -= selectedMember.familyDeduction;
-                Debug.Log($"[Family Aid] {selectedMember.callerName} selected! Deduction: -{selectedMember.familyDeduction}. Current Budget: {character.currentWeeklyBudget}");
+                logBookUI.AddLog($"Aid deduction: {selectedMember.callerName} -<color=red>{selectedMember.familyDeduction} PHP</color>");
 
                 UpdateFamilyMemberUI(selectedMember);
             }
