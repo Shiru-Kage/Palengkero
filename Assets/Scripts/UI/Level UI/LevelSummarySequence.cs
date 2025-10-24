@@ -66,6 +66,7 @@ public class LevelSummarySequence : MonoBehaviour
             introMessageText.text = introMessage;
             StartCoroutine(ShowIntro());
         }
+        
     }
 
     private IEnumerator ShowIntro()
@@ -137,6 +138,9 @@ public class LevelSummarySequence : MonoBehaviour
     bool metSatisfaction = false;
     bool metSavings = false;
 
+    int currentLevelIndex = LevelStateManager.Instance.CurrentLevelIndex;
+    Debug.Log($"Current Level Index: {currentLevelIndex}");
+    
     if (currentObjective != null && wellBeing != null)
     {
         metNutrition = wellBeing.CurrentNutrition >= currentObjective.nutritionGoal;
@@ -145,7 +149,8 @@ public class LevelSummarySequence : MonoBehaviour
 
     if (runtimeCharacter != null && currentObjective != null)
     {
-        metSavings = runtimeCharacter.currentWeeklyBudget >= currentObjective.savingsGoal;
+            metSavings = runtimeCharacter.currentWeeklyBudget >= currentObjective.savingsGoal;
+            currentObjective.levelSavings = runtimeCharacter.currentWeeklyBudget;
     }
 
     StarSystem.Instance.AssignStarsForLevel(LevelStateManager.Instance.CurrentLevelIndex, CharacterSelectionManager.Instance.SelectedCharacterID, metNutrition, metSatisfaction, metSavings);

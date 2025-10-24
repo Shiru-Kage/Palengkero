@@ -23,17 +23,20 @@ MonoBehaviour:
     More frequent family requests\r\n- Limited stock for certain stalls\r\r\n"
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
-    nutritionGoal: 125
-    satisfactionGoal: 125
-    savingsGoal: 500
+    nutritionGoal: 85
+    satisfactionGoal: 85
+    savingsGoal: 80
+    levelSavings: 0
   - character: {fileID: 11400000, guid: 6399178f1d62bc74289bb49dc0ddc68a, type: 2}
-    nutritionGoal: 105
-    satisfactionGoal: 150
-    savingsGoal: 600
+    nutritionGoal: 65
+    satisfactionGoal: 110
+    savingsGoal: 250
+    levelSavings: 0
   - character: {fileID: 11400000, guid: eb0e05ddc319aba40bb3b693dfbcb67c, type: 2}
-    nutritionGoal: 150
-    satisfactionGoal: 105
-    savingsGoal: 700
+    nutritionGoal: 110
+    satisfactionGoal: 65
+    savingsGoal: 300
+    levelSavings: 0
   minNPCToSpawn: 2
   maxNPCToSpawn: 3
   NPCperLevel: 10

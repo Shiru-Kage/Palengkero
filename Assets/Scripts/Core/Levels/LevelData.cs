@@ -48,6 +48,8 @@ public class CharacterObjective
     public int nutritionGoal;
     public int satisfactionGoal;
     public int savingsGoal;
+
+    public float levelSavings = 0f; 
 }
 
 public enum BackgroundType

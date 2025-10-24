@@ -23,17 +23,20 @@ MonoBehaviour:
     stock remains\r\n- More  NPCs\r\n"
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
-    nutritionGoal: 135
-    satisfactionGoal: 135
-    savingsGoal: 600
+    nutritionGoal: 95
+    satisfactionGoal: 95
+    savingsGoal: 120
+    levelSavings: 0
   - character: {fileID: 11400000, guid: 6399178f1d62bc74289bb49dc0ddc68a, type: 2}
-    nutritionGoal: 115
-    satisfactionGoal: 165
-    savingsGoal: 700
+    nutritionGoal: 75
+    satisfactionGoal: 125
+    savingsGoal: 300
+    levelSavings: 0
   - character: {fileID: 11400000, guid: eb0e05ddc319aba40bb3b693dfbcb67c, type: 2}
-    nutritionGoal: 165
-    satisfactionGoal: 115
-    savingsGoal: 800
+    nutritionGoal: 125
+    satisfactionGoal: 75
+    savingsGoal: 350
+    levelSavings: 0
   minNPCToSpawn: 3
   maxNPCToSpawn: 3
   NPCperLevel: 10

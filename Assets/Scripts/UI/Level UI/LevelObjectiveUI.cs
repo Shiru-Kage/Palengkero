@@ -77,13 +77,19 @@ public class LevelObjectiveUI : MonoBehaviour
     {
         currentNutrition += nutritionDelta;
         currentSatisfaction += satisfactionDelta;
-
+        
         if (currentObjective == null) return;
 
         // Nutrition
         if (nutritionImage != null)
         {
-            if (currentNutrition >= currentObjective.nutritionGoal)
+            if (Mathf.Approximately(currentNutrition, currentObjective.nutritionGoal))
+            {
+                nutritionGoalText.color = Color.green;
+                nutritionGoalText.text = $"Nutrition Goal: {currentObjective.nutritionGoal} Cleared";
+                nutritionImage.sprite = completionImage;
+            }
+            else if (currentNutrition > currentObjective.nutritionGoal)
             {
                 nutritionGoalText.color = Color.green;
                 nutritionGoalText.text = $"Nutrition Goal: {currentObjective.nutritionGoal} Cleared";
@@ -100,7 +106,13 @@ public class LevelObjectiveUI : MonoBehaviour
         // Satisfaction
         if (satisfactionImage != null)
         {
-            if (currentSatisfaction >= currentObjective.satisfactionGoal)
+            if (Mathf.Approximately(currentSatisfaction, currentObjective.satisfactionGoal))
+            {
+                satisfactionGoalText.color = Color.green;
+                satisfactionGoalText.text = $"Satisfaction Goal: {currentObjective.satisfactionGoal} Cleared";
+                satisfactionImage.sprite = completionImage;
+            }
+            else if (currentSatisfaction > currentObjective.satisfactionGoal)
             {
                 satisfactionGoalText.color = Color.green;
                 satisfactionGoalText.text = $"Satisfaction Goal: {currentObjective.satisfactionGoal} Cleared";

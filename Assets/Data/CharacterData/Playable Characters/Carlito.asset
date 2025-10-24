@@ -18,7 +18,7 @@ MonoBehaviour:
   characterDifficulty: Easy
   characterAge: 21
   characterMonthlyIncome: "\u20B110,000 \u2013 \u20B112,999"
-  characterWeeklyBudget: 2500
+  characterWeeklyBudget: 500
   characterSprites: []
   characterSelectFrameSprite: {fileID: 736041423354105381, guid: ed49fe7c1141c3b429ae7704d2082b87, type: 3}
   characterDescription: Carlito juggles tasks in a small store, often stocking shelves,
@@ -26,12 +26,6 @@ MonoBehaviour:
   textColor: {r: 1, g: 1, b: 1, a: 1}
   voiceClip: {fileID: 0}
   characterAnimator: {fileID: 9100000, guid: 358f431969669b444842e768e0924e90, type: 2}
-  openingCutscene: {fileID: 32900000, guid: c6e0b23fe3a12c94eb331373d5ffcc6b, type: 3}
-  endingCutscenes:
-  - {fileID: 32900000, guid: c156b278d49d64d42bdcc02ea195fabd, type: 3}
-  - {fileID: 32900000, guid: e2743fbe4601b144fa422c4edbce5a27, type: 3}
-  - {fileID: 32900000, guid: 1737fc6181ca10b45b63b8716e5f4c63, type: 3}
-  - {fileID: 32900000, guid: d827b39c5ad5fa042a392aa15cd4526d, type: 3}
   cutscene: {fileID: 11400000, guid: 9bd81be40c2dad64fbc151a4eebff0a2, type: 2}
   preferCheapItemsChance: 0
   preferHighNutritionChance: 0

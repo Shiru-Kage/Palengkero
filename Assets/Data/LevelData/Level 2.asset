@@ -34,17 +34,20 @@ MonoBehaviour:
 '
   objectivesPerCharacter:
   - character: {fileID: 11400000, guid: 445793ed72677064abfdfec893fec97c, type: 2}
-    nutritionGoal: 115
-    satisfactionGoal: 115
-    savingsGoal: 400
+    nutritionGoal: 75
+    satisfactionGoal: 75
+    savingsGoal: 50
+    levelSavings: 0
   - character: {fileID: 11400000, guid: 6399178f1d62bc74289bb49dc0ddc68a, type: 2}
-    nutritionGoal: 95
-    satisfactionGoal: 140
-    savingsGoal: 500
+    nutritionGoal: 55
+    satisfactionGoal: 100
+    savingsGoal: 200
+    levelSavings: 0
   - character: {fileID: 11400000, guid: eb0e05ddc319aba40bb3b693dfbcb67c, type: 2}
-    nutritionGoal: 140
-    satisfactionGoal: 95
-    savingsGoal: 600
+    nutritionGoal: 100
+    satisfactionGoal: 55
+    savingsGoal: 250
+    levelSavings: 0
   minNPCToSpawn: 2
   maxNPCToSpawn: 2
   NPCperLevel: 10

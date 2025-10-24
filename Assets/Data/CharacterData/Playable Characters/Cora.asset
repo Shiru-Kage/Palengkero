@@ -18,7 +18,7 @@ MonoBehaviour:
   characterDifficulty: Hard
   characterAge: 25
   characterMonthlyIncome: "\u20B115,000 - \u20B117,999"
-  characterWeeklyBudget: 3200
+  characterWeeklyBudget: 1000
   characterSprites: []
   characterSelectFrameSprite: {fileID: -7800151483077857245, guid: 2380f0fc8b1caac4eb4702e510755a7f, type: 3}
   characterDescription: Working graveyard shifts, Cora grabs groceries between work
