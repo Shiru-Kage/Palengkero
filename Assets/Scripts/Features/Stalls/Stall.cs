@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public enum BuyerType
 {
@@ -28,12 +29,15 @@ public class Stall : Interactable
     private bool isInitialized = false;
 
     private string discountedItemId = null;
+    private float discountPercentage = 0f; 
 
     [SerializeField]
     public bool useManualItems = false;
 
     [SerializeField]
     public List<string> manuallyAssignedItemIDs = new List<string>();
+    private Dictionary<string, float> originalPrices = new Dictionary<string, float>();
+
 
     public void Initialize(HaggleSystem haggleSystemRef, GameObject uiRef, Button[] buttonArray)
     {
@@ -44,8 +48,8 @@ public class Stall : Interactable
         AssignItems();
         isInitialized = true;
 
-        stallInnerUI = Object.FindAnyObjectByType<Stall_Inner_UI>();
-        logBookUI = Object.FindAnyObjectByType<LogBookUI>();
+        stallInnerUI = UnityEngine.Object.FindAnyObjectByType<Stall_Inner_UI>();
+        logBookUI = UnityEngine.Object.FindAnyObjectByType<LogBookUI>();
     }
 
     private void AssignItems()
@@ -64,7 +68,7 @@ public class Stall : Interactable
         int minItemsToStock = currentLevelData.minStallItemStock;
         int maxItemsToStock = currentLevelData.maxStallItemStock;
 
-        int itemCount = Random.Range(minItemsToStock, maxItemsToStock + 1);
+        int itemCount = UnityEngine.Random.Range(minItemsToStock, maxItemsToStock + 1);
         itemCount = Mathf.Min(itemCount, itemButtons.Length);
 
         assignedItems = new ItemData[itemCount];
@@ -84,13 +88,14 @@ public class Stall : Interactable
             else
             {
                 List<ItemData> databaseItems = new List<ItemData>(db.itemDatabase.items);
-                item = databaseItems[Random.Range(0, databaseItems.Count)];
+                item = databaseItems[UnityEngine.Random.Range(0, databaseItems.Count)];
             }
 
             if (item != null)
             {
                 assignedItems[i] = item;
-                stockAmounts[i] = Random.Range(1, item.stockLimit + 1);
+                stockAmounts[i] = UnityEngine.Random.Range(1, item.stockLimit + 1);
+                originalPrices[item.id] = item.price;
             }
             else
             {
@@ -121,7 +126,7 @@ public class Stall : Interactable
 
     public void TryStartHaggling()
     {
-        DialogueManager dialogueManager = Object.FindAnyObjectByType<DialogueManager>();
+        DialogueManager dialogueManager = UnityEngine.Object.FindAnyObjectByType<DialogueManager>();
         if (dialogueManager == null)
         {
             Debug.LogWarning("DialogueManager not found in scene.");
@@ -156,13 +161,58 @@ public class Stall : Interactable
     public void ApplyHaggleDiscount(string itemId)
     {
         discountedItemId = itemId;
-        UpdateSelectedItemUIAfterHaggle();
+
+        if (assignedItems == null || assignedItems.Length == 0) return;
+
+        ItemData item = Array.Find(assignedItems, i => i.id == itemId);
+        if (item != null)
+        {
+            float discountPercentage = 0f;
+            int haggleAttemptCount = haggleSystem.GetAttemptCount(); 
+            switch (haggleAttemptCount)
+            {
+                case 0: discountPercentage = 0.30f; break;  // 30% discount for first attempt
+                case 1: discountPercentage = 0.20f; break;  // 20% for second attempt
+                case 2: discountPercentage = 0.10f; break;  // 10% for third attempt
+            }
+
+            // Apply discount to the item price
+            float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;
+            item.price = Mathf.RoundToInt(originalPrice * (1 - discountPercentage));
+
+            // Update UI after haggling
+            var stallUI = GetComponent<StallUI>();
+            if (stallUI != null)
+            {
+                stallUI.UpdateSelectedItemPrice(originalPrice, item.price);  // Update with original and discounted prices
+            }
+        }
     }
 
+
+
+    public float GetDiscountPercentage() => discountPercentage;
+
     public void ResetDiscount()
+{
+    discountedItemId = null;
+    discountPercentage = 0f;
+
+    // Update the UI to reset the item price to the original price
+    var stallUI = GetComponent<StallUI>();
+    if (stallUI != null)
     {
-        discountedItemId = null;
+        // Get the item details
+        var item = assignedItems[selectedItemIndex];
+
+        // Retrieve the original price from the originalPrices dictionary
+        float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;
+
+        // Pass both original and discounted price (the same if no discount)
+        stallUI.UpdateSelectedItemPrice(originalPrice, originalPrice);  // No discount, so pass the same value for both
     }
+}
+
 
     public bool PurchaseItem(int index, BuyerType buyerType)
     {
@@ -180,13 +230,11 @@ public class Stall : Interactable
             var runtimeCharacter = CharacterSelectionManager.Instance?.SelectedRuntimeCharacter;
             if (runtimeCharacter == null) return false;
 
-            float finalPrice = item.price;
-
-            if (item.id == discountedItemId)
-            {
-                finalPrice *= 0.5f;
-                finalPrice = Mathf.Round(finalPrice);
-            }
+            float discountPercentage = this.GetDiscountPercentage();
+        
+            // Apply the discount based on the attempt count (from HaggleSystem)
+            float finalPrice = item.price * (1 - discountPercentage);  // Dynamic discount logic
+            finalPrice = Mathf.Round(finalPrice);
 
             if (runtimeCharacter.currentWeeklyBudget < finalPrice)
             {
@@ -209,16 +257,18 @@ public class Stall : Interactable
 
             WellBeingEvents.OnWellBeingChanged?.Invoke(item.nutrition, item.satisfaction);
 
-            LevelManager levelManager = Object.FindAnyObjectByType<LevelManager>();
+            LevelManager levelManager = UnityEngine.Object.FindAnyObjectByType<LevelManager>();
             if (levelManager != null)
                 levelManager.UpdateBudgetDisplay();
 
             ArchiveManager.Instance.OnItemPurchased(new InventoryItem(item, 1));
             logBookUI.AddLog($"- Purchased {item.itemName} for <color=red>{item.price} PHP</color>");
+            item.price = Mathf.RoundToInt(originalPrices[item.id]);
+            haggleSystem.ResetAttempts();
         }
         else if (buyerType == BuyerType.NPC)
         {
-            var player = Object.FindFirstObjectByType<PlayerController>();
+            var player = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
             if (player != null && player.CurrentInteractable == this)
             {
                 StallUI stallUI = GetComponent<StallUI>();
@@ -254,23 +304,30 @@ public class Stall : Interactable
         }
     }
 
-    private void UpdateSelectedItemUIAfterHaggle()
+    public void UpdateSelectedItemUIAfterHaggle()
+{
+    if (selectedItemIndex < 0 || selectedItemIndex >= assignedItems.Length) return;
+
+    var item = assignedItems[selectedItemIndex];
+    float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;  // Get the original price
+    float discountedPrice = item.price;  // Default to the current price
+
+    // Apply discount (if any)
+    float discountPercentage = this.GetDiscountPercentage();
+    if (discountPercentage > 0)
     {
-        if (selectedItemIndex < 0 || selectedItemIndex >= assignedItems.Length) return;
-
-        var item = assignedItems[selectedItemIndex];
-        float finalPrice = item.price;
-
-        if (item.id == discountedItemId)
-        {
-            finalPrice *= 0.5f;
-            finalPrice = Mathf.Round(finalPrice);
-        }
-
-        var ui = GetComponent<StallUI>();
-        if (ui != null)
-            ui.UpdateSelectedItemPrice(finalPrice);
+        discountedPrice = Mathf.RoundToInt(originalPrice * (1 - discountPercentage));  // Apply the discount and round
     }
+
+    Debug.Log($"Original Price: ₱{originalPrice}, Discounted Price: ₱{discountedPrice}");
+
+    // Pass both original and discounted price to StallUI
+    var ui = GetComponent<StallUI>();
+    if (ui != null)
+    {
+        ui.UpdateSelectedItemPrice(originalPrice, discountedPrice);  // Pass both prices
+    }
+}
 
     public (ItemData, int) GetItemAndStock(int index) =>
         (index < 0 || index >= assignedItems.Length) ? (null, 0) : (assignedItems[index], stockAmounts[index]);

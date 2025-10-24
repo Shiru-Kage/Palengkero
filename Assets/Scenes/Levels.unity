@@ -3878,7 +3878,7 @@ MonoBehaviour:
   fillImage: {fileID: 316245385}
   fillColor: {r: 0, g: 1, b: 0.017044306, a: 1}
   emptyColor: {r: 1, g: 1, b: 1, a: 1}
-  aidInterval: 10
+  aidInterval: 300
   callerDescriptionText: {fileID: 134983205}
   callerNameText: {fileID: 1649631432}
   aidReachedObject: {fileID: 1787573469}
@@ -8218,6 +8218,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5406355606555789930, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6751004755976457571, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -11993,7 +11997,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1736752757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2028459586}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: Retry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1736752757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23987,6 +24003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e858a70f4493f4c83db88598c14836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logPanel: {fileID: 7882554668905392832}
   logParentObject: {fileID: 5664796413081410753}
   logPrefab: {fileID: 1484431900162790417, guid: 5a91f9d43fb4ab84186f7c4d4d4a3ad9, type: 3}
 --- !u!222 &7990152760735690113

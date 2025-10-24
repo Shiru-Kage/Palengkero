@@ -32,11 +32,13 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
     private bool isMoving = false;
     private bool movementBlocked = false;
     public bool GetMovementBlocked() => movementBlocked;
+    private LogBookUI logBookUI;
 
     private void Awake()
     {
         inputActions = InputManager.GetInputActions();
         cachedTransform = transform;
+        logBookUI = Object.FindAnyObjectByType<LogBookUI>();
 
         currentGridPos = PathfindingGrid.Instance.GetGridPosition(transform.position);
         targetGridPos = currentGridPos;
@@ -96,6 +98,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         if (context.performed)
         {
             Vector2 movementInput = context.ReadValue<Vector2>();
+            logBookUI.SetLogBookActive(false);
 
             if (movementInput != Vector2.zero) 
             {
@@ -173,6 +176,7 @@ public class PlayerController : MonoBehaviour, ICharacterAnimatorData
         if (isInside)
         {
             ToggleMovement(false);
+            logBookUI.SetLogBookActive(false);
             interactable.Interact();
         }
         else

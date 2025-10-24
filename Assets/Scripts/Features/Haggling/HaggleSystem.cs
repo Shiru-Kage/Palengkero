@@ -15,8 +15,13 @@ public class HaggleSystem : MonoBehaviour
     private int attemptCount = 0;
     private int[] successRates = new int[] { 40, 30, 20 }; //{ 40, 30, 20 };
     private bool waitingForResult = false;
-
+    private PlayerController playerController;
     private Stall currentHaggledStall;
+
+    public void Start()
+    {
+        playerController = Object.FindAnyObjectByType<PlayerController>();
+    }
 
     public void StartHaggle(DialogueManager manager, Stall stall)
     {
@@ -61,8 +66,6 @@ public class HaggleSystem : MonoBehaviour
 
     private void HandleSuccess()
     {
-        attemptCount = 0;
-
         if (currentHaggledStall != null)
         {
             var selectedItem = currentHaggledStall.GetSelectedItem();
@@ -81,6 +84,8 @@ public class HaggleSystem : MonoBehaviour
     private void HandleFailure()
     {
         attemptCount++;
+
+        Debug.Log($"Haggle failed! Attempt count: {attemptCount}");
 
         if (currentHaggledStall != null)
         {
@@ -117,6 +122,7 @@ public class HaggleSystem : MonoBehaviour
         }
         if (attemptCount == 0)
         {
+            playerController.ToggleMovement(true);
             stallInnerUIContainer.SetActive(false);
         }
         if (currentHaggledStall != null && currentHaggledStall.GetStallCooldown() != null && attemptCount == 0)
@@ -126,7 +132,7 @@ public class HaggleSystem : MonoBehaviour
         }
     }
 
-    private void ResetAttempts()
+    public void ResetAttempts()
     {
         attemptCount = 0;
     }
@@ -141,6 +147,11 @@ public class HaggleSystem : MonoBehaviour
         ResetAttempts();
     }
 
+    public int GetAttemptCount()
+    {
+        Debug.Log($"Attempt count: {attemptCount}");
+        return attemptCount;
+    }
     private void OnFailSceneEnd_ShowStallDetails()
     {
         var stallUI = Object.FindAnyObjectByType<StallUI>();

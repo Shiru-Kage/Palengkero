@@ -311,11 +311,11 @@ public class StallUI : MonoBehaviour
 
         float price = item.price;
         float finalPrice = price;
-
         if (currentStall != null && item.id == currentStall.GetDiscountedItemId())
         {
-            finalPrice *= 0.5f;
-            finalPrice = Mathf.Round(finalPrice);
+            // Apply discount if the item is the one with a discount
+            float discountPercentage = currentStall.GetDiscountPercentage();
+            finalPrice = Mathf.RoundToInt(price * (1 - discountPercentage));  // Apply the discount
         }
 
         priceInfo.text = finalPrice < price
@@ -325,18 +325,21 @@ public class StallUI : MonoBehaviour
         descriptionInfo.text = item.flavorText;
     }
 
-    public void UpdateSelectedItemPrice(float discountedPrice)
+    public void UpdateSelectedItemPrice(float originalPrice, float discountedPrice)
     {
         if (currentStall == null || priceInfo == null) return;
 
-        var (item, _) = currentStall.GetItemAndStock(currentStall.SelectedItemIndex);
-        if (item == null) return;
+        // If the discounted price is less than the original, display both prices
+        if (discountedPrice < originalPrice)
+        {
+            priceInfo.text = $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{discountedPrice}";  // Show the original price with a strikethrough and the discounted price
+        }
+        else
+        {
+            priceInfo.text = $"Price: ₱{originalPrice}";  // No discount, so just show the original price
+        }
 
-        float originalPrice = item.price;
-
-        priceInfo.text = discountedPrice < originalPrice
-            ? $"Price: <color=red><s>₱{originalPrice}</s></color> ₱{discountedPrice}"
-            : $"Price: ₱{originalPrice}";
+        // Display the item details after haggling
         DisplayDetailsAfterHaggle();
     }
 

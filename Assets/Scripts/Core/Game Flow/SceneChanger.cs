@@ -26,7 +26,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    
+    public void Retry()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        ChangeScene(currentSceneName); 
+    }
+
     public void QuitGame()
     {
         Application.Quit();

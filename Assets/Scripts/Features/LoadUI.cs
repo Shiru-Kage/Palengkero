@@ -48,13 +48,13 @@ public class LoadUI : MonoBehaviour
                     }
 
                     // Display total stars for the character
-                    displayText += $"Total Stars: {totalStars}\n";  // Max Stars would be based on the number of unlocked levels
+                    displayText += $"Total Stars: {totalStars}\n\n";  // Max Stars would be based on the number of unlocked levels
                 }
             }
             else
             {
                 // If no save data for this slot, show a message
-                displayText += "No save data available.\n";
+                displayText += "No save data.\n";
             }
 
             // Update the corresponding TextMeshPro slot text
