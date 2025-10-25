@@ -10,6 +10,7 @@ public class HaggleSystem : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject stallInnerUIContainer;
+    [SerializeField] private GameObject stallUIPanel;
 
     private DialogueManager dialogueManager;
     private int attemptCount = 0;
@@ -100,6 +101,7 @@ public class HaggleSystem : MonoBehaviour
         if (attemptCount >= 3)
         {
             attemptCount = 0;
+            stallUIPanel.SetActive(false);
             dialogueManager.events.OnSceneEnd.AddListener(() =>
             {
                 if (dialogueManager.CurrentScene == failScene)

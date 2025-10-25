@@ -171,20 +171,17 @@ public class Stall : Interactable
             int haggleAttemptCount = haggleSystem.GetAttemptCount(); 
             switch (haggleAttemptCount)
             {
-                case 0: discountPercentage = 0.30f; break;  // 30% discount for first attempt
-                case 1: discountPercentage = 0.20f; break;  // 20% for second attempt
-                case 2: discountPercentage = 0.10f; break;  // 10% for third attempt
+                case 0: discountPercentage = 0.30f; break;
+                case 1: discountPercentage = 0.20f; break; 
+                case 2: discountPercentage = 0.10f; break; 
             }
-
-            // Apply discount to the item price
             float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;
             item.price = Mathf.RoundToInt(originalPrice * (1 - discountPercentage));
 
-            // Update UI after haggling
             var stallUI = GetComponent<StallUI>();
             if (stallUI != null)
             {
-                stallUI.UpdateSelectedItemPrice(originalPrice, item.price);  // Update with original and discounted prices
+                stallUI.UpdateSelectedItemPrice(originalPrice, item.price);  
             }
         }
     }
@@ -194,24 +191,21 @@ public class Stall : Interactable
     public float GetDiscountPercentage() => discountPercentage;
 
     public void ResetDiscount()
-{
-    discountedItemId = null;
-    discountPercentage = 0f;
-
-    // Update the UI to reset the item price to the original price
-    var stallUI = GetComponent<StallUI>();
-    if (stallUI != null)
     {
-        // Get the item details
-        var item = assignedItems[selectedItemIndex];
+        discountedItemId = null;
+        discountPercentage = 0f;
 
-        // Retrieve the original price from the originalPrices dictionary
-        float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;
+        var stallUI = GetComponent<StallUI>();
+        if (stallUI != null)
+        {
+            var item = assignedItems[selectedItemIndex];
 
-        // Pass both original and discounted price (the same if no discount)
-        stallUI.UpdateSelectedItemPrice(originalPrice, originalPrice);  // No discount, so pass the same value for both
+            float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;
+
+            stallUI.UpdateSelectedItemPrice(originalPrice, originalPrice);
+        }
     }
-}
+
 
 
     public bool PurchaseItem(int index, BuyerType buyerType)
@@ -232,8 +226,7 @@ public class Stall : Interactable
 
             float discountPercentage = this.GetDiscountPercentage();
         
-            // Apply the discount based on the attempt count (from HaggleSystem)
-            float finalPrice = item.price * (1 - discountPercentage);  // Dynamic discount logic
+            float finalPrice = item.price * (1 - discountPercentage);  
             finalPrice = Mathf.Round(finalPrice);
 
             if (runtimeCharacter.currentWeeklyBudget < finalPrice)
@@ -275,7 +268,6 @@ public class Stall : Interactable
                 if (stallUI != null)
                 {
                     stallUI.RefreshItemDetails(item, stockAmounts[index]);
-                    stallUI.UpdateDisplayItemsForPlayer(assignedItems, stockAmounts, this);
                 }
             }
         }
@@ -309,23 +301,21 @@ public class Stall : Interactable
     if (selectedItemIndex < 0 || selectedItemIndex >= assignedItems.Length) return;
 
     var item = assignedItems[selectedItemIndex];
-    float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;  // Get the original price
-    float discountedPrice = item.price;  // Default to the current price
+    float originalPrice = originalPrices.ContainsKey(item.id) ? originalPrices[item.id] : item.price;  
+    float discountedPrice = item.price; 
 
-    // Apply discount (if any)
     float discountPercentage = this.GetDiscountPercentage();
     if (discountPercentage > 0)
     {
-        discountedPrice = Mathf.RoundToInt(originalPrice * (1 - discountPercentage));  // Apply the discount and round
+        discountedPrice = Mathf.RoundToInt(originalPrice * (1 - discountPercentage)); 
     }
 
     Debug.Log($"Original Price: ₱{originalPrice}, Discounted Price: ₱{discountedPrice}");
 
-    // Pass both original and discounted price to StallUI
     var ui = GetComponent<StallUI>();
     if (ui != null)
     {
-        ui.UpdateSelectedItemPrice(originalPrice, discountedPrice);  // Pass both prices
+        ui.UpdateSelectedItemPrice(originalPrice, discountedPrice); 
     }
 }
 

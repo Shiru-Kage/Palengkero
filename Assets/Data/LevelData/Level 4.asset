@@ -26,7 +26,7 @@ MonoBehaviour:
     nutritionGoal: 95
     satisfactionGoal: 95
     savingsGoal: 120
-    levelSavings: 0
+    levelSavings: 130
   - character: {fileID: 11400000, guid: 6399178f1d62bc74289bb49dc0ddc68a, type: 2}
     nutritionGoal: 75
     satisfactionGoal: 125

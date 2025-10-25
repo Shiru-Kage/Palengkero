@@ -55,16 +55,17 @@ public class OverAllPerformanceUI : MonoBehaviour
         performanceSummaryText.text = $"Total Stars: {totalStars}/15";
 
         int characterTotalBudget = CharacterSelectionManager.Instance.SelectedCharacterData.characterTotalBudget;
-        float targetSavings = characterTotalBudget * 0.5f;
+        float targetSavings = characterTotalBudget * 0.2f;
 
         if (totalSavings >= targetSavings)
         {
-            greatJobText.text = $"Great Job! You saved more than 50% of your total budget! ₱{totalSavings:F2}/₱{characterTotalBudget}";
+            greatJobText.text = $"Great Job! You saved more than 20% of your total budget! ₱{totalSavings:F2}/₱{characterTotalBudget}";
             greatJobText.color = Color.green;
         }
         else
         {
-            greatJobText.text = $"You did not seem to have saved enough, you can try better next time! ₱{totalSavings:F2}/₱{characterTotalBudget} "; 
+            greatJobText.text = $"You did not seem to have saved enough, you can try better next time! ₱{totalSavings:F2}/₱{characterTotalBudget} ";
+            greatJobText.color = Color.red;
         }
 
 

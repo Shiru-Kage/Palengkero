@@ -8401,6 +8401,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6826337573613879324, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
   m_PrefabInstance: {fileID: 1060466688}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1060466690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1084820017627788718, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
+  m_PrefabInstance: {fileID: 1060466688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1060466693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2195500998275818353, guid: b50a6e03b6f91b243944115058066ff0, type: 3}
@@ -20575,6 +20580,10 @@ PrefabInstance:
       propertyPath: 'stallPrefabs.Array.data[5]'
       value: 
       objectReference: {fileID: 8063097523033287634, guid: ad950423b1426604f8c4ddc90d28eb27, type: 3}
+    - target: {fileID: 2901242554119275491, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
+      propertyPath: stallUIPanel
+      value: 
+      objectReference: {fileID: 1060466690}
     - target: {fileID: 2901242554119275491, guid: 2affa7c93b522da4ab3a4c5cca7134c8, type: 3}
       propertyPath: stallInnerUIContainer
       value: 
