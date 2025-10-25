@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 using TMPro;
 
@@ -9,7 +10,13 @@ public class LogBookUI : MonoBehaviour
     [SerializeField] private Transform logParentObject;
     [SerializeField] private GameObject logPrefab;
 
+    [Header("End Level references")]
+    [SerializeField] private Transform endLevelLogPanel;
+    [SerializeField] private GameObject endlogPrefab;
+
     private bool isLogBookActive = true;
+    private List<string> storedLogs = new List<string>();
+    
     private void Start()
     {
         if (logPrefab == null)
@@ -20,6 +27,7 @@ public class LogBookUI : MonoBehaviour
 
     public void AddLog(string logMessage)
     {
+        storedLogs.Add(logMessage);
         if (logParentObject != null && logPrefab != null)
         {
             GameObject newLog = Instantiate(logPrefab, logParentObject);
@@ -52,6 +60,29 @@ public class LogBookUI : MonoBehaviour
         else
         {
             logPanel.SetActive(true);
+        }
+    }
+
+    public void DisplayStoredLogs()
+    {
+        foreach (Transform child in logParentObject)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (string logMessage in storedLogs)
+        {
+            GameObject newLog = Instantiate(endlogPrefab, endLevelLogPanel.transform);
+            TextMeshProUGUI logText = newLog.GetComponent<TextMeshProUGUI>();
+
+            if (logText != null)
+            {
+                logText.text = logMessage;
+            }
+            else
+            {
+                Debug.LogError("Log prefab does not have a TextMeshProUGUI component.");
+            }
         }
     }
 }

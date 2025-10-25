@@ -16,6 +16,7 @@ public class LevelSummarySequence : MonoBehaviour
 
     [Header("Continue Button")]
     [SerializeField] private Button continueButton;
+    [SerializeField] private Button logBookRecall;
     [SerializeField] private Button levelSelect;
 
     [Header("Advice UI")]
@@ -36,6 +37,8 @@ public class LevelSummarySequence : MonoBehaviour
     [SerializeField] private WellBeingMeter wellBeingMeter;
 
     [SerializeField] private InventoryUI inventory;
+    [SerializeField] private LogBookUI logBookUI;
+    [SerializeField] private GameObject endLevelLogPanel;
 
     private CharacterObjective currentObjective;
 
@@ -49,6 +52,8 @@ public class LevelSummarySequence : MonoBehaviour
         savingsGoalText.alpha = 0f;
         continueButton.gameObject.SetActive(false);
         levelSelect.gameObject.SetActive(false);
+        logBookRecall.gameObject.SetActive(false);
+        endLevelLogPanel.SetActive(false);
     }
 
     void Start()
@@ -101,8 +106,33 @@ public class LevelSummarySequence : MonoBehaviour
         {
             continueButton.gameObject.SetActive(false);
             introMessageText.alpha = 0f;
+            StartCoroutine(ShowLogBookRecord());
+        });
+    }
+
+    private IEnumerator ShowLogBookRecord()
+    {
+        logBookUI.DisplayStoredLogs();
+        // Hide other UI elements temporarily to show the log panel
+        nutritionGoalText.alpha = 0f;
+        satisfactionGoalText.alpha = 0f;
+        savingsGoalText.alpha = 0f;
+        timeSpentText.alpha = 0f;
+        
+        // Show the end level log panel and button to proceed
+        endLevelLogPanel.SetActive(true);
+        logBookRecall.gameObject.SetActive(true);
+
+        logBookRecall.onClick.RemoveAllListeners();
+        logBookRecall.onClick.AddListener(() =>
+        {
+            // Once clicked, hide the log panel and proceed to the advice sequence
+            logBookRecall.gameObject.SetActive(false);
+            endLevelLogPanel.SetActive(false);
             StartCoroutine(ShowAdviceSequence());
         });
+        
+        yield return null;  // Ensures the flow continues to the next step
     }
 
     private IEnumerator ShowObjectiveWithAnimation(int goalValue, TextMeshProUGUI goalText, string goalMessage, int actualValue, bool isMoney)
