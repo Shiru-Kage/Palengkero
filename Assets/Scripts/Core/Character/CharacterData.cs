@@ -10,6 +10,7 @@ public class CharacterData : ScriptableObject
     public int characterAge;
     public string characterMonthlyIncome;
     public int characterWeeklyBudget;
+    public int characterTotalBudget;
     public Sprite[] characterSprites;
     public Sprite characterSelectFrameSprite;
     [TextArea(3, 10)]

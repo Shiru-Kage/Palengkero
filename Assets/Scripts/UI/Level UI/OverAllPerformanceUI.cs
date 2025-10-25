@@ -6,18 +6,19 @@ using System.Linq;
 public class OverAllPerformanceUI : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private TextMeshProUGUI performanceSummaryText;  // Total stars display
-    [SerializeField] private TextMeshProUGUI noticeableHabitText;  // Display the most noticeable habit
-    [SerializeField] private TextMeshProUGUI endingText;  // Display the ending
-    [SerializeField] private Endings endingsScript;  // Reference to the Endings script
+    [SerializeField] private TextMeshProUGUI performanceSummaryText;  
+    [SerializeField] private TextMeshProUGUI noticeableHabitText;  
+    [SerializeField] private TextMeshProUGUI endingText;
+    [SerializeField] private Endings endingsScript;  
+    [SerializeField] private TextMeshProUGUI greatJobText;
     
-    [SerializeField] private Image nutritionBar;  // Nutrition Bar
-    [SerializeField] private Image satisfactionBar;  // Satisfaction Bar
-    [SerializeField] private Image savingsBar;  // Savings Bar
+    [SerializeField] private Image nutritionBar;  
+    [SerializeField] private Image satisfactionBar; 
+    [SerializeField] private Image savingsBar; 
 
     private string selectedCharacterID;
-    private int totalLevels = 5;  // Total number of levels in the game
-    private int maxStarsPerCategory = 5;  // Maximum stars per category (5 levels × 1 star per level)
+    private int totalLevels = 5; 
+    private int maxStarsPerCategory = 5;
 
     void Start()
     {
@@ -36,6 +37,8 @@ public class OverAllPerformanceUI : MonoBehaviour
         bool[] satisfactionStars = new bool[totalLevels];
         bool[] savingsStars = new bool[totalLevels];
 
+        float totalSavings = 0f;
+
         for (int i = 0; i < totalLevels; i++)
         {
             var levelStars = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID);
@@ -43,9 +46,27 @@ public class OverAllPerformanceUI : MonoBehaviour
             nutritionStars[i] = levelStars.nutritionStars > 0;
             satisfactionStars[i] = levelStars.satisfactionStars > 0;
             savingsStars[i] = levelStars.savingsStars > 0;
+
+            var levelData = LevelStateManager.Instance.AllLevels[i];
+            var characterObjective = levelData.GetObjectiveFor(CharacterSelectionManager.Instance.SelectedCharacterData);
+            totalSavings += characterObjective.levelSavings;
         }
 
-        performanceSummaryText.text = $"Total Stars: {totalStars}/15";  // 15 is the total stars possible across all levels for each category
+        performanceSummaryText.text = $"Total Stars: {totalStars}/15";
+
+        int characterTotalBudget = CharacterSelectionManager.Instance.SelectedCharacterData.characterTotalBudget;
+        float targetSavings = characterTotalBudget * 0.5f;
+
+        if (totalSavings >= targetSavings)
+        {
+            greatJobText.text = $"Great Job! You saved more than 50% of your total budget! ₱{totalSavings:F2}/₱{characterTotalBudget}";
+            greatJobText.color = Color.green;
+        }
+        else
+        {
+            greatJobText.text = $"You did not seem to have saved enough, you can try better next time! ₱{totalSavings:F2}/₱{characterTotalBudget} "; 
+        }
+
 
         string noticeableHabit = GetMostNoticedHabit(nutritionStars, satisfactionStars, savingsStars);
         noticeableHabitText.text = $"Most Noticeable Habit: {noticeableHabit}";
@@ -86,7 +107,6 @@ public class OverAllPerformanceUI : MonoBehaviour
         float totalSatisfactionStars = 0f;
         float totalSavingsStars = 0f;
 
-        // Calculate total stars for each category across all levels
         for (int i = 0; i < totalLevels; i++)
         {
             var levelStars = StarSystem.Instance.GetStarsForLevel(i, selectedCharacterID);
@@ -96,28 +116,23 @@ public class OverAllPerformanceUI : MonoBehaviour
             totalSavingsStars += levelStars.savingsStars;
         }
 
-        // Calculate the overall percentage for each category (0% to 100%)
         float nutritionPercentage = CalculatePercentage(totalNutritionStars);
         float satisfactionPercentage = CalculatePercentage(totalSatisfactionStars);
         float savingsPercentage = CalculatePercentage(totalSavingsStars);
 
-        // Update the bars based on the overall percentage
         SetBar(nutritionBar, nutritionPercentage);
         SetBar(satisfactionBar, satisfactionPercentage);
         SetBar(savingsBar, savingsPercentage);
     }
 
-    // Method to calculate percentage for bar fill (based on 5 stars max per category)
     float CalculatePercentage(float totalStars)
     {
-        float percentage = (totalStars / maxStarsPerCategory) * 100f;  // Calculate percentage out of 100
-        return Mathf.Clamp(percentage, 0f, 100f);  // Ensure it's between 0 and 100
+        float percentage = (totalStars / maxStarsPerCategory) * 100f; 
+        return Mathf.Clamp(percentage, 0f, 100f); 
     }
 
-    // Method to set the fill amount for the bar
     void SetBar(Image bar, float percentage)
     {
-        // Map the percentage to the 0-1 range for fillAmount
-        bar.fillAmount = Mathf.Clamp(percentage / 100f, 0f, 1f);  // Ensure fillAmount stays between 0 and 1
+        bar.fillAmount = Mathf.Clamp(percentage / 100f, 0f, 1f);
     }
 }

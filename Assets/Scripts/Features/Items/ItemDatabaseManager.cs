@@ -70,8 +70,7 @@ public class ItemDatabaseManager : MonoBehaviour
 
         if (levelIndex >= 2)
         {
-            float priceMultiplier = 1 + (priceIncreasePercentage * levelIndex) / 100f;
-
+            float priceMultiplier = 1 + (priceIncreasePercentage / 100f)* (levelIndex - 1); 
             IncreaseItemPrices(priceMultiplier);
         }
 

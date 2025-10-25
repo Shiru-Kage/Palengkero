@@ -19,6 +19,7 @@ MonoBehaviour:
   characterAge: 28
   characterMonthlyIncome: "\u20B113,000 - \u20B114,999"
   characterWeeklyBudget: 800
+  characterTotalBudget: 4000
   characterSprites: []
   characterSelectFrameSprite: {fileID: 797296067685068265, guid: c970c9285f5301f4597cb359f8e7917e, type: 3}
   characterDescription: A hardworking family man, Tonyo sends a good chunk of his
