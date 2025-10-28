@@ -1,7 +1,11 @@
 using UnityEngine;
-
 public class LoadGameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject continueProgress;
+    private void Start()
+    {
+        CheckContinueButtonState();
+    }
     public void LoadGameSlot(int slotIndex)
     {
         if (!SaveSystem.SaveExists(slotIndex))
@@ -57,6 +61,17 @@ public class LoadGameManager : MonoBehaviour
         SceneChanger.instance.ChangeScene("CharacterSelect");
     }
 
+    public void CheckContinueButtonState()
+    {
+        if (SaveSystem.SaveExists(4))
+        {
+            continueProgress.SetActive(true);
+        }
+        else
+        {
+            continueProgress.SetActive(false);
+        }
+    }
 
     public void ResetAllCharacterLevelData()
     {

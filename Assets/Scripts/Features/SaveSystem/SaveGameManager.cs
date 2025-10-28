@@ -1,26 +1,38 @@
 using UnityEngine;
-using System.Collections;
-
 public class SaveGameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject savePrompt;
-    [SerializeField] private GameObject savedConfirmation;
+    public static SaveGameManager Instance { get; private set; }
 
     private int pendingSlotIndex = -1; 
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void SaveCurrentGame(int slotIndex)
     {
         if (SaveSystem.SaveExists(slotIndex))
         {
             pendingSlotIndex = slotIndex;
-
-            if (savePrompt != null)
-                savePrompt.SetActive(true);
-
             return;
         }
 
         PerformSave(slotIndex);
+    }
+
+    public void AutoSave()
+    {
+        int autoSaveSlotIndex = 4; 
+        PerformSave(autoSaveSlotIndex); 
     }
 
     private void PerformSave(int slotIndex)
@@ -42,7 +54,6 @@ public class SaveGameManager : MonoBehaviour
             string charName = pd.Data.characterName;
             LevelStateManager.Instance.SetSelectedCharacter(charName);
             
-            
             var characterProgress = new CharacterProgressEntry
             {
                 characterID = charID,
@@ -50,7 +61,6 @@ public class SaveGameManager : MonoBehaviour
                 currentLevelIndex = LevelStateManager.Instance.CurrentLevelIndex,
                 unlockedLevels = LevelStateManager.Instance.GetUnlockedLevelsForCurrentCharacter()
             };
-
 
             for (int i = 0; i < LevelStateManager.Instance.AllLevels.Length; i++)
             {
@@ -65,37 +75,13 @@ public class SaveGameManager : MonoBehaviour
             }
 
             saveData.characterProgressData.Add(characterProgress);
-                    Debug.Log($"Saving character progress: {charName}, Level: {LevelStateManager.Instance.CurrentLevelIndex}, Stars: {characterProgress.levelStars}");
+            Debug.Log($"Saving character progress: {charName}, Level: {LevelStateManager.Instance.CurrentLevelIndex}, Stars: {characterProgress.levelStars}");
         }
 
         SaveSystem.SaveToSlot(slotIndex, saveData);
         Debug.Log($"Game saved to slot {slotIndex}");
 
         LevelSelectUI.Instance.RefreshLevelButtons();
-        UpdateSavedConfirmation();
-    }
-
-    private void UpdateSavedConfirmation()
-    {
-        if (savedConfirmation != null)
-        {
-            savedConfirmation.SetActive(true);
-            StopAllCoroutines();
-            StartCoroutine(HideSavedConfirmationRoutine(2f));
-        }
-
-        if (savePrompt != null)
-            savePrompt.SetActive(false);
-    }
-
-    private IEnumerator HideSavedConfirmationRoutine(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        if (savedConfirmation != null)
-        {
-            savedConfirmation.SetActive(false);
-            Debug.Log("savedConfirmation set to false by coroutine");
-        }
     }
 
     public void OnConfirmSave()
@@ -109,9 +95,6 @@ public class SaveGameManager : MonoBehaviour
 
     public void OnCancelSave()
     {
-        if (savePrompt != null)
-            savePrompt.SetActive(false);
-
         pendingSlotIndex = -1;
     }
 }

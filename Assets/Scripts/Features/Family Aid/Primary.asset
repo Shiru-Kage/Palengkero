@@ -15,10 +15,10 @@ MonoBehaviour:
   familyMembers:
   - callerName: Younger Sibling
     callerDescription: Salamat kapatid! Kailangan ko toh para sa school
-    familyDeduction: 500
+    familyDeduction: 100
   - callerName: Father
     callerDescription: Salamat anak sa pag tutulong sa bills
-    familyDeduction: 300
+    familyDeduction: 150
   - callerName: Mother
     callerDescription: Pasensya na anak, para toh sa kalusugan natin.
-    familyDeduction: 100
+    familyDeduction: 200

@@ -4027,6 +4027,7 @@ MonoBehaviour:
   aidInterval: 300
   callerDescriptionText: {fileID: 134983205}
   callerNameText: {fileID: 1649631432}
+  callerAmount: {fileID: 1895279579}
   aidReachedObject: {fileID: 1787573469}
   logBookUI: {fileID: 7983311208562791724}
 --- !u!1 &329836878
@@ -12431,7 +12432,7 @@ GameObject:
   - component: {fileID: 1649631433}
   - component: {fileID: 1649631432}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Caller name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13693,7 +13694,7 @@ GameObject:
   - component: {fileID: 1895279580}
   - component: {fileID: 1895279579}
   m_Layer: 5
-  m_Name: Parent name
+  m_Name: caller amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

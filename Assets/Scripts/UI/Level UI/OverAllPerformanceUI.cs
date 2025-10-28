@@ -59,7 +59,7 @@ public class OverAllPerformanceUI : MonoBehaviour
 
         if (totalSavings >= targetSavings)
         {
-            greatJobText.text = $"Great Job! You saved more than 20% of your total budget! ₱{totalSavings:F2}/₱{characterTotalBudget}";
+            greatJobText.text = $"Great Job! You saved more than 20 percent of your total budget! ₱{totalSavings:F2}/₱{characterTotalBudget}";
             greatJobText.color = Color.green;
         }
         else

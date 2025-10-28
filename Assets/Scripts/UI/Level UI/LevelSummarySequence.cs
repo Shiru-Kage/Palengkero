@@ -71,7 +71,7 @@ public class LevelSummarySequence : MonoBehaviour
             introMessageText.text = introMessage;
             StartCoroutine(ShowIntro());
         }
-        
+        SaveGameManager.Instance.AutoSave();
     }
 
     private IEnumerator ShowIntro()

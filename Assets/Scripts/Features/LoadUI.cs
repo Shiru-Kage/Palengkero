@@ -17,7 +17,7 @@ public class LoadUI : MonoBehaviour
         // Iterate through all save slots
         for (int i = 0; i < slotTexts.Length; i++)
         {
-            string displayText = $"Slot {i + 1}\n";
+            string displayText = "";
 
             // Fetch the save data for each slot
             SaveData saveData = SaveSystem.LoadFromSlot(i);
@@ -27,11 +27,11 @@ public class LoadUI : MonoBehaviour
                 // If save data exists, loop through the character progress data
                 foreach (var entry in saveData.characterProgressData)
                 {
-                    displayText += $"Character: {entry.characterName}\n";
+                    displayText += $"Character: \n{entry.characterName}\n\n";
 
                     // Display the highest unlocked level
                     int highestLevelUnlocked = entry.unlockedLevels.Length > 0 ? entry.unlockedLevels[entry.unlockedLevels.Length - 1] ? entry.unlockedLevels.Length : 0 : 0;
-                    displayText += $"Highest Level: {highestLevelUnlocked}\n";
+                    displayText += $"Highest Level: {highestLevelUnlocked}\n\n";
 
                     // Calculate total stars for the character
                     int totalStars = 0;
@@ -48,7 +48,7 @@ public class LoadUI : MonoBehaviour
                     }
 
                     // Display total stars for the character
-                    displayText += $"Total Stars: {totalStars}\n\n";  // Max Stars would be based on the number of unlocked levels
+                    displayText += $"Total Stars: {totalStars}\n\n\n\n\n";  // Max Stars would be based on the number of unlocked levels
                 }
             }
             else

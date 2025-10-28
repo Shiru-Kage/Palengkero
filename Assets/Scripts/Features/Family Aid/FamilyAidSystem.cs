@@ -20,8 +20,9 @@ public class FamilyAidSystem : MonoBehaviour
     [SerializeField] private float aidInterval = 300f;
 
     [Header("UI Elements for Selected Family Member")]
-    [SerializeField] private TextMeshProUGUI callerDescriptionText; 
+    [SerializeField] private TextMeshProUGUI callerDescriptionText;
     [SerializeField] private TextMeshProUGUI callerNameText;
+    [SerializeField] private TextMeshProUGUI callerAmount;
     [SerializeField] private GameObject aidReachedObject;
     [SerializeField] private LogBookUI logBookUI;
 
@@ -113,6 +114,11 @@ public class FamilyAidSystem : MonoBehaviour
         if (callerNameText != null)
         {
             callerNameText.text = selectedMember.callerName;
+        }
+
+        if (callerAmount != null)
+        {
+            callerAmount.text = $"{selectedMember.familyDeduction} PHP";
         }
     }
 
